@@ -20,6 +20,39 @@ class Model_tabel extends CI_Model {
     private function _get_datatables_query($type=null,$sort=null,$order=null,$search=null)
     {         
         switch ($type) {
+            case 'agama':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_agama a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.agama_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.agama_id',$search);
+                $this->db->or_like('a.agama_nama',$search);
+            }
+            
+            break;
+
+             case 'pendidikan':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_pendidikan a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.pendidikan_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.pendidikan_id',$search);
+                $this->db->or_like('a.pendidikan_nama',$search);
+            }
+            
+            break;
 
             case 'skill':
             $this->db->select('a.*');
@@ -34,6 +67,23 @@ class Model_tabel extends CI_Model {
             if ($search!=null && $search!='') {
                 $this->db->like('a.skill_id',$search);
                 $this->db->or_like('a.skill_nama',$search);
+            }
+            
+            break;
+
+            case 'level':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_level a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.level_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.level_id',$search);
+                $this->db->or_like('a.level_nama',$search);
             }
             
             break;

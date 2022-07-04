@@ -33,7 +33,7 @@
 
     <div class="row">
       <div class="col-12">
-        <h1 class="h3 mb-3 ml-5 text-gray-800">User Management</h1>
+        <h1 class="h3 mb-3 ml-5 text-gray-800">Master Data User</h1>
         <div class="card">
           <div class="card-header">
             <div class="col-sm-6"> 
@@ -55,7 +55,6 @@
                 <tr class="bg-primary text-light text-center">
                   <th>No</th>
                   <th >Nama Lengkap</th>
-                  <th >Username</th>
                   <th >Email</th>
                   <th >Level</th>
                   <th >Cabang</th>
@@ -118,13 +117,7 @@
                 <div class="col-md-6 mb-3">  
                   <label style="color:#343a40;" for="email">Email</label> 
                   <input type="email" class="form-control " id="email"  name="email" >
-                  <input type="hidden" id="username_lama" name="username_lama" class="form-control" placeholder="Email" required>
                 </div> 
-
-                <div class="col-md-6 mb-3">  
-                  <label style="color:#343a40;" for="username">Username</label> 
-                  <input type="text" class="form-control " id="username"  name="username" required>
-                </div>
 
                 <div class="col-md-6  mb-3 inputpassword"> 
                   <label for="pwd1">Password</label>

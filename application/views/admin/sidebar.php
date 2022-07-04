@@ -39,11 +39,12 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?php echo base_url('user') ?>">User</a>
+                        <a class="collapse-item" href="<?php echo base_url('agama') ?>">Agama</a>
+                        <a class="collapse-item" href="<?php echo base_url('level') ?>">Level</a>
+                        <a class="collapse-item" href="<?php echo base_url('pendidikan') ?>">Pendidikan</a>
                         <a class="collapse-item" href="<?php echo base_url('skill') ?>">Skill</a>
-                        <a class="collapse-item" href="buttons.html">Jabatan</a>
-                        <a class="collapse-item" href="buttons.html">Kategori Produk</a>
-                        <a class="collapse-item" href="buttons.html">Produk</a>
+                        <a class="collapse-item" href="<?php echo base_url('user') ?>">User</a>
+                        <a class="collapse-item" href="<?php echo base_url('job/kategori') ?>">Kategori Pekerjaan</a>
                     </div>
                 </div>
             </li>
