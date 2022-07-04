@@ -91,7 +91,7 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 // $autoload['helper'] = array();
-$autoload['helper'] = array('url', 'file','download');
+$autoload['helper'] = array('url', 'file','download','talent');
 
 /*
 | -------------------------------------------------------------------
@@ -136,4 +136,4 @@ $autoload['language'] = array();
 */
 
 // load otomatis model-model di aplikasi blt
-$autoload['model'] = array('model_query');
+$autoload['model'] = array('model_query','model_tabel');

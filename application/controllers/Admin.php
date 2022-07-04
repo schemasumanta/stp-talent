@@ -6,7 +6,12 @@ class Admin extends CI_Controller {
 	
 	public function index()
 	{
+		if ($this->session->login==FALSE) {
 		$this->load->view('admin/tampilan_login');
+
+		}else{
+			redirect('dashboard','refresh');
+		}
 	}
 
 	public function cek_login()

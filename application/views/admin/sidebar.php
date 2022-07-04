@@ -40,7 +40,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo base_url('user') ?>">User</a>
-                        <a class="collapse-item" href="buttons.html">Cabang</a>
+                        <a class="collapse-item" href="<?php echo base_url('skill') ?>">Skill</a>
                         <a class="collapse-item" href="buttons.html">Jabatan</a>
                         <a class="collapse-item" href="buttons.html">Kategori Produk</a>
                         <a class="collapse-item" href="buttons.html">Produk</a>
@@ -66,7 +66,6 @@
                         <a class="collapse-item" href="utilities-other.html">Media Sosial</a>
                         <a class="collapse-item" href="utilities-other.html">Relation Link</a>
                         <a class="collapse-item" href="utilities-other.html">Galeri</a>
-
                     </div>
                 </div>
             </li>
