@@ -120,8 +120,6 @@ class Agama extends CI_Controller {
 
 		}
 
-
-
 		$output = array(
 			"draw"              => $_GET['draw'],
 			"recordsTotal"      => $this->model_tabel->count_all('agama',$sort,$order,$search),
