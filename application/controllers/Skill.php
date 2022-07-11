@@ -116,6 +116,12 @@ class Skill extends CI_Controller {
 
 			$l->opsi = $opsi;
 
+			if ($l->skill_status > 0) {
+				$l->skill_status = '<button type="button" class="btn btn-success btn-sm btn-round  item_aktivasi_agama">Aktif</button>';
+			}else{
+				$l->skill_status = '<button type="button" class="btn btn-danger btn-sm btn-round  item_aktivasi_agama">Non Aktif</button>';
+			}
+
 			$data[] = $l;
 
 		}

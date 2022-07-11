@@ -110,7 +110,11 @@ class Agama extends CI_Controller {
 			}else{
 				$opsi .='<a href="javascript:;" class="btn btn-success btn-sm btn-circle  item_aktivasi_agama" data="'.$l->agama_id.'"><i class="fa fa-check-circle"></i></a>';
 			}
-
+			if ($l->agama_status > 0) {
+				$l->agama_status = '<button type="button" class="btn btn-success btn-sm btn-round  item_aktivasi_agama">Aktif</button>';
+			}else{
+				$l->agama_status = '<button type="button" class="btn btn-danger btn-sm btn-round  item_aktivasi_agama">Non Aktif</button>';
+			}
 
 			$opsi .='</div>';
 

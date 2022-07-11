@@ -115,6 +115,12 @@ class Pendidikan extends CI_Controller {
 
 			$l->opsi = $opsi;
 
+			if ($l->pendidikan_status > 0) {
+				$l->pendidikan_status = '<button type="button" class="btn btn-success btn-sm btn-round  item_aktivasi_agama">Aktif</button>';
+			}else{
+				$l->pendidikan_status = '<button type="button" class="btn btn-danger btn-sm btn-round  item_aktivasi_agama">Non Aktif</button>';
+			}
+
 			$data[] = $l;
 
 		}

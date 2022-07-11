@@ -53,7 +53,8 @@
               <thead>
                 <tr class="bg-primary text-light ">
                   <th width="1%" class="text-center">No</th>
-                  <th width="80%">Level</th>
+                  <th width="70%">Level</th>
+                  <th width="10%">Status</th>
                   <th class="text-center" width="19%" >Opsi</th>
                 </tr>
 
@@ -270,12 +271,13 @@
   columns: [
   {'data':'no'},
   {'data':'level_nama'},
+  {'data':'level_status'},
   {'data':'opsi',orderable:false},
 
   ],   
   columnDefs: [
   {
-    targets: [0,-1],
+    targets: [0,2,-1],
     className: 'text-center'
   },
   ]

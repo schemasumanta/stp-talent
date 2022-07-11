@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "solo-digital-tech",
+  "private_key_id": "9a8c6ffab50bdbd4807a9bd73a7ff35c62c17bbd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvewQsCbkRUA6B\n4R46o1FR6Sjz9XMn3v2T55esUu9599dUmvwrUo/I0EHtIgXI/kI3cGJVWo9ZoAvv\nXsBeVG5WHKA72cnsLd0yU949BCliJj1NAuQ3fx8fDMQKWyOX6BDrj/nox0xKD2Zf\nWKgfGA+7bpojKm0dmq0peyhU/5o6h+1p8EUGi9fgKlN4aDvajJhLW3g6cvtPeDRw\nrZMYMkjDmB+EpcPD5ZLaeJK+7aNztkQc3HkFOYN+ajlyuvOkzfT1flMoL8PpqKSX\nSEIBZvEqeH7iOAxf42/r9orDUem8RCtqzex96JqEeU86HAsx0Y9nCVjHs51dOkCv\nMy9x+H9lAgMBAAECggEAPmx69/V/fc6mUoKUH9TwPTy9wkcq72COgVpt5LHeGdvW\nIHU/xmOI3a1j/mjPeQgl4xXaDTX5b68U/9KLiSLs2zo0sAXSJG/OU7RtBvSfihhD\nT017hNh2aDPA21Q/ja7SshGWG74l/+SJjNp7eBA1rH30XBUgGttmxS5YEyCYK0CO\nqpc48Tm0dDj1szyElWnDGB2eze/rSbLJUogsvLpJePqN1BNJVj41Y/OuflXGC/G6\nsAnkq9H7YPAwuLxD6J2eANHAi0A/QPob9i+plOT7rMaV+xyGlKal6jPhHhxALJJi\nbEW5KT8PbRKwJGU8e/lmzPAp6lWIUc0oiTQJJ/4YgwKBgQDtY9sRbtdBc7AOxF/L\nZqLe+AuA2GcUCLTYsGN4UrXPWSaZObOrCfO2/GC57DtLo9xlXO9PMMIW6wkg6UhC\n3EuYpbImxZyfaLFGt+Gw4GL8FUVa5Wt1YcP2a6p5dZFD8KwwlOrQJhRk4sOyyy16\nwcBuZUBePnnkvY0IIG36U0cFMwKBgQC9PLU1FMCyiQi2L/FnUrKnw1dbdgYGt/JO\nccbs6U4iHaYyKB/auSBOVxmxPLlVZM1UIZEEGmryop1Ex3p9paq/HJ/YdYTVqNEk\nsU1THrba7H3AhYasVls5yAw2AGT+W2nfJVIEY43Qv/zUdjU+QstjGLD7V9h2f9lh\nwOhf+6U5BwKBgH8IFmyHwcyWmbntP83aiIGEfrNeGhrQZeYmzbPPntbsQAlypUB7\nvN1IxIH5demOMBxV1QGtd89HysS/0RlmRVXUJTc2PA/ZuDO9ppo+GPoIb+qqJgzU\nWkb9amZAkZGnspz0s4rbNcKezlZY/2dXUyBAMme8SwIqpNOadv+jnLedAoGBAJn5\npIP9T9G1OJZtKiJlIqLoidMMlFixIYJ8h1zLdNzDfTBAf7LLgSLdMjWJcE+wRnXX\nHhTVngGxGQAWw28q9mSsWM+ax6vFwe72KTGhwy0c0jFtNChT18SLJoxmA8cHAH0l\n87dIfeLF5GXHjQkM9kq6k37femzpGCq2+RzoOAbPAoGAHmCugIOkaMgGoAAeacQT\nWPHZBbCWmuLj/OhBFPh19YURFnRLOFxCSeAavF/tzkiv5N4paMJHK6rQNfMyuts3\nTAvyOE7jBl+Xr2Sv35NEB8SIxU0s3uKGRJSTCM+SXD5yNk7BkPBM9wE9JAcgx4Az\n/WU0DADnmhvlKI8tLHXRbJQ=\n-----END PRIVATE KEY-----\n",
+  "client_email": "talenthub@solo-digital-tech.iam.gserviceaccount.com",
+  "client_id": "115052138455345983294",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/talenthub%40solo-digital-tech.iam.gserviceaccount.com"
+}
