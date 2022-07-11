@@ -6,9 +6,23 @@ class Landing extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('web/header');
-		$this->load->view('web/tampilan_landing');
-		$this->load->view('web/footer');
+		$this->db->where('slider_tipe','main');
+		$this->db->where('slider_status',1);
+		$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
+
+		$this->db->where('slider_tipe','cv');
+		$this->db->where('slider_status',1);
+		$data['slider_cv'] = $this->db->get('tbl_master_slider')->result();
+
+		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		
+		$this->db->where('slider_tipe','how');
+		$this->db->where('slider_status',1);
+		$data['slider_how'] = $this->db->get('tbl_master_slider')->result();
+
+		$this->load->view('web/header',$data);
+		$this->load->view('web/tampilan_landing',$data);
+		$this->load->view('web/footer',$data);
 	}
 
 	

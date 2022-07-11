@@ -52,6 +52,23 @@ class Model_tabel extends CI_Model {
             
             break;
 
+             case 'slider':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_slider a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.slider_id',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.slider_id',$search);
+                $this->db->or_like('a.slider_tipe',$search);
+            }
+            
+            break;
+
               case 'jabatan':
             $this->db->select('a.*');
             $this->db->from('tbl_master_jabatan a');

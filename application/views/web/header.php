@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?php foreach ($stp as $s): ?>
+  
 <html class="no-js" lang="zxx">
   <head>
     <meta charset="utf-8" />
@@ -35,7 +37,7 @@
         <div class="preloader-inner position-relative">
           <div class="preloader-circle"></div>
           <div class="preloader-img pere-text">
-            <img src="assets/img/logo/logoICT.png" alt="" />
+            <img src="<?php echo $s->stp_logo ?>" alt="" />
           </div>
         </div>
       </div>
@@ -50,8 +52,8 @@
               <div class="col-lg-3 col-md-2">
                 <!-- Logo -->
                 <div class="logo">
-                  <a href="index.html"
-                    ><img src="assets/img/logo/logoICT.png" alt=""
+                  <a href="<?php echo base_url() ?>"
+                    ><img src="<?php echo $s->stp_logo ?>" alt=""
                   /></a>
                 </div>
               </div>
@@ -61,7 +63,7 @@
                   <div class="main-menu">
                     <nav class="d-none d-lg-block">
                       <ul id="navigation">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="<?php echo base_url() ?>">Home</a></li>
                         <li><a href="job_listing.html">Find a Jobs </a></li>
                         <li><a href="about.html">About</a></li>
                         <li>
@@ -94,3 +96,5 @@
       </div>
       <!-- Header End -->
     </header>
+
+<?php endforeach ?>

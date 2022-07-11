@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700,900|Muli:300,400,500,600,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700,900|Inter:300,400,500,600,700,800,900&display=swap");
 .white-bg {
   background: #ffffff;
 }
@@ -37,7 +37,7 @@
   color: #F82C2C !important;
   display: inline-block;
   padding: 18px 44px;
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 400;
   border: 0;
@@ -101,7 +101,7 @@
   opacity: 0.9;
 }
 body {
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: normal;
   font-style: normal;
 }
@@ -111,7 +111,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #0b1c39;
   margin-top: 0px;
   font-style: normal;
@@ -119,7 +119,7 @@ h6 {
   text-transform: normal;
 }
 p {
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #506172;
   font-size: 16px;
   line-height: 30px;
@@ -405,7 +405,7 @@ hr {
 .border-btn {
   border: 1px solid #F82C2C;
   color: #F82C2C;
-  font: "Muli", sans-serif;
+  font: "Inter", sans-serif;
   background: none;
   -moz-user-select: none;
   padding: 27px 44px;
@@ -452,7 +452,7 @@ hr {
 .border-btn2 {
   border: 1px solid #ffffff;
   color: #ffffff;
-  font: "Muli", sans-serif;
+  font: "Inter", sans-serif;
   background: none;
   -moz-user-select: none;
   padding: 19px 69px;
@@ -1957,6 +1957,14 @@ hr {
   line-height: 1.2;
   margin-bottom: 95px;
 }
+
+.section-tittle-works h2 {
+  color: #28395a;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 95px;
+}
 @media (max-width: 767px) {
   .section-tittle h2 {
     font-size: 30px;
@@ -1970,7 +1978,18 @@ hr {
   margin-bottom: 28px;
   display: block;
 }
+
+.section-tittle-works span {
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  display: block;
+}
 .section-tittle.white-text h2 {
+  color: #fff;
+}
+
+.section-tittle-works.white-text h2 {
   color: #fff;
 }
 .small-section-tittle h4 {
@@ -2011,7 +2030,7 @@ hr {
 .section-overly::before {
   position: absolute;
   content: "";
-  background-color: rgba(31, 43, 123, 0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   width: 100%;
   height: 100%;
   left: 0;
@@ -2058,7 +2077,7 @@ hr {
   margin-bottom: 70px;
 }
 .blog_area a {
-  color: "Muli", sans-serif !important;
+  color: "Inter", sans-serif !important;
   text-decoration: none;
   transition: 0.4s;
 }
@@ -3178,7 +3197,7 @@ hr {
   color: #3a3a3a;
   text-transform: uppercase;
   font-size: 14px;
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #3a3a3a;
 }
 .home-blog-area .home-blog-single .blog-img-cap .blog-cap .more-btn:hover {
@@ -3413,7 +3432,7 @@ hr {
   color: #fff;
   font-weight: 900;
   margin-bottom: 0;
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   text-transform: capitalize;
 }
 @media (max-width: 767px) {
@@ -3464,7 +3483,7 @@ hr {
   cursor: pointer;
   display: block;
   float: left;
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: normal;
   width: 100% !important;
   line-height: 50px;
@@ -4810,7 +4829,7 @@ del {
   line-height: 1.2;
   font-weight: 400;
   margin-bottom: 39px;
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 @media (max-width: 767px) {
   .slider-area .hero__caption p {
@@ -4982,7 +5001,7 @@ form.search-box .search-form a {
   padding: 15px;
   border-radius: 0px;
   text-transform: capitalize;
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   letter-spacing: 0.1em;
   line-height: 1.2;
   line-height: 38px;
@@ -5256,7 +5275,7 @@ form.search-box .search-form a {
   }
 }
 .online-cv .cv-caption .pera1 {
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #fff;
   text-transform: uppercase;
 }
@@ -5266,7 +5285,7 @@ form.search-box .search-form a {
   }
 }
 .online-cv .cv-caption .pera2 {
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #fff;
   font-weight: 700;
   font-size: 60px;
@@ -5324,7 +5343,7 @@ form.search-box .search-form a {
   margin-bottom: 20px;
 }
 .apply-process-area .single-process .process-cap p {
-  color: #181d38;
+  color: #ffffff;
 }
 .apply-bg {
   background-size: cover;
@@ -5373,7 +5392,7 @@ form.search-box .search-form a {
   color: #fff;
   text-transform: uppercase;
   font-weight: 700;
-  font-family: "Muli", sans-serif;
+  font-family: "Inter", sans-serif;
   line-height: 1.2;
 }
 @media (max-width: 767px) {
@@ -5762,7 +5781,7 @@ form.search-box .search-form a {
   border: 1px solid transparent;
 }
 .footer-area .footer-pera p {
-  color: #181d38 !important;
+  color: #ffffff !important;
   padding-right: 52px;
   font-size: 16px;
   margin-bottom: 50px;
@@ -5784,15 +5803,15 @@ form.search-box .search-form a {
   text-transform: uppercase;
 }
 .footer-area .footer-tittle ul li {
-  color: #181d38 !important;
+  color: #ffffff !important;
   margin-bottom: 9px;
 }
 .footer-area .footer-tittle ul li a {
-  color: #181d38 !important;
+  color: #ffffff !important;
   font-weight: 300;
 }
 .footer-area .footer-tittle ul li a:hover {
-  color: #F82C2C;
+  color: #ffffff;
   padding-left: 5px;
 }
 .footer-area .footer-tittle-bottom span {
@@ -5840,14 +5859,18 @@ form.search-box .search-form a {
   color: #F82C2C;
 }
 .footer-bg {
-  background: #F82C2C !important;
+  background: #666666 !important;
+}
+
+.footer-ba {
+  background: #f82c2c !important;
 }
 .footer-bottom-area .footer-border {
   border-top: 1px solid #2d3544;
   padding: 33px 0px 20px;
 }
 .footer-bottom-area .footer-copy-right p {
-  color: #181d38 !important;
+  color: #ffffff !important;
   font-weight: 300;
   font-size: 16px;
   line-height: 2;
@@ -5883,9 +5906,9 @@ form.search-box .search-form a {
   }
 }
 .footer-bottom-area .footer-social a i {
-  color: #F82C2C !important;
+  color: #ffffff !important;
   margin-left: 13px;
-  font-size: 14px;
+  font-size: 18px;
   -webkit-transition: 0.4s;
   -moz-transition: 0.4s;
   -o-transition: 0.4s;

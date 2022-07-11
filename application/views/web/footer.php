@@ -1,5 +1,9 @@
 
     <footer>
+      <?php foreach ($stp as $s): ?>
+        
+      <?php endforeach ?>
+
       <!-- Footer Start-->
       <div class="footer-area footer-bg footer-padding">
         <div class="container">
@@ -96,14 +100,13 @@
               <!-- logo -->
               <div class="footer-logo mb-20">
                 <a href="index.html"
-                  ><img src="assets/img/logo/logoICT.png" alt=""
+                  ><img src="<?php echo $s->stp_logo ?>" alt=""
                 /></a>
               </div>
               <div class="footer-tittle-bottom">
-                <span>PT InfraCom Technology</span>
+                <span><?php echo $s->stp_pemilik; ?></span>
                 <p>
-                  Grha Infracom, Jl. Tanah Abang II No.46, Petojo Selatan.
-                  Jakarta Pusat
+                  <?php echo $s->stp_alamat; ?>
                 </p>
               </div>
             </div>
@@ -130,7 +133,7 @@
         </div>
       </div>
       <!-- footer-bottom area -->
-      <div class="footer-bottom-area footer-bg">
+      <div class="footer-bottom-area footer-ba">
         <div class="container">
           <div class="footer-border">
             <div class="row d-flex justify-content-between align-items-center">
@@ -149,10 +152,9 @@
               </div>
               <div class="col-xl-2 col-lg-2">
                 <div class="footer-social f-right">
-                  <a href="#"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-                  <a href="#"><i class="fas fa-globe"></i></a>
-                  <a href="#"><i class="fab fa-behance"></i></a>
+                  <a href="<?php echo $s->stp_facebook ?>" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                  <a  href="<?php echo $s->stp_instagram ?>" target="_blank"><i class="fab fa-instagram"></i></a>
+                  <a  href="<?php echo $s->stp_website ?>" target="_blank"><i class="fas fa-globe"></i></a>
                 </div>
               </div>
             </div>
@@ -200,3 +202,4 @@
     <script src="./assets/js/main.js"></script>
   </body>
 </html>
+

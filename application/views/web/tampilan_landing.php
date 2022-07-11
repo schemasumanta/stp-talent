@@ -5,7 +5,16 @@
         <div class="slider-active">
           <div
             class="single-slider slider-height d-flex align-items-center"
+
+            <?php if (count($slider_main) > 0) { ?>
+              <?php foreach ($slider_main as $key): ?>
+           
+            data-background="<?php echo $key->slider_gambar ?>"
+                
+              <?php endforeach ?>
+           <?php  }else{ ?>
             data-background="assets/img/hero/jobless.jpg"
+          <?php } ?>
           >
             <div class="container">
               <div class="row">
@@ -29,15 +38,7 @@
                           <option value="">Location DKI Jakarta</option>
                           <option value="">Location Jawa Tengah</option>
                           <option value="">Location Jawa Timur</option>
-                          <!-- <option value="">Location Jawa Barat</option> -->
-                          <!-- <option value="">Location Banten</option>
-                                                <option value="">Location Yogyakarta</option>
-                                                <option value="">Location Sumatra Utara</option>
-                                                <option value="">Location Sumatra Barat</option>
-                                                <option value="">Location Sumatra Selatan</option>
-                                                <option value="">Location Riau</option>
-                                                <option value="">Location Kepulauan Riau</option>
-                                                <option value="">Location Jambi</option> -->
+                          
                         </select>
                       </div>
                     </div>
@@ -171,7 +172,16 @@
       <!-- Online CV Area Start -->
       <div
         class="online-cv cv-bg section-overly pt-90 pb-120"
-        data-background="assets/img/gallery/cv_bg.jpg"
+
+        <?php if (count($slider_cv) > 0) { ?>
+              <?php foreach ($slider_cv as $cv): ?>
+           
+            data-background="<?php echo $cv->slider_gambar ?>"
+                
+              <?php endforeach ?>
+           <?php  }else{ ?>
+            data-background="assets/img/gallery/cv_bg.jpg"
+          <?php } ?>
       >
         <div class="container">
           <div class="row justify-content-center">
@@ -302,14 +312,26 @@
       <!-- Featured_job_end -->
       <!-- How  Apply Process Start-->
       <div
-        class="apply-process-area apply-bg pt-150 pb-150"
-        data-background="assets/img/gallery/how-applybg.png"
+        class="apply-process-area section-overly apply-bg pt-150 pb-150"
+
+         <?php if (count($slider_how) > 0) { 
+          ?>
+              <?php foreach ($slider_how as $how): ?>
+           
+            data-background="<?php echo $how->slider_gambar ?>"
+                
+              <?php endforeach ?>
+           <?php  }else{ ?>
+            data-background="assets/img/gallery/how-applybg.png"
+          <?php } ?>
+
+        
       >
         <div class="container">
           <!-- Section Tittle -->
           <div class="row">
             <div class="col-lg-12">
-              <div class="section-tittle white-text text-center">
+              <div class="section-tittle-works white-text text-center">
                 <span>Apply process</span>
                 <h2>How it works</h2>
               </div>
