@@ -57,8 +57,8 @@
                   <th >Nama Lengkap</th>
                   <th >Email</th>
                   <th >Level</th>
-                  <th >Cabang</th>
-                  <th >Jabatan</th>
+                  <th >Telepon</th>
+                  <th >Foto</th>
                   <th >Status</th>
                   <th style="text-align: center;" width="10%" >Opsi</th>
                 </tr>
@@ -93,30 +93,25 @@
                  </div>   
                  
                 <div class="col-md-6 mb-3"> 
-                  <label style="color:#343a40;vertical-align:middle;" for="jabatan">Jabatan</label> 
-                  <select type="text" class="form-control" id="jabatan" name="jabatan" required>
-                    <option value="0" selected="selected" disabled="disabled">Pilih Jabatan</option>
-                    <?php foreach ($jabatan as $key): ?>
-                      <option value="<?php echo $key->id_jabatan ?>"><?php echo $key->nama_jabatan; ?></option>
-                    <?php endforeach ?>
-                  </select>   
-                </div>
-
-                <div class="col-md-6 mb-3"> 
-                  <label style="color:#343a40;vertical-align:middle;" for="Level">Level User</label> 
-                  <select type="text" class="form-control" id="level" name="level" required>
+                  <label style="color:#343a40;vertical-align:middle;" for="user_level">Level</label> 
+                  <select type="text" class="form-control" id="user_level" name="user_level" required>
                     <option value="0" selected="selected" disabled="disabled">Pilih Level</option>
-                    <!-- <option value="superadmin">superadmin</option> -->
-                    <option value="Admin">Admin</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Supervisor">Supervisor</option>
+                    <?php foreach ($level as $key): ?>
+                     
+                    <option value="<?php $key->level_id ?>"><?php echo $key->level_nama; ?></option>
+                    <?php endforeach ?>
 
                   </select>   
                 </div>
+                <div class="col-md-6 mb-3"> 
+                   <label style="color:#343a40;" for="user_telepon">Telepon</label>
+                   <input type="text" class="form-control" id="user_telepon"  name="user_telepon" required onkeypress="return hanyaAngka(event)">
+                 </div>   
+
 
                 <div class="col-md-6 mb-3">  
-                  <label style="color:#343a40;" for="email">Email</label> 
-                  <input type="email" class="form-control " id="email"  name="email" >
+                  <label style="color:#343a40;" for="user_email">Email</label> 
+                  <input type="email" class="form-control " id="user_email"  name="user_email" >
                 </div> 
 
                 <div class="col-md-6  mb-3 inputpassword"> 
@@ -127,13 +122,7 @@
 
                   </div>
                 </div> 
-
-                
-
-
-
                 <div class="col-md-3 mb-3"> 
-
                   <label for="foto-produk">Foto</label>
                   <label class="imagecheck">
                    <input type="hidden" name="lampiran_user_lama" id="lampiran_user_lama">
@@ -144,14 +133,9 @@
                 </label>
               </div>
             </div>
-
           </div>
-
-
           <div class="modal-footer">
-
             <div class="form-group row"class="collapse" id="customer_collapse">
-
               <div class="col-sm-6">
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><b>TUTUP</b></button>
 
@@ -323,16 +307,15 @@
       sLast: '>>'
     }
   },
-  order: [1, 'asc'],
+  // order: [1, 'asc'],
   columns: [
   {'data':'no'},
-  {'data':'nama'},
-  {'data':'username'},
-  {'data':'email'},
-  {'data':'level'},
-  {'data':'nama_cabang'},
-  {'data':'nama_jabatan'},
-  {'data':'status_user'},               
+  {'data':'user_nama'},
+  {'data':'user_email'},
+  {'data':'level_nama'},
+  {'data':'user_telepon'},
+  {'data':'user_foto'},
+  {'data':'user_status'},               
   {'data':'opsi',orderable:false},
 
   ],   
@@ -498,6 +481,12 @@
   });
 
 
+function hanyaAngka(event) {
+  var angka = (event.which) ? event.which : event.keyCode
+  if (angka != 46 && angka != 8 && angka > 31 && (angka < 48 || angka > 57))
+    return false;
+  return true;
+}
 
 
   $('#btn_ubah_password').on('click',function(){
@@ -603,25 +592,11 @@
       return false;
     }
 
-     let cabang = $('#cabang').val();
-    if (cabang==null) {
-     $('#cabang').focus();
-     Swal.fire({
-      title:'Cabang Kosong',
-      text:'Silahkan Pilih Cabang!',
-      icon:'error'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.close();
-      }
-    });
-    return false;
-  }
 
 
-    let level = $('#level').val();
-    if (level==null) {
-     $('#level').focus();
+     let user_level = $('#user_level').val();
+    if (user_level==null) {
+     $('#user_level').focus();
      Swal.fire({
       title:'Level Kosong',
       text:'Silahkan Pilih Level!',
@@ -634,30 +609,41 @@
     return false;
   }
 
-  let username = $('#username').val();
-  if (username=="") {
-    $('#username').focus();
-    Swal.fire({
-      title:'Username Kosong',
-      text:'Silahkan Masukkan Username!',
-      icon:'error'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.close();
-      }
-    });
-    return false;
-  }
+  // let user_telepon = $('#user_telepon').val();
+  // if (user_telepon=="") {
+  //   $('#user_telepon').focus();
+  //   Swal.fire({
+  //     title:'Telepon Kosong',
+  //     text:'Silahkan Masukkan Telepon!',
+  //     icon:'error'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.close();
+  //     }
+  //   });
+  //   return false;
+  // }
 
 
-  let email = $('#email').val();
-  if (email!="") {
+  let user_email = $('#user_email').val();
+  if (user_email=="") {
+      $('#user_email').focus();
+      Swal.fire({
+        title:'Email Kosong',
+        text:'Silahkan Masukkan Email!',
+        icon:'error'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close();
+        }
+      });
+      return false;
+    }else{
 
     let testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-    if (!testEmail.test(email))
+    if (!testEmail.test(user_email))
     {
-
-     $('#email').focus();
+     $('#user_email').focus();
      Swal.fire({
       title:'Format Email Salah',
       text:'Silahkan Masukkan Email yang Valid!',
@@ -670,17 +656,12 @@
     return false;
   }
 }
-
-
 let cek = 0;
-
-
-
 $.ajax({
   type : "GET",
-  url  : "<?php echo base_url('user/cek_username')?>",
+  url  : "<?php echo base_url('user/cek_email')?>",
   dataType : "JSON",
-  data : {'username': username},
+  data : {'user_email': user_email},
   success: function(data){
    let link = $('#form_user').attr('action');
    if (link.includes('simpan')) {

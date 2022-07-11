@@ -56,6 +56,9 @@
                       <button type="submit" class="btn btn-primary btn-user btn-block">
                         Login
                       </button>
+                       <a href="<?php echo base_url() ?>" class="btn btn-danger btn-user btn-block">
+                        Batal
+                      </a>
                     </form>
                     <hr>
                     <div class="text-center">
