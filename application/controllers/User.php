@@ -57,9 +57,9 @@ class User extends CI_Controller {
 			$opsi .='</div>';
 			$l->opsi = $opsi;
 			if ($l->user_status > 0) {
-				$l->user_status = '<button type="button" class="btn btn-success btn-sm btn-round  item_aktivasi_agama">Aktif</button>';
+				$l->user_status = '<button type="button" class="btn btn-success btn-sm btn-round ">Aktif</button>';
 			}else{
-				$l->user_status = '<button type="button" class="btn btn-danger btn-sm btn-round  item_aktivasi_agama">Non Aktif</button>';
+				$l->user_status = '<button type="button" class="btn btn-danger btn-sm btn-round ">Non Aktif</button>';
 			}
 
 			$data[] = $l;

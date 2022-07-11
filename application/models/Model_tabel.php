@@ -15,8 +15,6 @@ class Model_tabel extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-
-
     private function _get_datatables_query($type=null,$sort=null,$order=null,$search=null)
     {         
         switch ($type) {
@@ -33,6 +31,40 @@ class Model_tabel extends CI_Model {
             if ($search!=null && $search!='') {
                 $this->db->like('a.agama_id',$search);
                 $this->db->or_like('a.agama_nama',$search);
+            }
+            
+            break;
+
+            case 'bahasa':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_bahasa a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.bahasa_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.bahasa_id',$search);
+                $this->db->or_like('a.bahasa_nama',$search);
+            }
+            
+            break;
+
+              case 'jabatan':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_jabatan a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.jabatan_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.jabatan_id',$search);
+                $this->db->or_like('a.jabatan_nama',$search);
             }
             
             break;
@@ -92,6 +124,23 @@ class Model_tabel extends CI_Model {
             
             break;
 
+            case 'skill_level':
+            $this->db->select('a.*');
+            $this->db->from('tbl_skill_level a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.skill_level_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.skill_level_id',$search);
+                $this->db->or_like('a.skill_level_nama',$search);
+            }
+            
+            break;
+
             case 'level':
             $this->db->select('a.*');
             $this->db->from('tbl_master_level a');
@@ -109,6 +158,44 @@ class Model_tabel extends CI_Model {
             
             break;
 
+              case 'stp':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_stp a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.stp_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.stp_id',$search);
+                $this->db->or_like('a.stp_nama',$search);
+                $this->db->or_like('a.stp_pemilik',$search);
+                $this->db->or_like('a.stp_email',$search);
+                $this->db->or_like('a.stp_telepon',$search);
+            }
+            
+            break;
+
+
+
+             case 'kategori_job':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_kategori_job a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.kategori_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.kategori_id',$search);
+                $this->db->or_like('a.kategori_nama',$search);
+            }
+            
+            break;
             case 'produk':
             $this->db->select('a.*,b.nama_kategori');
             $this->db->join('tbl_kategori_produk b','b.id_kategori=a.id_kategori');

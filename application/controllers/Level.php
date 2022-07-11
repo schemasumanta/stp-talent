@@ -115,9 +115,9 @@ class Level extends CI_Controller {
 			$opsi .='</div>';
 
 			if ($l->level_status > 0) {
-				$l->level_status = '<button type="button" class="btn btn-success btn-sm btn-round  item_aktivasi_agama">Aktif</button>';
+				$l->level_status = '<button type="button" class="btn btn-success btn-sm btn-round  ">Aktif</button>';
 			}else{
-				$l->level_status = '<button type="button" class="btn btn-danger btn-sm btn-round  item_aktivasi_agama">Non Aktif</button>';
+				$l->level_status = '<button type="button" class="btn btn-danger btn-sm btn-round  ">Non Aktif</button>';
 			}
 
 			$l->opsi = $opsi;
