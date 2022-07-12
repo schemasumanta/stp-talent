@@ -12,7 +12,6 @@ $sub_active=$this->uri->segment(2);
         </div>
         <div class="sidebar-brand-text mx-3"><?php echo $this->session->stp_nama !='' ? $this->session->stp_nama :'TALENT HUB'; ?></div>
     </a>
-
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
@@ -226,7 +225,7 @@ data-parent="#accordionSidebar">
                     <i class="fa fa-bars"></i>
                 </button>
 
-                    <img src="<?php echo $this->session->stp_logo ?>" style="max-height:  40px;margin-left: 15px">
+                    <img src="<?php echo base_url().$this->session->stp_logo ?>" style="max-height:  40px;margin-left: 15px">
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
