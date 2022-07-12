@@ -100,7 +100,7 @@
               <!-- logo -->
               <div class="footer-logo mb-20">
                 <a href="index.html"
-                  ><img src="<?php echo $s->stp_logo ?>" alt=""
+                  ><img src="<?php echo base_url().$s->stp_logo ?>" alt=""
                 /></a>
               </div>
               <div class="footer-tittle-bottom">
@@ -167,39 +167,39 @@
     <!-- JS here -->
 
     <!-- All JS Custom Plugins Link Here here -->
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
-    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/popper.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
     <!-- Jquery Mobile Menu -->
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.slicknav.min.js"></script>
 
     <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <script src="./assets/js/price_rangs.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/owl.carousel.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/slick.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/price_rangs.js"></script>
 
     <!-- One Page, Animated-HeadLin -->
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/animated.headline.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/wow.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/animated.headline.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.magnific-popup.js"></script>
 
     <!-- Scrollup, nice-select, sticky -->
-    <script src="./assets/js/jquery.scrollUp.min.js"></script>
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.scrollUp.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.nice-select.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.sticky.js"></script>
 
     <!-- contact js -->
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/contact.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.form.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.validate.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/mail-script.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.ajaxchimp.min.js"></script>
 
     <!-- Jquery Plugins, main Jquery -->
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/plugins.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/main.js"></script>
   </body>
 </html>
 

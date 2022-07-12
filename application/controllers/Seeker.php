@@ -6,11 +6,45 @@ class Seeker extends CI_Controller {
 	
 	public function index()
 	{
+
+		$this->db->where('slider_tipe','main');
+		$this->db->where('slider_status',1);
+		$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
+
+		$this->db->where('kategori_status',1);
+		$this->db->limit(8);
+		$this->db->order_by('kategori_nama','asc');
+
+		$data['kategori_job'] = $this->db->get('tbl_master_kategori_job')->result();
+
+		$this->db->where('slider_tipe','cv');
+		$this->db->where('slider_status',1);
+		$data['slider_cv'] = $this->db->get('tbl_master_slider')->result();
+
+		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		$this->db->where('slider_tipe','how');
+		$this->db->where('slider_status',1);
+		$data['slider_how'] = $this->db->get('tbl_master_slider')->result();
 		if ($this->session->login==FALSE) {
-		$this->load->view('seeker/tampilan_login');
+			$this->load->view('web/header',$data);
+			$this->load->view('seeker/tampilan_login',$data);
+			$this->load->view('web/footer',$data);
+
 
 		}else{
-			redirect('dashboard','refresh');
+			redirect('seeker/dashboard','refresh');
+		}
+	}
+
+	public function register()
+	{
+		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		if ($this->session->login==FALSE) {
+			$this->load->view('web/header',$data);
+			$this->load->view('seeker/tampilan_daftar',$data);
+			$this->load->view('web/footer',$data);
+		}else{
+			redirect('seeker/dashboard','refresh');
 		}
 	}
 
@@ -25,10 +59,10 @@ class Seeker extends CI_Controller {
 				if ($a->user_status==1) {
 					$stp = 	$this->db->get('tbl_master_stp')->result();
 					foreach ($stp as $s) {
-					$data['stp_id'] = $s->stp_id;
-					$data['stp_nama'] = $s->stp_nama;
-					$data['stp_pemilik'] = $s->stp_pemilik;
-					$data['stp_logo'] = $s->stp_logo;
+						$data['stp_id'] = $s->stp_id;
+						$data['stp_nama'] = $s->stp_nama;
+						$data['stp_pemilik'] = $s->stp_pemilik;
+						$data['stp_logo'] = $s->stp_logo;
 					}
 					$data['user_id'] = $a->user_id;
 					$data['user_nama'] = $a->user_nama;

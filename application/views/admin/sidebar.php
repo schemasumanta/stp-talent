@@ -6,7 +6,7 @@ $sub_active=$this->uri->segment(2);
 <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('landing') ?>">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url() ?>">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa fa-binoculars" aria-hidden="true"></i>
         </div>

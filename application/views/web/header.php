@@ -12,36 +12,40 @@
     <link
     rel="shortcut icon"
     type="image/x-icon"
-    href="assets/img/favicon.ico"
+    href="<?php echo base_url() ?>assets/img/favicon.ico"
     />
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="assets/css/flaticon.css" />
-    <link rel="stylesheet" href="assets/css/price_rangs.css" />
-    <link rel="stylesheet" href="assets/css/slicknav.css" />
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/magnific-popup.css" />
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-    <link rel="stylesheet" href="assets/css/themify-icons.css" />
-    <link rel="stylesheet" href="assets/css/slick.css" />
-    <link rel="stylesheet" href="assets/css/nice-select.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/flaticon.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/price_rangs.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/slicknav.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/animate.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/magnific-popup.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/themify-icons.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/slick.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/nice-select.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/style.css" />
   </head>
 
   <body>
     <!-- Preloader Start -->
+    <?php if ($this->uri->segment(1)==null) { ?>
+      
     <div id="preloader-active">
       <div class="preloader d-flex align-items-center justify-content-center">
         <div class="preloader-inner position-relative">
           <div class="preloader-circle"></div>
           <div class="preloader-img pere-text">
-            <img src="<?php echo $s->stp_logo ?>" alt="" />
+            <img src="<?php echo base_url().$s->stp_logo ?>" alt="" />
           </div>
         </div>
       </div>
     </div>
+   <?php  } ?>
+
     <!-- Preloader Start -->
     <header>
       <!-- Header Start -->
@@ -53,7 +57,7 @@
                 <!-- Logo -->
                 <div class="logo">
                   <a href="<?php echo base_url() ?>"
-                    ><img src="<?php echo $s->stp_logo ?>" alt=""
+                    ><img src="<?php echo base_url().$s->stp_logo ?>" alt=""
                     /></a>
                   </div>
                 </div>
@@ -83,8 +87,8 @@
                     <div class="header-btn d-none f-right d-lg-block">
                       <?php if ($this->session->login==FALSE): ?>
 
-                        <a href="#" class="btn head-btn1">Register</a>
-                        <a href="#" class="btn head-btn2">Login</a>
+                        <a href="<?php echo base_url('seeker') ?>" class="btn head-btn1">Kandidat</a>
+                        <a href="<?php echo base_url('provider') ?>" class="btn head-btn2">Perusahaan</a>
                         <?php else: ?>
                           <?php if ($this->session->user_level==1): ?>
                             <a href="<?php echo base_url('dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Admin Panel</a>
