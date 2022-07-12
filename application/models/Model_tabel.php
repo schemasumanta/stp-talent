@@ -197,7 +197,7 @@ class Model_tabel extends CI_Model {
 
 
 
-             case 'kategori_job':
+             case 'job_kategori':
             $this->db->select('a.*');
             $this->db->from('tbl_master_kategori_job a');
 
@@ -210,6 +210,23 @@ class Model_tabel extends CI_Model {
             if ($search!=null && $search!='') {
                 $this->db->like('a.kategori_id',$search);
                 $this->db->or_like('a.kategori_nama',$search);
+            }
+            
+            break;
+
+                case 'job_level':
+            $this->db->select('a.*');
+            $this->db->from('tbl_master_level_job a');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.joblevel_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.joblevel_id',$search);
+                $this->db->or_like('a.joblevel_nama',$search);
             }
             
             break;

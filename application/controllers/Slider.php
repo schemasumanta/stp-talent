@@ -6,7 +6,7 @@ class Slider extends CI_Controller {
 	{
 		parent::__construct();
 		if ($this->session->userdata('login')==FALSE) {
-			redirect('login','refresh');
+			redirect('admin','refresh');
 		}
 		date_default_timezone_set('Asia/Jakarta');	
 	}

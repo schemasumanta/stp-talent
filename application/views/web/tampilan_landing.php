@@ -65,101 +65,29 @@
               </div>
             </div>
           </div>
-          <div class="row d-flex justify-contnet-center">
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+          <div class="row d-flex justify-content-center">
+            <?php if (count($kategori_job) > 0): ?>
+              <?php foreach ($kategori_job as $kj): ?>
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
               <div class="single-services text-center mb-30">
                 <div class="services-ion">
-                  <span class="flaticon-tour"></span>
+                  <span class="mb-2"><img src="<?php echo $kj->kategori_icon ?>"></span>
                 </div>
                 <div class="services-cap">
-                  <h5><a href="job_listing.html">Design & Creative</a></h5>
+                  <h5><a href="job_listing.html"><?php echo ucwords($kj->kategori_nama); ?></a></h5>
                   <span>(653)</span>
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-              <div class="single-services text-center mb-30">
-                <div class="services-ion">
-                  <span class="flaticon-cms"></span>
-                </div>
-                <div class="services-cap">
-                  <h5><a href="job_listing.html">Administrative</a></h5>
-                  <span>(658)</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-              <div class="single-services text-center mb-30">
-                <div class="services-ion">
-                  <span class="flaticon-report"></span>
-                </div>
-                <div class="services-cap">
-                  <h5><a href="job_listing.html">Finance & Economics</a></h5>
-                  <span>(658)</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-              <div class="single-services text-center mb-30">
-                <div class="services-ion">
-                  <span class="flaticon-app"></span>
-                </div>
-                <div class="services-cap">
-                  <h5><a href="job_listing.html">Software Engineer</a></h5>
-                  <span>(658)</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-              <div class="single-services text-center mb-30">
-                <div class="services-ion">
-                  <span class="flaticon-helmet"></span>
-                </div>
-                <div class="services-cap">
-                  <h5><a href="job_listing.html">Construction</a></h5>
-                  <span>(658)</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-              <div class="single-services text-center mb-30">
-                <div class="services-ion">
-                  <span class="flaticon-high-tech"></span>
-                </div>
-                <div class="services-cap">
-                  <h5><a href="job_listing.html">Manufacturing</a></h5>
-                  <span>(658)</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-              <div class="single-services text-center mb-30">
-                <div class="services-ion">
-                  <span class="flaticon-real-estate"></span>
-                </div>
-                <div class="services-cap">
-                  <h5><a href="job_listing.html">Real Estate</a></h5>
-                  <span>(658)</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-              <div class="single-services text-center mb-30">
-                <div class="services-ion">
-                  <span class="flaticon-content"></span>
-                </div>
-                <div class="services-cap">
-                  <h5><a href="job_listing.html">Content Writer</a></h5>
-                  <span>(658)</span>
-                </div>
-              </div>
-            </div>
+              <?php endforeach ?>
+            <?php endif ?>
+            
           </div>
           <!-- More Btn -->
           <!-- Section Button -->
           <div class="row">
             <div class="col-lg-12">
-              <div class="browse-btn2 text-center mt-50">
+              <div class="browse-btn2 text-center mt-50 mb-1">
                 <a href="job_listing.html" class="border-btn2"
                   >Browse All Sectors</a
                 >
@@ -346,7 +274,7 @@
                 </div>
                 <div class="process-cap">
                   <h5>1. Search a job</h5>
-                  <p>
+                  <p class="justify-content">
                     As simple as clicking, filtering by Place and Interests !
                     and you could also browse by Categories !
                   </p>
@@ -360,7 +288,7 @@
                 </div>
                 <div class="process-cap">
                   <h5>2. Apply for job</h5>
-                  <p>
+                  <p class="justify-content">
                     Complete your profile, upload you resume, make it as
                     Interested as it can be for Recruiters
                   </p>
@@ -374,7 +302,7 @@
                 </div>
                 <div class="process-cap">
                   <h5>3. Get your job</h5>
-                  <p>
+                  <p class="justify-content">
                     In your Profile dashboard or Email for an update from
                     recruiters, do a remote interview, with our built-in
                     features.

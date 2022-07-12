@@ -450,8 +450,8 @@ hr {
   padding: 30px 55px;
 }
 .border-btn2 {
-  border: 1px solid #ffffff;
-  color: #ffffff;
+  border: 1px solid #F82C2C;
+  color: #F82C2C;
   font: "Inter", sans-serif;
   background: none;
   -moz-user-select: none;
@@ -477,7 +477,7 @@ hr {
   }
 }
 .border-btn2::before {
-  border: 1px solid transparent;
+  border: 1px solid #F82C2C;
   content: "";
   position: absolute;
   left: 0;
@@ -5229,12 +5229,15 @@ form.search-box .search-form a {
   transform: perspective(600px) rotateY(-180deg);
 }
 .our-services .single-services {
-  border: 1px solid #dafcef;
+  border: 1px solid #a9abae;
+  border-radius: 5px;
+
   padding: 44px 0;
   -webkit-transition: 0.4s;
   -moz-transition: 0.4s;
   -o-transition: 0.4s;
   transition: 0.4s;
+  cursor: pointer;
 }
 .our-services .single-services .services-ion span {
   font-size: 60px;
@@ -5344,6 +5347,7 @@ form.search-box .search-form a {
 }
 .apply-process-area .single-process .process-cap p {
   color: #ffffff;
+  
 }
 .apply-bg {
   background-size: cover;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php foreach ($stp as $s): ?>
-  
-<html class="no-js" lang="zxx">
+
+  <html class="no-js" lang="zxx">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="manifest" href="site.webmanifest" />
     <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="assets/img/favicon.ico"
+    rel="shortcut icon"
+    type="image/x-icon"
+    href="assets/img/favicon.ico"
     />
 
     <!-- CSS here -->
@@ -54,47 +54,65 @@
                 <div class="logo">
                   <a href="<?php echo base_url() ?>"
                     ><img src="<?php echo $s->stp_logo ?>" alt=""
-                  /></a>
-                </div>
-              </div>
-              <div class="col-lg-9 col-md-9">
-                <div class="menu-wrapper">
-                  <!-- Main-menu -->
-                  <div class="main-menu">
-                    <nav class="d-none d-lg-block">
-                      <ul id="navigation">
-                        <li><a href="<?php echo base_url() ?>">Home</a></li>
-                        <li><a href="job_listing.html">Find a Jobs </a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li>
-                          <a href="#">Page</a>
-                          <ul class="submenu">
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="single-blog.html">Blog Details</a></li>
-                            <li><a href="elements.html">Elements</a></li>
-                            <li><a href="job_details.html">job Details</a></li>
-                          </ul>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                      </ul>
-                    </nav>
-                  </div>
-                  <!-- Header-btn -->
-                  <div class="header-btn d-none f-right d-lg-block">
-                    <a href="#" class="btn head-btn1">Register</a>
-                    <a href="#" class="btn head-btn2">Login</a>
+                    /></a>
                   </div>
                 </div>
-              </div>
-              <!-- Mobile Menu -->
-              <div class="col-12">
-                <div class="mobile_menu d-block d-lg-none"></div>
+                <div class="col-lg-9 col-md-9">
+                  <div class="menu-wrapper">
+                    <!-- Main-menu -->
+                    <div class="main-menu">
+                      <nav class="d-none d-lg-block">
+                        <ul id="navigation">
+                          <li><a href="<?php echo base_url() ?>">Home</a></li>
+                          <li><a href="job_listing.html">Find a Jobs </a></li>
+                          <li><a href="about.html">About</a></li>
+                          <li>
+                            <a href="#">Page</a>
+                            <ul class="submenu">
+                              <li><a href="blog.html">Blog</a></li>
+                              <li><a href="single-blog.html">Blog Details</a></li>
+                              <li><a href="elements.html">Elements</a></li>
+                              <li><a href="job_details.html">job Details</a></li>
+                            </ul>
+                          </li>
+                          <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                      </nav>
+                    </div>
+                    <!-- Header-btn -->
+                    <div class="header-btn d-none f-right d-lg-block">
+                      <?php if ($this->session->login==FALSE): ?>
+
+                        <a href="#" class="btn head-btn1">Register</a>
+                        <a href="#" class="btn head-btn2">Login</a>
+                        <?php else: ?>
+                          <?php if ($this->session->user_level==1): ?>
+                            <a href="<?php echo base_url('dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Admin Panel</a>
+                          <?php endif ?>
+
+                          <?php if ($this->session->user_level==2): ?>
+                            <a href="<?php echo base_url('seeker/dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Job Seeker Area</a>
+                          <?php endif ?>
+
+                          <?php if ($this->session->user_level==3): ?>
+                            <a href="<?php echo base_url('provider/dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Job Provider Area</a>
+                          <?php endif ?>
+
+                        <?php endif ?>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Mobile Menu -->
+                  <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- Header End -->
-    </header>
+          <!-- Header End -->
+        </header>
 
-<?php endforeach ?>
+      <?php endforeach ?>

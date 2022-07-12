@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Seeker extends CI_Controller {
 
 	
 	public function index()
 	{
 		if ($this->session->login==FALSE) {
-		$this->load->view('admin/tampilan_login');
+		$this->load->view('seeker/tampilan_login');
 
 		}else{
 			redirect('dashboard','refresh');
