@@ -13,20 +13,23 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
+			
+		$this->load->view('admin/header');
+
 		if ($this->session->user_level==1) {
-			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar'); 
 			$this->load->view('admin/tampilan_dashboard'); 
-			$this->load->view('admin/footer');
 			
 		}
 		if ($this->session->user_level==2) {
+			$this->load->view('templates/sidebar'); 
 			$this->load->view('seeker/tampilan_dashboard');  
 		}
 
 		if ($this->session->user_level==3) {
 			$this->load->view('provider/tampilan_dashboard');  
 		}
+			$this->load->view('admin/footer');
 
 	}
 

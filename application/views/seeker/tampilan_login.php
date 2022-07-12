@@ -7,8 +7,9 @@
         class="single-slider section-overly slider-height2 d-flex align-items-center"
         data-background="<?php echo base_url() ?>assets/img/hero/about.jpg"
         >
-        <div class="container">
-          <form method="post" action="<?php echo base_url('seeker/ceklogin') ?>" id="form-login">
+        <div class="container flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
+       
+          <form method="post" action="<?php echo base_url('seeker/cek_login') ?>" id="form-login">
             <div class="row mt-5 mb-5 align-items-center">
               <div class="col-lg-6">
                 <div class="hero-cap text-center">
@@ -48,5 +49,20 @@
   <script type="text/javascript">
     $(document).on('click','.item_login',function () {
       $('#form-login').submit();
-    })
+    });
+      $(document).ready(function(){
+     const notif = $('.flashdatart').data('title');
+     if (notif) {
+      Swal.fire({
+        title:notif,
+        text:$('.flashdatart').data('text'),
+        icon:$('.flashdatart').data('icon'),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close(); 
+
+        }
+      });
+    }
+  });
   </script>

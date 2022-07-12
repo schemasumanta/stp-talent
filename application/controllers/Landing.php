@@ -28,6 +28,8 @@ class Landing extends CI_Controller {
 		$this->load->view('web/header',$data);
 		$this->load->view('web/tampilan_landing',$data);
 		$this->load->view('web/footer',$data);
+		$this->load->view('web/script_include',$data);
+
 	}
 
 	

@@ -7,7 +7,7 @@
         class="single-slider section-overly slider-height2 d-flex align-items-center"
         data-background="<?php echo base_url() ?>assets/img/hero/about.jpg"
         >
-        <div class="container">
+        <div class="container flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
           <form method="post" action="<?php echo base_url('seeker/simpan_pendaftaran') ?>" id="form-daftar">
             <div class="row mt-5 mb-5 align-items-center">
               <div class="col-lg-6">
@@ -20,11 +20,9 @@
                     <input type="text" class="form-control" name="seeker_nama"  id="seeker_nama" placeholder="Nama Lengkap" autofocus>
                   </div>
 
-                   <div class="col-lg-8 mt-3">
+                  <div class="col-lg-8 mt-3">
                     <input type="text" class="form-control" name="seeker_telepon"  id="seeker_telepon" placeholder="Nomor Telepon" autofocus>
                   </div>
-
-
                   <div class="col-lg-8 mt-3">
                     <input type="text" class="form-control" name="seeker_email"  id="seeker_email" placeholder="Masukkan Email" autofocus>
                   </div>
@@ -56,5 +54,20 @@
   <script type="text/javascript">
     $(document).on('click','.item_daftar',function () {
       $('#form-daftar').submit();
-    })
-  </script>
+    });
+    $(document).ready(function(){
+     const notif = $('.flashdatart').data('title');
+     if (notif) {
+      Swal.fire({
+        title:notif,
+        text:$('.flashdatart').data('text'),
+        icon:$('.flashdatart').data('icon'),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close(); 
+
+        }
+      });
+    }
+  });
+</script>

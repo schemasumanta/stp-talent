@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/slick.css" />
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/nice-select.css" />
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/style.css" />
+    
   </head>
 
   <body>
@@ -95,11 +96,11 @@
                           <?php endif ?>
 
                           <?php if ($this->session->user_level==2): ?>
-                            <a href="<?php echo base_url('seeker/dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Job Seeker Area</a>
+                            <a href="<?php echo base_url('dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Job Seeker Area</a>
                           <?php endif ?>
 
                           <?php if ($this->session->user_level==3): ?>
-                            <a href="<?php echo base_url('provider/dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Job Provider Area</a>
+                            <a href="<?php echo base_url('dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Job Provider Area</a>
                           <?php endif ?>
 
                         <?php endif ?>

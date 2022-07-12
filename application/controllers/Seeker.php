@@ -28,7 +28,7 @@ class Seeker extends CI_Controller {
 		if ($this->session->login==FALSE) {
 			$this->load->view('web/header',$data);
 			$this->load->view('seeker/tampilan_login',$data);
-			$this->load->view('web/footer',$data);
+			$this->load->view('web/script_include',$data);
 
 
 		}else{
@@ -42,7 +42,7 @@ class Seeker extends CI_Controller {
 		if ($this->session->login==FALSE) {
 			$this->load->view('web/header',$data);
 			$this->load->view('seeker/tampilan_daftar',$data);
-			$this->load->view('web/footer',$data);
+			$this->load->view('web/script_include',$data);
 		}else{
 			redirect('seeker/dashboard','refresh');
 		}
@@ -50,19 +50,19 @@ class Seeker extends CI_Controller {
 
 	public function cek_login()
 	{
-		$email =$this->input->post('user_email');
-		$password =md5($this->input->post('user_password'));
-		$cek = $this->model_query->cek_admin($email,$password)->result();
+		$email =$this->input->post('seeker_email');
+		$password =md5($this->input->post('seeker_password'));
+		$cek = $this->model_query->cek_seeker($email,$password)->result();
 		if ($cek !=NULL) {
 			foreach ($cek as $a)
 			{
 				if ($a->user_status==1) {
 					$stp = 	$this->db->get('tbl_master_stp')->result();
 					foreach ($stp as $s) {
-						$data['stp_id'] = $s->stp_id;
-						$data['stp_nama'] = $s->stp_nama;
-						$data['stp_pemilik'] = $s->stp_pemilik;
-						$data['stp_logo'] = $s->stp_logo;
+					$data['stp_id'] = $s->stp_id;
+					$data['stp_nama'] = $s->stp_nama;
+					$data['stp_pemilik'] = $s->stp_pemilik;
+					$data['stp_logo'] = $s->stp_logo;
 					}
 					$data['user_id'] = $a->user_id;
 					$data['user_nama'] = $a->user_nama;
@@ -80,14 +80,14 @@ class Seeker extends CI_Controller {
 
 					$this->db->where('user_id', $a->user_id);
 					$this->db->update('tbl_master_user', $data);
-					redirect('dashboard','refresh');
+					redirect('landing','refresh');
 				}else{
 
 					$data['title'] = 'Login Gagal';
 					$data['text'] = 'User Belum Diaktivasi!';
 					$data['icon'] = 'error';
 					$this->session->set_flashdata($data); 
-					redirect('admin','refresh');
+					redirect('seeker','refresh');
 				}
 			}
 		}
@@ -96,7 +96,7 @@ class Seeker extends CI_Controller {
 			$data['text'] = 'Silahkan Periksa Email & Password!';
 			$data['icon'] = 'error';
 			$this->session->set_flashdata($data); 
-			redirect('admin','refresh');
+			redirect('seeker','refresh');
 		}
 	}
 	public function logout()

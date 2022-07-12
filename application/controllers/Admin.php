@@ -48,7 +48,6 @@ class Admin extends CI_Controller {
 					$this->db->update('tbl_master_user', $data);
 					redirect('dashboard','refresh');
 				}else{
-
 					$data['title'] = 'Login Gagal';
 					$data['text'] = 'User Belum Diaktivasi!';
 					$data['icon'] = 'error';
