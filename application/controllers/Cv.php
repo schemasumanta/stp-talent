@@ -47,6 +47,46 @@ class Cv extends CI_Controller {
 		$this->load->view('web/script_include',$data);
 
 	}
+
+	
+
+	public function upload_resume()
+	{
+		$this->db->where('user_id',  $this->session->user_id);
+		$this->db->delete('tbl_resume_lampiran');
+		
+		$data_upload = array(
+			'resume_lampiran' => $this->input->post('lampiran_cv'),
+				'user_id' => $this->session->user_id,
+				'lampiran_created_date' =>date('Y-m-d H:i:s')
+
+		);
+		$result= $this->db->insert('tbl_resume_lampiran', $data_upload);
+
+		if ($result) {
+			$data_history = array(
+				'id_user' => $this->session->user_id, 
+				'ip_address'=>get_ip(),
+				'aktivitas' => "Mengupload CV ",
+			);
+
+			$this->db->insert('tbl_history', $data_history);
+
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'CV Berhasil Diupload!';
+			$data['icon'] = 'success';
+
+		}else{
+
+			$data['title'] = 'Gagal';
+			$data['text'] = 'CV Gagal Diupload!';
+			$data['icon'] = 'error';
+		}	
+		$this->session->set_flashdata($data);
+		redirect('cv','refresh');
+	}
+
+
 	public function simpan_resume()
 	{
 		$data_resume = array(

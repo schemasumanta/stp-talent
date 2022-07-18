@@ -8,26 +8,27 @@
         data-background="<?php echo base_url() ?>assets/img/hero/about.jpg"
         >
         <div class="container flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
-          <form method="post" action="<?php echo base_url('seeker/simpan_pendaftaran') ?>" id="form-daftar">
+          <form method="post" action="<?php echo base_url('provider/simpan_pendaftaran') ?>" id="form-daftar">
             <div class="row mt-5 mb-5 align-items-center">
               <div class="col-lg-6">
                 <div class="hero-cap text-center">
-                  <h2>Kandidat</h2>
-                  <p class="text-light">Bergabung bersama kami dan dapatkan pekerjaan dengan mudah</p>
+                  <h2>Job Provider</h2>
+                  <p class="text-light">Bergabung bersama kami dan temukan calon karyawan dengan mudah</p>
                 </div>
                 <div class="row justify-content-center mt-4">
                   <div class="col-lg-8">
-                    <input type="text" class="form-control" name="seeker_nama"  id="seeker_nama" placeholder="Nama Lengkap" autofocus>
+                    <input type="text" class="form-control" name="provider_nama"  id="provider_nama" placeholder="Nama Lengkap" autofocus>
                   </div>
 
                   <div class="col-lg-8 mt-3">
-                    <input type="text" class="form-control" name="seeker_telepon"  id="seeker_telepon" placeholder="Nomor Telepon" autofocus>
+                    <input type="text" class="form-control" name="provider_telepon"  id="provider_telepon" placeholder="Nomor Telepon" autofocus>
                   </div>
                   <div class="col-lg-8 mt-3">
-                    <input type="text" class="form-control" name="seeker_email"  id="seeker_email" placeholder="Masukkan Email" autofocus>
+                    <input type="text" class="form-control" name="provider_email"  id="provider_email" placeholder="Masukkan Email" autofocus>
                   </div>
+
                   <div class="col-lg-8 mt-3">
-                    <input type="password" class="form-control" name="seeker_password"  id="seeker_password" placeholder="Masukkan Password">
+                    <input type="password" class="form-control" name="provider_password"  id="provider_password" placeholder="Masukkan Password">
                   </div>
                   <div class="col-lg-8 mt-4 items-link btn-group">
                     <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
@@ -35,12 +36,12 @@
                   </div>
 
                   <div class="col-lg-8 text-center">
-                    <span class="text-light">Sudah Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('seeker') ?>">Login</a></span>
+                    <span class="text-light">Sudah Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('provider') ?>">Login</a></span>
                   </div>
                 </div>
               </div>
               <div class="col-lg-6" style=";padding: 10px;border:1px solid white;border-bottom-left-radius: 35px;border-top-right-radius: 35px">
-                <img src="<?php echo base_url() ?>assets/img/seeker.jpg" style="width: 100%;border-bottom-left-radius: 35px;border-top-right-radius: 35px">
+                <img src="<?php echo base_url() ?>assets/img/provider.jpg" style="width: 100%;border-bottom-left-radius: 35px;border-top-right-radius: 35px">
               </div>
             </div>
           </form>
