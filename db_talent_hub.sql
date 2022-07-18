@@ -56,9 +56,9 @@ CREATE TABLE IF NOT EXISTS `tbl_history` (
   PRIMARY KEY (`kode_history`) USING BTREE,
   KEY `id_user` (`id_user`),
   CONSTRAINT `tbl_history_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tbl_master_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=latin1 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_history: ~92 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_history: ~89 rows (lebih kurang)
 INSERT INTO `tbl_history` (`kode_history`, `tanggal`, `ip_address`, `id_user`, `aktivitas`) VALUES
 	(13, '2022-07-04 08:10:44', '::1', 1, 'Menambah Data Skill Baru Corel Draw'),
 	(14, '2022-07-04 08:11:53', '::1', 1, 'Menambah Data Skill Baru Corel Draw'),
@@ -151,7 +151,16 @@ INSERT INTO `tbl_history` (`kode_history`, `tanggal`, `ip_address`, `id_user`, `
 	(101, '2022-07-12 05:34:08', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama TalentHub'),
 	(102, '2022-07-12 05:34:35', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
 	(103, '2022-07-12 07:45:25', '::1', 1, 'Mengubah Data Jabatan Digital Creative'),
-	(104, '2022-07-12 07:45:40', '::1', 1, 'Menambah Data Jabatan Baru HRD');
+	(104, '2022-07-12 07:45:40', '::1', 1, 'Menambah Data Jabatan Baru HRD'),
+	(105, '2022-07-18 08:00:31', '::1', 3, 'Menambah Data Bahasa Baru '),
+	(106, '2022-07-18 08:09:29', '::1', 3, 'Menambah Profil Sumanta'),
+	(107, '2022-07-18 08:13:39', '::1', 3, 'Menambah Profil Sumanta'),
+	(108, '2022-07-18 10:24:26', '::1', 3, 'Mengupload CV '),
+	(109, '2022-07-18 10:32:58', '::1', 3, 'Mengupload CV '),
+	(110, '2022-07-18 10:35:16', '::1', 3, 'Mengupload CV '),
+	(111, '2022-07-18 10:36:05', '::1', 3, 'Mengupload CV '),
+	(112, '2022-07-18 10:36:23', '::1', 3, 'Mengupload CV '),
+	(113, '2022-07-18 10:37:14', '::1', 3, 'Mengupload CV ');
 
 -- membuang struktur untuk table db_talent_hub.tbl_langganan_premium
 CREATE TABLE IF NOT EXISTS `tbl_langganan_premium` (
@@ -249,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_bahasa` (
   `bahasa_nama` varchar(250) DEFAULT NULL,
   `bahasa_status` int(11) DEFAULT NULL,
   PRIMARY KEY (`bahasa_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_master_bahasa: ~5 rows (lebih kurang)
 INSERT INTO `tbl_master_bahasa` (`bahasa_id`, `bahasa_nama`, `bahasa_status`) VALUES
@@ -813,7 +822,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_kategori_job` (
   PRIMARY KEY (`kategori_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_kategori_job: ~3 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_kategori_job: ~2 rows (lebih kurang)
 INSERT INTO `tbl_master_kategori_job` (`kategori_id`, `kategori_nama`, `kategori_status`, `kategori_icon`) VALUES
 	(1, 'Design & Creative', 1, 'assets/img/icon_kategori/icon1657599869chatbubble.png'),
 	(2, 'Architecture', 1, 'assets/img/icon_kategori/icon1657602782logoraja.png'),
@@ -878,7 +887,7 @@ INSERT INTO `tbl_master_pendidikan` (`pendidikan_id`, `pendidikan_nama`, `pendid
 -- membuang struktur untuk table db_talent_hub.tbl_master_provinsi
 CREATE TABLE IF NOT EXISTS `tbl_master_provinsi` (
   `prov_id` char(2) NOT NULL DEFAULT '0',
-  `prov_Nama` varchar(50) DEFAULT NULL,
+  `prov_nama` varchar(50) DEFAULT NULL,
   `prov_Lat` varchar(25) NOT NULL,
   `prov_Long` varchar(25) NOT NULL,
   PRIMARY KEY (`prov_id`) USING BTREE,
@@ -886,7 +895,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_provinsi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_master_provinsi: ~34 rows (lebih kurang)
-INSERT INTO `tbl_master_provinsi` (`prov_id`, `prov_Nama`, `prov_Lat`, `prov_Long`) VALUES
+INSERT INTO `tbl_master_provinsi` (`prov_id`, `prov_nama`, `prov_Lat`, `prov_Long`) VALUES
 	('AC', 'Aceh', '4.695135', '96.7493993'),
 	('BA', 'Bali', '-8.4095178', '115.188916'),
 	('BB', 'Kepulauan Bangka Belitung', '-2.7410513', '106.4405872'),
@@ -930,7 +939,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_skill` (
   PRIMARY KEY (`skill_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_skill: ~5 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_skill: ~4 rows (lebih kurang)
 INSERT INTO `tbl_master_skill` (`skill_id`, `skill_nama`, `skill_status`) VALUES
 	(4, 'Corel Draw', 1),
 	(5, 'Adobe Photoshop', 1),
@@ -947,7 +956,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_slider` (
   PRIMARY KEY (`slider_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_slider: ~3 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_slider: ~4 rows (lebih kurang)
 INSERT INTO `tbl_master_slider` (`slider_id`, `slider_gambar`, `slider_tipe`, `slider_status`) VALUES
 	(1, 'assets/img/slider/slider1657552714jobless.jpg', 'main', 1),
 	(2, 'assets/img/slider/slider1657553191cv_bg.jpg', 'cv', 1),
@@ -969,7 +978,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_stp` (
   PRIMARY KEY (`stp_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_stp: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_stp: ~0 rows (lebih kurang)
 INSERT INTO `tbl_master_stp` (`stp_id`, `stp_nama`, `stp_pemilik`, `stp_logo`, `stp_facebook`, `stp_instagram`, `stp_website`, `stp_telepon`, `stp_email`, `stp_alamat`, `stp_tagline`) VALUES
 	(2, 'Talent Hub', 'Solo Techno Park', 'assets/img/foto_stp/logo1657549008LOGO STP warna besar.png', '', '', '', '', '', '', '');
 
@@ -990,12 +999,13 @@ CREATE TABLE IF NOT EXISTS `tbl_master_user` (
   UNIQUE KEY `user_email` (`user_email`),
   KEY `user_level` (`user_level`),
   CONSTRAINT `tbl_master_user_ibfk_1` FOREIGN KEY (`user_level`) REFERENCES `tbl_master_level` (`level_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_user: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_user: ~2 rows (lebih kurang)
 INSERT INTO `tbl_master_user` (`user_id`, `user_email`, `user_nama`, `user_password`, `user_status`, `user_level`, `user_login_status`, `user_foto`, `user_created_date`, `user_updated_date`, `user_telepon`) VALUES
 	(1, 'athoxusdah@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978'),
-	(3, 'schemasumanta@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 2, 1, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978');
+	(3, 'schemasumanta@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 2, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978'),
+	(4, 'athoxzoemanta@gmail.com', 'Super Door', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 3, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978');
 
 -- membuang struktur untuk table db_talent_hub.tbl_notifikasi
 CREATE TABLE IF NOT EXISTS `tbl_notifikasi` (
@@ -1103,20 +1113,20 @@ CREATE TABLE IF NOT EXISTS `tbl_report` (
 CREATE TABLE IF NOT EXISTS `tbl_resume` (
   `resume_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `pendidikan_id` int(11) NOT NULL,
+  `pendidikan_id` int(11) DEFAULT NULL,
   `prov_id` char(2) DEFAULT NULL,
   `kabkota_id` int(5) DEFAULT NULL,
   `agama_id` int(11) DEFAULT NULL,
-  `resume_nama_pendidikan_terakhir` varchar(250) NOT NULL,
-  `resume_pendididkan_tahun_lulus` int(5) NOT NULL,
-  `resume_nama_lengkap` varchar(250) NOT NULL,
-  `resume_foto` text NOT NULL,
-  `resume_lampiran` text DEFAULT NULL,
+  `resume_nama_pendidikan_terakhir` varchar(250) DEFAULT NULL,
+  `resume_pendididkan_tahun_lulus` int(5) DEFAULT NULL,
+  `resume_nama_lengkap` varchar(250) DEFAULT NULL,
+  `resume_foto` text DEFAULT NULL,
   `resume_nik` int(12) DEFAULT NULL,
   `resume_alamat_lengkap` text DEFAULT NULL,
   `resume_jenis_kelamin` char(2) DEFAULT NULL,
   `resume_tempat_lahir` varchar(150) DEFAULT NULL,
   `resume_tanggal_lahir` date DEFAULT NULL,
+  `resume_created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`resume_id`),
   KEY `user_id` (`user_id`),
   KEY `pendidikan_id` (`pendidikan_id`),
@@ -1127,9 +1137,22 @@ CREATE TABLE IF NOT EXISTS `tbl_resume` (
   CONSTRAINT `tbl_resume_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`),
   CONSTRAINT `tbl_resume_ibfk_3` FOREIGN KEY (`pendidikan_id`) REFERENCES `tbl_master_pendidikan` (`pendidikan_id`),
   CONSTRAINT `tbl_resume_ibfk_4` FOREIGN KEY (`kabkota_id`) REFERENCES `tbl_master_kabkota` (`kabkota_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_resume: ~0 rows (lebih kurang)
+
+-- membuang struktur untuk table db_talent_hub.tbl_resume_lampiran
+CREATE TABLE IF NOT EXISTS `tbl_resume_lampiran` (
+  `lampiran_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `resume_lampiran` text DEFAULT NULL,
+  `lampiran_created_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`lampiran_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
+-- Membuang data untuk tabel db_talent_hub.tbl_resume_lampiran: ~0 rows (lebih kurang)
+INSERT INTO `tbl_resume_lampiran` (`lampiran_id`, `user_id`, `resume_lampiran`, `lampiran_created_date`) VALUES
+	(6, 3, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fcv%2Fseeker.jpg?alt=media&token=a4469f8a-f17b-4623-aece-7eebb356acc3', '2022-07-18 17:37:14');
 
 -- membuang struktur untuk table db_talent_hub.tbl_skill_level
 CREATE TABLE IF NOT EXISTS `tbl_skill_level` (
@@ -1139,7 +1162,7 @@ CREATE TABLE IF NOT EXISTS `tbl_skill_level` (
   PRIMARY KEY (`skill_level_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_skill_level: ~3 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_skill_level: ~2 rows (lebih kurang)
 INSERT INTO `tbl_skill_level` (`skill_level_id`, `skill_level_nama`, `skill_level_status`) VALUES
 	(1, 'Beginner', 1),
 	(2, 'Intermediate', 1),
