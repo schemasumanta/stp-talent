@@ -28,10 +28,12 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/slick.css" />
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/nice-select.css" />
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/style.css" />
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets_admin/css/select2.min.css">
     
   </head>
 
   <body>
+
     <!-- Preloader Start -->
     <?php if ($this->uri->segment(1)==null) { ?>
       

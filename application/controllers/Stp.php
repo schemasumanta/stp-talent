@@ -11,6 +11,8 @@ class Stp extends CI_Controller {
 		// 	</script>";
 
 		// } 
+
+		
 		date_default_timezone_set('Asia/Jakarta');	
 	}
 

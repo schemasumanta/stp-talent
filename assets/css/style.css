@@ -369,11 +369,23 @@ hr {
   color: #fff !important;
   z-index: -1;
 }
+
+
 .head-btn2 {
   background: none;
   border: 1px solid #666666;
   color: #666666;
 }
+
+.sidebar-btn2 {
+  background: none;
+  border: 1px solid #666666;
+  color: #666666;
+  border-radius: 25px!important;
+}
+
+
+
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .head-btn2 {
     padding: 27px 34px;
@@ -3700,6 +3712,9 @@ del {
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px
+
 }
 .genric-btn:focus {
   outline: none;

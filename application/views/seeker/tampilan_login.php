@@ -8,10 +8,13 @@
         data-background="<?php echo base_url() ?>assets/img/hero/about.jpg"
         >
         <div class="container flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
-       
+
           <form method="post" action="<?php echo base_url('seeker/cek_login') ?>" id="form-login">
-            <div class="row mt-5 mb-5 align-items-center">
-              <div class="col-lg-6">
+            <div class="row mt-5 p-3 mb-5 align-items-center">
+              <div class="col-lg-6" style=";padding: 10px;border:1px solid white;border-bottom-left-radius: 35px;border-top-right-radius: 35px">
+                <img src="<?php echo base_url() ?>assets/img/seeker.jpg" style="width: 100%;border-bottom-left-radius: 35px;border-top-right-radius: 35px">
+              </div>
+              <div class="col-lg-6 mb-5 mt-5">
                 <div class="hero-cap text-center">
                   <h2>Kandidat</h2>
                   <p class="text-light">Temukan Lowongan yang sesuai dengan Gaji Anda</p>
@@ -35,9 +38,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6" style=";padding: 10px;border:1px solid white;border-bottom-left-radius: 35px;border-top-right-radius: 35px">
-                <img src="<?php echo base_url() ?>assets/img/seeker.jpg" style="width: 100%;border-bottom-left-radius: 35px;border-top-right-radius: 35px">
-              </div>
+
             </div>
           </form>
         </div>
@@ -50,7 +51,7 @@
     $(document).on('click','.item_login',function () {
       $('#form-login').submit();
     });
-      $(document).ready(function(){
+    $(document).ready(function(){
      const notif = $('.flashdatart').data('title');
      if (notif) {
       Swal.fire({
@@ -65,4 +66,4 @@
       });
     }
   });
-  </script>
+</script>

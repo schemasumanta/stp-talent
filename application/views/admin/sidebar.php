@@ -7,7 +7,7 @@ $sub_active=$this->uri->segment(2);
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url() ?>">
-        <div class="sidebar-brand-icon rotate-n-15">
+        <div class="sidebar-brand-icon ">
             <i class="fa fa-binoculars" aria-hidden="true"></i>
         </div>
         <div class="sidebar-brand-text mx-3"><?php echo $this->session->stp_nama !='' ? $this->session->stp_nama :'TALENT HUB'; ?></div>
@@ -27,95 +27,162 @@ $sub_active=$this->uri->segment(2);
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Master Data
-        </div>
+         Admin Panel
+     </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-database"></i>
+     <!-- Nav Item - Pages Collapse Menu -->
 
-            <span>Master Data</span>
-        </a>
-        <div id="collapseTwo" class="collapse <?php if($active=="agama" || $active=="bahasa" || $active=="level"  || $active=="pendidikan" || $active=="jabatan" || $active=="skill" || $active=="job" || $active=="user"){
-            echo "show";
-        } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item 
-            <?php if($active=="agama" && $sub_active==""){
-                echo "bg-danger text-light";
-            } ?>
-            " href="<?php echo base_url('agama') ?>">Agama</a>
+     <li class="nav-item 
 
-            <a class="collapse-item 
-            <?php if($active=="bahasa" && $sub_active==""){
-                echo "bg-danger text-light";
-            } ?>
-            " href="<?php echo base_url('bahasa') ?>">Bahasa</a>
-
-            <a class="collapse-item
-            <?php if($active=="jabatan" && $sub_active==""){
-                echo "bg-danger text-light";
-            } ?>
-            " href="<?php echo base_url('jabatan') ?>">Jabatan</a>
-            <a class="collapse-item
-            <?php if($active=="level" && $sub_active==""){
-                echo "bg-danger text-light";
-            } ?>
-
-            " href="<?php echo base_url('level') ?>">Level</a>
-            <a class="collapse-item
-            <?php if($active=="pendidikan" && $sub_active==""){
-                echo "bg-danger text-light";
-            } ?>
-
-            " href="<?php echo base_url('pendidikan') ?>">Pendidikan</a>
-            <a class="collapse-item
-            <?php if($active=="skill" && $sub_active==""){
-                echo "bg-danger text-light";
-            } ?>
-
-            " href="<?php echo base_url('skill') ?>">Skill</a>
-
-            <a class="collapse-item
-            <?php if($active=="skill" && $sub_active=="skill_level"){
-                echo "bg-danger text-light";
-            } ?>
-            " href="<?php echo base_url('skill/skill_level') ?>">Level Skill</a>
-
-
-            <a class="collapse-item
-            <?php if($active=="user" && $sub_active==""){
-                echo "bg-danger text-light";
-            } ?>
-
-            " href="<?php echo base_url('user') ?>">User</a>
-
-            <a class="collapse-item
-            <?php if($active=="job" && $sub_active=="kategori"){
-                echo "bg-danger text-light";
-            } ?>
-
-            " href="<?php echo base_url('job/kategori') ?>">Kategori Pekerjaan</a>
-
-            <a class="collapse-item
-            <?php if($active=="job" && $sub_active=="level"){
-                echo "bg-danger text-light";
-            } ?>
-
-            " href="<?php echo base_url('job/level') ?>">Level Pekerjaan</a>
-
-
-
-        </div>
-    </div>
+     <?php if($active=="admin"){
+        echo "active";
+    } ?> ">
+    <a class="nav-link" href="<?php echo base_url('user') ?>">
+        <i class="fas fa-fw fa-user"></i>Admin Role
+    </a>
 </li>
+
+<div class="sidebar-heading">
+ MANAGE ACCOUNTS
+</div>
+
+<li class="nav-item 
+
+<?php if($active=="user"){
+    echo "active";
+} ?> ">
+<a class="nav-link" href="<?php echo base_url('user') ?>">
+    <i class="fas fa-fw fa-user"></i>Job Provider
+</a>
+</li>
+
+<li class="nav-item 
+
+<?php if($active=="user"){
+    echo "active";
+} ?> ">
+<a class="nav-link" href="<?php echo base_url('user') ?>">
+    <i class="fas fa-fw fa-user"></i>Job Seeker
+</a>
+</li>
+
+
+<div class="sidebar-heading">
+Premium Panel
+</div>
+
+<li class="nav-item">
+    <a class="nav-link ">
+        <i class="fas fa-fw fa-book"></i>Fitur Premium
+    </a>
+</li>
+
+<div class="sidebar-heading">
+Job Panel
+</div>
+
+
+<li class="nav-item">
+    <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
+    aria-expanded="true" aria-controls="collapseTwo">
+    <i class="fas fa-fw fa-database"></i>
+
+    <span>Job Posting</span>
+</a>
+<div id="collapseTwo" class="collapse <?php if($active=="agama" || $active=="bahasa" || $active=="level"  || $active=="pendidikan" || $active=="jabatan" || $active=="skill" || $active=="job"){
+    echo "show";
+} ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+<div class="bg-white py-2 collapse-inner rounded">
+    <a class="collapse-item 
+    <?php if($active=="agama" && $sub_active==""){
+        echo "bg-danger text-light";
+    } ?>
+    " href="<?php echo base_url('agama') ?>">Agama</a>
+
+    <a class="collapse-item 
+    <?php if($active=="bahasa" && $sub_active==""){
+        echo "bg-danger text-light";
+    } ?>
+    " href="<?php echo base_url('bahasa') ?>">Bahasa</a>
+
+    <a class="collapse-item
+    <?php if($active=="jabatan" && $sub_active==""){
+        echo "bg-danger text-light";
+    } ?>
+    " href="<?php echo base_url('jabatan') ?>">Jabatan</a>
+    <a class="collapse-item
+    <?php if($active=="level" && $sub_active==""){
+        echo "bg-danger text-light";
+    } ?>
+
+    " href="<?php echo base_url('level') ?>">Level</a>
+    <a class="collapse-item
+    <?php if($active=="pendidikan" && $sub_active==""){
+        echo "bg-danger text-light";
+    } ?>
+
+    " href="<?php echo base_url('pendidikan') ?>">Pendidikan</a>
+    <a class="collapse-item
+    <?php if($active=="skill" && $sub_active==""){
+        echo "bg-danger text-light";
+    } ?>
+
+    " href="<?php echo base_url('skill') ?>">Skill</a>
+
+    <a class="collapse-item
+    <?php if($active=="skill" && $sub_active=="skill_level"){
+        echo "bg-danger text-light";
+    } ?>
+    " href="<?php echo base_url('skill/skill_level') ?>">Level Skill</a>
+
+
+
+    <a class="collapse-item
+    <?php if($active=="job" && $sub_active=="kategori"){
+        echo "bg-danger text-light";
+    } ?>
+
+    " href="<?php echo base_url('job/kategori') ?>">Kategori Pekerjaan</a>
+
+    <a class="collapse-item
+    <?php if($active=="job" && $sub_active=="level"){
+        echo "bg-danger text-light";
+    } ?>
+
+    " href="<?php echo base_url('job/level') ?>">Level Pekerjaan</a>
+
+</div>
+</div>
+</li>
+
+<div class="sidebar-heading">
+Chat</div>
+
+<li class="nav-item">
+    <a class="nav-link ">
+        <i class="fas fa-fw fa-envelope"></i>Inbox
+    </a>
+</li>
+
+<div class="sidebar-heading">
+Report</div>
+
+
+<li class="nav-item">
+    <a class="nav-link ">
+        <i class="fas fa-fw fa-flag"></i>Report
+    </a>
+</li>
+
+<div class="sidebar-heading">
+Pengaturan</div>
+
+
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
     aria-expanded="true" aria-controls="collapseUtilities">
-    <i class="fas fa-fw fa-wrench"></i>
-    <span>Pengaturan</span>
+     <i class="fas fa-fw fa-cog"></i>
+    <span>Data Website</span>
 </a>
 <div id="collapseUtilities" class="collapse <?php if($active=="stp" || $active=="slider"){
     echo "show";
@@ -141,28 +208,15 @@ data-parent="#accordionSidebar">
     <a class="collapse-item" href="utilities-other.html">Media Sosial</a>
     <a class="collapse-item" href="utilities-other.html">Relation Link</a>
     <a class="collapse-item" href="utilities-other.html">Galeri</a>
-</div>
-</div>
-</li>
 
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDataWebsite"
-    aria-expanded="true" aria-controls="collapseDataWebsite">
-    <i class="fas fa-fw fa-cog"></i>
-
-    <span>Data Website</span>
-</a>
-<div id="collapseDataWebsite" class="collapse" aria-labelledby="headingUtilities"
-data-parent="#accordionSidebar">
-<div class="bg-white py-2 collapse-inner rounded">
-    <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-    <a class="collapse-item" href="utilities-color.html">Saran & Kritik</a>
+     <a class="collapse-item" href="utilities-color.html">Saran & Kritik</a>
     <a class="collapse-item" href="utilities-border.html">Email Subscribe</a>
-    <a class="collapse-item" href="utilities-animation.html">Syarat & Ketentuan</a>
 
 </div>
 </div>
 </li>
+
+
 
 <!-- Divider -->
 <hr class="sidebar-divider">
@@ -225,7 +279,7 @@ data-parent="#accordionSidebar">
                     <i class="fa fa-bars"></i>
                 </button>
 
-                    <img src="<?php echo base_url().$this->session->stp_logo ?>" style="max-height:  40px;margin-left: 15px">
+                <img src="<?php echo base_url().$this->session->stp_logo ?>" style="max-height:  40px;margin-left: 15px">
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">

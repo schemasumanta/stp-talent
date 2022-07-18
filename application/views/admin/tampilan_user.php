@@ -1,264 +1,47 @@
-<div class="main-panel">
-  <div class="content">
-   <style type="text/css">
-    input[type="file"]{
-      opacity: 0 !important;
-      padding: 0 !important;
-      width: 100%!important;
 
-    }
-    .imagecheck-figure > img {
-      width: 100%!important;
-    }
-  </style>
+<div class="container-fluid">
 
-  <section class="content-header" >
-    <div class="container-fluid" >
-      <div class="row mb-2">
-        <div class="col-sm-6">
+  <h1 class="h3 mb-2 text-gray-800">User</h1>
+  <p class="mb-4"></p>
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <div class="row">
+        <div class="col-md-12 mb-4">
+          <h6 class="m-0 font-weight-bold text-primary">Data User</h6>
 
         </div>
-        <div class="col-sm-6">
-
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-  <!-- Main content -->
-  <section class="content flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
-
-    <div class="row">
-      <div class="col-12">
-        <h1 class="h3 mb-3 ml-5 text-gray-800">Master Data User</h1>
-        <div class="card">
-          <div class="card-header">
-            <div class="col-sm-6"> 
-            </div>
-            <div class="col-sm-12"> 
-
-             <!-- Button trigger modal -->
-             <button id="btn_tambah" class="btn btn-success btn-sm btn-md btn  mr-2" ><i class="fa fa-plus mr-2"></i> Tambah Data User</button>
-             <button id="export" name="export" class="btn btn-sm refresh btn-warning btn-md"  ><i class="fas fa-sync-alt" style="margin-right: 10px"></i>Refresh Data</button>
-
-           </div>
-           
-         </div>
-         <div class="card-body">
-          <div class="table-responsive">
-
-            <table  id="tabel_user"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
-              <thead>
-                <tr class="bg-primary text-light text-center">
-                  <th>No</th>
-                  <th >Nama Lengkap</th>
-                  <th >Email</th>
-                  <th >Level</th>
-                  <th >Telepon</th>
-                  <th >Foto</th>
-                  <th >Status</th>
-                  <th style="text-align: center;" width="10%" >Opsi</th>
-                </tr>
-
-              </thead>
-              <tbody id="show_data">
-              </tbody>
-
-
-
-            </table>
-          </div>
-        </div>
-
-        <!-- modal add -->
-
-
-        <div class="modal fade" data-backdrop="static" id="modal_user" tabindex="-1" role="dialog" aria-labelledby="modal_userLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content" >
-              <div class="modal-header bg-primary text-light"> 
-                <h3 class="modal-title" id="label_header_user"> <i class="fas fa-user mr-2"></i> TAMBAH DATA USER</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-              </div>
-              <div class="modal-body">
-               <form id="form_user" method="post" enctype="multipart/form-data" action="<?php echo base_url('user/simpan') ?>">
-                 <div class="row "> 
-                  <div class="col-md-12 mb-3"> 
-                   <label style="color:#343a40;" for="user_nama">Nama Lengkap</label>
-                   <input type="hidden" name="id_user" id="id_user">
-                   <input type="text" class="form-control" id="user_nama"  name="user_nama" required>
-                 </div>   
-                 
-                <div class="col-md-6 mb-3"> 
-                  <label style="color:#343a40;vertical-align:middle;" for="user_level">Level</label> 
-                  <select type="text" class="form-control" id="user_level" name="user_level" required>
-                    <option value="0" selected="selected" disabled="disabled">Pilih Level</option>
-                    <?php foreach ($level as $key): ?>
-                     
-                    <option value="<?php $key->level_id ?>"><?php echo $key->level_nama; ?></option>
-                    <?php endforeach ?>
-
-                  </select>   
-                </div>
-                <div class="col-md-6 mb-3"> 
-                   <label style="color:#343a40;" for="user_telepon">Telepon</label>
-                   <input type="text" class="form-control" id="user_telepon"  name="user_telepon" required onkeypress="return hanyaAngka(event)">
-                 </div>   
-
-
-                <div class="col-md-6 mb-3">  
-                  <label style="color:#343a40;" for="user_email">Email</label> 
-                  <input type="email" class="form-control " id="user_email"  name="user_email" >
-                </div> 
-
-                <div class="col-md-6  mb-3 inputpassword"> 
-                  <label for="pwd1">Password</label>
-                  <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
-                    <div class="input-group-addon password mr-2 ml-2 pt-2" style="cursor: pointer;" onclick="show_password('password')"><i class="fa fa-eye"></i></div>
-
-                  </div>
-                </div> 
-                <div class="col-md-3 mb-3"> 
-                  <label for="foto-produk">Foto</label>
-                  <label class="imagecheck">
-                   <input type="hidden" name="lampiran_user_lama" id="lampiran_user_lama">
-                   <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_user" id="lampiran_user" onchange="previewFile(this.id)">
-                   <figure class="imagecheck-figure">
-                    <img src="<?php echo base_url('assets/img/img03.jpg');?>"  class="imagecheck-image" id="preview_lampiran_user">
-                  </figure>
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <div class="form-group row"class="collapse" id="customer_collapse">
-              <div class="col-sm-6">
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><b>TUTUP</b></button>
-
-              </div>
-
-              <div class="col-sm-6 float-sm-right">
-                <button type="button" class="btn btn-success" id="btn_simpan"><b>TAMBAH</b></button>
-
-              </div>
-
-            </div>
-
-
-
-          </div>
-
-        </form>
-
-
-
-      </div>
-    </div>
-  </div> 
-
-
-  <!-- /.card-body -->
-</div>
-
-
-<div class="modal fade" data-backdrop="static" id="modal_edit_password" tabindex="-1" role="dialog" aria-labelledby="modal_edit_passwordLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" >
-
-      <div class="modal-header bg-info text-light">
-        <h5 id="modal_edit_passwordLabel" style="color: white;font-weight:bold; font: sans-serif;"><i class="fas fa-key mr-2"></i>RESET PASSWORD USER</h5>
-      </div>
-      <div class="modal-body">
-        <form method="post" action="<?php echo base_url() ?>user/reset_password">
-          <div class="form-group row"class="collapse" id="customer_collapse">
-            <div class="col-md-12 mb-3">
-
-              <input type="hidden" class="form-control" id="id_user_password"  name="id_user_password" required >
-
-              <div class="alert-danger alert">
-                <p>Reset Password User... ?</p>
-                <p class="fw-bold mt-2">Password Default : <b>12345678</b></p>
-              </div>
-            </div>
-
-          </div>
-
-        <div class="modal-footer">
-
-          <div class="form-group row"class="collapse" id="customer_collapse">
-
-            <div class="col-sm-12 btn-group">
-              <button type="button" class="btn btn-danger mr-2" data-dismiss="modal"><b>BATAL</b></button>
-
-              <button type="submit" class="btn btn-success" id="btn_reset_password"><b>RESET</b></button>
-
-            </div>
-
-          </div>
-
-
-
-        </div>
-
-
-        </form>
-
-
-      </div>
-    </div>
-  </div> 
-
-
-  <!-- /.card-body -->
-</div>
-
-
-</div>
-<!-- /.col -->
-</div>
-<!-- /.row -->
-</section>
-<!-- /.content -->
-</div>
-</div>
-<div class="modal fade" data-backdrop="static" id="ModalAktivasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-light">
-       <h3 class="modal-title" id="myModalLabel" style=" font: sans-serif; "><i class="fas fa-users mr-2"></i> Status User</h3>
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+        <div class="col-md-12">
+         <button id="btn_tambah" class="btn btn-success btn-sm btn-md btn  mr-2" ><i class="fa fa-plus mr-2"></i> Tambah Data User</button>
+       </div>
 
      </div>
-     <form class="form-horizontal">
-      <div class="modal-body">
-
-        <input type="hidden" name="kode_user_aktivasi" id="kode_user_aktivasi" value=""> 
-        <input type="hidden" name="isi_aktivasi" id="isi_aktivasi" value="">  
-
-        <div class="alert alert-danger"><p class="notif_aktivasi"></p></div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-flat mr-2" data-dismiss="modal"><i class="far fa-times-circle mr-2"></i> Batal</button>
-        <button class="btn_aktivasi btn btn-success btn-flat" id="btn_aktivasi"><i class="fas fa-check mr-2"></i>YA</button>
-      </div>
-
-
-    </form>
+   </div>
+   <div class="card-body">
+    <div class="table-responsive">
+     <table  id="tabel_user"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
+      <thead>
+        <tr class="bg-danger text-light text-center">
+          <th>No</th>
+          <th >Nama Lengkap</th>
+          <th >Email</th>
+          <th >Level</th>
+          <th >Telepon</th>
+          <th >Foto</th>
+          <th >Status</th>
+          <th style="text-align: center;" width="10%" >Opsi</th>
+        </tr>
+      </thead>
+      <tbody id="show_data">
+      </tbody>
+    </table>
   </div>
 </div>
 </div>
+
+</div>
 <script type="text/javascript">
-
-
-
-
-  $(document).ready(function(){
-
+    $(document).ready(function(){
    const notif = $('.flashdatart').data('title');
    if (notif) {
     Swal.fire({
@@ -272,8 +55,6 @@
       }
     });
   }
-
-
 
   dataTable = $('#tabel_user').DataTable( {
     paginationType:'full_numbers',
@@ -608,23 +389,6 @@ function hanyaAngka(event) {
     });
     return false;
   }
-
-  // let user_telepon = $('#user_telepon').val();
-  // if (user_telepon=="") {
-  //   $('#user_telepon').focus();
-  //   Swal.fire({
-  //     title:'Telepon Kosong',
-  //     text:'Silahkan Masukkan Telepon!',
-  //     icon:'error'
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       Swal.close();
-  //     }
-  //   });
-  //   return false;
-  // }
-
-
   let user_email = $('#user_email').val();
   if (user_email=="") {
       $('#user_email').focus();
@@ -738,7 +502,6 @@ $.ajax({
 
 }
 
-
 }
 
 });
@@ -746,17 +509,8 @@ $.ajax({
 });
 
 
+
 </script>
-
-
-
-
-
-
-
-
-
-
 
 
 

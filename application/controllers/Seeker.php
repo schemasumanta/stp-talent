@@ -80,7 +80,7 @@ class Seeker extends CI_Controller {
 
 					$this->db->where('user_id', $a->user_id);
 					$this->db->update('tbl_master_user', $data);
-					redirect('landing','refresh');
+					redirect('dashboard','refresh');
 				}else{
 
 					$data['title'] = 'Login Gagal';
@@ -99,13 +99,15 @@ class Seeker extends CI_Controller {
 			redirect('seeker','refresh');
 		}
 	}
+	
+
 	public function logout()
 	{
 		$this->db->where('user_id',$this->session->user_id);
 		$logout = $this->db->update('tbl_master_user',array('user_login_status' => 0, ));
 		if ($logout) {
 			$this->session->sess_destroy();
-			redirect('admin');
+			redirect('landing');
 		}
 	}
 }

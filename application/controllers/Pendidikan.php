@@ -8,6 +8,9 @@ class Pendidikan extends CI_Controller {
 		if ($this->session->userdata('login')==FALSE) {
 			redirect('admin','refresh');
 		}
+		if ($this->session->user_level!=1) {
+			redirect('landing','refresh');
+		}
 		date_default_timezone_set('Asia/Jakarta');	
 	}
 
