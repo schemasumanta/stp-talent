@@ -90,6 +90,50 @@ class Model_tabel extends CI_Model {
              case 'user':
             $this->db->select('a.*,b.*');
             $this->db->from('tbl_master_user a');
+            $this->db->where('a.user_level',1);
+
+            $this->db->join('tbl_master_level b','b.level_id=a.user_level');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.user_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.user_nama',$search);
+                $this->db->or_like('a.user_email',$search);
+                $this->db->or_like('a.user_telepon',$search);
+                $this->db->or_like('b.level_nama',$search);
+            }
+            
+            break;
+
+             case 'user_job_provider':
+            $this->db->select('a.*,b.*');
+            $this->db->from('tbl_master_user a');
+            $this->db->where('a.user_level',3);
+            $this->db->join('tbl_master_level b','b.level_id=a.user_level');
+
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.user_nama',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+            if ($search!=null && $search!='') {
+                $this->db->like('a.user_nama',$search);
+                $this->db->or_like('a.user_email',$search);
+                $this->db->or_like('a.user_telepon',$search);
+                $this->db->or_like('b.level_nama',$search);
+            }
+            
+            break;
+
+            case 'user_job_seeker':
+            $this->db->select('a.*,b.*');
+            $this->db->from('tbl_master_user a');
+            $this->db->where('a.user_level',2);
             $this->db->join('tbl_master_level b','b.level_id=a.user_level');
 
             if($_GET['order'][0]['column'] == 0)

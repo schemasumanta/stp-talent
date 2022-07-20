@@ -19,14 +19,12 @@
                   <div class="col-lg-8">
                     <input type="text" class="form-control" name="provider_nama"  id="provider_nama" placeholder="Nama Lengkap" autofocus>
                   </div>
-
                   <div class="col-lg-8 mt-3">
                     <input type="text" class="form-control" name="provider_telepon"  id="provider_telepon" placeholder="Nomor Telepon" autofocus>
                   </div>
                   <div class="col-lg-8 mt-3">
                     <input type="text" class="form-control" name="provider_email"  id="provider_email" placeholder="Masukkan Email" autofocus>
                   </div>
-
                   <div class="col-lg-8 mt-3">
                     <input type="password" class="form-control" name="provider_password"  id="provider_password" placeholder="Masukkan Password">
                   </div>
@@ -34,7 +32,6 @@
                     <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
                     <a href="javascript:;" class="item_daftar" style="width: 50%;display: inline-block!important;background:#DD2727;color: white;border: 1px solid #DD2727">Daftar</a>
                   </div>
-
                   <div class="col-lg-8 text-center">
                     <span class="text-light">Sudah Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('provider') ?>">Login</a></span>
                   </div>

@@ -116,7 +116,7 @@ class Job extends CI_Controller {
 			$location ='assets/img/icon_kategori/icon'.time().$filename;
 			$file_extension = pathinfo($location, PATHINFO_EXTENSION);
 			$file_extension = strtolower($file_extension);
-			$image_ext = array("jpg", "png", "jpeg", "gif");
+			$image_ext = array("jpg", "png", "jpeg", "gif","svg");
 			if (in_array($file_extension, $image_ext)) {
 				if (move_uploaded_file($_FILES['lampiran_kategori']['tmp_name'], $location)) {
 					$icon = $location;
@@ -173,7 +173,7 @@ class Job extends CI_Controller {
 			$location ='assets/img/icon_kategori/icon'.time().$filename;
 			$file_extension = pathinfo($location, PATHINFO_EXTENSION);
 			$file_extension = strtolower($file_extension);
-			$image_ext = array("jpg", "png", "jpeg", "gif");
+			$image_ext = array("jpg", "png", "jpeg", "gif","svg");
 			if (in_array($file_extension, $image_ext)) {
 				if (move_uploaded_file($_FILES['lampiran_kategori']['tmp_name'], $location)) {
 					$icon = $location;

@@ -5,9 +5,9 @@ use PHPMailer\PHPMailer\Exception;
 
 class Mailer {
     protected $_ci;
-    protected $email_pengirim = 'athoxusdah@gmail.com'; // Isikan dengan email pengirim
-    protected $nama_pengirim = 'Sumanta'; // Isikan dengan nama pengirim
-    protected $password = 'laoxiwvbqecqfydx'; // Isikan dengan password email pengirim
+    protected $email_pengirim = 'solodigitaltech@gmail.com'; // Isikan dengan email pengirim
+    protected $nama_pengirim = 'Talent Hub'; // Isikan dengan nama pengirim
+    protected $password = 'nuzhexdikrivchsw'; // Isikan dengan password email pengirim
        public function __construct(){
         $this->_ci = &get_instance(); // Set variabel _ci dengan Fungsi2-fungsi dari Codeigniter
         require_once(APPPATH.'third_party/phpmailer/Exception.php');
@@ -32,7 +32,7 @@ class Mailer {
         $mail->isHTML(true); // Aktifkan jika isi emailnya berupa html
         $mail->Subject = $data['subjek'];
         $mail->Body = $data['content'];
-        $mail->AddEmbeddedImage('assets/img/sbm.png', 'logo_sbm', 'logo.png'); 
+        $mail->AddEmbeddedImage('assets/img/foto_stp/logo1657547284LOGO%20STP%20warna%20besar.png', 'logo_talenthub', 'logo.png'); 
         // Aktifkan jika ingin menampilkan gambar dalam email
         
         $send = $mail->send();

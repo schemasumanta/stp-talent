@@ -14,23 +14,15 @@
             <ul id="navigation">
               <?php $active = $this->uri->segment(1);  $sub_active = $this->uri->segment(2); ?>
 
-              <li class="mb-10 "><a href="<?php echo base_url('cv') ?>" class="genric-btn large 
-                <?php if($active=="cv" && $sub_active==""){
+              <li class="mb-10 "><a href="<?php echo base_url('provider/job_posting') ?>" class="genric-btn large 
+                 <?php if($active=="provider" && $sub_active=="job_posting"){
                 echo "primary"; }else{ echo "danger"; } ?>
-                 w-100">CV</a></li>
-
-              <li class="mb-10 "><a href="<?php echo base_url('seeker/lamaran_saya') ?>" class="genric-btn large 
-                 <?php if($active=="seeker" && $sub_active=="lamaran_saya"){
+               w-100">Job Posting</a></li>
+              <li class="mb-10 "><a href="<?php echo base_url('provider/pelamar') ?>" class="genric-btn large 
+                 <?php if($active=="provider" && $sub_active=="pelamar"){
                 echo "primary"; }else{ echo "danger"; } ?>
+                w-100">Data Pelamar</a></li>
 
-               w-100">Lamaran Saya</a></li>
-
-
-              <li class="mb-10 "><a href="<?php echo base_url('seeker/lowongan_tersimpan') ?>" class="genric-btn large 
-
-                 <?php if($active=="seeker" && $sub_active=="lowongan_tersimpan"){
-                echo "primary"; }else{ echo "danger"; } ?>
-                w-100">Lowongan Tersimpan</a></li>
                <li class="mb-10 "><a href="job_listing.html" class="genric-btn large danger w-100">Chat</a></li>
             </ul>
           </nav>
@@ -56,7 +48,7 @@ aria-hidden="true">
         <div class="modal-body">Anda yakin ingin keluar dari sistem ini?</div>
         <div class="modal-footer">
             <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-            <a class="btn btn-primary" href="<?php echo base_url('seeker/logout') ?>">Logout</a>
+            <a class="btn btn-primary" href="<?php echo base_url('provider/logout') ?>">Logout</a>
         </div>
     </div>
 </div>

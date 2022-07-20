@@ -4,7 +4,7 @@ require 'vendor\autoload.php';
 use Google\Cloud\Storage\StorageClient;
 
 class User extends CI_Controller {
-function __construct()
+	function __construct()
 	{
 		parent::__construct();
 		if ($this->session->userdata('login')==FALSE) {
@@ -43,11 +43,11 @@ function __construct()
 			<a href="javascript:;" class="btn btn-sm btn-circle  btn-success   item_edit_user" data="'.$l->user_id.'"><i class="fa fa-edit"></i></a>
 			<a href="javascript:;" class="btn btn-sm btn-circle btn-primary  item_edit_password" data="'.$l->user_id.'"><i class="fa fa-key"></i></a>';
 			if ($l->user_level!='1') {
-			if ($l->user_status == 1) {
-				$opsi .='<a href="javascript:;" class="btn btn-danger btn-sm btn-circle  item_aktivasi_user" data="'.$l->user_id.'"><i class="fa fa-times-circle"></i></a>';
-			}else{
-				$opsi .='<a href="javascript:;" class="btn btn-success btn-sm btn-circle  item_aktivasi_user" data="'.$l->user_id.'"><i class="fa fa-check-circle"></i></a>';
-			}
+				if ($l->user_status == 1) {
+					$opsi .='<a href="javascript:;" class="btn btn-danger btn-sm btn-circle  item_aktivasi_user" data="'.$l->user_id.'"><i class="fa fa-times-circle"></i></a>';
+				}else{
+					$opsi .='<a href="javascript:;" class="btn btn-success btn-sm btn-circle  item_aktivasi_user" data="'.$l->user_id.'"><i class="fa fa-check-circle"></i></a>';
+				}
 			}
 			$opsi .='</div>';
 			$l->opsi = $opsi;
@@ -71,6 +71,93 @@ function __construct()
 		echo json_encode($output); 
 	}
 
+	public function tabel_job_provider(){
+		$data   = array();
+		$sort     = isset($_GET['columns'][$_GET['order'][0]['column']]['data']) ? strval($_GET['columns'][$_GET['order'][0]['column']]['data']) : 'user_nama';
+		$order    = isset($_GET['order'][0]['dir']) ? strval($_GET['order'][0]['dir']) : 'asc';
+		$search    = isset($_GET['search']['value']) ? strval($_GET['search']['value']):null;
+		$no = $this->input->get('start');
+
+		$list = $this->model_tabel->get_datatables('user_job_provider',$sort,$order,$search);
+
+		foreach ($list as $l) {
+			$no++;
+			$l->no = $no;
+			$opsi ='
+			<div class="btn-group">';
+			if ($l->user_level!='1') {
+				if ($l->user_status == 1) {
+					$opsi .='<a href="javascript:;" class="btn btn-danger btn-sm btn-circle  item_aktivasi_user" data="'.$l->user_id.'"><i class="fa fa-times-circle"></i></a>';
+				}else{
+					$opsi .='<a href="javascript:;" class="btn btn-success btn-sm btn-circle  item_aktivasi_user" data="'.$l->user_id.'"><i class="fa fa-check-circle"></i></a>';
+				}
+			}
+			$opsi .='</div>';
+			$l->opsi = $opsi;
+			if ($l->user_status > 0) {
+				$l->user_status = '<button type="button" class="btn btn-success btn-sm btn-round ">Aktif</button>';
+			}else{
+				$l->user_status = '<button type="button" class="btn btn-danger btn-sm btn-round ">Non Aktif</button>';
+			}
+
+			$data[] = $l;
+		}
+
+
+
+		$output = array(
+			"draw"              => $_GET['draw'],
+			"recordsTotal"      => $this->model_tabel->count_all('user_job_provider',$sort,$order,$search),
+			"recordsFiltered"   => $this->model_tabel->count_filtered('user_job_provider',$sort,$order,$search),
+			"data"              => $data,
+		);  
+		echo json_encode($output); 
+	}
+
+
+	public function tabel_job_seeker(){
+		$data   = array();
+		$sort     = isset($_GET['columns'][$_GET['order'][0]['column']]['data']) ? strval($_GET['columns'][$_GET['order'][0]['column']]['data']) : 'user_nama';
+		$order    = isset($_GET['order'][0]['dir']) ? strval($_GET['order'][0]['dir']) : 'asc';
+		$search    = isset($_GET['search']['value']) ? strval($_GET['search']['value']):null;
+		$no = $this->input->get('start');
+
+		$list = $this->model_tabel->get_datatables('user_job_seeker',$sort,$order,$search);
+
+		foreach ($list as $l) {
+			$no++;
+			$l->no = $no;
+
+			$opsi ='
+			<div class="btn-group">';
+			if ($l->user_level!='1') {
+				if ($l->user_status == 1) {
+					$opsi .='<a href="javascript:;" class="btn btn-danger btn-sm btn-circle  item_aktivasi_user" data="'.$l->user_id.'"><i class="fa fa-times-circle"></i></a>';
+				}else{
+					$opsi .='<a href="javascript:;" class="btn btn-success btn-sm btn-circle  item_aktivasi_user" data="'.$l->user_id.'"><i class="fa fa-check-circle"></i></a>';
+				}
+			}
+			$opsi .='</div>';
+			$l->opsi = $opsi;
+			if ($l->user_status > 0) {
+				$l->user_status = '<button type="button" class="btn btn-success btn-sm btn-round ">Aktif</button>';
+			}else{
+				$l->user_status = '<button type="button" class="btn btn-danger btn-sm btn-round ">Non Aktif</button>';
+			}
+
+			$data[] = $l;
+		}
+
+
+
+		$output = array(
+			"draw"              => $_GET['draw'],
+			"recordsTotal"      => $this->model_tabel->count_all('user_job_seeker',$sort,$order,$search),
+			"recordsFiltered"   => $this->model_tabel->count_filtered('user_job_seeker',$sort,$order,$search),
+			"data"              => $data,
+		);  
+		echo json_encode($output); 
+	}
 
 
 
@@ -82,6 +169,24 @@ function __construct()
 		$this->load->view('admin/tampilan_user',$data);
 		$this->load->view('admin/footer');
 	}
+
+	public function job_provider()
+	{
+		$this->load->view('admin/header');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/tampilan_job_provider');
+		$this->load->view('admin/footer');
+	}
+
+
+	public function job_seeker()
+	{
+		$this->load->view('admin/header');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/tampilan_job_seeker');
+		$this->load->view('admin/footer');
+	}
+
 
 	public function aktivasi_user()
 	{
@@ -104,7 +209,7 @@ function __construct()
 			]);
 			$bucketName = 'artisansweb-bucket';
 			$bucket = $storage->defaultBucket();
-				echo "Your Bucket $bucket .";
+			echo "Your Bucket $bucket .";
 		} catch(Exception $e) {
 			echo $e->getMessage();
 		}

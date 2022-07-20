@@ -52,8 +52,77 @@
   </main>
   <script type="text/javascript">
     $(document).on('click','.item_daftar',function () {
-      $('#form-daftar').submit();
-    });
+      let cek = 0;
+      let seeker_nama = $('#seeker_nama').val()
+
+      if (seeker_nama=='') {
+        $('#seeker_nama').attr('placeholder','Silahkan Masukkan Nama');
+        $('#seeker_nama').addClass('ph-merah');
+        cek++;
+      }else{
+        $('#seeker_nama').removeClass('ph-merah');
+      }
+
+      let seeker_email = $('#seeker_email').val();
+
+      if (seeker_email=='') {
+       $('#seeker_email').attr('placeholder','Silahkan Masukkan Email');
+       $('#seeker_email').addClass('ph-merah');
+       cek++;
+     }else{
+       let testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+       if (!testEmail.test(seeker_email))
+       {
+         $('#seeker_email').attr('placeholder','Format Email Tidak Valid');
+         $('#seeker_email').addClass('ph-merah');
+         cek++;
+       }else{
+         $('#seeker_email').removeClass('ph-merah');
+         
+       }
+     }
+
+     let seeker_password = $('#seeker_password').val();
+
+     if (seeker_password=='') {
+
+      $('#seeker_password').attr('placeholder','Silahkan Masukkan Password');
+      $('#seeker_password').addClass('ph-merah');
+      cek++;
+    }else{
+      $('#seeker_password').removeClass('ph-merah');
+
+    }
+
+    if (cek > 0) {
+      return false
+    }else{
+
+      $.ajax({
+        type : "GET",
+        url  : "<?php echo base_url('seeker/cek_email')?>",
+        dataType : "JSON",
+        data : {'seeker_email':seeker_email},
+        success: function(data){
+          console.log(data);
+          if (data > 0) {
+            $('#seeker_email').attr('placeholder','Email Sudah Digunakan!');
+            $('#seeker_email').addClass('ph-merah');
+            $('#seeker_email').val('');
+            $('#seeker_email').focus();
+
+
+            return false;
+          }else{
+            $('#form-daftar').submit();
+          }
+        },
+
+      });
+
+    }
+
+  });
     $(document).ready(function(){
      const notif = $('.flashdatart').data('title');
      if (notif) {

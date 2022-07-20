@@ -34,12 +34,13 @@ $sub_active=$this->uri->segment(2);
 
      <li class="nav-item 
 
-     <?php if($active=="admin"){
+     <?php if($active=="user" && $sub_active=="" ){
         echo "active";
     } ?> ">
     <a class="nav-link" href="<?php echo base_url('user') ?>">
         <i class="fas fa-fw fa-user"></i>Admin Role
     </a>
+    
 </li>
 
 <div class="sidebar-heading">
@@ -48,27 +49,27 @@ $sub_active=$this->uri->segment(2);
 
 <li class="nav-item 
 
-<?php if($active=="user"){
+<?php if($active=="user" && $sub_active=="job_provider"){
     echo "active";
 } ?> ">
-<a class="nav-link" href="<?php echo base_url('user') ?>">
+<a class="nav-link" href="<?php echo base_url('user/job_provider') ?>">
     <i class="fas fa-fw fa-user"></i>Job Provider
 </a>
 </li>
 
 <li class="nav-item 
 
-<?php if($active=="user"){
+<?php if($active=="user"  && $sub_active=="job_seeker"){
     echo "active";
 } ?> ">
-<a class="nav-link" href="<?php echo base_url('user') ?>">
+<a class="nav-link" href="<?php echo base_url('user/job_seeker') ?>">
     <i class="fas fa-fw fa-user"></i>Job Seeker
 </a>
 </li>
 
 
 <div class="sidebar-heading">
-Premium Panel
+    Premium Panel
 </div>
 
 <li class="nav-item">
@@ -78,7 +79,7 @@ Premium Panel
 </li>
 
 <div class="sidebar-heading">
-Job Panel
+    Job Panel
 </div>
 
 
@@ -181,7 +182,7 @@ Pengaturan</div>
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
     aria-expanded="true" aria-controls="collapseUtilities">
-     <i class="fas fa-fw fa-cog"></i>
+    <i class="fas fa-fw fa-cog"></i>
     <span>Data Website</span>
 </a>
 <div id="collapseUtilities" class="collapse <?php if($active=="stp" || $active=="slider"){
@@ -209,7 +210,7 @@ data-parent="#accordionSidebar">
     <a class="collapse-item" href="utilities-other.html">Relation Link</a>
     <a class="collapse-item" href="utilities-other.html">Galeri</a>
 
-     <a class="collapse-item" href="utilities-color.html">Saran & Kritik</a>
+    <a class="collapse-item" href="utilities-color.html">Saran & Kritik</a>
     <a class="collapse-item" href="utilities-border.html">Email Subscribe</a>
 
 </div>
