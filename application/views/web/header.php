@@ -95,8 +95,8 @@
                     <div class="header-btn d-none f-right d-lg-block">
                       <?php if ($this->session->login==FALSE): ?>
 
-                        <a href="<?php echo base_url('seeker') ?>" class="btn head-btn1">Kandidat</a>
-                        <a href="<?php echo base_url('provider') ?>" class="btn head-btn2">Perusahaan</a>
+                        <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1">Login</a>
+                        <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Register</a>
                         <?php else: ?>
                           <?php if ($this->session->user_level==1): ?>
                            

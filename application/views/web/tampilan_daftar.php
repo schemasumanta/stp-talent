@@ -12,7 +12,6 @@
             <div class="row mt-5 mb-5 align-items-center">
 
               <div class="col-lg-6">
-                
                 <div class="hero-cap align-items-center mb-3 text-center">
                   <a href="javascript:;" class="genric-btn danger medium btn-kandidat btn-pilihan" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px">Job Seeker</a>
                   <a href="javascript:;" class="genric-btn danger medium btn-provider btn-pilihan" >Job Provider</a>
@@ -53,7 +52,7 @@
                   </div>
 
                   <div class="col-lg-8 text-center">
-                    <span class="text-light">Sudah Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('seeker') ?>">Login</a></span>
+                    <span class="text-light">Sudah Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('landing/login') ?>">Login</a></span>
                   </div>
                 </div>
               </div>
@@ -109,7 +108,6 @@
       cek++;
     }else{
       $('#seeker_password').removeClass('ph-merah');
-
     }
 
     if (cek > 0) {

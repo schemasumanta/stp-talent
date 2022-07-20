@@ -217,7 +217,7 @@ class Seeker extends CI_Controller {
 					$data['text'] = 'User Belum Diaktivasi!';
 					$data['icon'] = 'error';
 					$this->session->set_flashdata($data); 
-					redirect('seeker','refresh');
+					redirect('landing/login','refresh');
 				}
 			}
 		}
@@ -226,7 +226,7 @@ class Seeker extends CI_Controller {
 			$data['text'] = 'Silahkan Periksa Email & Password!';
 			$data['icon'] = 'error';
 			$this->session->set_flashdata($data); 
-			redirect('seeker','refresh');
+			redirect('landing/login','refresh');
 		}
 	}
 	

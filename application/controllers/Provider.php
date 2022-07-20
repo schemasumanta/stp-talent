@@ -50,10 +50,11 @@ class Provider extends CI_Controller {
 
 	public function cek_login()
 	{
-		$email =$this->input->post('provider_email');
-		$password =md5($this->input->post('provider_password'));
+		$email =$this->input->post('seeker_email');
+		$password =md5($this->input->post('seeker_password'));
 		$cek = $this->model_query->cek_provider($email,$password)->result();
 		if ($cek !=NULL) {
+			
 			foreach ($cek as $a)
 			{
 				if ($a->user_status==1) {
@@ -87,7 +88,7 @@ class Provider extends CI_Controller {
 					$data['text'] = 'User Belum Diaktivasi!';
 					$data['icon'] = 'error';
 					$this->session->set_flashdata($data); 
-					redirect('provider','refresh');
+					redirect('landing/login','refresh');
 				}
 			}
 		}
@@ -96,7 +97,7 @@ class Provider extends CI_Controller {
 			$data['text'] = 'Silahkan Periksa Email & Password!';
 			$data['icon'] = 'error';
 			$this->session->set_flashdata($data); 
-			redirect('provider','refresh');
+			redirect('landing/login','refresh');
 		}
 	}
 	
