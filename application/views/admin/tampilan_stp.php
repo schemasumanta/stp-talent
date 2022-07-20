@@ -55,7 +55,7 @@
 
             <table  id="tabel_stp"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
               <thead>
-                <tr class="bg-primary text-light text-center">
+                <tr class="bg-danger text-light text-center">
                   <th>No</th>
                   <th >Nama Aplikasi</th>
                   <th >Pemilik</th>

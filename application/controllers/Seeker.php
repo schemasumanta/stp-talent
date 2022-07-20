@@ -78,7 +78,7 @@ class Seeker extends CI_Controller {
 					$data['text'] = 'Link Expired!';
 					$data['icon'] = 'error';
 					$this->session->set_flashdata($data);
-					redirect('seeker','refresh');
+					redirect('landing/login','refresh');
 				}else{
 					$this->db->where('user_id',$key->user_id);
 					$result = $this->db->update('tbl_master_user', array('user_status' =>1));
@@ -89,7 +89,7 @@ class Seeker extends CI_Controller {
 						$data['text'] = 'Silahkan Login!';
 						$data['icon'] = 'success';
 						$this->session->set_flashdata($data);
-						redirect('seeker','refresh');
+						redirect('landing/login','refresh');
 					}
 				}
 			}
@@ -98,13 +98,13 @@ class Seeker extends CI_Controller {
 			$data['text'] = 'Link Tidak Valid!';
 			$data['icon'] = 'error';
 			$this->session->set_flashdata($data);
-			redirect('seeker','refresh');
+			redirect('landing/login','refresh');
 		}
 
 	}
 	public function simpan_pendaftaran()
 	{
-		$foto = 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fphoto_user%2Fprofile.svg?alt=media&token=a595aaab-3258-4367-a935-e0e245b18588';
+		$foto = 'assets_admin/img/profile.svg';
 		$data_seeker = array(
 			'user_level' 			=>2,
 			'user_nama' 			=>$this->input->post('seeker_nama'),

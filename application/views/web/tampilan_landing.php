@@ -70,8 +70,8 @@
               <?php foreach ($kategori_job as $kj): ?>
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
               <div class="single-services text-center mb-30">
-                <div class="services-ion">
-                  <span class="mb-2"><img src="<?php echo $kj->kategori_icon ?>"></span>
+                <div class="services-ion mb-2">
+                  <span class="mb-2"><img src="<?php echo $kj->kategori_icon ?>" style="height: 100px"></span>
                 </div>
                 <div class="services-cap">
                   <h5><a href="job_listing.html"><?php echo ucwords($kj->kategori_nama); ?></a></h5>

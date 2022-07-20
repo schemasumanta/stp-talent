@@ -48,7 +48,7 @@
 
             <table  id="tabel_slider"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
               <thead>
-                <tr class="bg-primary text-light ">
+                <tr class="bg-danger text-light ">
                   <th width="1%" class="text-center">No</th>
                   <th width="20%">Tipe</th>
                   <th width="59%">Slider</th>

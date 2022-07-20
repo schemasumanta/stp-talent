@@ -23,18 +23,20 @@
 
                   <h2 class="user_role">Register</h2>
                   <p class="text-light taglinetalent">
-                    
+
                   </p>
                 </div>
                 <div class="row justify-content-center mt-4">
                   <div class="col-lg-8">
                     <input type="text" class="form-control" name="seeker_nama"  id="seeker_nama" placeholder="Nama Lengkap" autofocus>
+                    <input type="hidden" class="form-control" name="seeker_level"  id="seeker_level" value="2">
+
                   </div>
 
                   <div class="col-lg-8 mt-3">
                     <input type="text" class="form-control" name="seeker_telepon"  id="seeker_telepon" placeholder="Nomor Telepon" autofocus>
                   </div>
-                     <div class="col-lg-8 mt-3 perusahaan d-none">
+                  <div class="col-lg-8 mt-3 perusahaan d-none">
                     <input type="text" class="form-control" name="perusahaan_id"  id="perusahaan_id" placeholder="Nama Perusahaan sesuai NPWP" autofocus>
                   </div>
                   
@@ -79,6 +81,21 @@
       }else{
         $('#seeker_nama').removeClass('ph-merah');
       }
+      let level = $('#seeker_level').val();
+      if (level==3) {
+        let perusahaan_id = $('#perusahaan_id').val()
+        
+        if (perusahaan_id=='') {
+          $('#perusahaan_id').attr('placeholder','Silahkan Masukkan Perusahaan');
+          $('#perusahaan_id').addClass('ph-merah');
+          cek++;
+        }else{
+          $('#perusahaan_id').removeClass('ph-merah');
+        }
+      }else{
+        $('#perusahaan_id').removeClass('ph-merah');
+
+      }
 
       let seeker_email = $('#seeker_email').val();
 
@@ -95,7 +112,7 @@
          cek++;
        }else{
          $('#seeker_email').removeClass('ph-merah');
-         
+
        }
      }
 
@@ -149,7 +166,6 @@
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.close(); 
-
         }
       });
     }
@@ -162,8 +178,9 @@
       $(this).removeClass('danger');
       $(this).addClass('primary');
       $('.perusahaan').addClass('d-none');
+      $('#form-daftar').attr('action','<?php echo base_url('seeker/simpan_pendaftaran') ?>');
+      $('#seeker_level').val(2);
     });
-
     $(document).on('click','.btn-provider',function(){
       $('.user_role').html('Job Provider');
       $('.taglinetalent').html('Bergabung bersama kami dan temukan calon karyawan dengan mudah');
@@ -171,7 +188,9 @@
       $(this).removeClass('danger');
       $(this).addClass('primary');
       $('.perusahaan').removeClass('d-none');
+      $('#form-daftar').attr('action','<?php echo base_url('provider/simpan_pendaftaran') ?>');
+      $('#seeker_level').val(3);
     });
 
 
-</script>
+  </script>

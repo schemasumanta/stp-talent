@@ -38,6 +38,17 @@ $sub_active=$this->uri->segment(2);
         echo "active";
     } ?> ">
     <a class="nav-link" href="<?php echo base_url('user') ?>">
+        <i class="fas fa-fw fa-user"></i>User
+    </a>
+    
+</li>
+
+ <li class="nav-item 
+
+     <?php if($active=="user" && $sub_active=="admin_role" ){
+        echo "active";
+    } ?> ">
+    <a class="nav-link" href="<?php echo base_url('user') ?>">
         <i class="fas fa-fw fa-user"></i>Admin Role
     </a>
     
