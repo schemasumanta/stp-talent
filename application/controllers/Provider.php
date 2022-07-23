@@ -20,7 +20,6 @@ class Provider extends CI_Controller {
 		$this->db->where('slider_tipe','cv');
 		$this->db->where('slider_status',1);
 		$data['slider_cv'] = $this->db->get('tbl_master_slider')->result();
-
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
 		$this->db->where('slider_tipe','how');
 		$this->db->where('slider_status',1);
@@ -30,10 +29,50 @@ class Provider extends CI_Controller {
 			$this->load->view('provider/tampilan_login',$data);
 			$this->load->view('web/script_include',$data);
 
-
 		}else{
 			redirect('provider/dashboard','refresh');
 		}
+	}
+
+	public function ubah_perusahaan()
+	{
+		$data_perusahaan = array(
+			'perusahaan_nama' => $this->input->post('perusahaan_nama_edit'),
+			'perusahaan_prov' => $this->input->post('perusahaan_prov_edit'), 
+			'perusahaan_kabkota' => $this->input->post('perusahaan_kabkota_edit'), 
+			'perusahaan_alamat' => $this->input->post('perusahaan_alamat_edit'), 
+			'perusahaan_telepon' => $this->input->post('perusahaan_telepon_edit'), 
+			'perusahaan_email' => $this->input->post('perusahaan_email_edit'), 
+			'perusahaan_website' => $this->input->post('perusahaan_website_edit'), 
+			'perusahaan_jml_karyawan' => $this->input->post('perusahaan_jml_karyawan_edit'), 
+			'perusahaan_logo' => $this->input->post('lampiran_logo_perusahaan_lama'), 
+		);
+
+		$this->db->where('perusahaan_id',$this->session->perusahaan_id);
+		$result = $this->db->update('tbl_perusahaan',$data_perusahaan);
+
+		if ($result) {
+			$data_history = array(
+				'id_user' => $this->session->user_id, 
+				'ip_address'=>get_ip(),
+				'aktivitas' => "Mengubah Data Profil Perusahaan",
+			);
+
+			$this->db->insert('tbl_history', $data_history);
+
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'Profil Perusahaan Berhasil Diubah!';
+			$data['icon'] = 'success';
+
+
+		}else{
+
+			$data['title'] = 'Gagal';
+			$data['text'] = 'Profil Perusahaan Gagal Diubah!';
+			$data['icon'] = 'error';
+		}	
+		$this->session->set_flashdata($data);
+		redirect('dashboard','refresh');
 	}
 
 	public function register()
@@ -64,6 +103,8 @@ class Provider extends CI_Controller {
 						$data['stp_nama'] = $s->stp_nama;
 						$data['stp_pemilik'] = $s->stp_pemilik;
 						$data['stp_logo'] = $s->stp_logo;
+						$data['stp_brand_icon'] = $s->stp_brand_icon;
+						
 					}
 					$data['user_id'] = $a->user_id;
 					$data['user_nama'] = $a->user_nama;
@@ -71,11 +112,10 @@ class Provider extends CI_Controller {
 					$data['user_level'] = $a->user_level;
 					$data['user_foto'] = $a->user_foto;
 					$data['user_telepon'] = $a->user_telepon; 
+					$data['perusahaan_id'] = $a->perusahaan_id; 
 					$data['login'] = TRUE;
 					$this->session->set_userdata($data);
-
 					$data = array(
-
 						'user_login_status'=> "1",
 					);
 

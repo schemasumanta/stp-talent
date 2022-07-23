@@ -193,6 +193,8 @@ class Seeker extends CI_Controller {
 						$data['stp_nama'] = $s->stp_nama;
 						$data['stp_pemilik'] = $s->stp_pemilik;
 						$data['stp_logo'] = $s->stp_logo;
+					$data['stp_brand_icon'] = $s->stp_brand_icon;
+						
 					}
 					$data['user_id'] = $a->user_id;
 					$data['user_nama'] = $a->user_nama;

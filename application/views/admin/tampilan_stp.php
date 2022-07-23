@@ -77,12 +77,13 @@
         <div class="modal fade" data-backdrop="static" id="modal_stp" tabindex="-1" role="dialog" aria-labelledby="modal_stpLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content" >
+               <form id="form_stp" method="post" enctype="multipart/form-data" action="<?php echo base_url('stp/simpan') ?>">
               <div class="modal-header bg-primary text-light"> 
                 <h3 class="modal-title" id="label_header_stp"> <i class="fas fa-building mr-2"></i> TAMBAH DATA USER</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
               </div>
               <div class="modal-body">
-               <form id="form_stp" method="post" enctype="multipart/form-data" action="<?php echo base_url('stp/simpan') ?>">
+              
                  <div class="row "> 
                   <div class="col-md-12 mb-3"> 
                    <label style="color:#343a40;" for="stp_nama">Nama Aplikasi</label>
@@ -97,7 +98,7 @@
                  <div class="col-md-6 mb-3"> 
                    <label style="color:#343a40;" for="stp_telepon">Telepon</label>
                    <input type="text" class="form-control" id="stp_telepon"  name="stp_telepon">
-                 </div>  
+                 </div>
 
                  <div class="col-md-6 mb-3"> 
                    <label style="color:#343a40;" for="stp_email">Email</label>
@@ -132,7 +133,7 @@
                  </div>  
 
                  <div class="col-md-3 mb-3"> 
-                  <label class="imagecheck">Logo
+                  <label class="imagecheck">Logo Perusahaan
                    <input type="hidden" name="lampiran_stp_lama" id="lampiran_stp_lama">
                    <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_stp" id="lampiran_stp" onchange="previewFile(this.id)">
                    <figure class="imagecheck-figure">
@@ -140,36 +141,46 @@
                   </figure>
                 </label>
               </div>
+
+              <div class="col-md-3 mb-3"> 
+                <label class="imagecheck">Brand Icon
+                 <input type="hidden" name="lampiran_icon_lama" id="lampiran_icon_lama">
+                 <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_icon" id="lampiran_icon" onchange="previewFile(this.id)">
+                 <figure class="imagecheck-figure">
+                  <img src="<?php echo base_url('assets/img/img03.jpg');?>"  class="imagecheck-image" id="preview_lampiran_icon">
+                </figure>
+              </label>
             </div>
           </div>
-          <div class="modal-footer">
-            <div class="form-group row"class="collapse" id="customer_collapse">
-              <div class="col-sm-6">
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><b>TUTUP</b></button>
-
-              </div>
-
-              <div class="col-sm-6 float-sm-right">
-                <button type="button" class="btn btn-success" id="btn_simpan"><b>TAMBAH</b></button>
-
-              </div>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group row"class="collapse" id="customer_collapse">
+            <div class="col-sm-6">
+              <button type="button" class="btn btn-danger" data-dismiss="modal"><b>TUTUP</b></button>
 
             </div>
 
+            <div class="col-sm-6 float-sm-right">
+              <button type="button" class="btn btn-success" id="btn_simpan"><b>TAMBAH</b></button>
 
+            </div>
 
           </div>
 
-        </form>
+
+
+        </div>
+
+      </form>
 
 
 
-      </div>
     </div>
-  </div> 
+  </div>
+</div> 
 
 
-  <!-- /.card-body -->
+<!-- /.card-body -->
 </div>
 
 
@@ -308,9 +319,16 @@
         $('#stp_website').val(data[0].stp_website);
         $('#stp_alamat').val(data[0].stp_alamat);
         $('#lampiran_stp_lama').val(data[0].stp_logo);
+        $('#lampiran_icon_lama').val(data[0].stp_brand_icon);
+
         if(data[0].stp_logo!='')
         {
           $('#preview_lampiran_stp').attr('src','<?php echo base_url()?>'+data[0].stp_logo);
+        }
+
+        if(data[0].stp_brand_icon!='')
+        {
+          $('#preview_lampiran_icon').attr('src','<?php echo base_url()?>'+data[0].stp_brand_icon);
         }
       },
 
@@ -380,7 +398,7 @@
 
   if (link.includes('simpan')) {
 
-      let lampiran_stp = $('#lampiran_stp').val();
+    let lampiran_stp = $('#lampiran_stp').val();
     if (lampiran_stp=="") {
       $('#lampiran_stp').focus();
       Swal.fire({
@@ -394,10 +412,25 @@
       });
       return false;
     }
+
+    let lampiran_icon = $('#lampiran_icon').val();
+    if (lampiran_icon=="") {
+      $('#lampiran_icon').focus();
+      Swal.fire({
+        title:'Logo Brand Kosong',
+        text:'Silahkan Upload Logo Brand!',
+        icon:'error'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close();
+        }
+      });
+      return false;
+    }
   }
-    $('#btn_simpan').attr('disabled','disabled');
-    $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
-    $('#form_stp').submit();
+  $('#btn_simpan').attr('disabled','disabled');
+  $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
+  $('#form_stp').submit();
 
 });
 

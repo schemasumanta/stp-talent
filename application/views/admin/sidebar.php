@@ -7,8 +7,8 @@ $sub_active=$this->uri->segment(2);
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url() ?>">
-        <div class="sidebar-brand-icon ">
-            <i class="fa fa-binoculars" aria-hidden="true"></i>
+        <div class="sidebar-brand-icon">
+            <img src="<?php echo base_url().$this->session->stp_brand_icon ?>" style="max-height:40px">
         </div>
         <div class="sidebar-brand-text mx-3"><?php echo $this->session->stp_nama !='' ? $this->session->stp_nama :'TALENT HUB'; ?></div>
     </a>

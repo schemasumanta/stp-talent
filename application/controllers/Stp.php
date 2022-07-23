@@ -88,7 +88,7 @@ class Stp extends CI_Controller {
 			$location ='assets/img/foto_stp/logo'.time().$filename;
 			$file_extension = pathinfo($location, PATHINFO_EXTENSION);
 			$file_extension = strtolower($file_extension);
-			$image_ext = array("jpg", "png", "jpeg", "gif");
+			$image_ext = array("jpg", "png", "jpeg", "gif","svg");
 			if (in_array($file_extension, $image_ext)) {
 				if (move_uploaded_file($_FILES['lampiran_stp']['tmp_name'], $location)) {
 					$logo = $location;
@@ -153,10 +153,29 @@ class Stp extends CI_Controller {
 			$location ='assets/img/foto_stp/logo'.time().$filename;
 			$file_extension = pathinfo($location, PATHINFO_EXTENSION);
 			$file_extension = strtolower($file_extension);
-			$image_ext = array("jpg", "png", "jpeg", "gif");
+			$image_ext = array("jpg", "png", "jpeg", "gif","svg");
 			if (in_array($file_extension, $image_ext)) {
 				if (move_uploaded_file($_FILES['lampiran_stp']['tmp_name'], $location)) {
 					$logo = $location;
+				}
+			}
+		}
+
+		$icon = $this->input->post('lampiran_icon_lama');
+
+		if (!is_dir('assets/img/foto_icon/')) {
+			mkdir('assets/img/foto_icon/');
+		}
+		if($_FILES['lampiran_icon']['name'] != '')
+		{
+			$filename = trim($_FILES['lampiran_icon']['name']);
+			$location ='assets/img/foto_icon/icon'.time().$filename;
+			$file_extension = pathinfo($location, PATHINFO_EXTENSION);
+			$file_extension = strtolower($file_extension);
+			$image_ext = array("jpg", "png", "jpeg", "gif","svg");
+			if (in_array($file_extension, $image_ext)) {
+				if (move_uploaded_file($_FILES['lampiran_icon']['tmp_name'], $location)) {
+					$icon = $location;
 				}
 			}
 		}
@@ -172,6 +191,7 @@ class Stp extends CI_Controller {
 			'stp_website' => $this->input->post('stp_website'),
 			'stp_alamat' => $this->input->post('stp_alamat'),
 			'stp_logo' => $logo,
+			'stp_brand_icon' => $icon,
 		);
 		$this->db->where('stp_id',$this->input->post('stp_id'));
 		$result= $this->db->update('tbl_master_stp', $data_stp);

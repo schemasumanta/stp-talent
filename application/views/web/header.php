@@ -8,7 +8,7 @@
     <title>Talent Hub</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="manifest" href="site.webmanifest" />
+    <!-- <link rel="manifest" href="site.webmanifest" /> -->
     <link
     rel="shortcut icon"
     type="image/x-icon"
@@ -28,11 +28,52 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/nice-select.css" />
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/style.css" />
     <link rel="stylesheet" href="<?php echo base_url() ?>assets_admin/css/select2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
     <style type="text/css">
-        .ph-merah::-webkit-input-placeholder {
-            color: #DD2727
-        }
+      .ph-merah::-webkit-input-placeholder {
+        color: #DD2727
+      }
+
+      .select2-selection__rendered {
+        line-height: 31px !important;
+      }
+      .select2-container .select2-selection--single {
+        height: 40px !important;
+      }
+      .select2-selection__arrow {
+        height: 34px !important;
+      }
+
+      .popover-header{
+        font-weight: bold!important;
+        padding: 15px!important;
+        background: #3f00ff!important;
+        color: white!important;
+        text-align: center;!important;
+      }
+      .popover-body{
+        text-align: center!important;
+      }
+      .popover{
+        padding: 15px!important;
+      }
+
+      .note-btn{
+        color: #dc3545 !important
+        background: transparent!important;
+        height: 25px!important;
+      }
+
+    
+
+      html,
+      body{
+        height: 100%;
+      }
+      
+
+      
     </style>
     
   </head>
@@ -53,15 +94,12 @@
         </div>
       </div>
     <?php  } ?>
-
-    <!-- Preloader Start -->
     <header>
-      <!-- Header Start -->
       <div class="header-area header-transparrent">
         <div class="headder-top header-sticky">
           <div class="container">
             <div class="row align-items-center">
-              <div class="col-lg-3 col-md-2">
+              <div class="col-lg-2 col-md-2">
                 <!-- Logo -->
                 <div class="logo">
                   <a href="<?php echo base_url() ?>"
@@ -69,9 +107,8 @@
                     /></a>
                   </div>
                 </div>
-                <div class="col-lg-9 col-md-9">
+                <div class="col-lg-10 col-md-10">
                   <div class="menu-wrapper">
-                    <!-- Main-menu -->
                     <div class="main-menu">
                       <nav class="d-none d-lg-block">
                         <ul id="navigation">
@@ -91,121 +128,223 @@
                         </ul>
                       </nav>
                     </div>
-                    <!-- Header-btn -->
                     <div class="header-btn d-none f-right d-lg-block">
                       <?php if ($this->session->login==FALSE): ?>
-
                         <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1">Login</a>
                         <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Register</a>
                         <?php else: ?>
                           <?php if ($this->session->user_level==1): ?>
-                           
-
-                              <div class="row">
-                              <div class="col-12">
-                               <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link align-items-center" href="<?php echo base_url('admin') ?>" id="userDropdown" role="button"
-                               >
-                                <img class="img-profile rounded-circle"
-                                src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
-                                <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?></span>
-                              </a>
-                          </li>
-                        </div>
-                      </div>
 
 
-
-
-                          <?php endif ?>
-
-                          <?php if ($this->session->user_level==2): ?>
-                            <!-- <a href="<?php echo base_url('dashboard') ?>" class="btn head-btn1"><i class="fas fa-user mr-2"></i>Job Seeker Area</a> -->
                             <div class="row">
                               <div class="col-12">
                                <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle align-items-center" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle"
-                                src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
-                                <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?><i class="fa fa-chevron-down ml-5" aria-hidden="true"></i></span>
-                              </a>
-                              <div class="dropdown-menu text-danger dropdown-menu-right shadow animated--grow-in"
-                              aria-labelledby="userDropdown">
-                              <a class="dropdown-item" href="<?php echo base_url('dashboard') ?>">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                My Dashboard
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Ubah Profile
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Ubah Password
-                              </a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                              </a>
+                                <a class="nav-link align-items-center" href="<?php echo base_url('admin') ?>" id="userDropdown" role="button"
+                                 >
+                                 <img class="img-profile rounded-circle"
+                                 src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
+                                 <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?></span>
+                               </a>
+                             </li>
+                           </div>
+                         </div>
+
+                       <?php endif ?>
+
+                       <?php if ($this->session->user_level==2): ?>
+                        <div class="nav">
+                         <!-- Nav Item - Alerts -->
+                         <li class="nav-item dropdown mt-3">
+                          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                          data-toggle="dropdown" aria-haspopup="true" ">
+                          <span class="badge badge-danger badge-counter">3</span>
+                          
+                          <i class="fas fa-bell fa-fw fa-1x text-danger"></i>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="alertsDropdown">
+                        <h6 class="dropdown-header">
+                          Notifikasi
+                        </h6>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                          <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                              <i class="fas fa-file-alt text-white"></i>
                             </div>
-                          </li>
-                        </div>
-                      </div>
-                    <?php endif ?>
-                    <?php if ($this->session->user_level==3): ?>
-                        <div class="row">
-                              <div class="col-12">
-                               <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle align-items-center" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle"
-                                src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
-                                <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?><i class="fa fa-chevron-down ml-5" aria-hidden="true"></i></span>
-                              </a>
-                              <div class="dropdown-menu text-danger dropdown-menu-right shadow animated--grow-in"
-                              aria-labelledby="userDropdown">
-                               <a class="dropdown-item" href="<?php echo base_url('dashboard') ?>">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                My Dashboard
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Ubah Profile
-                              </a>
-                              <a class="dropdown-item" href="#">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Ubah Password
-                              </a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                              </a>
+                          </div>
+                          <div>
+                            <div class="small text-gray-500">December 12, 2019</div>
+                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                          </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                          <div class="mr-3">
+                            <div class="icon-circle bg-success">
+                              <i class="fas fa-donate text-white"></i>
                             </div>
-                          </li>
-                        </div>
+                          </div>
+                          <div>
+                            <div class="small text-gray-500">December 7, 2019</div>
+                            $290.29 has been deposited into your account!
+                          </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                          <div class="mr-3">
+                            <div class="icon-circle bg-warning">
+                              <i class="fas fa-exclamation-triangle text-white"></i>
+                            </div>
+                          </div>
+                          <div>
+                            <div class="small text-gray-500">December 2, 2019</div>
+                            Spending Alert: We've noticed unusually high spending for your account.
+                          </div>
+                        </a>
+                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                       </div>
+                    </li>
 
+                    <li class="nav-item dropdown no-arrow">
+                      <a class="nav-link dropdown-toggle align-items-center" href="#" id="userDropdown" role="button"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img class="img-profile rounded-circle"
+                      src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
+                      <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?><i class="fa fa-chevron-down ml-5" aria-hidden="true"></i></span>
+                    </a>
+                    <div class="dropdown-menu text-danger dropdown-menu-right shadow animated--grow-in"
+                    aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="<?php echo base_url('dashboard') ?>">
+                      <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                      My Dashboard
+                    </a>
 
-                    <?php endif ?>
+                    <a class="dropdown-item" href="#">
+                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                      Ubah Profile
+                    </a>
 
-                  <?php endif ?>
+                    
+                    <a class="dropdown-item" href="#">
+                      <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                      Ubah Password
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                      <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                      Logout
+                    </a>
+                  </div>
+                </li>
 
-
-                </div>
               </div>
-            </div>
-            <!-- Mobile Menu -->
-            <div class="col-12">
-              <div class="mobile_menu d-block d-lg-none"></div>
-            </div>
+            <?php endif ?>
+            <?php if ($this->session->user_level==3): ?>
+              <div class="nav">
+                <!-- Nav Item - Alerts -->
+                <li class="nav-item dropdown mt-3">
+                  <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" ">
+                  <span class="badge badge-danger badge-counter">3</span>
+
+                  <i class="fas fa-bell fa-fw fa-1x text-danger"></i>
+                </a>
+                <!-- Dropdown - Alerts -->
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Notifikasi
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>
+
+
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle align-items-center" href="#" id="userDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="img-profile rounded-circle"
+              src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
+              <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?><i class="fa fa-chevron-down ml-5" aria-hidden="true"></i></span>
+            </a>
+            <div class="dropdown-menu text-danger dropdown-menu-right shadow animated--grow-in"
+            aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="<?php echo base_url('dashboard') ?>">
+              <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+              My Dashboard
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              Ubah Profile
+            </a>
+            <a class="dropdown-item item_ubah_perusahaan" href="#">
+              <i class="fas fa-building fa-sm fa-fw mr-2 text-gray-400"></i>
+              Ubah Profile Perusahaan
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+              Ubah Password
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Logout
+            </a>
           </div>
-        </div>
+        </li>
+
       </div>
-    </div>
-    <!-- Header End -->
-  </header>
+
+
+    <?php endif ?>
+
+  <?php endif ?>
+
+
+</div>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div class="col-12">
+  <div class="mobile_menu d-block d-lg-none"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Header End -->
+</header>
 
 <?php endforeach ?>

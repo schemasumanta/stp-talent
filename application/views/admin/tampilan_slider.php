@@ -53,30 +53,25 @@
                   <th width="20%">Tipe</th>
                   <th width="59%">Slider</th>
                   <th width="10%">Status</th>
-
                   <th class="text-center" width="10%" >Opsi</th>
                 </tr>
-
               </thead>
               <tbody id="show_data">
               </tbody>
-
             </table>
           </div>
         </div>
 
-        <!-- modal add -->
-
-
         <div class="modal fade" data-backdrop="static" id="modal_slider" tabindex="-1" role="dialog" aria-labelledby="modal_sliderLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content" >
+               <form id="form_slider" method="post" enctype="multipart/form-data" action="<?php echo base_url('slider/simpan') ?>">
+              
               <div class="modal-header bg-primary text-light"> 
                 <h3 class="modal-title" id="label_header_slider"> <i class="fas fa-user mr-2"></i> TAMBAH DATA SLIDER</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
               </div>
               <div class="modal-body">
-               <form id="form_slider" method="post" enctype="multipart/form-data" action="<?php echo base_url('slider/simpan') ?>">
                  <div class="row "> 
                    <div class="col-md-12 mb-3"> 
                      <label style="color:#343a40;" for="slider_tipe">Tipe</label>

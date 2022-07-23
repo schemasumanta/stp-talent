@@ -21,11 +21,35 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets_admin/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets_admin/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
 
-        <link rel="stylesheet" href="<?php echo base_url() ?>assets_admin/css/select2.min.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets_admin/css/select2.min.css">
     <script src="<?php echo base_url() ?>assets_admin/js/jquery.min.js"></script>
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url() ?>assets_admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <style type="text/css">
+        .select2-selection__rendered {
+            line-height: 31px !important;
+        }
+        .select2-container .select2-selection--single {
+            height: 40px !important;
+        }
+        .select2-selection__arrow {
+            height: 34px !important;
+        }
 
+        .popover-header{
+            font-weight: bold!important;
+            padding: 15px!important;
+            background: #3f00ff!important;
+            color: white!important;
+            text-align: center;!important;
+        }
+        .popover-body{
+            text-align: center!important;
+        }
+        .popover{
+            padding: 15px!important;
+        }
+    </style>
 </head>
 <body id="page-top">
 

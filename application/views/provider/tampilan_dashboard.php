@@ -1,10 +1,9 @@
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <div class="col-xl-10 col-lg-10 col-md-10">
-  <!-- Featured_job_start -->
   <section class="featured-job-area">
-    <div class="container-fluid">
+    <div class="container-fluid   flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
         <div class="row">
-            <!-- Earnings (Monthly) Card Example -->
+
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -21,8 +20,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
@@ -78,31 +75,29 @@
                 </div>
             </div>
         </div>
-        <!-- Content Row -->
-      <!--   <div class="row">
+        
 
-            <div class="col-xl-12 col-lg-12">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Transaction Overview</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas id="myAreaChart" style="display: block; width: 582px; height: 320px;" width="1164" height="640" class="chartjs-render-monitor"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
+    </div>
 
 </div>
-<!-- /.container-fluid -->
 
-</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+     const notif = $('.flashdatart').data('title');
+     if (notif) {
+        Swal.fire({
+          title:notif,
+          text:$('.flashdatart').data('text'),
+          icon:$('.flashdatart').data('icon'),
+      }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.close(); 
+        }
+    });
+  }
+});
+
+</script>
 
 

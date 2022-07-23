@@ -8,7 +8,7 @@ class User extends CI_Controller {
 	{
 		parent::__construct();
 		if ($this->session->userdata('login')==FALSE) {
-			redirect('admin','refresh');
+			redirect('landing','refresh');
 		}
 
 		if ($this->session->user_level!=1) {

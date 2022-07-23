@@ -1,9 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
 <div class="col-xl-10 col-lg-10 col-md-10">
 
   <!-- Featured_job_start -->
@@ -213,20 +210,7 @@
 </div>
 </div>
 
-<script>
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
-  authDomain: "solo-digital-tech.firebaseapp.com",
-  projectId: "solo-digital-tech",
-  storageBucket: "solo-digital-tech.appspot.com",
-  messagingSenderId: "608688468148",
-  appId: "1:608688468148:web:e503938ea2f4ea0eaa27e1",
-  measurementId: "G-6GFS5NPL12"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-</script>
+
 
 <script type="text/javascript">
   var files = [];

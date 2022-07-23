@@ -14,8 +14,8 @@
             <ul id="navigation">
               <?php $active = $this->uri->segment(1);  $sub_active = $this->uri->segment(2); ?>
 
-              <li class="mb-10 "><a href="<?php echo base_url('provider/job_posting') ?>" class="genric-btn large 
-                 <?php if($active=="provider" && $sub_active=="job_posting"){
+              <li class="mb-10 "><a href="<?php echo base_url('job/job_posting') ?>" class="genric-btn large 
+                 <?php if($active=="job" && $sub_active=="job_posting"){
                 echo "primary"; }else{ echo "danger"; } ?>
                w-100">Job Posting</a></li>
               <li class="mb-10 "><a href="<?php echo base_url('provider/pelamar') ?>" class="genric-btn large 
@@ -27,11 +27,8 @@
             </ul>
           </nav>
         </div>
-
       </div>
-
     </div>
-    <!-- Job Category Listing End -->
   </div>
 <!-- Right content -->
      <!-- End of Topbar -->
