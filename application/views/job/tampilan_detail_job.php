@@ -1,5 +1,23 @@
  <main>
-   <?php foreach ($lowongan as $job): ?>
+  <?php 
+  $bulan = array(
+    '01' => 'Januari',
+    '02' => 'Februari',
+    '03' => 'Maret',
+    '04' => 'April',
+    '05' => 'Mei',
+    '06' => 'Juni',
+    '07' => 'Juli',
+    '08' => 'Agustus',
+    '09' => 'September',
+    '10' => 'Oktober',
+    '11' => 'November',
+    '12' => 'Desember'
+  );
+  $colspan = 6;
+  ?>
+
+  <?php foreach ($lowongan as $job): ?>
 
     <!-- Hero Area End -->
     <!-- job post company Start -->
@@ -17,12 +35,22 @@
                   /></a>
                 </div>
                 <div class="job-tittle">
+                  <a href="javascript:;" class="bookmark_lowongan" data="<?php echo $job->lowongan_id ?>" style="color: #F82C2C;
+                  display: block;
+                  padding: 4px 33px;
+                  text-align: center;
+                  background: transparent!important;
+                  border: 0px!important;
+                  position: absolute;
+                  top:-3px;
+                  right: 0;
+                  margin-bottom: 25px;"><i class="fas fa-bookmark fa-3x"></i></a>
                   <a href="#">
                     <h4><?php echo $job->lowongan_judul ?></h4>
                   </a>
                   <ul>
-                    <li>News & Media</li>
-                    <li><i class="fas fa-map-marker-alt"></i>DKI Jakarta</li>
+                    <li><?php echo $job->kategori_nama; ?></li>
+                    <li><i class="fas fa-map-marker-alt"></i><?php echo $job->prov_nama; ?></li>
                     <li>
                      <?php if ($job->lowongan_gaji_secret ==null || $job->lowongan_gaji_secret =='' ) {
                       if (floatval($job->lowongan_gaji_max) > 0) {
@@ -57,10 +85,10 @@
                   <h4>Skills</h4>
                 </div>
                 <ul>
-                <?php foreach ($skill as $sk): ?>
-                  
-                <li class="mb-3"  style="font-family: Inter!important;line-height: 15px">  <?php echo $sk->skill_nama; ?></li>
-                <?php endforeach ?>
+                  <?php foreach ($skill as $sk): ?>
+
+                    <li class="mb-3"  style="font-family: Inter!important;line-height: 15px">  <?php echo $sk->skill_nama; ?></li>
+                  <?php endforeach ?>
                 </ul>
 
               </div>
@@ -79,13 +107,14 @@
               <h4>Job Overview</h4>
             </div>
             <ul>
-              <li>Posted date : <span>1 June 2022</span></li>
-              <li>Location : <span>DKI Jakarta</span></li>
-              <li>Vacancy : <span>01</span></li>
-              <li>Application date : <span>10 June 2022</span></li>
+              <li>Posted date : <span><?php $tgl_posting = explode(' ', $job->lowongan_created_date);$tgl_tampil = explode('-', $tgl_posting[0]);echo $tgl_tampil[2]." ".$bulan[$tgl_tampil[1]]." ".$tgl_tampil[0]; ?></span></li>
+              <li>Location : <span><?php echo $job->kabkota_nama; ?></span></li>
+              <li>Applicants : <span><?php echo number_format($applicants,0,",","."); ?></span></li>
+              <li>Application date : <span><?php $tgl_end = explode('-', $job->lowongan_end_date);echo $tgl_end[2]." ".$bulan[$tgl_end[1]]." ".$tgl_end[0]; ?></span></li>
             </ul>
-            <div class="apply-btn2">
-              <a href="#" class="btn">Apply Now</a>
+            <div class="apply-btn2 btn-group w-100">
+              <a href="#" class="genric-btn2 danger large w-50">Apply Now</a>
+              <a href="#" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
             </div>
           </div>
           <div class="post-details4 mb-50">
@@ -93,16 +122,26 @@
             <div class="small-section-tittle">
               <h4>Company Information</h4>
             </div>
-            <span>Metro TV</span>
-            <p>
-              Metro TV is an Indonesian free-to-air television news network
-              based in West Jakarta. It was established on 25 November 2000
-              and now has over 52 relay stations all over the country.
-            </p>
+            <span><?php echo $job->perusahaan_nama; ?></span>
+            <?php if ($job->perusahaan_sambutan!=''): ?>
+
+              <p class="text-justify">
+                <?php echo $job->perusahaan_sambutan ?>
+              </p>
+            <?php endif ?>
             <ul>
-              <li>Name: <span>Metro TV </span></li>
-              <li>Web : <span> www.metrotvnews.com</span></li>
-              <li>Email: <span>career@metrotvnews.com</span></li>
+              <?php if ($job->perusahaan_website!=''): ?>
+
+                <li>Web : <span> <?php echo $job->perusahaan_website; ?></span></li>
+              <?php endif ?>
+              <?php if ($job->perusahaan_email!=''): ?>
+
+                <li>Email: <span><?php echo $job->perusahaan_email; ?></span></li>
+              <?php endif ?>
+              <?php if ($job->perusahaan_telepon!=''): ?>
+                
+                <li>Phone: <span><?php echo $job->perusahaan_telepon; ?></span></li>
+              <?php endif ?>
             </ul>
           </div>
         </div>

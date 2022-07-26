@@ -78,7 +78,7 @@
   });
 
     $(document).on('click','.btn-kandidat',function(){
-      $('.user_role').html('Kandidat');
+      $('.user_role').html('Job Seeker');
       $('.taglinetalent').html('Bergabung bersama kami dan dapatkan pekerjaan dengan mudah');
       $('.btn-pilihan').addClass('danger');
       $(this).removeClass('danger');

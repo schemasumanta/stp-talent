@@ -379,6 +379,11 @@ aria-hidden="true">
  <input type="number" class="form-control" id="perusahaan_jml_karyawan_edit"  name="perusahaan_jml_karyawan_edit">
 </div>   
 
+<div class="col-md-12 mb-3"> 
+ <label style="color:#343a40;" for="perusahaan_sambutan_edit">Tentang Perusahaan</label>
+ <textarea class="form-control" id="perusahaan_sambutan_edit"  name="perusahaan_sambutan_edit" rows="6"></textarea> 
+ <small class="mt-1 error-perusahaan_sambutan_edit text-danger"></small>
+</div>  
 <div class="col-md-6 mb-3"> 
  <label style="color:#343a40;" for="perusahaan_alamat_edit">Alamat</label>
  <textarea class="form-control" id="perusahaan_alamat_edit"  name="perusahaan_alamat_edit" rows="6"></textarea> 

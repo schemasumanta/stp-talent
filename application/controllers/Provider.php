@@ -45,6 +45,7 @@ class Provider extends CI_Controller {
 			'perusahaan_email' => $this->input->post('perusahaan_email_edit'), 
 			'perusahaan_website' => $this->input->post('perusahaan_website_edit'), 
 			'perusahaan_jml_karyawan' => $this->input->post('perusahaan_jml_karyawan_edit'), 
+			'perusahaan_sambutan'=>$this->input->post('perusahaan_sambutan_edit'), 
 			'perusahaan_logo' => $this->input->post('lampiran_logo_perusahaan_lama'), 
 		);
 

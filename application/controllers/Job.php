@@ -202,11 +202,18 @@ class Job extends CI_Controller {
 		$data ['stp'] = $this->db->get('tbl_master_stp')->result();
 
 		$this->db->where('a.lowongan_id',$id);
+		$this->db->join('tbl_perusahaan b','b.perusahaan_id=a.perusahaan_id');
+		$this->db->join('tbl_master_kategori_job c','c.kategori_id=a.kategori_id');
+		$this->db->join('tbl_master_provinsi d','d.prov_id=b.perusahaan_prov');
+		$this->db->join('tbl_master_kabkota e','e.kabkota_id=b.perusahaan_kabkota');
 		$data['lowongan'] = $this->db->get('tbl_lowongan_pekerjaan a')->result();
 
 		$this->db->where('a.lowongan_id',$id);
 		$this->db->join('tbl_master_skill b','b.skill_id=a.skill_id','left');
 		$data['skill'] = $this->db->get('tbl_lowongan_skill a')->result();
+
+		$this->db->where('a.lowongan_id',$id);
+		$data['applicants'] = $this->db->get('tbl_pelamar_pekerjaan a')->num_rows();
 
 		$this->load->view('web/header',$data);
 

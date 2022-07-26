@@ -148,12 +148,12 @@ class="online-cv cv-bg section-overly pt-90 pb-120"
           <div class="single-job-items mb-30">
             <div class="job-items">
               <div class="company-img">
-                <a href="job_details.html"
+                <a href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>"
                 ><img src="<?php echo $fj->perusahaan_logo ?>" alt=""
                 /></a>
               </div>
               <div class="job-tittle">
-                <a href="job_details.html"><h4><?php echo $fj->lowongan_judul; ?></h4></a>
+                <a href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>"><h4><?php echo $fj->lowongan_judul; ?></h4></a>
                 <ul>
                   <li><?php echo $fj->kategori_nama; ?></li>
                   <li><i class="fas fa-map-marker-alt"></i><?php echo $fj->kabkota_nama." - ".$fj->prov_nama; ?></li>
@@ -170,7 +170,7 @@ class="online-cv cv-bg section-overly pt-90 pb-120"
             </div>
           </div>
           <div class="items-link f-right">
-            <?php if ($this->session->user_level==2): ?>
+           <!--  <php if ($this->session->user_level==2): ?>
               <a href="javascript:;" class="bookmark_lowongan" data="<?php echo $fj->lowongan_id ?>" style="color: #F82C2C;
               display: block;
               padding: 4px 33px;
@@ -181,7 +181,7 @@ class="online-cv cv-bg section-overly pt-90 pb-120"
               top:-3px;
               right: 0;
               margin-bottom: 25px;"><i class="fas fa-bookmark fa-2x"></i></a>
-            <?php endif ?>
+            <php endif ?> -->
             <a class="mt-3" href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>"> Detail</a>
             <span style="text-align: right;">7 hours ago</span>
 
