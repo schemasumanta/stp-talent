@@ -14,7 +14,6 @@
     '11' => 'November',
     '12' => 'Desember'
   );
-  $colspan = 6;
   ?>
 
   <?php foreach ($lowongan as $job): ?>

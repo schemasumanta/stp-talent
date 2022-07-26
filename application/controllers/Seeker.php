@@ -44,6 +44,13 @@ class Seeker extends CI_Controller {
 
 	}
 
+	public function get_resume()
+	{
+		$this->db->where('a.user_id',$this->session->user_id);
+
+		$data = $this->db->get('tbl_resume a')->result();
+		echo json_encode($data);
+	}
 	public function register()
 	{
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
@@ -63,6 +70,13 @@ class Seeker extends CI_Controller {
 		$data['password'] = $password;
 		$content = $this->load->view('seeker/body_email',$data,true);
 		return $content;
+	}
+
+	public function getkabkota()
+	{
+		$this->db->where('prov_id',$this->input->get('prov_id'));
+		$data = $this->db->get('tbl_master_kabkota')->result();
+		echo json_encode($data);
 	}
 
 	public function aktivasi($token)
