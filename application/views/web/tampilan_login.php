@@ -35,8 +35,11 @@
                     <a href="javascript:;" class="item_login" style="width: 50%;display: inline-block!important;background:#DD2727;color: white;border: 1px solid #DD2727">Login</a>
                   </div>
 
-                  <div class="col-lg-12 text-center">
-                    <span class="text-light">Belum Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('landing/register') ?>">Daftar</a></span>
+                  <div class="col-lg-6">
+                    <a href="<?php echo base_url('landing/register') ?>"><span class="text-light">Belum Punya Akun ?</span></a>
+                  </div>
+                   <div class="col-lg-6 text-right">
+                    <a href="<?php echo base_url('landing/forgot') ?>"><span >Lupa Password</span></a>
                   </div>
                 </div>
               </div>

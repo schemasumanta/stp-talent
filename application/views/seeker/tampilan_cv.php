@@ -31,20 +31,17 @@ $bulan = array(
 ?>
 
 
-<div class="col-xl-10 col-lg-10 col-md-10">
 
-  <!-- Featured_job_start -->
-  <section class="featured-job-area">
     <div class="container-fluid  flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
      <h1 class="h3 mb-4 text-gray-800">Curriculum Vitae</h1>
      <div class="row">
       <!-- Earnings (Monthly) Card Example -->
-      <div class="col-xl-12 col-md-12 mb-4">
+      <div class="col-md-12 col-md-12 mb-4">
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <div class="row">
-              <div class="col-md-12 mb-4">
-                <h6 class="m-0 font-weight-bold text-primary">Data Resume</h6>
+              <div class="col-md-12">
+                <h6 class="font-weight-bold text-primary">Data Resume</h6>
 
               </div>
 
@@ -52,12 +49,12 @@ $bulan = array(
           </div>
           <div class="card-body">
            <div class="row">
-             <div class="col-md-12 col-xl-12">
+             <div class="col-md-12 col-md-12">
               <div class="row p-3">
                 <div class="col-xl-8 col-md-8 mb-4 p-3" >
                   <div class="row">
 
-                    <div class="col-md-12 col-xl-12">
+                    <div class="col-md-12 col-md-12">
                       <span style="font-weight: bold;font-size: 18px">Biodata</span>
                       <hr>
                       <?php if (count($resume) > 0): ?>
@@ -66,12 +63,12 @@ $bulan = array(
                     </div>
                     <?php if (count($resume) > 0): ?>
                       <?php foreach ($resume as $pp): ?>
-                        <div class="col-md-3 text-center">
+                        <div class="col-md-3 text-center mb-3">
                           <img  class="" src="<?php echo $pp->resume_foto ?>" style="width: 60%;border-radius: 10px">
 
                         </div>  
 
-                        <div class="col-md-9 col-xl-9">
+                        <div class="col-md-9 col-xl-9 mb-3">
                           <div class="row mb-3">
                             <span class="col-md-4">NIK</span>
                             <span class="col-md-8" style="font-weight: bold;">: <?php echo $pp->resume_nik; ?></span>
@@ -108,7 +105,7 @@ $bulan = array(
                       <?php endforeach ?>
 
                       <?php else: ?>
-                        <div class="col-md-12 col-xl-12 text-center">
+                        <div class="col-md-12 col-md-12 text-center">
                          <a href="javascript:;" class="text-danger genric-btn small btn-transparent" style="border-radius: 0px" data-toggle="modal" data-target="#ModalProfil"><i class="fas fa-plus mr-2"></i>Tambah Profil</a>
                        </div>
                      <?php endif ?>
@@ -116,7 +113,7 @@ $bulan = array(
                  </div>
                  <div class="col-md-4 col-xl-4 p-3" style="border: 1px solid #d8d8d8;border-radius: 15px;max-height: 200px">
                   <div class="row">
-                    <div class="col-md-12 col-xl-12 text-center">
+                    <div class="col-md-12 col-md-12 text-center">
                       <span style="font-weight: bold;font-size: 18px;">Resume</span>
                       <hr>
                       <?php if (count($upload_resume) > 0): ?>
@@ -125,24 +122,24 @@ $bulan = array(
                     </div>
                     <?php if (count($upload_resume) > 0): ?>
                       <?php foreach ($upload_resume as $up): ?>
-                        <div class="col-md-12 col-xl-12 justify-content-center w-100 btn-group">
-                          <a href="<?php echo $up->resume_lampiran ?>" target="_blank" class="genric-btn danger large item_lihat_resume" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;">Lihat Resume</a>
-                          <a href="<?php echo base_url()?>cv/profile/<?php echo $up->user_id ?>" target="_blank" class="genric-btn primary large">Generate CV</a>
+                        <div class="col-md-12 col-md-12 mt-3 justify-content-center btn-group">
+                          <a href="<?php echo $up->resume_lampiran ?>" target="_blank" class="btn btn-danger  item_lihat_resume">Lihat Resume</a>
+                          <a href="<?php echo base_url()?>cv/generate_cv/<?php echo $up->user_id ?>" target="_blank" class="btn btn-success">Generate CV</a>
                         </div>
                       <?php endforeach ?>
 
                       <?php else: ?>
-                        <div class="col-md-12 col-xl-12 text-center">
+                        <div class="col-md-12 col-md-12 text-center justify-content-center">
                          <a href="javascript:;" class="text-danger genric-btn small btn-transparent" style="border-radius: 0px" data-toggle="modal" data-target="#ModalUploadResume"><i class="fas fa-plus mr-2"></i>Upload Resume</a>
                        </div>
                      <?php endif ?>
                    </div>
                  </div>
 
-                 <div class="col-xl-12 col-md-12 mb-4 p-3" >
+                 <div class="col-md-12 col-md-12 mb-4 p-3" >
                   <div class="row">
 
-                    <div class="col-md-12 col-xl-12">
+                    <div class="col-md-12 col-md-12">
                       <span style="font-weight: bold;font-size: 18px">Pengalaman Kerja</span>
                       <hr>
                       <?php if (count($pengalaman) > 0): ?>
@@ -152,7 +149,7 @@ $bulan = array(
                     <?php if (count($pengalaman) > 0): ?>
                       <?php foreach ($pengalaman as $pl): ?>
 
-                        <div class="col-md-12 col-xl-12">
+                        <div class="col-md-12 col-md-12">
                           <div class="row mb-3">
                             <span class="col-md-4">NIK</span>
                             <span class="col-md-8" style="font-weight: bold;">: <?php echo $pl->resume_nik; ?></span>
@@ -184,17 +181,17 @@ $bulan = array(
                         </div>
                       <?php endforeach ?>
                       <?php else: ?>
-                        <div class="col-md-12 col-xl-12 text-center">
+                        <div class="col-md-12 col-md-12 text-center">
                          <a href="javascript:;" class="text-danger genric-btn small btn-transparent" style="border-radius: 0px" data-toggle="modal" data-target="#ModalPengalaman"><i class="fas fa-plus mr-2"></i>Tambah Pengalaman</a>
                        </div>
                      <?php endif ?>
                    </div>
                  </div>
 
-                 <div class="col-xl-12 col-md-12 mb-4 p-3" >
+                 <div class="col-md-12 col-md-12 mb-4 p-3" >
                   <div class="row">
 
-                    <div class="col-md-12 col-xl-12">
+                    <div class="col-md-12 col-md-12">
                       <span style="font-weight: bold;font-size: 18px">Skill / Keahlian</span>
                       <hr>
                       <?php if (count($skill_resume) > 0): ?>
@@ -204,7 +201,7 @@ $bulan = array(
                     <?php if (count($skill_resume) > 0): ?>
                       <?php foreach ($skill_resume as $sr): ?>
 
-                        <div class="col-md-12 col-xl-12">
+                        <div class="col-md-12 col-md-12">
                           <div class="row mb-3">
                             <span class="col-md-4">NIK</span>
                             <span class="col-md-8" style="font-weight: bold;">: <?php echo $sr->resume_nik; ?></span>
@@ -236,7 +233,7 @@ $bulan = array(
                         </div>
                       <?php endforeach ?>
                       <?php else: ?>
-                        <div class="col-md-12 col-xl-12 text-center">
+                        <div class="col-md-12 col-md-12 text-center">
                          <a href="javascript:;" class="text-danger genric-btn small btn-transparent item_tambah_skill" style="border-radius: 0px" ><i class="fas fa-plus mr-2"></i>Tambah Skill</a>
                        </div>
                      <?php endif ?>
@@ -399,9 +396,9 @@ $bulan = array(
   <div class=" row"class="collapse" id="customer_collapse">
 
     <div class="col-sm-12 float-right">
-      <button type="button" class="genric-btn large primary" data-dismiss="modal" style="border-radius: 0px;" >Tutup</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal" style="border-radius: 0px;" >Tutup</button>
 
-      <button type="button" class="genric-btn large danger text-light" style="border-radius: 0px" id="btn_simpan_biodata">Simpan</button>
+      <button type="button" class="btn btn-success" style="border-radius: 0px" id="btn_simpan_biodata">Simpan</button>
 
     </div>
 
@@ -495,29 +492,17 @@ $bulan = array(
 
       <div class="col-sm-12 float-right">
         <button type="button" class="genric-btn large primary" data-dismiss="modal" style="border-radius: 0px;" >Tutup</button>
-
         <button type="button" class="genric-btn large danger text-light" style="border-radius: 0px" id="btn_simpan_skill">Simpan</button>
-
       </div>
-
     </div>
-
-
-
   </div>
-
 </form>
-
-
-
 </div>
 </div>
 </div> 
-
 <script type="text/javascript">
   function previewFile(id) {
     let file = $('#'+id)[0].files[0];
-    alert(file);
     let reader = new FileReader();
     reader.addEventListener("load", function () {
       $('#preview_'+id).attr('src',reader.result);

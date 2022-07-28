@@ -1,6 +1,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<div class="col-xl-10 col-lg-10 col-md-10">
-  <section class="featured-job-area">
     <div class="container-fluid   flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
         <div class="row">
 
@@ -79,7 +77,6 @@
 
     </div>
 
-</div>
 
 <script type="text/javascript">
     $(document).ready(function(){

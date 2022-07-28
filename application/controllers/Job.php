@@ -150,44 +150,7 @@ class Job extends CI_Controller {
 	}
 
 
-	public function job_posting()
-	{
-		$this->db->where('slider_tipe','main');
-		$this->db->where('slider_status',1);
-		$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
-		$this->db->where('kategori_status',1);
-		$this->db->limit(8);
-		$this->db->order_by('kategori_nama','asc');
-		$data['kategori_job'] = $this->db->get('tbl_master_kategori_job')->result();
-
-		$this->db->where('kategori_status',1);
-		$this->db->order_by('kategori_nama','asc');
-		$data['kategori'] = $this->db->get('tbl_master_kategori_job')->result();
-
-		$this->db->where('skill_status',1);
-		$this->db->order_by('skill_nama','asc');
-		$data['skill'] = $this->db->get('tbl_master_skill')->result();
-
-		$this->db->where('joblevel_status',1);
-		$this->db->order_by('joblevel_nama','asc');
-		$data['joblevel'] = $this->db->get('tbl_master_level_job')->result();
-
-		$this->db->where('jabatan_status',1);
-		$this->db->order_by('jabatan_nama','asc');
-		$data['jabatan'] = $this->db->get('tbl_master_jabatan')->result();
-		$this->db->where('slider_tipe','cv');
-		$this->db->where('slider_status',1);
-		$data['slider_cv'] = $this->db->get('tbl_master_slider')->result();
-
-		$data['stp'] = $this->db->get('tbl_master_stp')->result();
-		$this->db->where('slider_tipe','how');
-		$this->db->where('slider_status',1);
-		$data['slider_how'] = $this->db->get('tbl_master_slider')->result();
-		$this->load->view('web/header',$data);
-		$this->load->view('provider/sidebar',$data); 
-		$this->load->view('provider/tampilan_job_posting',$data);
-		$this->load->view('web/script_include',$data);
-	}
+	
 
 	public function kategori()
 	{

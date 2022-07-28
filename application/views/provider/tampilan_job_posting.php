@@ -1,9 +1,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<div class="col-xl-10 col-lg-10 col-md-10">
-  <!-- Featured_job_start -->
-  <section class="featured-job-area">
+
     <div class="container-fluid  flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
       <div class="row">
         <!-- Earnings (Monthly) Card Example -->
@@ -14,8 +12,8 @@
               </div>
               <div class="col-sm-12"> 
                <!-- Button trigger modal -->
-               <button id="btn_tambah"  class="genric-btn2 large danger"  ><i class="fa fa-plus mr-2"></i> Posting Job</button>
-               <button id="export" name="export" class="genric-btn large primary"  onclick="location.reload()"><i class="fas fa-sync-alt mr-2" style=""></i>Refresh Data</button>
+               <button id="btn_tambah"  class="btn btn-danger"  ><i class="fa fa-plus mr-2"></i> Posting Job</button>
+               <button id="export" name="export" class="btn btn-success "  onclick="location.reload()"><i class="fas fa-sync-alt mr-2" style=""></i>Refresh Data</button>
              </div>
            </div>
            <div class="card-body">
@@ -156,10 +154,10 @@
  <div class="modal-footer">
   <div class="form-group row"class="collapse" id="customer_collapse">
     <div class="col-sm-6">
-      <button type="button" class="genric-btn2 large primary" data-dismiss="modal">TUTUP</button>
+      <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">TUTUP</button>
     </div>
     <div class="col-sm-6 float-sm-right">
-      <button type="button" class="genric-btn large danger" id="btn_simpan">TAMBAH</button>
+      <button type="button" class="btn btn-success btn-sm" id="btn_simpan">TAMBAH</button>
 
     </div>
 

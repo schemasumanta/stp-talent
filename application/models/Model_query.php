@@ -18,6 +18,12 @@ class Model_query extends CI_Model {
 		return $this->db->get('tbl_master_user');
 	}
 
+	public function cek_email($email)
+	{
+		$this->db->where('user_email',$email);
+		return $this->db->get('tbl_master_user');
+	}
+
 	public function cek_provider($email,$password)
 	{
 		$this->db->where('user_email',$email);

@@ -30,7 +30,6 @@ class Seeker extends CI_Controller {
 			$this->load->view('seeker/tampilan_login',$data);
 			$this->load->view('web/script_include',$data);
 
-
 		}else{
 			redirect('seeker/dashboard','refresh');
 		}
@@ -50,17 +49,6 @@ class Seeker extends CI_Controller {
 
 		$data = $this->db->get('tbl_resume a')->result();
 		echo json_encode($data);
-	}
-	public function register()
-	{
-		$data['stp'] = $this->db->get('tbl_master_stp')->result();
-		if ($this->session->login==FALSE) {
-			$this->load->view('web/header',$data);
-			$this->load->view('seeker/tampilan_daftar',$data);
-			$this->load->view('web/script_include',$data);
-		}else{
-			redirect('seeker/dashboard','refresh');
-		}
 	}
 
 	public function kirim_email($id_user,$email,$password)
@@ -179,7 +167,7 @@ class Seeker extends CI_Controller {
 		}	
 
 		$this->session->set_flashdata($data);
-		redirect('seeker/register','refresh');
+		redirect('landing/register','refresh');
 	}
 
 	public function generateRandomString($length = 10) {

@@ -76,18 +76,7 @@ class Provider extends CI_Controller {
 		redirect('dashboard','refresh');
 	}
 
-	public function register()
-	{
-		$data['stp'] = $this->db->get('tbl_master_stp')->result();
-		if ($this->session->login==FALSE) {
-			$this->load->view('web/header',$data);
-			$this->load->view('provider/tampilan_daftar',$data);
-			$this->load->view('web/script_include',$data);
-		}else{
-			redirect('provider/dashboard','refresh');
-		}
-	}
-
+	
 	public function cek_login()
 	{
 		$email =$this->input->post('seeker_email');
@@ -179,6 +168,7 @@ class Provider extends CI_Controller {
 				);
 
 				$result = $this->db->insert('tbl_master_user',$data_seeker);
+				
 				if ($result) {
 
 					$this->db->where('user_nama',$this->input->post('seeker_nama'));
@@ -232,8 +222,39 @@ class Provider extends CI_Controller {
 
 
 		$this->session->set_flashdata($data);
-		redirect('seeker/register','refresh');
+		redirect('landing/register','refresh');
 	}
+
+	public function job_posting()
+	{
+		
+		$this->db->where('kategori_status',1);
+		$this->db->limit(8);
+		$this->db->order_by('kategori_nama','asc');
+		$data['kategori_job'] = $this->db->get('tbl_master_kategori_job')->result();
+
+		$this->db->where('kategori_status',1);
+		$this->db->order_by('kategori_nama','asc');
+		$data['kategori'] = $this->db->get('tbl_master_kategori_job')->result();
+
+		$this->db->where('skill_status',1);
+		$this->db->order_by('skill_nama','asc');
+		$data['skill'] = $this->db->get('tbl_master_skill')->result();
+
+		$this->db->where('joblevel_status',1);
+		$this->db->order_by('joblevel_nama','asc');
+		$data['joblevel'] = $this->db->get('tbl_master_level_job')->result();
+
+		$this->db->where('jabatan_status',1);
+		$this->db->order_by('jabatan_nama','asc');
+		$data['jabatan'] = $this->db->get('tbl_master_jabatan')->result();
+		
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar'); 
+		$this->load->view('provider/tampilan_job_posting',$data);
+		$this->load->view('templates/footer');
+	}
+
 
 	public function kirim_email($id_user,$email,$password)
 	{

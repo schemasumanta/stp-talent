@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700,900|Inter:300,400,500,600,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800,900&display=swap");
 .white-bg {
   background: #ffffff;
 }
@@ -4874,7 +4874,7 @@ del {
   color: #252b60;
   font-weight: 500;
   padding: 37px 20px;
-  font-family: "Barlow", sans-serif;
+  font-family: "Inter", sans-serif;
   display: block;
   font-size: 16px;
   position: relative;
@@ -4921,7 +4921,7 @@ del {
   font-size: 14px;
   color: #0b1c39;
   font-weight: 500;
-  font-family: "Barlow", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 .header-area .main-menu ul ul.submenu > li > a:hover {
   color: #F82C2C;
@@ -5910,7 +5910,7 @@ form.search-box .search-form a {
   font-weight: 600;
   line-height: 1;
   display: block;
-  font-family: "Barlow", sans-serif;
+  font-family: "Inter", sans-serif;
   margin-bottom: 10px;
 }
 .testimonial-area .testimonial-caption .testimonial-founder .founder-img p {

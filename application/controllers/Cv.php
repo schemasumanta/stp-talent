@@ -57,10 +57,10 @@ class Cv extends CI_Controller {
 		$data['skill_level'] = $this->db->get('tbl_skill_level')->result();
 		
 		$data['provinsi'] = $this->db->get('tbl_master_provinsi')->result();
-		$this->load->view('web/header',$data);
-		$this->load->view('seeker/sidebar',$data); 
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar'); 
 		$this->load->view('seeker/tampilan_cv',$data);
-		$this->load->view('web/script_include',$data);
+		$this->load->view('templates/footer');
 	}
 
 	
@@ -99,6 +99,28 @@ class Cv extends CI_Controller {
 		}	
 		$this->session->set_flashdata($data);
 		redirect('cv','refresh');
+	}
+	public function generate_cv($id)
+	{
+		$this->db->where('a.user_id',$id);
+		$this->db->join('tbl_master_user b','b.user_id=a.user_id');
+		$this->db->join('tbl_master_agama c','c.agama_id=a.agama_id');
+		$this->db->join('tbl_master_provinsi d','d.prov_id=a.prov_id');
+		$this->db->join('tbl_master_kabkota e','e.kabkota_id=a.kabkota_id');
+		$data['resume']	=$this->db->get('tbl_resume a')->result();
+		$this->db->where('a.user_id',$id);
+		$this->db->join('tbl_master_skill b','b.skill_id=a.skill_id');
+		$this->db->join('tbl_skill_level c','c.skill_level_id=a.skill_level_id');
+		$data['skill']	=$this->db->get('tbl_skill_resume a')->result();
+		$this->db->where('user_id',$id);
+		$data['pengalaman']	=$this->db->get('tbl_pengalaman_resume')->result();
+		$this->load->library('dompdf_gen');
+		$this->load->view('seeker/generate_cv',$data);
+		$customPaper = 'A4';
+		$orientation = 'portrait';
+		$html = $this->output->get_output();
+		$this->load->library('pdfgenerator');
+		$this->pdfgenerator->generate_view($html, strtoupper("CV ".$id), TRUE, $customPaper, $orientation);
 	}
 
 	public function simpan_resume()

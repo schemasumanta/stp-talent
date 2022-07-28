@@ -1,43 +1,27 @@
-
 <!-- Footer -->
-<footer class="sticky-footer bg-white">
+</div>
+
+<!-- <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>Copyright &copy; <?php echo  $this->session->nama_website ?> <?php echo  date('Y'); ?></span>
         </div>
     </div>
-</footer>
+</footer> -->
 <!-- End of Footer -->
 
 </div>
 <!-- End of Content Wrapper -->
 
 </div>
+
 <!-- End of Page Wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
+	<i class="fas fa-angle-up"></i>
 </a>
 
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-    </div>
-</div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 
@@ -63,6 +47,26 @@ aria-hidden="true">
 <script src="<?php echo base_url(); ?>assets_admin/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_admin/js/modules-datatables.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+<script>
+// Your web app's Firebase configuration
+const firebaseConfig = {
+	apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
+	authDomain: "solo-digital-tech.firebaseapp.com",
+	projectId: "solo-digital-tech",
+	storageBucket: "solo-digital-tech.appspot.com",
+	messagingSenderId: "608688468148",
+	appId: "1:608688468148:web:e503938ea2f4ea0eaa27e1",
+	measurementId: "G-6GFS5NPL12"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+</script>
 
 </body>
 
