@@ -53,11 +53,14 @@
 
 <!-- TODO: Add SDKs for Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
+
 <script>
 // Your web app's Firebase configuration
 const firebaseConfig = {
 	apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
 	authDomain: "solo-digital-tech.firebaseapp.com",
+	databaseURL: "https://solo-digital-tech-default-rtdb.firebaseio.com",
 	projectId: "solo-digital-tech",
 	storageBucket: "solo-digital-tech.appspot.com",
 	messagingSenderId: "608688468148",

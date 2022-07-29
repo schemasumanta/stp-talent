@@ -57,15 +57,14 @@ $sub_active=$this->uri->segment(2);
 
     <li class="nav-item 
 
-    <?php if($active=="user" && $sub_active=="admin_role" ){
+    <?php if($active=="chat" && $sub_active=="" ){
         echo "active";
     } ?> ">
-    <a class="nav-link" href="<?php echo base_url('user') ?>">
+    <a class="nav-link" href="<?php echo base_url('chat') ?>">
         <i class="fas fa-fw fa-comment mr-2"></i><span>Inbox</span>
     </a>
 
 </li>
-
 
 <li class="nav-item">
     <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -138,7 +137,7 @@ $sub_active=$this->uri->segment(2);
     <?php if($active=="user" && $sub_active=="admin_role" ){
         echo "active";
     } ?> ">
-    <a class="nav-link" href="<?php echo base_url('user') ?>">
+    <a class="nav-link" href="<?php echo base_url('chat') ?>">
         <i class="fas fa-fw fa-comment mr-2"></i><span>Inbox</span>
     </a>
 

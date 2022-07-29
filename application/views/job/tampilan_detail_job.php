@@ -113,7 +113,9 @@
             </ul>
             <div class="apply-btn2 btn-group w-100">
               <a href="#" class="genric-btn2 danger large w-50">Apply Now</a>
-              <a href="#" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+              <?php if ($this->session->user_id !=$job->user_id): ?>
+              <a href="<?php echo base_url() ?>chat/index/<?php echo $job->user_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+              <?php endif ?>
             </div>
           </div>
           <div class="post-details4 mb-50">
