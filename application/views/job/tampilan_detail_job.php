@@ -1,4 +1,6 @@
  <main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
   <?php 
   $bulan = array(
     '01' => 'Januari',
@@ -34,16 +36,56 @@
                   /></a>
                 </div>
                 <div class="job-tittle">
-                  <a href="javascript:;" class="bookmark_lowongan" data="<?php echo $job->lowongan_id ?>" style="color: #F82C2C;
-                  display: block;
-                  padding: 4px 33px;
-                  text-align: center;
-                  background: transparent!important;
-                  border: 0px!important;
-                  position: absolute;
-                  top:-3px;
-                  right: 0;
-                  margin-bottom: 25px;"><i class="fas fa-bookmark fa-3x"></i></a>
+
+                  <?php if (!$this->session->login) { ?>
+                   <a 
+                   href="<?php echo base_url() ?>landing/login/<?php echo $job->lowongan_id ?>" class="bookmark_lowongan" data="<?php echo $job->lowongan_id ?>" style="color: #F82C2C;
+                   display: block;
+                   padding: 4px 33px;
+                   text-align: center;
+                   background: transparent!important;
+                   border: 0px!important;
+                   position: absolute;
+                   top:-3px;
+                   right: 0;
+                   margin-bottom: 25px;"><i class="fas fa-bookmark fa-3x"></i></a>
+
+                 <?php  }else{ ?>
+
+                  <?php if ($this->session->user_level==2) { 
+
+                    $this->db->where('lowongan_id',$job->lowongan_id);
+                    $this->db->where('user_id' ,$this->session->user_id);
+                    $cek_bookmark  = $this->db->get('tbl_lowongan_tersimpan')->num_rows();
+                    if ($cek_bookmark > 0) { ?>
+                      <a 
+                      href="javascript:;" class="bookmark_lowongan item_bookmark" data-job="<?php echo $job->lowongan_id ?>" data-status="0" style="color: #F82C2C;
+                      display: block;
+                      padding: 4px 33px;
+                      text-align: center;
+                      background: transparent!important;
+                      border: 0px!important;
+                      position: absolute;
+                      top:-3px;
+                      right: 0;
+                      margin-bottom: 25px;"><i class="fas fa-bookmark fa-3x"></i></a>
+                      
+                    <?php }else{ ?>
+                      <a 
+                      href="javascript:;" class="bookmark_lowongan item_bookmark" data-job="<?php echo $job->lowongan_id ?>" data-status="1" style="color: #b2b2b2;
+                      display: block;
+                      padding: 4px 33px;
+                      text-align: center;
+                      background: transparent!important;
+                      border: 1px!important;
+                      position: absolute;
+                      top:-3px;
+                      right: 0;
+                      margin-bottom: 25px;"><i class="fas fa-bookmark fa-3x"></i></a>
+
+                    <?php }} ?>
+
+                  <?php } ?>
                   <a href="#">
                     <h4><?php echo $job->lowongan_judul ?></h4>
                   </a>
@@ -63,8 +105,6 @@
               </div>
             </div>
           </div>
-          <!-- job single End -->
-
           <div class="job-post-details">
             <div class="post-details1 mb-50">
               <!-- Small Section Tittle -->
@@ -73,7 +113,7 @@
               </div>
               <p class="mb-3"  style="font-family: Inter!important;line-height: 15px">  <?php echo $job->lowongan_deskripsi; ?></p>
             </div>
-            
+
           </div>
           <?php if (count($skill) > 0) { ?>
 
@@ -111,12 +151,14 @@
               <li>Applicants : <span><?php echo number_format($applicants,0,",","."); ?></span></li>
               <li>Application date : <span><?php $tgl_end = explode('-', $job->lowongan_end_date);echo $tgl_end[2]." ".$bulan[$tgl_end[1]]." ".$tgl_end[0]; ?></span></li>
             </ul>
-            <div class="apply-btn2 btn-group w-100">
-              <a href="#" class="genric-btn2 danger large w-50">Apply Now</a>
-              <?php if ($this->session->user_id !=$job->user_id): ?>
-              <a href="<?php echo base_url() ?>chat/index/<?php echo $job->user_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
-              <?php endif ?>
-            </div>
+            <?php if ($this->session->user_id !=$job->user_id): ?>
+
+              <div class="apply-btn2 btn-group w-100">
+                <a href="#" class="genric-btn2 danger large w-50">Apply Now</a>
+                <a href="<?php echo base_url() ?>chat/index/<?php echo $job->user_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+              </div>
+            <?php endif ?>
+
           </div>
           <div class="post-details4 mb-50">
             <!-- Small Section Tittle -->
@@ -140,7 +182,7 @@
                 <li>Email: <span><?php echo $job->perusahaan_email; ?></span></li>
               <?php endif ?>
               <?php if ($job->perusahaan_telepon!=''): ?>
-                
+
                 <li>Phone: <span><?php echo $job->perusahaan_telepon; ?></span></li>
               <?php endif ?>
             </ul>
@@ -152,3 +194,30 @@
 <?php endforeach ?>
 
 </main>
+
+<script type="text/javascript">
+  $('.item_bookmark').on('click',function(e){
+    e.preventDefault();
+    let job = $(this).data('job');
+    let status = $(this).data('status');
+    $.ajax({
+      type : "POST",
+      url  : "<?php echo base_url('job/bookmark')?>",
+      dataType : "JSON",
+      data : {'job':job,'status':status,},
+      success: function(data){
+        if (data!="Gagal") {
+          if (data==0) {
+            $('.item_bookmark').css('color','#b2b2b2');
+            $('.item_bookmark').data('status','1');
+
+          }else{
+            $('.item_bookmark').css('color','#F82C2C');
+            $('.item_bookmark').data('status','0');
+
+          }
+        }
+      }
+    });
+  });
+</script>

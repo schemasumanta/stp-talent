@@ -9,6 +9,8 @@ class Job extends CI_Controller {
 		date_default_timezone_set('Asia/Jakarta');	
 	}
 
+
+
 	public function index()
 	{
 		$this->load->view('admin/header');
@@ -16,6 +18,35 @@ class Job extends CI_Controller {
 		$this->load->view('admin/tampilan_job'); 
 		$this->load->view('admin/footer');
 	}
+
+	public function bookmark()
+
+	{
+		$status = $this->input->post('status');
+		$lowongan_id = $this->input->post('job');
+		if ($status ==1) {
+			$data_save_job = array(
+				'user_id' => $this->session->user_id, 
+				'lowongan_id' => $lowongan_id, 
+			);
+			$result = $this->db->insert('tbl_lowongan_tersimpan',$data_save_job);
+			
+		}else{
+			$this->db->where('lowongan_id',$lowongan_id);
+			$this->db->where('user_id',$this->session->user_id);
+			$result = $this->db->delete('tbl_lowongan_tersimpan');
+
+		}
+
+		if ($result) {
+			echo json_encode($status);
+		}else{
+			echo json_encode('Gagal');
+		}
+		
+	}
+
+
 	public function simpan_post()
 	{
 		// cek and tambah kategori
@@ -47,7 +78,7 @@ class Job extends CI_Controller {
 				'joblevel_nama' =>$this->input->post('joblevel_id') ,
 				'joblevel_status' =>1 ,
 			);
-			$this->db->insert('tbl_master_level_job',$data_kategori);
+			$this->db->insert('tbl_master_level_job',$data_joblevel);
 			$joblevel_id = $this->db->insert_id();
 		}
 
@@ -62,7 +93,7 @@ class Job extends CI_Controller {
 				'jabatan_nama' =>$this->input->post('jabatan_id') ,
 				'jabatan_status' =>1 ,
 			);
-			$this->db->insert('tbl_master_jabatan',$data_kategori);
+			$this->db->insert('tbl_master_jabatan',$data_jabatan);
 			$jabatan_id = $this->db->insert_id();
 		}
 
@@ -122,7 +153,7 @@ class Job extends CI_Controller {
 			$data['icon'] = 'error';
 		}	
 		$this->session->set_flashdata($data);
-		redirect('job/job_posting','refresh');
+		redirect('provider/job_posting','refresh');
 	}
 
 	public function cek_perusahaan()
@@ -183,6 +214,7 @@ class Job extends CI_Controller {
 		$this->load->view('job/tampilan_detail_job',$data);
 
 		$this->load->view('web/script_include',$data);
+		
 	}
 
 	public function level()

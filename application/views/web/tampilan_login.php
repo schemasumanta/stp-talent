@@ -9,14 +9,13 @@
         >
         <div class="container flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
 
-          <form method="post" action="<?php echo base_url('seeker/cek_login') ?>" id="form-login">
+          <form method="post" action="<?php echo base_url() ?>seeker/cek_login/<?php $this->uri->segment(3) ?>" id="form-login">
             <div class="row mt-5 mb-5 p-0 w-100 justify-content-center">
-            
+
               <div class="col-lg-5 mb-5 mt-5  p-5" style="border-radius: 15px;background: rgba(22,22,26,0.7);">
                <div class="hero-cap align-items-center mb-3 text-center">
                 <a href="javascript:;" class="genric-btn danger medium btn-kandidat btn-pilihan" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px">Job Seeker</a>
                 <a href="javascript:;" class="genric-btn danger medium btn-provider btn-pilihan" >Job Provider</a>
-
               </div>
               <div class="hero-cap text-center">
                 <h2 class="user_role">Login</h2>
@@ -31,21 +30,29 @@
                     <input type="password" class="form-control" name="seeker_password"  id="seeker_password" placeholder="Masukkan Password">
                   </div>
                   <div class="col-lg-12 mt-4 items-link btn-group">
-                    <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
+                    <?php if ($this->uri->segment(3) > 0) { ?>
+                      <a href="<?php echo base_url() ?>job/detail/<?php echo $this->uri->segment(3) ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
+
+                    <?php }else{ ?>
+                      <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
+
+                    <?php } ?>
+
+
                     <a href="javascript:;" class="item_login" style="width: 50%;display: inline-block!important;background:#DD2727;color: white;border: 1px solid #DD2727">Login</a>
                   </div>
 
                   <div class="col-lg-6">
                     <a href="<?php echo base_url('landing/register') ?>"><span class="text-light">Belum Punya Akun ?</span></a>
                   </div>
-                   <div class="col-lg-6 text-right">
+                  <div class="col-lg-6 text-right">
                     <a href="<?php echo base_url('landing/forgot') ?>"><span >Lupa Password</span></a>
                   </div>
                 </div>
               </div>
-                <div class="col-lg-2">
-                </div>
-                <div class="col-lg-5 d-flex flex-wrap flex-fill justify-content-center mx-auto text-center">
+              <div class="col-lg-2">
+              </div>
+              <div class="col-lg-5 d-flex flex-wrap flex-fill justify-content-center mx-auto text-center">
                 <img src="<?php echo base_url() ?>assets/img/login.svg" style="width: 80%;">
                 <h3 class="text-white fw-bold">Welcome to <strong>SoloTechnoPark</strong></h3>
                 <p class="text-white">Join us to develop your company with expert talent, and expand your network
@@ -88,7 +95,7 @@
       $(this).addClass('primary');
       $('.perusahaan').addClass('d-none');
       $('#seeker_level').val(2);
-      $('#form-login').attr('action','<?php echo  base_url('seeker/cek_login'); ?>');
+      $('#form-login').attr('action','<?php echo  base_url()?>seeker/cek_login/<?php echo $this->uri->segment(3) ?>');
     });
 
     $(document).on('click','.btn-provider',function(){
@@ -99,8 +106,7 @@
       $(this).addClass('primary');
       $('.perusahaan').removeClass('d-none');
       $('#seeker_level').val(3);
-      $('#form-login').attr('action','<?php echo  base_url('provider/cek_login'); ?>');
-
+      $('#form-login').attr('action','<?php echo base_url()?>provider/cek_login/<?php echo $this->uri->segment(3) ?>');
     });
 
     $(document).ready(function() {

@@ -454,8 +454,3 @@ class="apply-process-area section-overly apply-bg pt-150 pb-150"
 </div>
 <!-- Blog Area End -->
 </main>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#search_lokasi_pekerjaan').niceSelect();
-  });
-</script>

@@ -48,6 +48,7 @@
 <script src="<?php echo base_url(); ?>assets_admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_admin/js/modules-datatables.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
 
@@ -56,6 +57,21 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
 
 <script>
+
+	function show_password_user(id)
+	{
+		if($('#'+id).attr('type')=="password")
+		{
+			$('#'+id).attr('type','text');
+			$('.'+id).html('<i class="fa fa-eye-slash"></i>');
+		}else{
+			$('#'+id).attr('type','password');
+			$('.'+id).html('<i class="fa fa-eye"></i>');
+
+		}
+	}
+
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
 	apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
@@ -69,6 +85,40 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+
+
+
+$('#btn_ubah_password_user').on('click',function(){
+	let cek = 0;
+
+	let password = $('#password_baru_user').val();
+	let confirm = $('#confirm_password_baru_user').val();
+	if (password=="") {
+		cek++;
+		$('#password_baru_user').focus();
+		$('.error-password_baru_user').html('Silahkan Masukkan Password Baru');
+	}else{
+		$('.error-password_baru_user').html('');
+	}
+	if (password!==confirm) {
+		cek++;
+		$('#confirm_password_baru_user').focus();
+		$('#confirm_password_baru_user').val();
+		$('.error-confirm_password_baru_user').html('Konfirmasi Password Tidak Valid');
+	}else{
+		$('.error-confirm_password_baru_user').html('');
+	}
+	if (cek > 0) {
+		return false;
+	}else{
+		$('#form_ubah_password_user').submit();
+		
+	}
+
+});
+
+
 </script>
 
 </body>

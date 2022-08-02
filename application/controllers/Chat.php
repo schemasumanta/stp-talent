@@ -11,8 +11,6 @@ class Chat extends CI_Controller {
 		
 		date_default_timezone_set('Asia/Jakarta');	
 	}
-
-
 	public function generateRandomString($length = 10) {
 		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$charactersLength = strlen($characters);
@@ -22,8 +20,6 @@ class Chat extends CI_Controller {
 		}
 		return $randomString;
 	}
-
-
 	public function index($id='')
 	{
 		$id_chat ='';
@@ -47,24 +43,41 @@ class Chat extends CI_Controller {
 				$this->db->insert('tbl_chat',$data_chat);
 
 			}else{
-
 				foreach ($chat->result() as $key) {
-				$id_chat = $key->chat_id;
+					$id_chat = $key->chat_id;
 				}
 			}
-
-
-
 		}
 
 		$data['id_chat'] = $id_chat;
-		$this->db->where('chat_penerima',$this->session->user_id);
-		$this->db->or_where('chat_pengirim',$this->session->user_id);
-		$data['contact_chat'] = $this->db->get('tbl_chat')->result();
+		$this->db->select('a.*,
+			b.user_nama as nama_penerima,
+			b.user_foto as foto_penerima,
+			b.user_login_status as status_penerima,
+			b.user_id as id_penerima,
+			b.perusahaan_id as perusahaan_id_penerima,
+			c.user_nama as nama_pengirim,
+			c.user_foto as foto_pengirim,
+			c.user_login_status as status_pengirim,
+			c.user_id as id_pengirim,
+			c.perusahaan_id as perusahaan_id_pengirim,
+			d.perusahaan_nama as nama_perusahaan_penerima,
+			e.perusahaan_nama as nama_perusahaan_pengirim,
 
-		$this->db->select('user_nama,user_foto,user_login_status,user_id');
-		$this->db->where('user_id',$id);
-		$data['penerima'] = $this->db->get('tbl_master_user')->result();
+			');
+		$this->db->where('a.chat_penerima',$this->session->user_id);
+		$this->db->or_where('a.chat_pengirim',$this->session->user_id);
+		$this->db->join('tbl_master_user b','b.user_id=a.chat_penerima');
+		$this->db->join('tbl_master_user c','c.user_id=a.chat_pengirim');
+		$this->db->join('tbl_perusahaan d','d.perusahaan_id=b.perusahaan_id','left');
+		$this->db->join('tbl_perusahaan e','e.perusahaan_id=c.perusahaan_id','left');
+		$data['contact_chat'] = $this->db->get('tbl_chat a')->result();
+
+
+		$this->db->select('a.user_nama,a.user_foto,a.user_login_status,a.user_id,a.perusahaan_id,b.perusahaan_nama');
+		$this->db->where('a.user_id',$id);
+		$this->db->join('tbl_perusahaan b','b.perusahaan_id=a.perusahaan_id','left');
+		$data['penerima'] = $this->db->get('tbl_master_user a')->result();
 		if ($this->session->user_level==1) {
 			
 

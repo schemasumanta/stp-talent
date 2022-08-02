@@ -35,6 +35,85 @@ class Model_tabel extends CI_Model {
             
             break;
 
+
+
+            case 'lowongan_tersimpan':
+            $this->db->select('
+                a.*,
+                b.lowongan_judul,
+                b.lowongan_gaji_min,
+                b.lowongan_gaji_max,
+                b.lowongan_gaji_secret,
+                b.lowongan_created_date,
+                b.perusahaan_id,
+                c.perusahaan_nama,
+                c.perusahaan_logo,
+                d.prov_nama,
+                e.kabkota_nama,
+                f.kategori_nama,
+
+                ');
+            $this->db->join('tbl_lowongan_pekerjaan b','b.lowongan_id=a.lowongan_id');
+            $this->db->join('tbl_perusahaan c','c.perusahaan_id=b.perusahaan_id');
+            $this->db->join('tbl_master_provinsi d','d.prov_id=c.perusahaan_prov');
+            $this->db->join('tbl_master_kabkota e','e.kabkota_id=c.perusahaan_kabkota');
+            $this->db->join('tbl_master_kategori_job f','f.kategori_id=b.kategori_id');
+
+            $this->db->from('tbl_lowongan_tersimpan a');
+            $this->db->where('a.user_id',$this->session->user_id);
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.lowongan_tersimpan_id',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+
+            if ($search!=null && $search!='') {
+                $this->db->like('b.lowongan_judul',$search);
+                $this->db->where('a.user_id',$this->session->user_id);
+                $this->db->or_like('b.lowongan_deskripsi',$search);
+                $this->db->where('a.user_id',$this->session->user_id);
+
+            }
+            
+            break;
+            case 'job_posting':
+            $this->db->select('
+                a.*,
+                c.perusahaan_nama,
+                c.perusahaan_logo,
+                d.prov_nama,
+                e.kabkota_nama,
+                f.kategori_nama,
+                ');
+            $this->db->join('tbl_perusahaan c','c.perusahaan_id=a.perusahaan_id');
+            $this->db->join('tbl_master_provinsi d','d.prov_id=c.perusahaan_prov');
+            $this->db->join('tbl_master_kabkota e','e.kabkota_id=c.perusahaan_kabkota');
+            $this->db->join('tbl_master_kategori_job f','f.kategori_id=a.kategori_id');
+
+            $this->db->from('tbl_lowongan_pekerjaan a');
+            $this->db->where('a.user_id',$this->session->user_id);
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.lowongan_id',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
+
+            if ($search!=null && $search!='') {
+                $this->db->like('a.lowongan_judul',$search);
+                $this->db->where('a.user_id',$this->session->user_id);
+                $this->db->or_like('a.lowongan_deskripsi',$search);
+                $this->db->where('a.user_id',$this->session->user_id);
+
+            }
+            
+            break;
+
+
+
+
+
             case 'bahasa':
             $this->db->select('a.*');
             $this->db->from('tbl_master_bahasa a');
@@ -52,7 +131,7 @@ class Model_tabel extends CI_Model {
             
             break;
 
-             case 'slider':
+            case 'slider':
             $this->db->select('a.*');
             $this->db->from('tbl_master_slider a');
 
@@ -69,7 +148,7 @@ class Model_tabel extends CI_Model {
             
             break;
 
-              case 'jabatan':
+            case 'jabatan':
             $this->db->select('a.*');
             $this->db->from('tbl_master_jabatan a');
 
@@ -87,7 +166,7 @@ class Model_tabel extends CI_Model {
             break;
 
 
-             case 'user':
+            case 'user':
             $this->db->select('a.*,b.*');
             $this->db->from('tbl_master_user a');
             $this->db->where('a.user_level',1);
@@ -109,7 +188,7 @@ class Model_tabel extends CI_Model {
             
             break;
 
-             case 'user_job_provider':
+            case 'user_job_provider':
             $this->db->select('a.*,b.*');
             $this->db->from('tbl_master_user a');
             $this->db->where('a.user_level',3);
@@ -151,7 +230,7 @@ class Model_tabel extends CI_Model {
             
             break;
 
-             case 'pendidikan':
+            case 'pendidikan':
             $this->db->select('a.*');
             $this->db->from('tbl_master_pendidikan a');
 
@@ -219,7 +298,7 @@ class Model_tabel extends CI_Model {
             
             break;
 
-              case 'stp':
+            case 'stp':
             $this->db->select('a.*');
             $this->db->from('tbl_master_stp a');
 
@@ -241,7 +320,7 @@ class Model_tabel extends CI_Model {
 
 
 
-             case 'job_kategori':
+            case 'job_kategori':
             $this->db->select('a.*');
             $this->db->from('tbl_master_kategori_job a');
 
@@ -258,7 +337,7 @@ class Model_tabel extends CI_Model {
             
             break;
 
-                case 'job_level':
+            case 'job_level':
             $this->db->select('a.*');
             $this->db->from('tbl_master_level_job a');
 

@@ -55,6 +55,16 @@ $sub_active=$this->uri->segment(2);
 
     </li>
 
+      <li class="nav-item 
+        <?php if($active=="seeker" && $sub_active=="saved_job" ){
+            echo "active";
+        } ?> ">
+        <a class="nav-link" href="<?php echo base_url('seeker/saved_job') ?>">
+            <i class="fas fa-fw fa-bookmark mr-2"></i><span>Saved Job</span>
+        </a>
+
+    </li>
+
     <li class="nav-item 
 
     <?php if($active=="chat" && $sub_active=="" ){
@@ -85,7 +95,7 @@ $sub_active=$this->uri->segment(2);
     <?php if($active=="bahasa" && $sub_active==""){
         echo "bg-danger text-light";
     } ?>
-    " href="<?php echo base_url('bahasa') ?>">Ubah Password</a>
+    " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Ubah Password</a>
 
 </div>
 </div>
@@ -105,7 +115,7 @@ $sub_active=$this->uri->segment(2);
                 echo "active";
             } ?> ">
             <a class="nav-link" href="<?php echo base_url('cv') ?>">
-                <i class="fas fa-fw fa-building mr-2"></i><span>My Vacancy</span>
+                <i class="fas fa-fw fa-building mr-2"></i><span>My Company</span>
             </a>
 
         </li>
@@ -116,7 +126,7 @@ $sub_active=$this->uri->segment(2);
             echo "active";
         } ?> ">
         <a class="nav-link" href="<?php echo base_url('provider/job_posting') ?>">
-            <i class="fas fa-fw fa-calendar-check mr-2"></i><span>Job Posting</span>
+            <i class="fas fa-fw fa-calendar-check mr-2"></i><span>My Vacancy</span>
         </a>
 
     </li>
@@ -163,7 +173,7 @@ $sub_active=$this->uri->segment(2);
     <?php if($active=="bahasa" && $sub_active==""){
         echo "bg-danger text-light";
     } ?>
-    " href="<?php echo base_url('bahasa') ?>">Ubah Password</a>
+    " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Ubah Password</a>
 
 </div>
 </div>

@@ -157,6 +157,7 @@
                   <a  href="<?php echo $s->stp_website ?>" target="_blank"><i class="fas fa-globe"></i></a>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

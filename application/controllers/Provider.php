@@ -274,4 +274,38 @@ class Provider extends CI_Controller {
 			redirect('landing');
 		}
 	}
+
+	public function tabel_job_posting()
+	{
+		$data   = array();
+		$sort     = isset($_GET['columns'][$_GET['order'][0]['column']]['data']) ? strval($_GET['columns'][$_GET['order'][0]['column']]['data']) : 'lowongan_id';
+		$order    = isset($_GET['order'][0]['dir']) ? strval($_GET['order'][0]['dir']) : 'desc';
+		$search    = isset($_GET['search']['value']) ? strval($_GET['search']['value']):null;
+		$no = $this->input->get('start');
+		$list = $this->model_tabel->get_datatables('job_posting',$sort,$order,$search);
+		foreach ($list as $l) {
+
+			$no++;
+			$l->isi_lowongan ='<div class="card border-left-success shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><img src="'.$l->perusahaan_logo.'" style="width:5%;margin-right:25px;">
+			<div class="col mr-2"><div class="text-lg font-weight-bold text-danger text-uppercase mb-1">
+			'.$l->lowongan_judul.'</div>
+			<div class="h6 mb-2 text-gray-800">'.$l->kategori_nama.'</div>
+			<div class="h6 mb-0 font-weight-bold text-gray-800"><i class="fas fa-map-marker-alt mr-2"></i>'.$l->kabkota_nama." - ".$l->prov_nama.'</li></div>
+			</div><div class="col-auto"><a href="'.base_url().'job/detail/'.$l->lowongan_id.'" class="btn btn-sm rounded  mr-2 btn-success   item_detail_lowongan" data="'.$l->lowongan_id.'"><i class="fa fa-eye mr-2"></i>Detail</a></div>
+			</div></div></div>';
+
+			// <a href="javascript:;" class="btn btn-sm rounded btn-danger item_hapus_lowongan" data="'.$l->lowongan_id.'"><i class="fa fa-trash"></i></a>
+			$l->no = $no;
+			$data[] = $l;
+		}
+
+		$output = array(
+			"draw"              => $_GET['draw'],
+			"recordsTotal"      => $this->model_tabel->count_all('job_posting',$sort,$order,$search),
+			"recordsFiltered"   => $this->model_tabel->count_filtered('job_posting',$sort,$order,$search),
+			"data"              => $data,
+		);  
+		echo json_encode($output); 
+	}
+
 }

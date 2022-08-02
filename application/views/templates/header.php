@@ -25,6 +25,7 @@
     <script src="<?php echo base_url() ?>assets_admin/js/jquery.min.js"></script>
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url() ?>assets_admin/css/sb-admin-2-user.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <style type="text/css">
         .select2-selection__rendered {
             line-height: 31px !important;
@@ -51,9 +52,69 @@
         }
     </style>
 
+    <script type="text/javascript">
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+      })
+  </script>
 
-   
-</script>
+  <div class="modal fade" data-backdrop="static" id="modalubahpassworduser" tabindex="-1" role="dialog" aria-labelledby="modalubahpassworduserLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" >
+
+            <div class="modal-header bg-danger text-light">
+                <h5 id="modalubahpassworduserLabel" >UBAH PASSWORD</h5>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="form_ubah_password_user" action="<?php echo base_url('dashboard/ubah_password') ?>">
+                    <div class="form-group row"class="collapse" id="customer_collapse">
+
+                        <div class="col-md-12 mb-3">
+                            <label for="pwd1">Password Baru</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password_baru_user" name="password_baru_user" placeholder="Masukkan Password" required>
+                                <div class="input-group-addon password_baru_user mr-2 ml-2 pt-2" style="cursor: pointer;" onclick="show_password_user('password_baru_user')"><i class="fa fa-eye"></i></div>
+                            </div>
+                            <small class="mt-1 error-password_baru_user text-danger"></small>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="pwd1">Ulangi Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="confirm_password_baru_user" name="confirm_password_baru_user" placeholder="Ulangi Password" required>
+                                <div class="input-group-addon confirm_password_baru_user mr-2 ml-2 pt-2" style="cursor: pointer;" onclick="show_password_user('confirm_password_baru_user')"><i class="fa fa-eye"></i></div>
+
+                            </div>
+                            <small class="mt-1 error-confirm_password_baru_user text-danger"></small>
+                            
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <div class="form-group row"class="collapse" id="customer_collapse">
+                        <div class="col-sm-12 btn-group">
+                            <button type="button" class="btn btn-danger mr-2" data-dismiss="modal"><b>BATAL</b></button>
+
+                            <button type="button" class="btn btn-success" id="btn_ubah_password_user"><b>UBAH</b></button>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div> 
+
+
+    <!-- /.card-body -->
+</div>
+
 
 </head>
 <body id="page-top">

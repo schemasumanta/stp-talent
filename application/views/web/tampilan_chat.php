@@ -115,98 +115,144 @@ $bulan = array(
     <div class="col-md-12 mb-4">
       <div class="card  mb-4 rounded" style="background: transparent; ">
         <div class="card-body py-3">
-
-          <?php var_dump($contact_chat) ?>
           <div class="row">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-4 d-flex flex-row align-items-start rounded-left" style="background: white">
-                  <div class="search mt-3 d-flex justify-content-center flex-row">
-                    <i class="fa fa-search"></i>
-                    <input type="text" class="form-control" placeholder="Cari Pesan">
-                  </div>
-                </div>
-                <div class="col-md-8 rounded-right reset_break" style="background: transparent;">
-                  <?php if (count($penerima) > 0) { ?>
-                    <?php foreach ($penerima as $key): ?>
-                      
-                  <div class="header_chatting row d-flex flex-row align-items-center">
-                    <span class="col-md-1" style="cursor: pointer;"><i class="fa fa-ellipsis-v text-white fa-2x" aria-hidden="true"></i></span>
-
-                    <span class="col-md-9 text-white text-right">
-                      <b><?php echo $key->user_nama; ?></b>
-                      <input type="hidden" id="chat_penerima" name="chat_penerima" value="<?php echo $key->user_id ?>">
-                      <br>
-                      <?php echo $key->user_login_status==1 ? "Online":"Offline"; ?>
-                    </span>
-                    <span class="col-md-2 text-right">
-                      <a class="nav-link" href="javascript:;"  aria-expanded="false">
-                        <img class="img-profile rounded-circle"
-                        src="<?php echo base_url().$key->user_foto ?>" style="max-height: 60px;width: auto;">
-                      </a>
-                    </span>
-                  </div>
-
-                    <?php endforeach ?>
-
-
-                  <?php } ?>
-                  <input type="hidden" id="chat_id" name="chat_id" value="<?php echo $id_chat ?>">
-                  <div class="isi_chatting row mt-5">
-                    <div class="col-md-12 ">
-                      <div class="row p-0 chatbox">
-                       <!--  <div class="col-md-6 isi_chatting_penerima mr-2">
-                          <div class="row">
-                            <img id="profil" class="rounded-circle " src="<?php echo $this->session->user_foto ?>" style="width:35px;position: absolute;top:-15px;left:-15px">
-                            <div class="col-md-12 text-justify">
-                              <span class="chat_text" style="color: white;font-size: 14px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                              <span style="position: absolute;bottom:-15px;right: 10px;font-size: 12px;color: white;font-weight: bold;">25 Agustus 2022</span>
-                            </div>
-                          </div>
-                        </div> -->
-                        <!-- <div class="col-md-6  mt-3"></div>  
-                        <div class="col-md-6 mt-3 isi_chatting_pengirim float-right">                          <div class="row">
-                          <img id="profil" class="rounded-circle " src="<?php echo $this->session->user_foto ?>" style="width:35px;position: absolute;top:-15px;right:-15px">
-                          <div class="col-md-12 text-justify">
-                            <span class="chat_text" style="color: black;font-size: 14px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-                            <span style="position: absolute;bottom:-15px;right: 10px;font-size: 12px;color: black;font-weight: bold;">25 Agustus 2022</span>
-                          </div>
-                        </div>
-                      </div> -->
+                <div class="col-md-4 d-flex flex-column align-items-start rounded-left" style="background: white">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="search mt-3 d-flex justify-content-center flex-row">
+                        <i class="fa fa-search"></i>
+                        <input type="text" class="form-control" placeholder="Cari Pesan">
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="form_chatting row mt-5 d-flex flex-row align-items-center">
-                  <div class="col-md-10">
-                    <input type="text" id="isi_pesan" name="isi_pesan" class="form-control" placeholder="Masukkan Pesan">
-                  </div>
-                  <div class="col-md-2  d-flex flex-row align-items-center justify-content-around">
-                    <i class="fas fa-paperclip text-danger" style="cursor: pointer;"></i>
-                    <i class="fas fa-smile  text-warning"   style="cursor: pointer;"></i>
-                    <i class="fas fa-paper-plane  text-success"  style="cursor: pointer;"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <hr>
+                    <div class="contactbox col-md-12 mt-3 p-3">
+                      <div class="row list_contact d-flex flex-row align-items-center justify-content-center">
+                        <?php foreach ($contact_chat as $ct) { ?>
+                          <?php if($ct->chat_pengirim==$this->session->user_id){ ?>
+                            <div class="col-md-12 p-0 mt-2 d-none contact_db contact_db_<?php echo $ct->chat_id ?>" style="cursor: pointer;" onclick="mulai_chat('<?php echo $ct->chat_id; ?>')" id="<?php echo $ct->chat_id ?>">
+                              <div class="card rounded p-0" style=" background: #cccccc69;border:2px solid #dcdcdc;width: 95%">
+                                <div class="card-body p-2">
+                                  <div class="row p-0">
+                                    <div class="col-md-1">
+                                      <img class="rounded-circle chat_foto_<?php echo $ct->chat_id ?>" src="<?php echo base_url().$ct->foto_penerima ?>" style="width:35px;height: 35px">
+                                    </div>
+                                    <div class="col-md-11">
+                                      <span data-perusahaan ="<?php echo $ct->nama_perusahaan_penerima ?>" data-status ="<?php echo $ct->status_penerima ?>" data-penerima="<?php echo $ct->id_penerima ?>"class="chat_nama_<?php echo $ct->chat_id ?>" style="color: black;font-size: 16px;margin-left: 15px;font-weight: bold;"><?php
+                                      if ($ct->nama_perusahaan_penerima!='') {
+                                       echo $ct->nama_perusahaan_penerima;
+                                     }else{echo $ct->nama_penerima;} ?></span>
+                                     <br>
+                                     <span class="chat_text_<?php echo $ct->chat_id ?>" style="color: black;font-size: 12px;margin-left: 15px"></span>
+                                     <span class="jumlah_chat_<?php echo $ct->chat_id ?>" style="font-size: 12px;color: black;font-weight: bold;padding: 5px;height: 25px;width: 25px;border-radius: 50%;float:right;background: green;color:white">50</span>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                         <?php }elseif($ct->chat_penerima==$this->session->user_id){ ?>
+                          <div class="col-md-12 p-0 mt-2 d-none contact_db contact_db_<?php echo $ct->chat_id ?>" style="cursor: pointer;" onclick="mulai_chat('<?php echo $ct->chat_id; ?>')" id="<?php echo $ct->chat_id ?>">
+                            <div class="card rounded p-0" style=" background: #cccccc69;border:2px solid #dcdcdc;width: 95%">
+                              <div class="card-body p-2">
+                                <div class="row p-0">
+                                  <div class="col-md-1">
+                                    <img class="rounded-circle chat_foto_<?php echo $ct->chat_id ?>" src="<?php echo base_url().$ct->foto_pengirim ?>" style="width:35px;height: 35px">
+                                  </div>
+                                  <div class="col-md-11">
+                                    <span data-perusahaan ="<?php echo $ct->nama_perusahaan_pengirim ?>" data-status ="<?php echo $ct->status_pengirim ?>" data-penerima="<?php echo $ct->id_pengirim ?>" class="chat_nama_<?php echo $ct->chat_id ?>" style="color: black;font-size: 16px;margin-left: 15px;font-weight: bold;"><?php
+                                    if ($ct->nama_perusahaan_pengirim!='') {
+                                     echo $ct->nama_perusahaan_pengirim;
+                                   }else{echo $ct->nama_pengirim;} ?></span>
+                                   <br>
+                                   <span class="chat_text_<?php echo $ct->chat_id ?>" style="color: black;font-size: 12px;margin-left: 15px"></span>
+                                   <span class="jumlah_chat_<?php echo $ct->chat_id ?>" style="font-size: 12px;color: black;font-weight: bold;padding: 5px;height: 25px;width: 25px;border-radius: 50%;float:right;background: green;color:white">50</span>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                       <?php } ?>
 
+                     <?php } ?>
+
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div class="col-md-8 rounded-right reset_break" style="background: transparent;">
+
+              <?php if (count($penerima) > 0) { ?>
+                <?php foreach ($penerima as $key): ?>
+                  <!-- d-flex flex-row align-items-center -->
+                  <div class="header_chatting row ">
+                    <span class="col-md-1" style="cursor: pointer;"><i class="fa fa-ellipsis-v text-white fa-2x" aria-hidden="true"></i></span>
+                    <input type="hidden" id="chat_penerima" name="chat_penerima" value="<?php echo $key->user_id ?>">
+                    <span class="col-md-9 text-white text-right chat_penerima" style="font-weight: bold;">
+                      <?php if($key->perusahaan_nama!='') {
+                       echo $key->perusahaan_nama; 
+                     }else{
+                       echo $key->user_nama;
+                     } ?>
+                     <br>
+                     <span class="chat_penerima_status"><?php echo $key->user_login_status==1 ? "Online":"Offline"; ?>
+                   </span>
+
+                 </span>
+                 <span class="col-md-2 text-right">
+                  <a class="nav-link" href="javascript:;"  aria-expanded="false">
+                    <img class="img-profile rounded-circle chat_penerima_foto"
+                    src="<?php echo base_url().$key->user_foto ?>" style="height: 60px;width: 60px">
+                  </a>
+                </span>
+              </div>
+            <?php endforeach ?>
+          <?php }else{ ?>
+            <div class="d-none header_chatting row">
+              <span class="col-md-1" style="cursor: pointer;"><i class="fa fa-ellipsis-v text-white fa-2x" aria-hidden="true"></i></span>
+              <input type="hidden" id="chat_penerima" name="chat_penerima" value="">
+              <span class="col-md-9 text-white text-right chat_penerima" style="font-weight: bold;"><br>
+               <span class="chat_penerima_status"></span>
+             </span>
+             <span class="col-md-2 text-right">
+              <a class="nav-link" href="javascript:;"  aria-expanded="false">
+                <img class="img-profile rounded-circle chat_penerima_foto"
+                src="" style="height: 60px;width: 60px">
+              </a>
+            </span>
+          </div>
+        <?php }?>
+
+
+
+        <input type="hidden" id="chat_id" name="chat_id" value="<?php echo $id_chat ?>">
+        <div class="isi_chatting row mt-5">
+          <div class="col-md-12 ">
+            <div class="row p-0 chatbox" >
+            </div>
           </div>
         </div>
-
+        <div class="form_chatting row mt-5 d-flex flex-row align-items-center">
+          <div class="col-md-10">
+            <input type="text" id="isi_pesan" name="isi_pesan" class="form-control" placeholder="Masukkan Pesan">
+          </div>
+          <div class="col-md-2  d-flex flex-row align-items-center justify-content-around">
+            <i class="fas fa-paperclip text-danger" style="cursor: pointer;"></i>
+            <i class="fas fa-smile  text-warning"   style="cursor: pointer;"></i>
+            <i class="fas fa-paper-plane  text-success"  style="cursor: pointer;"></i>
+          </div>
+        </div>
       </div>
     </div>
 
-
   </div>
+</div>
+
+</div>
+</div>
+
+
+</div>
 </div>
 </div>
 
@@ -251,7 +297,7 @@ $bulan = array(
     }
   }
 
-  // var files = [];
+  // let files = [];
   // document.getElementById("file-cv").addEventListener("change", function(e) {
   //   files = e.target.files;
   // });
@@ -301,7 +347,7 @@ $bulan = array(
 
   function hanyaAngka(evt)
   {
-    var charCode = (evt.which) ? evt.which : event.keyCode
+    let charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
       return false;
 
@@ -322,8 +368,8 @@ $bulan = array(
       } 
 
       for (let i = 0; i < files.length; i++) {
-        var storage = firebase.storage().ref('talent_hub/cv/'+files[i].name);
-        var upload = storage.put(files[i]);
+        let storage = firebase.storage().ref('talent_hub/cv/'+files[i].name);
+        let upload = storage.put(files[i]);
         upload.on(
 
           "state_changed",
@@ -357,13 +403,30 @@ $bulan = array(
 
 
   $(document).ready(function(){
-    var chat_id = '<?php echo $id_chat ?>';
-    var rootchatref = firebase.database().ref('/');  
-    var chatref = firebase.database().ref('/Chat/'+chat_id+'/').orderByChild('chat_tanggal');  
-    // .equalTo('<?php echo $this->session->user_id ?>')
-    chatref.on('child_added', function(snapshot) { 
-     var data = snapshot.val();  
-     console.log(JSON.stringify(data));
+
+    let rootchatref = firebase.database().ref('/'); 
+    let contactref;
+
+    $('.contact_db').each(function(){
+      let id_contact_chat = $(this).attr('id');
+      let contactref = firebase.database().ref('/Chat/'+id_contact_chat).orderByChild('chat_order').limitToLast(1)
+      contactref.on('value',function(snap){
+        if(snap.numChildren()> 0){
+          $('.contact_db_'+id_contact_chat).removeClass('d-none');
+          snap.forEach((isi) => {
+            let last_chat = isi.val();
+            $('.chat_text_'+id_contact_chat).html(last_chat.chat_isi);
+          });
+        }
+      });
+    });
+    let chat_id = $('#chat_id').val();
+    let chatref = firebase.database().ref('/Chat/'+chat_id+'/').orderByChild('chat_order'); 
+
+     chatref.on('child_added', function(snapshot) { 
+
+     let data = snapshot.val();  
+        console.log(chatref);
 
      if(data.chat_pengirim == '<?php echo $this->session->user_id; ?>')
      {
@@ -371,7 +434,7 @@ $bulan = array(
       $('.chatbox').append(`<div class="col-md-6 mt-3"></div>  
         <div class="col-md-6 mt-3 isi_chatting_pengirim float-right"><div class="row"><img id="profil" class="rounded-circle " src="<?php echo base_url() ?>`+data.chat_photo+`" style="width:35px;position: absolute;top:-15px;right:-15px">
         <div class="col-md-12 text-justify">
-        <span class="chat_text" style="color: black;font-size: 14px">`+data.chat_isi+`</span>
+        <span class="chat_text" style="color: black;font-size: 14px;margin-left:15px">`+data.chat_isi+`</span>
         <span style="position: absolute;bottom:-15px;right: 10px;font-size: 12px;color: black;font-weight: bold;">`+data.chat_tanggal+`</span>
         </div></div></div>`);
     }else if(data.chat_penerima== '<?php echo $this->session->user_id; ?>')
@@ -380,46 +443,104 @@ $bulan = array(
       <div class="row">
       <img id="profil" class="rounded-circle " src="<?php echo base_url() ?>`+data.chat_photo+`" style="width:35px;position: absolute;top:-15px;left:-15px">
       <div class="col-md-12 text-justify">
-      <span class="chat_text" style="color: white;font-size: 14px">`+data.chat_isi+`</span>
+      <span class="chat_text" style="color: white;font-size: 14px;margin-left:15px">`+data.chat_isi+`</span>
       <span style="position: absolute;bottom:-15px;right: 10px;font-size: 12px;color: white;font-weight: bold;">`+data.chat_tanggal+`</span>
       </div>
       </div>
       </div>`);
    }
- });  
+ }); 
+
   });  
 
-  function writeChat(chat_pengirim,chat_penerima, chat_isi,chat_tanggal,chat_photo) {  
-            // A post entry.  
-            var chat_id = $('#chat_id').val();
-            var postData = {  
+  function writeChat(chat_pengirim,chat_penerima, chat_isi,chat_tanggal,chat_photo,chat_order) {  
+            // A post entry. 
+            chat_id =  $('#chat_id').val();
+            let postData = {  
               chat_pengirim : chat_pengirim,  
               chat_penerima: chat_penerima,
               chat_isi: chat_isi,  
               chat_tanggal: chat_tanggal,  
               chat_photo: chat_photo,  
+              chat_order: chat_order,  
             };  
             // Get a key for a new Post.  
-            var newPostKey = firebase.database().ref().child('Chat/'+chat_id+'/').push().key;  
-            var updates = {}; 
-            updates['/Chat/'+chat_id+'/'+newPostKey] = postData;  
+            let newPostKey = firebase.database().ref().child('Chat/'+$('#chat_id').val()+'/').push().key;  
+            let updates = {}; 
+            updates['/Chat/'+$('#chat_id').val()+'/'+newPostKey] = postData;  
             return firebase.database().ref().update(updates);  
           }  
 
           $('#isi_pesan').keypress(function(e) {  
-            var chat_pengirim = '<?php echo $this->session->user_id ?>';
-            var chat_photo = '<?php echo $this->session->user_foto ?>';  
-            var chat_isi = $('#isi_pesan').val(); 
-            var chat_penerima = $('#chat_penerima').val(); 
-            var chat_tanggal = '<?php echo date('Y-m-d H:i:s'); ?>';  
+            let chat_pengirim = '<?php echo $this->session->user_id ?>';
+            let chat_photo = '<?php echo $this->session->user_foto ?>';  
+            let chat_isi = $('#isi_pesan').val(); 
+            let chat_penerima = $('#chat_penerima').val(); 
+            let chat_tanggal = '<?php echo date('Y-m-d H:i:s'); ?>';  
+            let chat_order = $.now();
+
             if(e.which == 13) {  
               if(chat_isi == ''){  
                 return false;  
               }  
-              writeChat(chat_pengirim,chat_penerima, chat_isi,chat_tanggal,chat_photo);  
+              writeChat(chat_pengirim,chat_penerima, chat_isi,chat_tanggal,chat_photo,chat_order);  
               $('#isi_pesan').val('');  
             }  
           });  
+
+
+          function mulai_chat(id)
+          {
+            let chat_baru = $('.chat_nama_'+id).data('penerima');
+            let chat_baru_status = $('.chat_nama_'+id).data('status');
+            let nama = $('.chat_nama_'+id).html();
+            let chat_baru_foto = $('.chat_foto_'+id).attr('src');
+            let status = 'Offline'
+            if(chat_baru_status==1)
+            {
+              status ="Online";
+            }
+            $('.header_chatting').removeClass('d-none');
+            $('#chat_id').val(id);
+            $('#chat_penerima').val(chat_baru);
+
+            $('.chat_penerima').html(nama+`<br><span class="chat_penerima_status">`+status+`</span>`);
+            $('.chat_penerima_foto').attr('src',chat_baru_foto);
+            $('.chatbox').html('');
+            chatref = firebase.database().ref('/Chat/'+id+'/').orderByChild('chat_order'); 
+            let neWchatRef = firebase.database().ref('/Chat/'+ id+'/').orderByChild('chat_order');
+
+            neWchatRef.once('value',function(chatting){
+              if(chatting.numChildren()> 0){
+               chatting.forEach((newchat) => {
+                let data = newchat.val();
+                if(data.chat_pengirim == '<?php echo $this->session->user_id; ?>')
+                {
+                  $('.chatbox').append(`<div class="col-md-6 mt-3"></div>  
+                    <div class="col-md-6 mt-3 isi_chatting_pengirim float-right"><div class="row"><img id="profil" class="rounded-circle " src="<?php echo base_url() ?>`+data.chat_photo+`" style="width:35px;position: absolute;top:-15px;right:-15px">
+                    <div class="col-md-12 text-justify">
+                    <span class="chat_text" style="color: black;font-size: 14px;margin-left:15px">`+data.chat_isi+`</span>
+                    <span style="position: absolute;bottom:-15px;right: 10px;font-size: 12px;color: black;font-weight: bold;">`+data.chat_tanggal+`</span>
+                    </div></div></div>`);
+                }else if(data.chat_penerima== '<?php echo $this->session->user_id; ?>')
+                {
+                 $('.chatbox').append(`<div class="col-md-6 mt-3 isi_chatting_penerima mr-2">
+                  <div class="row">
+                  <img id="profil" class="rounded-circle " src="<?php echo base_url() ?>`+data.chat_photo+`" style="width:35px;position: absolute;top:-15px;left:-15px">
+                  <div class="col-md-12 text-justify">
+                  <span class="chat_text" style="color: white;font-size: 14px;margin-left:15px">`+data.chat_isi+`</span>
+                  <span style="position: absolute;bottom:-15px;right: 10px;font-size: 12px;color: white;font-weight: bold;">`+data.chat_tanggal+`</span>
+                  </div>
+                  </div>
+                  </div>`);
+               }
+             });
+
+             }
+
+           });
+          }
+
         </script>  
 
 

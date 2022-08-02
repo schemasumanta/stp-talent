@@ -43,6 +43,24 @@ class Seeker extends CI_Controller {
 
 	}
 
+	public function hapus_bookmark()
+	{
+		$this->db->where('lowongan_tersimpan_id',$this->input->post('lowongan_tersimpan_id_hapus'));
+		$result = $this->db->delete('tbl_lowongan_tersimpan');
+		if ($result) {
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'Bookmark Berhasil Dihapus!';
+			$data['icon'] = 'success';
+		}else{
+
+			$data['title'] = 'Gagal';
+			$data['text'] = 'Bookmark Gagal Dihapus!';
+			$data['icon'] = 'error';
+		}	
+		$this->session->set_flashdata($data);
+		redirect('seeker/saved_job','refresh');
+	}
+
 	public function get_resume()
 	{
 		$this->db->where('a.user_id',$this->session->user_id);
@@ -182,6 +200,7 @@ class Seeker extends CI_Controller {
 
 	public function cek_login()
 	{
+		$job = $this->uri->segment(3);
 		$email =$this->input->post('seeker_email');
 		$password =md5($this->input->post('seeker_password'));
 		$cek = $this->model_query->cek_seeker($email,$password)->result();
@@ -195,7 +214,7 @@ class Seeker extends CI_Controller {
 						$data['stp_nama'] = $s->stp_nama;
 						$data['stp_pemilik'] = $s->stp_pemilik;
 						$data['stp_logo'] = $s->stp_logo;
-					$data['stp_brand_icon'] = $s->stp_brand_icon;
+						$data['stp_brand_icon'] = $s->stp_brand_icon;
 						
 					}
 					$data['user_id'] = $a->user_id;
@@ -214,6 +233,10 @@ class Seeker extends CI_Controller {
 
 					$this->db->where('user_id', $a->user_id);
 					$this->db->update('tbl_master_user', $data);
+					if ($job > 0) {
+						redirect('job/detail/'.$job,'refresh');
+						
+					}
 					redirect('dashboard','refresh');
 				}else{
 
@@ -221,7 +244,7 @@ class Seeker extends CI_Controller {
 					$data['text'] = 'User Belum Diaktivasi!';
 					$data['icon'] = 'error';
 					$this->session->set_flashdata($data); 
-					redirect('landing/login','refresh');
+					redirect('landing/login/'.$job,'refresh');
 				}
 			}
 		}
@@ -230,11 +253,20 @@ class Seeker extends CI_Controller {
 			$data['text'] = 'Silahkan Periksa Email & Password!';
 			$data['icon'] = 'error';
 			$this->session->set_flashdata($data); 
-			redirect('landing/login','refresh');
+			redirect('landing/login/'.$job,'refresh');
 		}
 	}
-	
 
+	public function saved_job()
+	{
+		$this->db->where('slider_tipe','main');
+		$this->db->where('slider_status',1);
+		$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar'); 
+		$this->load->view('seeker/saved_job',$data);
+		$this->load->view('templates/footer');
+	}
 	public function logout()
 	{
 		$this->db->where('user_id',$this->session->user_id);
@@ -244,4 +276,36 @@ class Seeker extends CI_Controller {
 			redirect('landing');
 		}
 	}
+
+	public function tabel_saved_job()
+	{
+		$data   = array();
+		$sort     = isset($_GET['columns'][$_GET['order'][0]['column']]['data']) ? strval($_GET['columns'][$_GET['order'][0]['column']]['data']) : 'lowongan_tersimpan_id';
+		$order    = isset($_GET['order'][0]['dir']) ? strval($_GET['order'][0]['dir']) : 'desc';
+		$search    = isset($_GET['search']['value']) ? strval($_GET['search']['value']):null;
+		$no = $this->input->get('start');
+		$list = $this->model_tabel->get_datatables('lowongan_tersimpan',$sort,$order,$search);
+		foreach ($list as $l) {
+
+			$no++;
+			$l->isi_lowongan ='<div class="card border-left-success shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><img src="'.$l->perusahaan_logo.'" style="width:5%;margin-right:25px;">
+			<div class="col mr-2"><div class="text-lg font-weight-bold text-danger text-uppercase mb-1">
+			'.$l->lowongan_judul.'</div>
+			<div class="h6 mb-2 text-gray-800">'.$l->kategori_nama.'</div>
+			<div class="h6 mb-0 font-weight-bold text-gray-800"><i class="fas fa-map-marker-alt mr-2"></i>'.$l->kabkota_nama." - ".$l->prov_nama.'</li></div>
+			</div><div class="col-auto"><a href="'.base_url().'job/detail/'.$l->lowongan_id.'" class="btn btn-sm rounded  mr-2 btn-success   item_detail_lowongan" data="'.$l->lowongan_tersimpan_id.'"><i class="fa fa-eye mr-2"></i>Detail</a><a href="javascript:;" class="btn btn-sm rounded btn-danger item_hapus_lowongan" data="'.$l->lowongan_tersimpan_id.'"><i class="fa fa-trash"></i></a></div>
+			</div></div></div>';
+			$l->no = $no;
+			$data[] = $l;
+		}
+
+		$output = array(
+			"draw"              => $_GET['draw'],
+			"recordsTotal"      => $this->model_tabel->count_all('lowongan_tersimpan',$sort,$order,$search),
+			"recordsFiltered"   => $this->model_tabel->count_filtered('lowongan_tersimpan',$sort,$order,$search),
+			"data"              => $data,
+		);  
+		echo json_encode($output); 
+	}
+
 }

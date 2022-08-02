@@ -1,6 +1,7 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -117,3 +118,22 @@
 
                 </div>
                 <!-- End of Main Content -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+     const notif = $('.flashdatart').data('title');
+     if (notif) {
+        Swal.fire({
+          title:notif,
+          text:$('.flashdatart').data('text'),
+          icon:$('.flashdatart').data('icon'),
+      }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.close(); 
+        }
+    });
+  }
+});
+
+</script>

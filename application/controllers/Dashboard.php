@@ -45,6 +45,30 @@ class Dashboard extends CI_Controller {
 
 	}
 
+	public function ubah_password()
+	{
+		$data_password = array(
+			'user_password' => md5($this->input->post('password_baru_user')),
+		);
+
+		$this->db->where('user_id',$this->session->user_id);
+		$result = $this->db->update('tbl_master_user',$data_password);
+		if ($result) {
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'Password Berhasil Diubah!';
+			$data['icon'] = 'success';
+			
+
+		}else{
+			$data['title'] = 'Gagal';
+			$data['text'] = 'Password Gagal Diubah!';
+			$data['icon'] = 'error';
+			
+		}	
+		$this->session->set_flashdata($data);
+		redirect('dashboard','refresh');
+	}
+
 	public function logout()
 	{
 		$this->db->where('user_id',$this->session->user_id);
