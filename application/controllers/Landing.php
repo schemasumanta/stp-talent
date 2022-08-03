@@ -77,6 +77,21 @@ class Landing extends CI_Controller {
 		}
 	}
 
+	public function profil_perusahaan($perusahaan_id)
+	{
+		$this->db->where('md5(perusahaan_id)',$perusahaan_id);
+
+		$data['perusahaan'] = $this->db->get('tbl_perusahaan')->result();
+		$data ['stp'] = $this->db->get('tbl_master_stp')->result();
+
+		$this->load->view('web/header',$data);
+
+		$this->load->view('provider/profil_perusahaan',$data);
+
+		$this->load->view('web/script_include',$data);
+
+	}
+
 	public function register()
 	{
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();

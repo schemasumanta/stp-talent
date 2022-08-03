@@ -159,6 +159,7 @@ $sub_active=$this->uri->segment(2);
     aria-expanded="true" aria-controls="collapseTwo">
     <i class="fas fa-fw fa-cog mr-2"></i><span>Settings</span>
 </a>
+
 <div id="collapseTwo" class="collapse <?php if($active=="agama" || $active=="bahasa" || $active=="level"  || $active=="pendidikan" || $active=="jabatan" || $active=="skill" || $active=="job"){
     echo "show";
 } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">

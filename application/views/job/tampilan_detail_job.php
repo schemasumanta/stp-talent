@@ -1,4 +1,9 @@
  <main>
+  <style type="text/css">
+    .btn-perusahaan:hover{
+      color:  #f44a40 !important;
+    }
+  </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
   <?php 
@@ -19,26 +24,20 @@
   ?>
 
   <?php foreach ($lowongan as $job): ?>
-
     <!-- Hero Area End -->
     <!-- job post company Start -->
     <div class="job-post-company pt-120 pb-120">
       <div class="container">
-        <div class="row justify-content-between">
+        <div class="row ">
           <!-- Left Content -->
           <div class="col-xl-7 col-lg-8">
             <!-- job single -->
             <div class="single-job-items mb-50">
               <div class="job-items">
-                <div class="company-img company-img-details">
-                  <a href="#"
-                  ><img src="" alt=""
-                  /></a>
-                </div>
-                <div class="job-tittle">
 
+                <div class="job-tittle">
                   <?php if (!$this->session->login) { ?>
-                   <a 
+                   <a
                    href="<?php echo base_url() ?>landing/login/<?php echo $job->lowongan_id ?>" class="bookmark_lowongan" data="<?php echo $job->lowongan_id ?>" style="color: #F82C2C;
                    display: block;
                    padding: 4px 33px;
@@ -51,9 +50,7 @@
                    margin-bottom: 25px;"><i class="fas fa-bookmark fa-3x"></i></a>
 
                  <?php  }else{ ?>
-
                   <?php if ($this->session->user_level==2) { 
-
                     $this->db->where('lowongan_id',$job->lowongan_id);
                     $this->db->where('user_id' ,$this->session->user_id);
                     $cek_bookmark  = $this->db->get('tbl_lowongan_tersimpan')->num_rows();
@@ -154,47 +151,99 @@
             <?php if ($this->session->user_id !=$job->user_id): ?>
 
               <div class="apply-btn2 btn-group w-100">
-                <a href="#" class="genric-btn2 danger large w-50">Apply Now</a>
-                <a href="<?php echo base_url() ?>chat/index/<?php echo $job->user_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+                <?php if ($this->session->login) { ?>
+                  <a href="javascript:;" class="genric-btn2 danger large w-50 btn_apply" data-lowongan="<?php echo $job->lowongan_id ?>" data-perusahaan="<?php echo $job->perusahaan_nama ?>">Apply Now</a>
+                  <a href="<?php echo base_url() ?>chat/index/<?php echo $job->user_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+                <?php  }else{ ?>
+                  <a href="<?php echo base_url() ?>landing/login/<?php echo $job->lowongan_id ?>" class="genric-btn2 danger large w-50">Apply Now</a>
+                  <a href="<?php echo base_url() ?>landing/login/<?php echo $job->lowongan_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+                <?php } ?>
+
               </div>
-            <?php endif ?>
+              <?php else: ?>
+             <!--  <div class="apply-btn2 btn-group w-100">
+                <?php if ($this->session->login) { ?>
+                  <a href="#" class="genric-btn2 danger large w-50">Apply Now</a>
+                  <a href="<?php echo base_url() ?>chat/index/<?php echo $job->user_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+                <?php  }else{ ?>
+                  <a href="<?php echo base_url('landing/login') ?>" class="genric-btn2 danger large w-50">Apply Now</a>
+                  <a href="<?php echo base_url('landing/login') ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+                <?php } ?>
 
+              </div>
+            -->
+          <?php endif ?>
+
+
+        </div>
+        <div class="post-details4 mb-50">
+          <!-- Small Section Tittle -->
+          <div class="small-section-tittle">
+            <h4>Company Information</h4>
           </div>
-          <div class="post-details4 mb-50">
-            <!-- Small Section Tittle -->
-            <div class="small-section-tittle">
-              <h4>Company Information</h4>
-            </div>
-            <span><?php echo $job->perusahaan_nama; ?></span>
-            <?php if ($job->perusahaan_sambutan!=''): ?>
+          <a  class="btn-perusahaan" style="font-weight: bold;font-size: 1.4em;color: #5b5c6e" href="<?php echo base_url() ?>landing/profil_perusahaan/<?php echo md5($job->perusahaan_id) ?>"><?php echo $job->perusahaan_nama; ?></a>
+          <?php if ($job->perusahaan_sambutan!=''): ?>
 
-              <p class="text-justify">
-                <?php echo $job->perusahaan_sambutan ?>
-              </p>
+            <p class="text-justify">
+              <?php echo $job->perusahaan_sambutan ?>
+            </p>
+          <?php endif ?>
+          <ul>
+            <?php if ($job->perusahaan_website!=''): ?>
+
+              <li>Web : <span> <?php echo $job->perusahaan_website; ?></span></li>
             <?php endif ?>
-            <ul>
-              <?php if ($job->perusahaan_website!=''): ?>
+            <?php if ($job->perusahaan_email!=''): ?>
 
-                <li>Web : <span> <?php echo $job->perusahaan_website; ?></span></li>
-              <?php endif ?>
-              <?php if ($job->perusahaan_email!=''): ?>
+              <li>Email: <span><?php echo $job->perusahaan_email; ?></span></li>
+            <?php endif ?>
+            <?php if ($job->perusahaan_telepon!=''): ?>
 
-                <li>Email: <span><?php echo $job->perusahaan_email; ?></span></li>
-              <?php endif ?>
-              <?php if ($job->perusahaan_telepon!=''): ?>
-
-                <li>Phone: <span><?php echo $job->perusahaan_telepon; ?></span></li>
-              <?php endif ?>
-            </ul>
-          </div>
+              <li>Phone: <span><?php echo $job->perusahaan_telepon; ?></span></li>
+            <?php endif ?>
+          </ul>
         </div>
       </div>
     </div>
   </div>
+</div>
 <?php endforeach ?>
 
-</main>
 
+
+<div class="modal fade" data-backdrop="static" id="ModalLamaran" tabindex="-1" role="dialog" aria-labelledby="ModalLamaranLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" >
+     <form id="form_lamaran" method="post" enctype="multipart/form-data" action="<?php echo base_url('job/simpan_lamaran') ?>">
+
+      <div class="modal-header"> 
+        <h6 class="modal-title judul_lamaran">Melamar Ke</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+      </div>
+      <div class="modal-body">
+       <div class="row "> 
+        
+       <div class="col-md-12"> 
+         <label style="color:#343a40;" for="lamaran_deskripsi">Tentang Anda</label>
+         <input type="hidden" name="lowongan_id" id="lowongan_id">
+         <textarea type="text" class="form-control" id="lamaran_deskripsi"  name="lamaran_deskripsi" required rows="5" placeholder="Berikan informasi terkait keahlian anda untuk pekerjaan ini"></textarea>
+         <small class="error-lamaran_deskripsi text-danger"></small>
+       </div>
+     </div>
+   </div>
+   <div class="modal-footer">
+    <div class=" row"class="collapse" id="customer_collapse">
+      <div class="col-sm-12 float-right">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" style="border-radius: 0px;" >Tutup</button>
+        <button type="button" class="btn btn-success" style="border-radius: 0px" id="btn_simpan_biodata">Simpan</button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+</div>
+</div> 
+</main>
 <script type="text/javascript">
   $('.item_bookmark').on('click',function(e){
     e.preventDefault();
@@ -219,5 +268,12 @@
         }
       }
     });
+  });
+  $('.btn_apply').on('click',function(){
+    let lowongan_id = $(this).data('lowongan');
+    let perusahaan = $(this).data('perusahaan');
+    $('#ModalLamaran').modal('show');
+    $('.judul_lamaran').html('Melamar ke '+perusahaan);
+    $('#lowongan_id').val(lowongan_id);
   });
 </script>
