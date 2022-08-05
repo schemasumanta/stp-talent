@@ -79,9 +79,12 @@ class Landing extends CI_Controller {
 
 	public function profil_perusahaan($perusahaan_id)
 	{
-		$this->db->where('md5(perusahaan_id)',$perusahaan_id);
+		$this->db->where('md5(a.perusahaan_id)',$perusahaan_id);
+		$this->db->join('tbl_master_provinsi b','b.prov_id=a.perusahaan_prov');
+		$this->db->join('tbl_master_kabkota c','c.kabkota_id=a.perusahaan_kabkota');
 
-		$data['perusahaan'] = $this->db->get('tbl_perusahaan')->result();
+		$data['perusahaan'] = $this->db->get('tbl_perusahaan a')->result();
+
 		$data ['stp'] = $this->db->get('tbl_master_stp')->result();
 
 		$this->load->view('web/header',$data);

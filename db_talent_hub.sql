@@ -20,31 +20,38 @@ CREATE TABLE IF NOT EXISTS `tbl_bahasa_resume` (
   `user_id` int(11) NOT NULL,
   `bahasa_id` int(11) NOT NULL,
   `resume_bahasa_level` int(2) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`bahasa_resume_id`) USING BTREE,
-  KEY `user_id` (`user_id`),
-  KEY `bahasa_id` (`bahasa_id`),
-  CONSTRAINT `tbl_bahasa_resume_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_bahasa_resume_ibfk_2` FOREIGN KEY (`bahasa_id`) REFERENCES `tbl_master_bahasa` (`bahasa_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  PRIMARY KEY (`bahasa_resume_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_bahasa_resume: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_bahasa_resume: ~2 rows (lebih kurang)
+INSERT INTO `tbl_bahasa_resume` (`bahasa_resume_id`, `user_id`, `bahasa_id`, `resume_bahasa_level`) VALUES
+	(12, 3, 1, 0),
+	(13, 3, 2, 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_chat
 CREATE TABLE IF NOT EXISTS `tbl_chat` (
-  `chat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `chat_id` varchar(16) NOT NULL,
   `chat_pengirim` int(11) NOT NULL,
   `chat_penerima` int(11) NOT NULL,
   `chat_isi` text NOT NULL,
   `chat_tanggal` datetime NOT NULL,
   `chat_lampiran` text NOT NULL,
-  PRIMARY KEY (`chat_id`),
-  KEY `chat_pengirim` (`chat_pengirim`),
-  KEY `chat_penerima` (`chat_penerima`),
-  CONSTRAINT `tbl_chat_ibfk_1` FOREIGN KEY (`chat_pengirim`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_chat_ibfk_2` FOREIGN KEY (`chat_penerima`) REFERENCES `tbl_master_user` (`user_id`)
+  PRIMARY KEY (`chat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_chat: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_chat: ~11 rows (lebih kurang)
+INSERT INTO `tbl_chat` (`chat_id`, `chat_pengirim`, `chat_penerima`, `chat_isi`, `chat_tanggal`, `chat_lampiran`) VALUES
+	('baHFuIVDYXIUmfKC', 32, 34, '', '2022-08-03 19:55:51', ''),
+	('chC5cOm49Z9OBFJS', 32, 1, '', '2022-08-03 19:55:38', ''),
+	('cOqO2TxPH4Kjr8Gk', 3, 34, '', '2022-07-29 17:33:34', ''),
+	('gVnLEEBEuktUvOIj', 3, 33, '', '2022-07-29 21:51:44', ''),
+	('KhonU5WS6xBeQ315', 32, 4, '', '2022-08-03 19:55:45', ''),
+	('lzY7Ga3NtDUBiezQ', 3, 35, '', '2022-07-29 23:30:15', ''),
+	('MFf59Qr0SQFihXBW', 32, 33, '', '2022-08-03 19:27:42', ''),
+	('qg0JeCJ7nkmeRZTL', 3, 3, '', '2022-07-30 00:30:30', ''),
+	('r8mGzt5lKFYSumrf', 3, 4, '', '2022-07-29 21:47:02', ''),
+	('xrAxn9L834mkDxUW', 36, 4, '', '2022-08-02 15:21:31', ''),
+	('zQ51PFO4FElmKDae', 3, 32, '', '2022-07-29 17:31:28', '');
 
 -- membuang struktur untuk table db_talent_hub.tbl_history
 CREATE TABLE IF NOT EXISTS `tbl_history` (
@@ -53,12 +60,10 @@ CREATE TABLE IF NOT EXISTS `tbl_history` (
   `ip_address` varchar(50) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
   `aktivitas` text NOT NULL,
-  PRIMARY KEY (`kode_history`) USING BTREE,
-  KEY `id_user` (`id_user`),
-  CONSTRAINT `tbl_history_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tbl_master_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=latin1 COMMENT='Y';
+  PRIMARY KEY (`kode_history`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=latin1 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_history: ~89 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_history: ~169 rows (lebih kurang)
 INSERT INTO `tbl_history` (`kode_history`, `tanggal`, `ip_address`, `id_user`, `aktivitas`) VALUES
 	(13, '2022-07-04 08:10:44', '::1', 1, 'Menambah Data Skill Baru Corel Draw'),
 	(14, '2022-07-04 08:11:53', '::1', 1, 'Menambah Data Skill Baru Corel Draw'),
@@ -160,7 +165,75 @@ INSERT INTO `tbl_history` (`kode_history`, `tanggal`, `ip_address`, `id_user`, `
 	(110, '2022-07-18 10:35:16', '::1', 3, 'Mengupload CV '),
 	(111, '2022-07-18 10:36:05', '::1', 3, 'Mengupload CV '),
 	(112, '2022-07-18 10:36:23', '::1', 3, 'Mengupload CV '),
-	(113, '2022-07-18 10:37:14', '::1', 3, 'Mengupload CV ');
+	(113, '2022-07-18 10:37:14', '::1', 3, 'Mengupload CV '),
+	(114, '2022-07-19 04:42:36', '::1', NULL, 'Mengubah Data Kategori Pekerjaan dengan nama Design & Creative'),
+	(115, '2022-07-19 04:43:06', '::1', NULL, 'Mengubah Data Kategori Pekerjaan dengan nama Design & Creative'),
+	(116, '2022-07-19 04:46:55', '::1', NULL, 'Mengubah Data Kategori Pekerjaan dengan nama Financial & Economic'),
+	(117, '2022-07-19 04:47:23', '::1', NULL, 'Mengubah Data Kategori Pekerjaan dengan nama Construction'),
+	(118, '2022-07-19 08:24:13', '::1', NULL, 'Mengubah Data Kategori Pekerjaan dengan nama Design & Creative'),
+	(119, '2022-07-19 08:24:45', '::1', NULL, 'Mengubah Data Kategori Pekerjaan dengan nama Construction'),
+	(120, '2022-07-19 08:24:58', '::1', NULL, 'Mengubah Data Kategori Pekerjaan dengan nama Financial & Economic'),
+	(121, '2022-07-19 08:27:36', '::1', 3, 'Mengupload CV '),
+	(122, '2022-07-19 11:02:57', '::1', 16, 'Mengupload CV '),
+	(123, '2022-07-20 07:18:38', '::1', NULL, 'Menambah Data Kategori Pekerjaan Baru dengan nama Real Estate'),
+	(124, '2022-07-20 07:34:46', '::1', NULL, 'Menambah Data Kategori Pekerjaan Baru dengan nama Content Writer'),
+	(125, '2022-07-20 07:35:12', '::1', NULL, 'Menambah Data Kategori Pekerjaan Baru dengan nama Software Engineer'),
+	(126, '2022-07-20 07:36:04', '::1', NULL, 'Menambah Data Kategori Pekerjaan Baru dengan nama Administrative'),
+	(127, '2022-07-20 07:37:47', '::1', NULL, 'Menambah Data Kategori Pekerjaan Baru dengan nama Manufacturing'),
+	(128, '2022-07-20 08:10:30', '::1', 31, 'Mengupload CV '),
+	(129, '2022-07-21 07:18:40', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(130, '2022-07-21 07:25:39', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(131, '2022-07-21 07:28:06', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(132, '2022-07-21 18:01:33', '::1', 3, 'Mengupload CV '),
+	(133, '2022-07-21 18:23:16', '::1', 4, 'Mengubah Data Profil Perusahaan'),
+	(134, '2022-07-21 18:34:19', '::1', 4, 'Mengubah Data Profil Perusahaan'),
+	(135, '2022-07-21 18:35:42', '::1', 4, 'Mengubah Data Profil Perusahaan'),
+	(136, '2022-07-21 18:35:53', '::1', 4, 'Mengubah Data Profil Perusahaan'),
+	(137, '2022-07-21 18:38:12', '::1', 4, 'Mengubah Data Profil Perusahaan'),
+	(138, '2022-07-22 07:53:37', '::1', 32, 'Mengubah Data Profil Perusahaan'),
+	(139, '2022-07-22 08:29:58', '::1', 33, 'Mengubah Data Profil Perusahaan'),
+	(140, '2022-07-25 07:24:36', '::1', 33, 'Mengubah Data Profil Perusahaan'),
+	(141, '2022-07-26 07:02:02', '::1', 3, 'Menambah Profil Sumanta'),
+	(142, '2022-07-26 09:11:44', '::1', 3, 'Mengubah Biodata Sumanta'),
+	(143, '2022-07-26 09:13:07', '::1', 3, 'Mengubah Biodata Sumanta'),
+	(144, '2022-07-26 10:48:03', '::1', 3, 'Mengubah Biodata Sumanta'),
+	(145, '2022-07-26 10:48:35', '::1', 3, 'Mengubah Biodata Sumanta'),
+	(146, '2022-07-26 10:54:25', '::1', 3, 'Mengupload CV '),
+	(147, '2022-07-27 13:21:11', '::1', 35, 'Mengubah Data Profil Perusahaan'),
+	(148, '2022-07-28 05:36:44', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(149, '2022-07-28 09:31:44', '::1', 3, 'Mengubah Biodata Sumanta'),
+	(150, '2022-07-28 09:33:49', '::1', 3, 'Mengubah Biodata Sumanta'),
+	(151, '2022-07-28 09:35:25', '::1', 3, 'Mengubah Biodata Mayang Nuranggraeni'),
+	(152, '2022-08-01 03:03:21', '::1', 3, 'Menambah Skill'),
+	(153, '2022-08-01 03:11:02', '::1', 3, 'Menambah Skill'),
+	(154, '2022-08-01 04:12:59', '::1', 3, 'Menambah Skill'),
+	(155, '2022-08-01 04:14:39', '::1', 3, 'Menambah Skill'),
+	(156, '2022-08-01 04:15:07', '::1', 3, 'Menambah Skill'),
+	(157, '2022-08-01 04:16:54', '::1', 3, 'Menambah Skill'),
+	(158, '2022-08-01 04:51:22', '::1', 3, 'Menambah Skill'),
+	(159, '2022-08-01 04:51:31', '::1', 3, 'Menambah Skill'),
+	(160, '2022-08-01 04:51:41', '::1', 3, 'Menambah Skill'),
+	(161, '2022-08-01 04:51:56', '::1', 3, 'Menambah Skill'),
+	(162, '2022-08-01 04:52:14', '::1', 3, 'Menambah Skill'),
+	(163, '2022-08-01 05:41:54', '::1', 3, 'Mengupload CV '),
+	(164, '2022-08-01 10:36:32', '::1', 3, 'Menambah Data Pengalaman'),
+	(165, '2022-08-01 11:03:14', '::1', 3, 'Menambah Data Pengalaman'),
+	(166, '2022-08-01 11:03:52', '::1', 3, 'Menambah Data Pengalaman'),
+	(167, '2022-08-01 17:05:38', '::1', 3, 'Menghapus Data Pengalaman'),
+	(168, '2022-08-01 17:05:48', '::1', 3, 'Menghapus Data Pengalaman'),
+	(169, '2022-08-01 17:07:08', '::1', 3, 'Menghapus Data Pengalaman'),
+	(170, '2022-08-01 17:27:44', '::1', 3, 'Mengubah Data Pengalaman'),
+	(171, '2022-08-01 17:30:07', '::1', 3, 'Menambah Data Pengalaman'),
+	(172, '2022-08-02 03:22:22', '::1', 3, 'Menambah Bahasa'),
+	(173, '2022-08-02 03:42:55', '::1', 3, 'Menambah Bahasa'),
+	(174, '2022-08-02 03:43:08', '::1', 3, 'Mengubah Bahasa'),
+	(175, '2022-08-02 03:43:32', '::1', 3, 'Mengubah Bahasa'),
+	(176, '2022-08-02 04:06:16', '::1', 3, 'Menambah Data Tentang Saya'),
+	(177, '2022-08-02 06:13:13', '::1', 3, 'Mengubah Biodata Mayang Nuranggraeni'),
+	(178, '2022-08-02 06:15:31', '::1', 3, 'Mengubah Biodata Sumanta'),
+	(179, '2022-08-03 07:41:01', '::1', 3, 'Mengupload CV '),
+	(180, '2022-08-03 12:52:20', '::1', 3, 'Mengubah Data Pengalaman'),
+	(181, '2022-08-05 08:54:01', '::1', 3, 'Mengupload CV ');
 
 -- membuang struktur untuk table db_talent_hub.tbl_langganan_premium
 CREATE TABLE IF NOT EXISTS `tbl_langganan_premium` (
@@ -168,11 +241,7 @@ CREATE TABLE IF NOT EXISTS `tbl_langganan_premium` (
   `user_id` int(11) DEFAULT NULL,
   `premium_id` int(11) DEFAULT NULL,
   `premium_masa_aktif` date DEFAULT NULL,
-  PRIMARY KEY (`langganan_id`) USING BTREE,
-  KEY `user_id` (`user_id`),
-  KEY `premium_id` (`premium_id`),
-  CONSTRAINT `tbl_langganan_premium_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_langganan_premium_ibfk_2` FOREIGN KEY (`premium_id`) REFERENCES `tbl_premium` (`premium_id`)
+  PRIMARY KEY (`langganan_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_langganan_premium: ~0 rows (lebih kurang)
@@ -186,54 +255,67 @@ CREATE TABLE IF NOT EXISTS `tbl_lowongan_pekerjaan` (
   `user_id` int(11) DEFAULT NULL,
   `jabatan_id` int(11) DEFAULT NULL,
   `lowongan_judul` varchar(250) DEFAULT NULL,
-  `lowongan_gaji` varchar(250) DEFAULT NULL,
+  `lowongan_gaji_min` varchar(250) DEFAULT NULL,
+  `lowongan_gaji_max` varchar(250) DEFAULT NULL,
+  `lowongan_gaji_secret` varchar(50) DEFAULT NULL,
   `lowongan_created_date` datetime DEFAULT NULL,
-  `lowongan_end_date` datetime DEFAULT NULL,
+  `lowongan_end_date` date DEFAULT NULL,
   `lowongan_updated_date` datetime DEFAULT NULL,
   `lowongan_deskripsi` text DEFAULT NULL,
   `lowongan_status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`lowongan_id`),
-  KEY `joblevel_id` (`joblevel_id`),
-  KEY `perusahaan_id` (`perusahaan_id`),
-  KEY `user_id` (`user_id`),
-  KEY `jabatan_id` (`jabatan_id`),
-  KEY `kategori_id` (`kategori_id`),
-  CONSTRAINT `tbl_lowongan_pekerjaan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_lowongan_pekerjaan_ibfk_2` FOREIGN KEY (`joblevel_id`) REFERENCES `tbl_master_level_job` (`joblevel_id`),
-  CONSTRAINT `tbl_lowongan_pekerjaan_ibfk_3` FOREIGN KEY (`kategori_id`) REFERENCES `tbl_master_kategori_job` (`kategori_id`),
-  CONSTRAINT `tbl_lowongan_pekerjaan_ibfk_4` FOREIGN KEY (`perusahaan_id`) REFERENCES `tbl_perusahaan` (`perusahaan_id`),
-  CONSTRAINT `tbl_lowongan_pekerjaan_ibfk_5` FOREIGN KEY (`jabatan_id`) REFERENCES `tbl_master_jabatan` (`jabatan_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  PRIMARY KEY (`lowongan_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_lowongan_pekerjaan: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_lowongan_pekerjaan: ~5 rows (lebih kurang)
+INSERT INTO `tbl_lowongan_pekerjaan` (`lowongan_id`, `joblevel_id`, `kategori_id`, `perusahaan_id`, `user_id`, `jabatan_id`, `lowongan_judul`, `lowongan_gaji_min`, `lowongan_gaji_max`, `lowongan_gaji_secret`, `lowongan_created_date`, `lowongan_end_date`, `lowongan_updated_date`, `lowongan_deskripsi`, `lowongan_status`) VALUES
+	(4, 22, 8, 1, 4, 5, 'Office Boy Magang', '3500000', '0', NULL, '2022-07-22 14:21:12', '2022-08-06', NULL, '<p>Kami Mencari Office Boy Yang Telaten</p><p><b style=""><font color="#000000" style="background-color: rgb(255, 255, 255);">&nbsp;Syarat :</font></b></p><p>Mempunyai Kendaraan Sendiri</p><p>Mempunyai Dua Mata</p><p>Mempunyai Sendal Swallow&nbsp;</p>', 1),
+	(5, 20, 9, 3, 32, 6, 'Junior IT Programmer', '8000000', '10000000', NULL, '2022-07-22 14:55:25', '2022-07-22', NULL, '<p>Kami Mencari Depelover Yang Dapat bekerja di bawah tekanan</p>', 1),
+	(6, 20, 1, 4, 33, 7, 'Digital Marketing', '1500000', '3000000', NULL, '2022-07-22 15:34:19', '2022-07-22', NULL, '<p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;">The ideal candidate will oversee the online marketing strategy for the organization by planning and executing digital marketing campaigns. This candidate will launch advertisements and create content to increase brand awareness. This candidate will have previous marketing experience and be able to monitor the company\'s social media presence.</p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: var(--artdeco-reset-base-font-size-hundred-percent); vertical-align: var(--artdeco-reset-base-vertical-align-baseline); background: var(--artdeco-reset-base-background-transparent); outline: var(--artdeco-reset-base-outline-zero); font-weight: var(--artdeco-reset-typography-font-weight-bold);"><br></span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: var(--artdeco-reset-base-font-size-hundred-percent); vertical-align: var(--artdeco-reset-base-vertical-align-baseline); background: var(--artdeco-reset-base-background-transparent); outline: var(--artdeco-reset-base-outline-zero);"><b>Responsibilities</b></span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent); text-align: left;">Design, maintain, and supply content for the organization\'s website</span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent); text-align: left;">Formulate strategies to build lasting digital connection with customers</span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent); text-align: left;">Monitor company presence on social media</span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent); text-align: left;">Launch advertisements to increase brand awareness</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><br style="box-sizing: inherit;"></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: var(--artdeco-reset-base-font-size-hundred-percent); vertical-align: var(--artdeco-reset-base-vertical-align-baseline); background: var(--artdeco-reset-base-background-transparent); outline: var(--artdeco-reset-base-outline-zero);"><b>Qualifications</b></span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">Bachelor\'s degree in Marketing or related field</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">at least 1-2 years in the same field</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">Excellent understanding of digital marketing concepts</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">Experience with business to customer social media and content generation</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">Strong creative and analytical skills</span></p>', 1),
+	(7, 20, 1, 5, 35, 7, 'Marketing Manager', '50000', '100000', NULL, '2022-07-27 20:27:22', '2022-09-27', NULL, '<p>Kami Mencari tim yang biasa aja&nbsp;</p>', 1),
+	(8, 20, 1, 3, 32, 9, 'Desain Grafis Full Time', '5000000', '0', NULL, '2022-08-02 14:22:04', '2022-08-27', NULL, '<p>Mencari Desain Graphis dengan wajah tampan dan memiliki saldo crypto $500</p>', 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_lowongan_skill
 CREATE TABLE IF NOT EXISTS `tbl_lowongan_skill` (
   `lowongan_skill_id` int(11) NOT NULL AUTO_INCREMENT,
   `lowongan_id` int(11) NOT NULL DEFAULT 0,
   `skill_id` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`lowongan_skill_id`),
-  KEY `lowongan_id` (`lowongan_id`),
-  KEY `skill_id` (`skill_id`),
-  CONSTRAINT `tbl_lowongan_skill_ibfk_1` FOREIGN KEY (`lowongan_id`) REFERENCES `tbl_lowongan_pekerjaan` (`lowongan_id`),
-  CONSTRAINT `tbl_lowongan_skill_ibfk_2` FOREIGN KEY (`skill_id`) REFERENCES `tbl_master_skill` (`skill_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  PRIMARY KEY (`lowongan_skill_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_lowongan_skill: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_lowongan_skill: ~18 rows (lebih kurang)
+INSERT INTO `tbl_lowongan_skill` (`lowongan_skill_id`, `lowongan_id`, `skill_id`) VALUES
+	(1, 4, 9),
+	(2, 5, 6),
+	(3, 5, 7),
+	(4, 5, 8),
+	(5, 5, 10),
+	(6, 6, 11),
+	(7, 6, 12),
+	(8, 6, 13),
+	(9, 6, 14),
+	(10, 6, 15),
+	(11, 7, 13),
+	(12, 7, 16),
+	(13, 7, 17),
+	(14, 8, 5),
+	(15, 8, 4),
+	(16, 8, 21),
+	(17, 8, 22),
+	(18, 8, 23);
 
 -- membuang struktur untuk table db_talent_hub.tbl_lowongan_tersimpan
 CREATE TABLE IF NOT EXISTS `tbl_lowongan_tersimpan` (
   `lowongan_tersimpan_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT 0,
   `lowongan_id` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`lowongan_tersimpan_id`),
-  KEY `user_id` (`user_id`),
-  KEY `lowongan_id` (`lowongan_id`),
-  CONSTRAINT `tbl_lowongan_tersimpan_ibfk_1` FOREIGN KEY (`lowongan_id`) REFERENCES `tbl_lowongan_pekerjaan` (`lowongan_id`),
-  CONSTRAINT `tbl_lowongan_tersimpan_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  PRIMARY KEY (`lowongan_tersimpan_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_lowongan_tersimpan: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_lowongan_tersimpan: ~3 rows (lebih kurang)
+INSERT INTO `tbl_lowongan_tersimpan` (`lowongan_tersimpan_id`, `user_id`, `lowongan_id`) VALUES
+	(11, 3, 6),
+	(12, 3, 7),
+	(14, 3, 5);
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_agama
 CREATE TABLE IF NOT EXISTS `tbl_master_agama` (
@@ -274,9 +356,9 @@ CREATE TABLE IF NOT EXISTS `tbl_master_jabatan` (
   `jabatan_nama` varchar(250) DEFAULT NULL,
   `jabatan_status` int(11) DEFAULT 1,
   PRIMARY KEY (`jabatan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_jabatan: ~8 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_jabatan: ~9 rows (lebih kurang)
 INSERT INTO `tbl_master_jabatan` (`jabatan_id`, `jabatan_nama`, `jabatan_status`) VALUES
 	(1, 'IT Staff', 1),
 	(2, 'IT Support', 1),
@@ -285,15 +367,15 @@ INSERT INTO `tbl_master_jabatan` (`jabatan_id`, `jabatan_nama`, `jabatan_status`
 	(5, 'Office Boy', 1),
 	(6, 'IT Programmer', 1),
 	(7, 'Digital Creative', 1),
-	(8, 'HRD', 1);
+	(8, 'HRD', 1),
+	(9, 'Desain Graphis', 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_kabkota
 CREATE TABLE IF NOT EXISTS `tbl_master_kabkota` (
   `prov_id` char(2) NOT NULL DEFAULT '0',
   `kabkota_nama` varchar(50) DEFAULT NULL,
   `kabkota_id` int(5) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`kabkota_id`),
-  KEY `prov_ID` (`prov_id`) USING BTREE
+  PRIMARY KEY (`kabkota_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=515 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_master_kabkota: ~514 rows (lebih kurang)
@@ -820,13 +902,19 @@ CREATE TABLE IF NOT EXISTS `tbl_master_kategori_job` (
   `kategori_status` int(11) DEFAULT NULL,
   `kategori_icon` text DEFAULT NULL,
   PRIMARY KEY (`kategori_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_kategori_job: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_kategori_job: ~9 rows (lebih kurang)
 INSERT INTO `tbl_master_kategori_job` (`kategori_id`, `kategori_nama`, `kategori_status`, `kategori_icon`) VALUES
-	(1, 'Design & Creative', 1, 'assets/img/icon_kategori/icon1657599869chatbubble.png'),
-	(2, 'Architecture', 1, 'assets/img/icon_kategori/icon1657602782logoraja.png'),
-	(3, 'Financial', 1, 'assets/img/icon_kategori/icon1657603009ig1.jpg');
+	(1, 'Design & Creative', 1, 'assets/img/icon_kategori/icon1658219053Vector500.svg'),
+	(2, 'Construction', 1, 'assets/img/icon_kategori/icon1658219085Vectorconst.svg'),
+	(3, 'Financial & Economic', 1, 'assets/img/icon_kategori/icon1658219098Vectorfinance.svg'),
+	(4, 'Real Estate', 1, 'assets/img/icon_kategori/icon1658301518Vectorre.svg'),
+	(5, 'Content Writer', 1, 'assets/img/icon_kategori/icon1658302486Vectorcw.svg'),
+	(6, 'Software Engineer', 1, 'assets/img/icon_kategori/icon1658302512Vectorse (1).svg'),
+	(7, 'Administrative', 1, 'assets/img/icon_kategori/icon1658302564Vectoradmin.svg'),
+	(8, 'Manufacturing', 1, 'assets/img/icon_kategori/icon1658302667Vectormf.svg'),
+	(9, 'News & Media', 1, 'assets/img/icon_kategori/icon1658301518Vectorre.svg');
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_level
 CREATE TABLE IF NOT EXISTS `tbl_master_level` (
@@ -890,8 +978,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_provinsi` (
   `prov_nama` varchar(50) DEFAULT NULL,
   `prov_Lat` varchar(25) NOT NULL,
   `prov_Long` varchar(25) NOT NULL,
-  PRIMARY KEY (`prov_id`) USING BTREE,
-  CONSTRAINT `tbl_master_provinsi_ibfk_1` FOREIGN KEY (`prov_id`) REFERENCES `tbl_master_kabkota` (`prov_id`)
+  PRIMARY KEY (`prov_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_master_provinsi: ~34 rows (lebih kurang)
@@ -937,15 +1024,30 @@ CREATE TABLE IF NOT EXISTS `tbl_master_skill` (
   `skill_nama` varchar(250) DEFAULT NULL,
   `skill_status` int(11) DEFAULT 1,
   PRIMARY KEY (`skill_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_skill: ~4 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_skill: ~20 rows (lebih kurang)
 INSERT INTO `tbl_master_skill` (`skill_id`, `skill_nama`, `skill_status`) VALUES
 	(4, 'Corel Draw', 1),
 	(5, 'Adobe Photoshop', 1),
 	(6, 'Codeigniter', 1),
 	(7, 'Java', 1),
-	(8, 'Python', 1);
+	(8, 'Python', 1),
+	(9, 'Maintenance Gedung', 1),
+	(10, 'C++', 1),
+	(11, 'SEO', 1),
+	(12, 'Google Ads Manager', 1),
+	(13, 'Creative Content Writing', 1),
+	(14, 'Facebook Ads', 1),
+	(15, 'Tiktok Ads', 1),
+	(16, 'Seo Analyst', 1),
+	(17, 'Tiktok Creator', 1),
+	(18, 'Hacking', 1),
+	(19, NULL, 1),
+	(20, NULL, 1),
+	(21, 'Adobe Illustrator', 1),
+	(22, 'Figma', 1),
+	(23, 'Adobe Premiere', 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_slider
 CREATE TABLE IF NOT EXISTS `tbl_master_slider` (
@@ -956,7 +1058,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_slider` (
   PRIMARY KEY (`slider_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_slider: ~4 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_slider: ~3 rows (lebih kurang)
 INSERT INTO `tbl_master_slider` (`slider_id`, `slider_gambar`, `slider_tipe`, `slider_status`) VALUES
 	(1, 'assets/img/slider/slider1657552714jobless.jpg', 'main', 1),
 	(2, 'assets/img/slider/slider1657553191cv_bg.jpg', 'cv', 1),
@@ -975,12 +1077,13 @@ CREATE TABLE IF NOT EXISTS `tbl_master_stp` (
   `stp_email` varchar(150) DEFAULT NULL,
   `stp_alamat` text DEFAULT NULL,
   `stp_tagline` text DEFAULT NULL,
+  `stp_brand_icon` text DEFAULT NULL,
   PRIMARY KEY (`stp_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_stp: ~0 rows (lebih kurang)
-INSERT INTO `tbl_master_stp` (`stp_id`, `stp_nama`, `stp_pemilik`, `stp_logo`, `stp_facebook`, `stp_instagram`, `stp_website`, `stp_telepon`, `stp_email`, `stp_alamat`, `stp_tagline`) VALUES
-	(2, 'Talent Hub', 'Solo Techno Park', 'assets/img/foto_stp/logo1657549008LOGO STP warna besar.png', '', '', '', '', '', '', '');
+-- Membuang data untuk tabel db_talent_hub.tbl_master_stp: ~1 rows (lebih kurang)
+INSERT INTO `tbl_master_stp` (`stp_id`, `stp_nama`, `stp_pemilik`, `stp_logo`, `stp_facebook`, `stp_instagram`, `stp_website`, `stp_telepon`, `stp_email`, `stp_alamat`, `stp_tagline`, `stp_brand_icon`) VALUES
+	(2, 'Talent Hub', 'Solo Techno Park', 'assets/img/foto_stp/logo1657549008LOGO STP warna besar.png', '', '', '', '', '', '', '', 'assets/img/foto_icon/icon1658986604logo apps.png');
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_user
 CREATE TABLE IF NOT EXISTS `tbl_master_user` (
@@ -989,6 +1092,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_user` (
   `user_nama` varchar(150) DEFAULT NULL,
   `user_password` varchar(150) DEFAULT NULL,
   `user_status` int(1) DEFAULT 1,
+  `perusahaan_id` int(11) DEFAULT 1,
   `user_level` int(1) DEFAULT NULL,
   `user_login_status` int(1) DEFAULT 0,
   `user_foto` text DEFAULT NULL,
@@ -996,16 +1100,22 @@ CREATE TABLE IF NOT EXISTS `tbl_master_user` (
   `user_updated_date` datetime DEFAULT NULL,
   `user_telepon` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE KEY `user_email` (`user_email`),
-  KEY `user_level` (`user_level`),
-  CONSTRAINT `tbl_master_user_ibfk_1` FOREIGN KEY (`user_level`) REFERENCES `tbl_master_level` (`level_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  UNIQUE KEY `user_email` (`user_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_user: ~2 rows (lebih kurang)
-INSERT INTO `tbl_master_user` (`user_id`, `user_email`, `user_nama`, `user_password`, `user_status`, `user_level`, `user_login_status`, `user_foto`, `user_created_date`, `user_updated_date`, `user_telepon`) VALUES
-	(1, 'athoxusdah@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978'),
-	(3, 'schemasumanta@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 2, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978'),
-	(4, 'athoxzoemanta@gmail.com', 'Super Door', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 3, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978');
+-- Membuang data untuk tabel db_talent_hub.tbl_master_user: ~11 rows (lebih kurang)
+INSERT INTO `tbl_master_user` (`user_id`, `user_email`, `user_nama`, `user_password`, `user_status`, `perusahaan_id`, `user_level`, `user_login_status`, `user_foto`, `user_created_date`, `user_updated_date`, `user_telepon`) VALUES
+	(1, 'athoxusdah@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 1, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978'),
+	(3, 'schemasumanta@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 1, 'assets/img/personnel_boy.png', '2022-06-28 11:14:54', NULL, '085921923978'),
+	(4, 'athoxzoemanta@gmail.com', 'Super Door', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 3, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978'),
+	(28, 'janu@gmail.com', 'Janu', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-07-20 08:11:11', NULL, '08787878787877'),
+	(31, 'jimy@gmail.com', 'Jimy', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-07-20 10:08:25', NULL, '0878787878'),
+	(32, 'metrotv212@gmail.com', 'MetrotvNews', '9dd4e461268c8034f5c8564e155c67a6', 1, 3, 3, 1, 'assets_admin/img/profile.svg', '2022-07-22 09:50:27', NULL, '0878787878'),
+	(33, 'suherman@gg.com', 'Suherman', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 4, 3, 0, 'assets_admin/img/profile.svg', '2022-07-22 10:27:03', NULL, '0879759878'),
+	(34, 'mayang@gmail.com', 'mayang', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-07-27 15:15:48', NULL, '08787878787'),
+	(35, 'mayang2@gmail.com', 'Hamdani', '21c2e59531c8710156d34a3c30ac81d5', 1, 5, 3, 0, 'assets_admin/img/profile.svg', '2022-07-27 15:17:23', NULL, '08787878'),
+	(36, 'asih_schema@gmail.com', 'Asih', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 10, 3, 0, 'assets_admin/img/profile.svg', '2022-08-02 09:25:06', NULL, '0898 0723 2633'),
+	(37, 'a@bcc.com', 'ucup2', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 11, 3, 0, 'assets_admin/img/profile.svg', '2022-08-03 14:43:33', NULL, '0858585858588');
 
 -- membuang struktur untuk table db_talent_hub.tbl_notifikasi
 CREATE TABLE IF NOT EXISTS `tbl_notifikasi` (
@@ -1014,11 +1124,7 @@ CREATE TABLE IF NOT EXISTS `tbl_notifikasi` (
   `notifikasi_penerima` int(11) DEFAULT NULL,
   `notifikasi_isi` text DEFAULT NULL,
   `notifikasi_tanggal` datetime DEFAULT NULL,
-  PRIMARY KEY (`notifikasi_id`),
-  KEY `notifikasi_pengirim` (`notifikasi_pengirim`),
-  KEY `notifikasi_penerima` (`notifikasi_penerima`),
-  CONSTRAINT `tbl_notifikasi_ibfk_1` FOREIGN KEY (`notifikasi_pengirim`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_notifikasi_ibfk_2` FOREIGN KEY (`notifikasi_penerima`) REFERENCES `tbl_master_user` (`user_id`)
+  PRIMARY KEY (`notifikasi_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_notifikasi: ~0 rows (lebih kurang)
@@ -1026,18 +1132,17 @@ CREATE TABLE IF NOT EXISTS `tbl_notifikasi` (
 -- membuang struktur untuk table db_talent_hub.tbl_pelamar_pekerjaan
 CREATE TABLE IF NOT EXISTS `tbl_pelamar_pekerjaan` (
   `lamaran_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
+  `pelamar_id` int(11) NOT NULL,
   `lowongan_id` int(11) NOT NULL,
   `lamaran_tanggal` datetime NOT NULL,
+  `lamaran_deskripsi` text NOT NULL,
   `lamaran_status` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`lamaran_id`) USING BTREE,
-  KEY `user_id` (`user_id`),
-  KEY `lowongan_id` (`lowongan_id`),
-  CONSTRAINT `tbl_pelamar_pekerjaan_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_pelamar_pekerjaan_ibfk_2` FOREIGN KEY (`lowongan_id`) REFERENCES `tbl_lowongan_pekerjaan` (`lowongan_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  PRIMARY KEY (`lamaran_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_pelamar_pekerjaan: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_pelamar_pekerjaan: ~1 rows (lebih kurang)
+INSERT INTO `tbl_pelamar_pekerjaan` (`lamaran_id`, `pelamar_id`, `lowongan_id`, `lamaran_tanggal`, `lamaran_deskripsi`, `lamaran_status`) VALUES
+	(2, 3, 7, '2022-08-05 18:56:39', 'Saya Seorang Pekerja Keras dan Berparas anggun', 0);
 
 -- membuang struktur untuk table db_talent_hub.tbl_pengalaman_resume
 CREATE TABLE IF NOT EXISTS `tbl_pengalaman_resume` (
@@ -1045,42 +1150,50 @@ CREATE TABLE IF NOT EXISTS `tbl_pengalaman_resume` (
   `user_id` int(11) NOT NULL,
   `perusahaan_id` int(11) NOT NULL,
   `joblevel_id` int(11) NOT NULL,
-  `pengalaman_deskripsi` text NOT NULL,
+  `pengalaman_deskripsi` text DEFAULT NULL,
   `jabatan_id` int(11) NOT NULL DEFAULT 0,
-  `pengalaman_tahun_awal` int(5) NOT NULL,
-  `pengalaman_tahun_akhir` int(5) NOT NULL,
-  PRIMARY KEY (`pengalaman_id`),
-  KEY `perusahaan_id` (`perusahaan_id`),
-  KEY `joblevel_id` (`joblevel_id`),
-  KEY `user_id` (`user_id`),
-  KEY `jabatan_id` (`jabatan_id`),
-  CONSTRAINT `tbl_pengalaman_resume_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_pengalaman_resume_ibfk_2` FOREIGN KEY (`perusahaan_id`) REFERENCES `tbl_perusahaan` (`perusahaan_id`),
-  CONSTRAINT `tbl_pengalaman_resume_ibfk_3` FOREIGN KEY (`joblevel_id`) REFERENCES `tbl_master_level_job` (`joblevel_id`),
-  CONSTRAINT `tbl_pengalaman_resume_ibfk_4` FOREIGN KEY (`jabatan_id`) REFERENCES `tbl_master_jabatan` (`jabatan_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  `pengalaman_tanggal_awal` date DEFAULT NULL,
+  `pengalaman_tanggal_akhir` date DEFAULT NULL,
+  `masih_bekerja` int(11) DEFAULT 0,
+  PRIMARY KEY (`pengalaman_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_pengalaman_resume: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_pengalaman_resume: ~4 rows (lebih kurang)
+INSERT INTO `tbl_pengalaman_resume` (`pengalaman_id`, `user_id`, `perusahaan_id`, `joblevel_id`, `pengalaman_deskripsi`, `jabatan_id`, `pengalaman_tanggal_awal`, `pengalaman_tanggal_akhir`, `masih_bekerja`) VALUES
+	(1, 3, 3, 1, 'Mencari rejeki', 1, '0000-00-00', '0000-00-00', 0),
+	(2, 3, 6, 15, '<p>Maintenance Komputer dan Jaringan</p>', 2, '2022-08-01', '2022-08-01', NULL),
+	(3, 3, 7, 18, '<p>Menjadi Sales Pemasaran yang sholehah dan penyendiri</p>', 1, '2022-01-02', NULL, 1),
+	(5, 3, 9, 22, '<p>Membersihkan tempat tidurku</p><p>bantal guling bau ompol</p>', 5, '2022-08-02', NULL, 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_perusahaan
 CREATE TABLE IF NOT EXISTS `tbl_perusahaan` (
   `perusahaan_id` int(11) NOT NULL AUTO_INCREMENT,
   `perusahaan_nama` varchar(250) NOT NULL DEFAULT '0',
-  `perusahaan_prov` char(2) NOT NULL DEFAULT '0',
-  `perusahaan_kabkota` int(5) NOT NULL DEFAULT 0,
-  `perusahaan_alamat` text NOT NULL,
-  `perusahaan_telepon` varchar(150) NOT NULL DEFAULT '',
-  `perusahaan_email` varchar(150) NOT NULL DEFAULT '',
-  `perusahaan_website` varchar(250) NOT NULL DEFAULT '',
-  `perusahaan_jml_karyawan` int(11) NOT NULL,
-  `perusahaan_logo` text NOT NULL,
-  PRIMARY KEY (`perusahaan_id`),
-  KEY `perusahaan_prov` (`perusahaan_prov`),
-  KEY `perusahaan_kabkota` (`perusahaan_kabkota`),
-  CONSTRAINT `tbl_perusahaan_ibfk_1` FOREIGN KEY (`perusahaan_kabkota`) REFERENCES `tbl_master_kabkota` (`kabkota_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  `perusahaan_sambutan` text NOT NULL,
+  `perusahaan_prov` char(2) DEFAULT '0',
+  `perusahaan_kabkota` int(5) DEFAULT 0,
+  `perusahaan_alamat` text DEFAULT NULL,
+  `perusahaan_telepon` varchar(150) DEFAULT '',
+  `perusahaan_email` varchar(150) DEFAULT '',
+  `perusahaan_website` varchar(250) DEFAULT '',
+  `perusahaan_jml_karyawan` int(11) DEFAULT NULL,
+  `perusahaan_logo` text DEFAULT NULL,
+  `perusahaan_sampul` text DEFAULT NULL,
+  PRIMARY KEY (`perusahaan_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_perusahaan: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_perusahaan: ~10 rows (lebih kurang)
+INSERT INTO `tbl_perusahaan` (`perusahaan_id`, `perusahaan_nama`, `perusahaan_sambutan`, `perusahaan_prov`, `perusahaan_kabkota`, `perusahaan_alamat`, `perusahaan_telepon`, `perusahaan_email`, `perusahaan_website`, `perusahaan_jml_karyawan`, `perusahaan_logo`, `perusahaan_sampul`) VALUES
+	(1, 'PT KEBUN SAWIT', '', 'BT', 50, 'Jl. Sunan Giri No 18L\r\nRangkasbitung - Banten', '0215212562367', 'a@b.com', 'www.mantaapps.com', 250, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658427796260stempel%20clear.png?alt=media&token=373dc453-7ca3-4a6d-bbf9-fe13128a6bfd', NULL),
+	(3, 'PT. Metro News TV', '', 'JK', 142, 'Jl. Kapten Pierre Tendean No. 57 Gambir', '0215212562367', 'a@b.com', 'www.metrotv.com', 5000, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658476416689Metro%20TV.png?alt=media&token=9b7b1416-45e6-4e0f-b224-88aa10972661', NULL),
+	(4, 'MANTA APPS', 'Perusahaan yang dibidang Jasa Pemesanan Pesawat Pesiar dan Pesaing Terberat Hollywoods yang terevakuasi dengan integritas yang solid dan dominan dalam kesenjangan sosial', 'JT', 179, 'Jl. Malioboro 27 Blok F29 Solo', '0215212562367', 'a@b.com', 'www.mantaapps.com', 50, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658478597932MANTAAPPS.png?alt=media&token=e4fc698d-d1b8-498d-8001-c37fc9e6a1f0', NULL),
+	(5, 'PT UNTUNG RUGI', 'Kami bergerak cepat seperti KRL dan MRT', 'BA', 25, 'Jl. Tani No 99 Namek', '', '', '', 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658928070274pngtree-vector-illustration-lovely-mother-png-image_1115780.jpg?alt=media&token=eb071e0a-76bd-4034-a85c-48c4ce452ccf', NULL),
+	(6, 'Super Door', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
+	(7, 'PT. Super Teknik', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
+	(8, 'PT. AbyNET', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
+	(9, 'PT. Raja Pintu Baja', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
+	(10, 'PT. Super Teknik', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
+	(11, 'PT SLEBEW', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL);
 
 -- membuang struktur untuk table db_talent_hub.tbl_premium
 CREATE TABLE IF NOT EXISTS `tbl_premium` (
@@ -1100,11 +1213,7 @@ CREATE TABLE IF NOT EXISTS `tbl_report` (
   `report_keterangan` text NOT NULL,
   `report_tanggal` datetime NOT NULL,
   `report_status` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`report_id`) USING BTREE,
-  KEY `reporter` (`reporter`),
-  KEY `reported` (`reported`),
-  CONSTRAINT `tbl_report_ibfk_1` FOREIGN KEY (`reporter`) REFERENCES `tbl_master_user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `tbl_report_ibfk_2` FOREIGN KEY (`reported`) REFERENCES `tbl_perusahaan` (`perusahaan_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`report_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_report: ~0 rows (lebih kurang)
@@ -1118,28 +1227,22 @@ CREATE TABLE IF NOT EXISTS `tbl_resume` (
   `kabkota_id` int(5) DEFAULT NULL,
   `agama_id` int(11) DEFAULT NULL,
   `resume_nama_pendidikan_terakhir` varchar(250) DEFAULT NULL,
-  `resume_pendididkan_tahun_lulus` int(5) DEFAULT NULL,
+  `resume_pendidikan_tahun_lulus` varchar(4) DEFAULT NULL,
   `resume_nama_lengkap` varchar(250) DEFAULT NULL,
   `resume_foto` text DEFAULT NULL,
-  `resume_nik` int(12) DEFAULT NULL,
+  `resume_about` text DEFAULT NULL,
+  `resume_nik` varchar(16) DEFAULT NULL,
   `resume_alamat_lengkap` text DEFAULT NULL,
   `resume_jenis_kelamin` char(2) DEFAULT NULL,
   `resume_tempat_lahir` varchar(150) DEFAULT NULL,
   `resume_tanggal_lahir` date DEFAULT NULL,
   `resume_created_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`resume_id`),
-  KEY `user_id` (`user_id`),
-  KEY `pendidikan_id` (`pendidikan_id`),
-  KEY `agama_id` (`agama_id`),
-  KEY `prov_id` (`prov_id`),
-  KEY `kabkota_id` (`kabkota_id`),
-  CONSTRAINT `tbl_resume_ibfk_1` FOREIGN KEY (`agama_id`) REFERENCES `tbl_master_agama` (`agama_id`),
-  CONSTRAINT `tbl_resume_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_resume_ibfk_3` FOREIGN KEY (`pendidikan_id`) REFERENCES `tbl_master_pendidikan` (`pendidikan_id`),
-  CONSTRAINT `tbl_resume_ibfk_4` FOREIGN KEY (`kabkota_id`) REFERENCES `tbl_master_kabkota` (`kabkota_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  PRIMARY KEY (`resume_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_resume: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_resume: ~1 rows (lebih kurang)
+INSERT INTO `tbl_resume` (`resume_id`, `user_id`, `pendidikan_id`, `prov_id`, `kabkota_id`, `agama_id`, `resume_nama_pendidikan_terakhir`, `resume_pendidikan_tahun_lulus`, `resume_nama_lengkap`, `resume_foto`, `resume_about`, `resume_nik`, `resume_alamat_lengkap`, `resume_jenis_kelamin`, `resume_tempat_lahir`, `resume_tanggal_lahir`, `resume_created_date`) VALUES
+	(4, 3, 3, 'BT', 50, 1, 'SMK Mulia Hati Insani', '2013', 'Sumanta', 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fcv%2FPas%20Photo%20merah%20sumanta.JPG?alt=media&token=8682bcd4-c467-4f3e-b6fe-bc3977540d70', '<p>Saya seorang pekerja keras yang memiliki otak seperti RUCIKA yang kepintarannya mengalir sampai jauh. dan juga seperti tepung bumbu yang harus SERBAGUNA</p>', '3602240704950004', 'Jl. Sunan Giri No. 18L Rangkasbitung', 'L', 'Lebak', '1995-08-08', '2022-07-26 14:02:02');
 
 -- membuang struktur untuk table db_talent_hub.tbl_resume_lampiran
 CREATE TABLE IF NOT EXISTS `tbl_resume_lampiran` (
@@ -1148,11 +1251,11 @@ CREATE TABLE IF NOT EXISTS `tbl_resume_lampiran` (
   `resume_lampiran` text DEFAULT NULL,
   `lampiran_created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`lampiran_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
--- Membuang data untuk tabel db_talent_hub.tbl_resume_lampiran: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_resume_lampiran: ~1 rows (lebih kurang)
 INSERT INTO `tbl_resume_lampiran` (`lampiran_id`, `user_id`, `resume_lampiran`, `lampiran_created_date`) VALUES
-	(6, 3, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fcv%2Fseeker.jpg?alt=media&token=a4469f8a-f17b-4623-aece-7eebb356acc3', '2022-07-18 17:37:14');
+	(14, 3, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fcv%2FSERTIFIKAT%20MAGANG%20NOVI.pdf?alt=media&token=bb5f12b6-59d0-40f0-ba19-45cbd55229fe', '2022-08-05 15:54:01');
 
 -- membuang struktur untuk table db_talent_hub.tbl_skill_level
 CREATE TABLE IF NOT EXISTS `tbl_skill_level` (
@@ -1160,13 +1263,14 @@ CREATE TABLE IF NOT EXISTS `tbl_skill_level` (
   `skill_level_nama` varchar(250) DEFAULT NULL,
   `skill_level_status` int(11) DEFAULT NULL,
   PRIMARY KEY (`skill_level_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_skill_level: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_skill_level: ~4 rows (lebih kurang)
 INSERT INTO `tbl_skill_level` (`skill_level_id`, `skill_level_nama`, `skill_level_status`) VALUES
 	(1, 'Beginner', 1),
 	(2, 'Intermediate', 1),
-	(3, 'Professional', 1);
+	(3, 'Advance', 1),
+	(4, 'Professional', 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_skill_resume
 CREATE TABLE IF NOT EXISTS `tbl_skill_resume` (
@@ -1174,41 +1278,34 @@ CREATE TABLE IF NOT EXISTS `tbl_skill_resume` (
   `skill_id` int(11) NOT NULL DEFAULT 0,
   `user_id` int(11) NOT NULL DEFAULT 0,
   `skill_level_id` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`skill_resume_id`),
-  KEY `skill_id` (`skill_id`),
-  KEY `user_id` (`user_id`),
-  KEY `skill_level_id` (`skill_level_id`),
-  CONSTRAINT `tbl_skill_resume_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`),
-  CONSTRAINT `tbl_skill_resume_ibfk_2` FOREIGN KEY (`skill_level_id`) REFERENCES `tbl_skill_level` (`skill_level_id`),
-  CONSTRAINT `tbl_skill_resume_ibfk_3` FOREIGN KEY (`skill_id`) REFERENCES `tbl_master_skill` (`skill_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+  PRIMARY KEY (`skill_resume_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_skill_resume: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_skill_resume: ~2 rows (lebih kurang)
+INSERT INTO `tbl_skill_resume` (`skill_resume_id`, `skill_id`, `user_id`, `skill_level_id`) VALUES
+	(20, 4, 3, 4),
+	(21, 5, 3, 3);
 
 -- membuang struktur untuk table db_talent_hub.tbl_subscribe
 CREATE TABLE IF NOT EXISTS `tbl_subscribe` (
   `subscribe_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `subscribe_status` int(11) NOT NULL,
-  PRIMARY KEY (`subscribe_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `tbl_subscribe_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`)
+  PRIMARY KEY (`subscribe_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_subscribe: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table db_talent_hub.tbl_token
 CREATE TABLE IF NOT EXISTS `tbl_token` (
-  `token_id` int(11) NOT NULL,
+  `token_id` int(11) NOT NULL AUTO_INCREMENT,
   `token_isi` varchar(150) DEFAULT NULL,
   `token_expired_date` datetime DEFAULT NULL,
-  `token_keterangan` datetime DEFAULT NULL,
+  `token_keterangan` text DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`token_id`),
-  UNIQUE KEY `token_isi` (`token_isi`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `tbl_token_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_master_user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y ';
+  UNIQUE KEY `token_isi` (`token_isi`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COMMENT='Y ';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_token: ~0 rows (lebih kurang)
 

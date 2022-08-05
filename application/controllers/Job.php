@@ -46,7 +46,33 @@ class Job extends CI_Controller {
 		
 	}
 
+	public function simpan_lamaran()
+	{
+		$lamaran = array(
+			'pelamar_id' 		=>$this->session->user_id, 
+			'lowongan_id' 		=>$this->input->post('lowongan_id'),
+			'lamaran_deskripsi' =>$this->input->post('lamaran_deskripsi'),
+			'lamaran_tanggal'	=>date('Y-m-d H:i:s'),
+			'Lamaran_status'		=>"In Review",
+		);
 
+		$simpan = $this->db->insert('tbl_pelamar_pekerjaan',$lamaran);
+
+		if ($simpan) {
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'Lamaran Berhasil Dikirim!';
+			$data['icon'] = 'success';
+
+		}else{
+
+			$data['title'] = 'Gagal';
+			$data['text'] = 'Lowongan Gagal Dikirim!';
+			$data['icon'] = 'error';
+		}
+
+		$this->session->set_flashdata($data);
+		redirect('job/detail/'.$this->input->post('lowongan_id'),'refresh');
+	}
 	public function simpan_post()
 	{
 		// cek and tambah kategori
@@ -195,6 +221,10 @@ class Job extends CI_Controller {
 	{
 		$data ['stp'] = $this->db->get('tbl_master_stp')->result();
 
+		$this->db->where('pelamar_id',$this->session->user_id);
+		$this->db->where('lowongan_id',$id);
+		$data['lamaran']=$this->db->get('tbl_pelamar_pekerjaan')->num_rows();
+
 		$this->db->where('a.lowongan_id',$id);
 		$this->db->join('tbl_perusahaan b','b.perusahaan_id=a.perusahaan_id');
 		$this->db->join('tbl_master_kategori_job c','c.kategori_id=a.kategori_id');
@@ -212,6 +242,19 @@ class Job extends CI_Controller {
 		$this->load->view('web/header',$data);
 
 		$this->load->view('job/tampilan_detail_job',$data);
+
+		$this->load->view('web/script_include',$data);
+		
+	}
+
+	public function job_listing()
+	{
+		$data ['stp'] = $this->db->get('tbl_master_stp')->result();
+
+
+		$this->load->view('web/header',$data);
+
+		$this->load->view('job/tampilan_job_listing',$data);
 
 		$this->load->view('web/script_include',$data);
 		

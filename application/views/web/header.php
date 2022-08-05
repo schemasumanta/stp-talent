@@ -113,7 +113,7 @@
                       <nav class="d-none d-lg-block">
                         <ul id="navigation">
                           <li><a href="<?php echo base_url() ?>">Home</a></li>
-                          <li><a href="job_listing.html">Find a Jobs </a></li>
+                          <li><a href="<?php echo base_url('job/job_listing') ?>">Find a Jobs </a></li>
                           <li><a href="about.html">About</a></li>
                           <li>
                             <a href="#">Page</a>

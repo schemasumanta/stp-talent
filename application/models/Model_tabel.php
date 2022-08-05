@@ -110,7 +110,36 @@ class Model_tabel extends CI_Model {
             
             break;
 
+              case 'job_posting_all':
+            $this->db->select('
+                a.*,
+                c.perusahaan_nama,
+                c.perusahaan_logo,
+                d.prov_nama,
+                e.kabkota_nama,
+                f.kategori_nama,
+                ');
+            $this->db->join('tbl_perusahaan c','c.perusahaan_id=a.perusahaan_id');
+            $this->db->join('tbl_master_provinsi d','d.prov_id=c.perusahaan_prov');
+            $this->db->join('tbl_master_kabkota e','e.kabkota_id=c.perusahaan_kabkota');
+            $this->db->join('tbl_master_kategori_job f','f.kategori_id=a.kategori_id');
+            $this->db->from('tbl_lowongan_pekerjaan a');
+            if($_GET['order'][0]['column'] == 0)
+            {
+                $this->db->order_by('a.lowongan_id',$order);
+            }else{
+                $this->db->order_by($sort,$order);
+            }
 
+            if ($search!=null && $search!='') {
+                $this->db->like('a.lowongan_judul',$search);
+                $this->db->or_like('a.lowongan_deskripsi',$search);
+                $this->db->or_like('e.kabkota_nama',$search);
+                $this->db->or_like('d.prov_nama',$search);
+                $this->db->or_like('f.kategori_nama',$search);
+            }
+            
+            break;
 
 
 
@@ -193,18 +222,26 @@ class Model_tabel extends CI_Model {
             $this->db->from('tbl_master_user a');
             $this->db->where('a.user_level',3);
             $this->db->join('tbl_master_level b','b.level_id=a.user_level');
-
             if($_GET['order'][0]['column'] == 0)
             {
                 $this->db->order_by('a.user_nama',$order);
             }else{
                 $this->db->order_by($sort,$order);
             }
+
             if ($search!=null && $search!='') {
                 $this->db->like('a.user_nama',$search);
+                $this->db->where('a.user_level',3);
+
                 $this->db->or_like('a.user_email',$search);
+                $this->db->where('a.user_level',3);
+
                 $this->db->or_like('a.user_telepon',$search);
+                $this->db->where('a.user_level',3);
+
                 $this->db->or_like('b.level_nama',$search);
+                $this->db->where('a.user_level',3);
+                
             }
             
             break;
@@ -223,9 +260,17 @@ class Model_tabel extends CI_Model {
             }
             if ($search!=null && $search!='') {
                 $this->db->like('a.user_nama',$search);
+                $this->db->where('a.user_level',2);
+
                 $this->db->or_like('a.user_email',$search);
+                $this->db->where('a.user_level',2);
+
                 $this->db->or_like('a.user_telepon',$search);
+                $this->db->where('a.user_level',2);
+
                 $this->db->or_like('b.level_nama',$search);
+                $this->db->where('a.user_level',2);
+                
             }
             
             break;

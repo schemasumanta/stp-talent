@@ -6,17 +6,13 @@ class Provider extends CI_Controller {
 	
 	public function index()
 	{
-
 		$this->db->where('slider_tipe','main');
 		$this->db->where('slider_status',1);
 		$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
-
 		$this->db->where('kategori_status',1);
 		$this->db->limit(8);
 		$this->db->order_by('kategori_nama','asc');
-
 		$data['kategori_job'] = $this->db->get('tbl_master_kategori_job')->result();
-
 		$this->db->where('slider_tipe','cv');
 		$this->db->where('slider_status',1);
 		$data['slider_cv'] = $this->db->get('tbl_master_slider')->result();
@@ -28,10 +24,24 @@ class Provider extends CI_Controller {
 			$this->load->view('web/header',$data);
 			$this->load->view('provider/tampilan_login',$data);
 			$this->load->view('web/script_include',$data);
-
 		}else{
 			redirect('provider/dashboard','refresh');
 		}
+	}
+	public function company()
+	{
+		$this->db->where('a.perusahaan_id',$this->session->perusahaan_id);
+		$this->db->join('tbl_master_provinsi b','b.prov_id=a.perusahaan_prov');
+		$this->db->join('tbl_master_kabkota c','c.kabkota_id=a.perusahaan_kabkota');
+
+		$data['perusahaan'] = $this->db->get('tbl_perusahaan a')->result();
+
+		$data ['stp'] = $this->db->get('tbl_master_stp')->result();
+
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar'); 
+		$this->load->view('provider/tampilan_perusahaan',$data);
+		$this->load->view('templates/footer');
 	}
 
 	public function ubah_perusahaan()

@@ -111,10 +111,10 @@ $sub_active=$this->uri->segment(2);
 
             <li class="nav-item 
 
-            <?php if($active=="cv" && $sub_active=="" ){
+            <?php if($active=="provider" && $sub_active=="company" ){
                 echo "active";
             } ?> ">
-            <a class="nav-link" href="<?php echo base_url('cv') ?>">
+            <a class="nav-link" href="<?php echo base_url('provider/company') ?>">
                 <i class="fas fa-fw fa-building mr-2"></i><span>My Company</span>
             </a>
 

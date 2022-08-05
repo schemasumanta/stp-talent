@@ -7,7 +7,7 @@ class Cv extends CI_Controller {
 	{
 		parent::__construct();
 		if ($this->session->userdata('login')==FALSE) {
-			redirect('seeker','refresh');
+			redirect('landing/login','refresh');
 		}
 		date_default_timezone_set('Asia/Jakarta');	
 	}
@@ -18,8 +18,6 @@ class Cv extends CI_Controller {
 		$this->db->select('a.resume_about');
 		$this->db->where('a.user_id',$this->session->user_id);
 		$data['about'] = $this->db->get('tbl_resume a')->result();
-
-
 		$this->db->where('a.user_id',$this->session->user_id);
 		$this->db->join('tbl_master_agama b','b.agama_id=a.agama_id','left');
 		$this->db->join('tbl_master_pendidikan c','c.pendidikan_id=a.pendidikan_id','left');

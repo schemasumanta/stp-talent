@@ -1,5 +1,5 @@
 
-<div class="container-fluid">
+<div class="container-fluid flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
 
   <h1 class="h3 mb-2 text-gray-800">Job Provider</h1>
   <p class="mb-4"></p>
@@ -97,7 +97,7 @@
   ],   
   columnDefs: [
   {
-    targets: [0,4,-1],
+    targets: [0,5,6,-1],
     className: 'text-center'
   },
   ]
@@ -147,7 +147,7 @@
   $('#btn_aktivasi').on('click',function(){
     var kode=$('#kode_user_aktivasi').val();
     var isi=$('#isi_aktivasi').val();
-
+    alert(kode);
     $.ajax({
       type : "POST",
       url  : "<?php echo base_url('user/aktivasi_user')?>",
@@ -164,7 +164,7 @@
           Swal.fire({
             title:'Berhasil',
 
-            text:'User Berhasil Di '+ pesan,
+            text:'Job Provider Berhasil Di '+ pesan,
             icon:'success'
           }).then((result) => {
             if (result.isConfirmed) {
@@ -185,11 +185,11 @@
 
   $('#show_data').on('click','.item_aktivasi_user',function(){
     if ($(this).html().includes('check')) {
-      $('.notif_aktivasi').html('Aktifkan User... ?');
+      $('.notif_aktivasi').html('Aktifkan Job Provider... ?');
       $('#isi_aktivasi').val(1);
 
     }else{
-      $('.notif_aktivasi').html('Nonaktifkan User... ?');
+      $('.notif_aktivasi').html('Nonaktifkan Job Provider... ?');
       $('#isi_aktivasi').val(0);
     }
 
@@ -502,10 +502,27 @@ $.ajax({
 });
 
 });
-
-
-
 </script>
+<div class="modal fade" data-backdrop="static" id="ModalAktivasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-light">
+       <h3 class="modal-title" id="myModalLabel" style=" font: sans-serif; "><i class="fas fa-users mr-2"></i> Status User</h3>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
 
+     </div>
+     <form class="form-horizontal" method="post" action="<?php echo base_url('user/aktivasi_job_provider') ?>">
+      <div class="modal-body">
+        <input type="hidden" name="kode_user_aktivasi" id="kode_user_aktivasi" value=""> 
+        <input type="hidden" name="isi_aktivasi" id="isi_aktivasi" value="">  
+        <div class="alert alert-danger"><p class="notif_aktivasi"></p></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-flat mr-2" data-dismiss="modal"><i class="far fa-times-circle mr-2"></i> Batal</button>
+        <button type="submit" class="btn_aktivasi btn btn-success btn-flat" id="btn_aktivasi"><i class="fas fa-check mr-2"></i>YA</button>
+      </div>
 
-
+    </form>
+  </div>
+</div>
+</div>

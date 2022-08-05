@@ -102,7 +102,7 @@
   ],   
   columnDefs: [
   {
-    targets: [0,4,-1],
+    targets: [0,5,6,-1],
     className: 'text-center'
   },
   ]

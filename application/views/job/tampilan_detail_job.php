@@ -27,14 +27,13 @@
     <!-- Hero Area End -->
     <!-- job post company Start -->
     <div class="job-post-company pt-120 pb-120">
-      <div class="container">
+      <div class="container flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
         <div class="row ">
           <!-- Left Content -->
           <div class="col-xl-7 col-lg-8">
             <!-- job single -->
             <div class="single-job-items mb-50">
               <div class="job-items">
-
                 <div class="job-tittle">
                   <?php if (!$this->session->login) { ?>
                    <a
@@ -152,8 +151,16 @@
 
               <div class="apply-btn2 btn-group w-100">
                 <?php if ($this->session->login) { ?>
+                  <?php if($this->session->user_level==2){ ?>
+                    <?php if ($lamaran==0) { ?>
+                      
                   <a href="javascript:;" class="genric-btn2 danger large w-50 btn_apply" data-lowongan="<?php echo $job->lowongan_id ?>" data-perusahaan="<?php echo $job->perusahaan_nama ?>">Apply Now</a>
+                    <?php }else{ ?>
+                      <a href="javascript:;" class="genric-btn2 danger large w-50 applied" disabled><i class="fas fa-check mr-2"></i>Applied</a>
+                    <?php } ?>
+
                   <a href="<?php echo base_url() ?>chat/index/<?php echo $job->user_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+                <?php } ?>
                 <?php  }else{ ?>
                   <a href="<?php echo base_url() ?>landing/login/<?php echo $job->lowongan_id ?>" class="genric-btn2 danger large w-50">Apply Now</a>
                   <a href="<?php echo base_url() ?>landing/login/<?php echo $job->lowongan_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
@@ -208,9 +215,6 @@
   </div>
 </div>
 <?php endforeach ?>
-
-
-
 <div class="modal fade" data-backdrop="static" id="ModalLamaran" tabindex="-1" role="dialog" aria-labelledby="ModalLamaranLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" >
@@ -222,11 +226,10 @@
       </div>
       <div class="modal-body">
        <div class="row "> 
-        
        <div class="col-md-12"> 
          <label style="color:#343a40;" for="lamaran_deskripsi">Tentang Anda</label>
          <input type="hidden" name="lowongan_id" id="lowongan_id">
-         <textarea type="text" class="form-control" id="lamaran_deskripsi"  name="lamaran_deskripsi" required rows="5" placeholder="Berikan informasi terkait keahlian anda untuk pekerjaan ini"></textarea>
+         <textarea type="text" class="form-control" id="lamaran_deskripsi"  name="lamaran_deskripsi" rows="5" placeholder="Berikan informasi terkait keahlian anda untuk pekerjaan ini"></textarea>
          <small class="error-lamaran_deskripsi text-danger"></small>
        </div>
      </div>
@@ -234,8 +237,8 @@
    <div class="modal-footer">
     <div class=" row"class="collapse" id="customer_collapse">
       <div class="col-sm-12 float-right">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" style="border-radius: 0px;" >Tutup</button>
-        <button type="button" class="btn btn-success" style="border-radius: 0px" id="btn_simpan_biodata">Simpan</button>
+        <button type="button" class="genric-btn rounded large danger" data-dismiss="modal" style="border-radius: 0px;" >Tutup</button>
+        <button type="submit" class="genric-btn rounded large primary" style="border-radius: 0px" id="btn_melamar">Lamar</button>
       </div>
     </div>
   </div>
@@ -245,6 +248,25 @@
 </div> 
 </main>
 <script type="text/javascript">
+
+  $(document).ready(function(){
+
+   const notif = $('.flashdatart').data('title');
+   if (notif) {
+    Swal.fire({
+      title:notif,
+      text:$('.flashdatart').data('text'),
+      icon:$('.flashdatart').data('icon'),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.close(); 
+
+      }
+    });
+  }
+
+
+});
   $('.item_bookmark').on('click',function(e){
     e.preventDefault();
     let job = $(this).data('job');

@@ -10,33 +10,33 @@
         <div class="col-md-12 mb-4">
           <h6 class="m-0 font-weight-bold text-primary">Data User Job Seeker</h6>
         </div>
-     </div>
-   </div>
-   <div class="card-body">
-    <div class="table-responsive">
-     <table  id="tabel_job_seeker"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
-      <thead>
-        <tr class="bg-danger text-light text-center">
-          <th>No</th>
-          <th >Nama Lengkap</th>
-          <th >Email</th>
-          <th >Level</th>
-          <th >Telepon</th>
-          <th >Foto</th>
-          <th >Status</th>
-          <th style="text-align: center;" width="10%" >Opsi</th>
-        </tr>
-      </thead>
-      <tbody id="show_data">
-      </tbody>
-    </table>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+       <table  id="tabel_job_seeker"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
+        <thead>
+          <tr class="bg-danger text-light text-center">
+            <th>No</th>
+            <th >Nama Lengkap</th>
+            <th >Email</th>
+            <th >Level</th>
+            <th >Telepon</th>
+            <th >Foto</th>
+            <th >Status</th>
+            <th style="text-align: center;" width="10%" >Opsi</th>
+          </tr>
+        </thead>
+        <tbody id="show_data">
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 </div>
 
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
+  $(document).ready(function(){
    const notif = $('.flashdatart').data('title');
    if (notif) {
     Swal.fire({
@@ -50,7 +50,6 @@
       }
     });
   }
-
   dataTable = $('#tabel_job_seeker').DataTable( {
     paginationType:'full_numbers',
     processing: true,
@@ -83,7 +82,6 @@
       sLast: '>>'
     }
   },
-  // order: [1, 'asc'],
   columns: [
   {'data':'no'},
   {'data':'user_nama'},
@@ -97,7 +95,7 @@
   ],   
   columnDefs: [
   {
-    targets: [0,4,-1],
+    targets: [0,5,6,-1],
     className: 'text-center'
   },
   ]
@@ -185,11 +183,11 @@
 
   $('#show_data').on('click','.item_aktivasi_user',function(){
     if ($(this).html().includes('check')) {
-      $('.notif_aktivasi').html('Aktifkan User... ?');
+      $('.notif_aktivasi').html('Aktifkan Job Seeker... ?');
       $('#isi_aktivasi').val(1);
 
     }else{
-      $('.notif_aktivasi').html('Nonaktifkan User... ?');
+      $('.notif_aktivasi').html('Nonaktifkan Job Seeker... ?');
       $('#isi_aktivasi').val(0);
     }
 
@@ -257,12 +255,12 @@
   });
 
 
-function hanyaAngka(event) {
-  var angka = (event.which) ? event.which : event.keyCode
-  if (angka != 46 && angka != 8 && angka > 31 && (angka < 48 || angka > 57))
-    return false;
-  return true;
-}
+  function hanyaAngka(event) {
+    var angka = (event.which) ? event.which : event.keyCode
+    if (angka != 46 && angka != 8 && angka > 31 && (angka < 48 || angka > 57))
+      return false;
+    return true;
+  }
 
 
   $('#btn_ubah_password').on('click',function(){
@@ -370,7 +368,7 @@ function hanyaAngka(event) {
 
 
 
-     let user_level = $('#user_level').val();
+    let user_level = $('#user_level').val();
     if (user_level==null) {
      $('#user_level').focus();
      Swal.fire({
@@ -386,18 +384,18 @@ function hanyaAngka(event) {
   }
   let user_email = $('#user_email').val();
   if (user_email=="") {
-      $('#user_email').focus();
-      Swal.fire({
-        title:'Email Kosong',
-        text:'Silahkan Masukkan Email!',
-        icon:'error'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.close();
-        }
-      });
-      return false;
-    }else{
+    $('#user_email').focus();
+    Swal.fire({
+      title:'Email Kosong',
+      text:'Silahkan Masukkan Email!',
+      icon:'error'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.close();
+      }
+    });
+    return false;
+  }else{
 
     let testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
     if (!testEmail.test(user_email))
@@ -507,5 +505,27 @@ $.ajax({
 
 </script>
 
+<div class="modal fade" data-backdrop="static" id="ModalAktivasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-light">
+       <h3 class="modal-title" id="myModalLabel" style=" font: sans-serif; "><i class="fas fa-users mr-2"></i> Status User</h3>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
 
+     </div>
+     <form class="form-horizontal" method="post" action="<?php echo base_url('user/aktivasi_job_seeker') ?>">
+      <div class="modal-body">
+        <input type="hidden" name="kode_user_aktivasi" id="kode_user_aktivasi" value=""> 
+        <input type="hidden" name="isi_aktivasi" id="isi_aktivasi" value="">  
+        <div class="alert alert-danger"><p class="notif_aktivasi"></p></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-flat mr-2" data-dismiss="modal"><i class="far fa-times-circle mr-2"></i> Batal</button>
+        <button type="submit" class="btn_aktivasi btn btn-success btn-flat" id="btn_aktivasi"><i class="fas fa-check mr-2"></i>YA</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+</div>
 

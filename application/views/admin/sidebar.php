@@ -3,63 +3,43 @@
 $sub_active=$this->uri->segment(2);         
 ?>
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url() ?>">
-        <div class="sidebar-brand-icon">
-            <img src="<?php echo base_url().$this->session->stp_brand_icon ?>" style="max-height:40px">
-        </div>
-        <div class="sidebar-brand-text mx-3"><?php echo $this->session->stp_nama !='' ? $this->session->stp_nama :'TALENT HUB'; ?></div>
-    </a>
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+        <?php if ($this->session->stp_brand_icon!='') { ?>
+            <div class="sidebar-brand-icon" style="filter: brightness(0) invert(1);">
+                <img src="<?php echo base_url().$this->session->stp_brand_icon ?>" style="max-height:40px">
+            </div>
+        <?php }else{ ?>
 
-    <!-- Nav Item - Dashboard -->
+            <div class="sidebar-brand-text mx-3"><?php echo $this->session->stp_nama !='' ? $this->session->stp_nama :'TALENT HUB'; ?></div>
+        <?php } ?>
+    </a>
+    <hr class="sidebar-divider my-0">
     <li class="nav-item active">
         <a class="nav-link" href="<?php echo base_url('dashboard') ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
         </li>
-
-        <!-- Divider -->
         <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-         Admin Panel
-     </div>
-
-     <!-- Nav Item - Pages Collapse Menu -->
-
-     <li class="nav-item 
-
-     <?php if($active=="user" && $sub_active=="" ){
-        echo "active";
-    } ?> ">
-    <a class="nav-link" href="<?php echo base_url('user') ?>">
-        <i class="fas fa-fw fa-user"></i>User
-    </a>
-    
-</li>
-
- <li class="nav-item 
-
-     <?php if($active=="user" && $sub_active=="admin_role" ){
+        <li class="nav-item 
+        <?php if($active=="user" && $sub_active=="" ){
+            echo "active";
+        } ?> ">
+        <a class="nav-link" href="<?php echo base_url('user') ?>">
+            <i class="fas fa-fw fa-user"></i>User
+        </a>
+    </li>
+    <li class="nav-item 
+    <?php if($active=="user" && $sub_active=="admin_role" ){
         echo "active";
     } ?> ">
     <a class="nav-link" href="<?php echo base_url('user') ?>">
         <i class="fas fa-fw fa-user"></i>Admin Role
     </a>
-    
 </li>
-
-<div class="sidebar-heading">
- MANAGE ACCOUNTS
-</div>
-
 <li class="nav-item 
-
 <?php if($active=="user" && $sub_active=="job_provider"){
     echo "active";
 } ?> ">
@@ -67,9 +47,7 @@ $sub_active=$this->uri->segment(2);
     <i class="fas fa-fw fa-user"></i>Job Provider
 </a>
 </li>
-
 <li class="nav-item 
-
 <?php if($active=="user"  && $sub_active=="job_seeker"){
     echo "active";
 } ?> ">
@@ -77,34 +55,58 @@ $sub_active=$this->uri->segment(2);
     <i class="fas fa-fw fa-user"></i>Job Seeker
 </a>
 </li>
-
-
-<div class="sidebar-heading">
-    Premium Panel
-</div>
-
 <li class="nav-item">
-    <a class="nav-link ">
+    <a class="nav-link" href="<?php echo base_url('') ?>">
         <i class="fas fa-fw fa-book"></i>Fitur Premium
     </a>
 </li>
-
-<div class="sidebar-heading">
-    Job Panel
-</div>
-
-
 <li class="nav-item">
-    <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
-    aria-expanded="true" aria-controls="collapseTwo">
-    <i class="fas fa-fw fa-database"></i>
-
-    <span>Job Posting</span>
+    <a class="nav-link " href="<?php echo base_url('user/job_posting') ?>">
+        <i class="fas fa-fw fa-database"></i>Job Posting
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="<?php echo base_url('chat') ?>">
+        <i class="fas fa-fw fa-bell"></i>Blast
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="<?php echo base_url('chat') ?>">
+        <i class="fas fa-fw fa-comments"></i>Inbox
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="<?php echo base_url('report') ?>">
+        <i class="fas fa-fw fa-flag"></i>Report
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+    aria-expanded="true" aria-controls="collapseUtilities">
+    <i class="fas fa-fw fa-cog"></i>
+    <span>Settings</span>
 </a>
-<div id="collapseTwo" class="collapse <?php if($active=="agama" || $active=="bahasa" || $active=="level"  || $active=="pendidikan" || $active=="jabatan" || $active=="skill" || $active=="job"){
+
+<div id="collapseUtilities" class="collapse <?php if($active=="stp" || $active=="slider" || $active=="agama" || $active=="bahasa" || $active=="level"  || $active=="pendidikan" || $active=="jabatan" || $active=="skill" || $active=="job"){
     echo "show";
-} ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+} ?>" aria-labelledby="headingUtilities"
+data-parent="#accordionSidebar">
 <div class="bg-white py-2 collapse-inner rounded">
+    <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+    <a class="collapse-item
+
+    <?php if($active=="stp" && $sub_active==""){
+        echo "bg-danger text-light";
+    } ?>
+
+    " href="<?php echo base_url('stp') ?>">Profil STP</a>
+    <a class="collapse-item 
+
+    <?php if($active=="slider" && $sub_active==""){
+        echo "bg-danger text-light";
+    } ?>"
+    href="<?php echo base_url('slider') ?>">Slider</a>
+
     <a class="collapse-item 
     <?php if($active=="agama" && $sub_active==""){
         echo "bg-danger text-light";
@@ -162,68 +164,6 @@ $sub_active=$this->uri->segment(2);
     } ?>
 
     " href="<?php echo base_url('job/level') ?>">Level Pekerjaan</a>
-
-</div>
-</div>
-</li>
-
-<div class="sidebar-heading">
-Chat</div>
-
-<li class="nav-item">
-    <a class="nav-link ">
-        <i class="fas fa-fw fa-envelope"></i>Inbox
-    </a>
-</li>
-
-<div class="sidebar-heading">
-Report</div>
-
-
-<li class="nav-item">
-    <a class="nav-link ">
-        <i class="fas fa-fw fa-flag"></i>Report
-    </a>
-</li>
-
-<div class="sidebar-heading">
-Pengaturan</div>
-
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-    aria-expanded="true" aria-controls="collapseUtilities">
-    <i class="fas fa-fw fa-cog"></i>
-    <span>Data Website</span>
-</a>
-<div id="collapseUtilities" class="collapse <?php if($active=="stp" || $active=="slider"){
-    echo "show";
-} ?>" aria-labelledby="headingUtilities"
-data-parent="#accordionSidebar">
-<div class="bg-white py-2 collapse-inner rounded">
-    <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-    <a class="collapse-item
-
-    <?php if($active=="stp" && $sub_active==""){
-        echo "bg-danger text-light";
-    } ?>
-
-    " href="<?php echo base_url('stp') ?>">Profil STP</a>
-    <a class="collapse-item 
-
-    <?php if($active=="slider" && $sub_active==""){
-        echo "bg-danger text-light";
-    } ?>"
-    href="<?php echo base_url('slider') ?>">Slider</a>
-    <a class="collapse-item" href="utilities-animation.html">About Us</a>
-    <a class="collapse-item" href="utilities-other.html">Testimoni</a>
-    <a class="collapse-item" href="utilities-other.html">Media Sosial</a>
-    <a class="collapse-item" href="utilities-other.html">Relation Link</a>
-    <a class="collapse-item" href="utilities-other.html">Galeri</a>
-
-    <a class="collapse-item" href="utilities-color.html">Saran & Kritik</a>
-    <a class="collapse-item" href="utilities-border.html">Email Subscribe</a>
-
 </div>
 </div>
 </li>
@@ -298,8 +238,8 @@ data-parent="#accordionSidebar">
 
 
 
-                 <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                 <li class="nav-item dropdown no-arrow d-sm-none">
+                   <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                   <li class="nav-item dropdown no-arrow d-sm-none">
                     <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-search fa-fw"></i>
@@ -373,75 +313,9 @@ data-parent="#accordionSidebar">
     </div>
 </li>
 
-<!-- Nav Item - Messages -->
-<li class="nav-item dropdown no-arrow mx-1">
-    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fas fa-envelope fa-fw"></i>
-    <!-- Counter - Messages -->
-    <span class="badge badge-danger badge-counter">7</span>
-</a>
-<!-- Dropdown - Messages -->
-<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-aria-labelledby="messagesDropdown">
-<h6 class="dropdown-header">
-    Message Center
-</h6>
-<a class="dropdown-item d-flex align-items-center" href="#">
-    <div class="dropdown-list-image mr-3">
-        <img class="rounded-circle" src="<?php echo base_url() ?>assets/img/undraw_profile_1.svg"
-        alt="...">
-        <div class="status-indicator bg-success"></div>
-    </div>
-    <div class="font-weight-bold">
-        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-        problem I've been having.</div>
-        <div class="small text-gray-500">Emily Fowler · 58m</div>
-    </div>
-</a>
-<a class="dropdown-item d-flex align-items-center" href="#">
-    <div class="dropdown-list-image mr-3">
-        <img class="rounded-circle" src="<?php echo base_url() ?>assets/img/undraw_profile_2.svg"
-        alt="...">
-        <div class="status-indicator"></div>
-    </div>
-    <div>
-        <div class="text-truncate">I have the photos that you ordered last month, how
-        would you like them sent to you?</div>
-        <div class="small text-gray-500">Jae Chun · 1d</div>
-    </div>
-</a>
-<a class="dropdown-item d-flex align-items-center" href="#">
-    <div class="dropdown-list-image mr-3">
-        <img class="rounded-circle" src="<?php echo base_url() ?>assets/img/undraw_profile_3.svg"
-        alt="...">
-        <div class="status-indicator bg-warning"></div>
-    </div>
-    <div>
-        <div class="text-truncate">Last month's report looks great, I am very happy with
-        the progress so far, keep up the good work!</div>
-        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-    </div>
-</a>
-<a class="dropdown-item d-flex align-items-center" href="#">
-    <div class="dropdown-list-image mr-3">
-        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-        alt="...">
-        <div class="status-indicator bg-success"></div>
-    </div>
-    <div>
-        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-        told me that people say this to all dogs, even if they aren't good...</div>
-        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-    </div>
-</a>
-<a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-</div>
-</li>
 
 <div class="topbar-divider d-none d-sm-block"></div>
 
-<!-- Nav Item - User Information -->
 <li class="nav-item dropdown no-arrow">
     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -450,20 +324,12 @@ aria-labelledby="messagesDropdown">
 
     src="<?php echo base_url().$this->session->user_foto ?>">
 </a>
-<!-- Dropdown - User Information -->
 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 aria-labelledby="userDropdown">
-<a class="dropdown-item" href="#">
-    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-    Profile
-</a>
+
 <a class="dropdown-item" href="#">
     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-    Settings
-</a>
-<a class="dropdown-item" href="#">
-    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-    Activity Log
+    Ubah Password
 </a>
 <div class="dropdown-divider"></div>
 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
