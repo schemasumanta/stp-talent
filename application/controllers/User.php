@@ -58,7 +58,7 @@ class User extends CI_Controller
 							   </div>';
 
 			if ($l->user_foto != '') {
-				$l->user_foto = '<img src="' . base_url('assets/img/foto_user/') . $l->user_foto . '" width="50px">';
+				$l->user_foto = '<img src="'  . $l->user_foto . '" width="50px">';
 			}
 
 			$data[] = $l;
@@ -483,7 +483,7 @@ class User extends CI_Controller
 	{
 		$methode = "add";
 		$this->_validate($methode);
-
+		$x = $this->input->post('file_firebase');
 		$data = array(
 			'user_email' => $this->input->post('user_email'),
 			'user_nama' => $this->input->post('user_nama'),
@@ -497,8 +497,7 @@ class User extends CI_Controller
 		);
 
 		if (!empty($_FILES['user_photo']['name'])) {
-			$upload = $this->_do_upload();
-			$data['user_foto'] = $upload;
+			$data['user_foto'] = $this->input->post('file_firebase');
 		}
 		$this->db->insert("tbl_master_user", $data);
 
@@ -556,13 +555,6 @@ class User extends CI_Controller
 				$data['error_string'][] = 'Password tidak boleh kurang dari 6 karakter';
 				$data['status'] = FALSE;
 			}
-
-			$foto_user 	= $_FILES['user_photo']['name'];
-			if ($foto_user == '') {
-				$data['inputerror'][] = 'user_photo';
-				$data['error_string'][] = 'Foto tidak boleh kosong';
-				$data['status'] = FALSE;
-			}
 		} else {
 			if ($this->input->post('user_nama') == '') {
 				$data['inputerror'][] = 'user_nama';
@@ -614,28 +606,7 @@ class User extends CI_Controller
 		}
 	}
 
-	private function _do_upload()
-	{
-		$config['upload_path']          = 'assets/img/foto_user/';
-		$config['allowed_types']        = 'jpg|png|jpeg';
-		$config['max_size']             = 2048; //set max size allowed in Kilobyte
-		$config['max_width']            = 1000; // set max width image allowed
-		$config['max_height']           = 1000; // set max height allowed
-		$config['file_name']            = round(microtime(true) * 1000); //just milisecond timestamp fot unique name
 
-		$this->upload->initialize($config);
-		$this->load->library('upload', $config);
-
-		if (!$this->upload->do_upload('user_photo')) //upload and validate
-		{
-			$data['inputerror'][] = 'user_photo';
-			$data['error_string'][] = 'Upload error: ' . $this->upload->display_errors('', ''); //show ajax error
-			$data['status'] = FALSE;
-			echo json_encode($data);
-			exit();
-		}
-		return $this->upload->data('file_name');
-	}
 
 	public function setStatus()
 	{
@@ -696,14 +667,7 @@ class User extends CI_Controller
 		}
 
 		if (!empty($_FILES['user_photo']['name'])) {
-			$upload = $this->_do_upload();
-
-			//delete file
-			$person = $this->db->get_where("tbl_master_user", ['user_id' => $this->input->post('id')])->row();
-			if (file_exists('assets/img/foto_user/' . $person->user_foto) && $person->user_foto)
-				unlink('assets/img/foto_user/' . $person->user_foto);
-
-			$data['user_foto'] = $upload;
+			$data['user_foto'] = $this->input->post('file_firebase');
 		}
 
 		$this->db->where('user_id', $this->input->post('id'));

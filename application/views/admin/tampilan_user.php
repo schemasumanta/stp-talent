@@ -49,7 +49,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body form">
-        <form action="javascript:;" id="form" class="form-horizontal">
+        <form action="javascript:;" id="form_user" class="form-horizontal">
           <input type="hidden" value="" name="id" id="id" />
           <div class="form-body">
             <div class="form-group">
@@ -102,21 +102,41 @@
               <div class="col-md-12">
                 <input name="user_photo" id="user_photo" type="file" multiple>
                 <span class="help-block"></span>
+                <input type="hidden" name="file_firebase" id="file_firebase">
               </div>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="submit" id="btnSave" onclick="save()" class="btn btn-primary">Simpan</button>
+        <button type="button" id="btnSave" class="btn btn-primary">Simpan</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Bootstrap modal -->
+
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
+
+
 <script type="text/javascript">
   $(document).ready(function() {
+    const firebaseConfig = {
+      apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
+      authDomain: "solo-digital-tech.firebaseapp.com",
+      databaseURL: "https://solo-digital-tech-default-rtdb.firebaseio.com",
+      projectId: "solo-digital-tech",
+      storageBucket: "solo-digital-tech.appspot.com",
+      messagingSenderId: "608688468148",
+      appId: "1:608688468148:web:e503938ea2f4ea0eaa27e1",
+      measurementId: "G-6GFS5NPL12"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
     const notif = $('.flashdatart').data('title');
     if (notif) {
       Swal.fire({
@@ -221,6 +241,40 @@
     fadeInAdd();
   });
 
+  document.getElementById('btnSave').addEventListener('click', function() {
+    var file = document.getElementById('user_photo').files[0];
+    if (file.name != "") {
+      console.log(file.name);
+      var storage = firebase.storage().ref('talent_hub/foto_user/' + file.name);
+      var upload = storage.put(file);
+
+      upload.on('state_changed', function(snapshot) {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("upload is " + progress + " done");
+      }, function(error) {
+        console.log(error.message);
+      }, function() {
+        upload.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+          console.log(downloadURL);
+          if (save_method == "add") {
+            $('#file_firebase').val(downloadURL);
+          } else {
+            let photo = $('#file_firebase').val();
+            if (photo != '') {
+              const myfile = firebase.storage();
+              myfile.refFromURL(photo).delete()
+            }
+            $('#file_firebase').val(downloadURL);
+          }
+          save();
+        })
+      })
+    } else {
+      save();
+    }
+  })
+
+
   function getuser_photo(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -271,7 +325,7 @@
 
   function add() {
     save_method = 'insert';
-    $('#form')[0].reset(); // reset form on modals
+    $('#form_user')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_user').modal('show'); // show bootstrap modal
@@ -301,7 +355,7 @@
 
     // ajax adding data to database
 
-    var formData = new FormData($('#form')[0]);
+    var formData = new FormData($('#form_user')[0]);
     $.ajax({
       url: url,
       type: "POST",
@@ -313,7 +367,6 @@
 
         if (data.status) //if success close modal and reload ajax table
         {
-
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -418,7 +471,7 @@
 
   function edit_user(id) {
     save_method = 'update';
-    $('#form')[0].reset(); // reset form on modals
+    $('#form_user')[0].reset(); // reset form on modals
     $('.form-group').removeClass('is-invalid'); // clear error class
     $('.help-block').empty(); // clear error string
 
@@ -440,8 +493,8 @@
         img = '<?= base_url('assets/img/foto_user/'); ?>'
         if (data.user_foto) {
           $('#label-photo').text('Change Photo'); // label photo upload
-          $('#photo-preview div').html('<img src="' + img + data.user_foto + '" class="card-img-top" id="imgView_user">'); // show photo
-
+          $('#photo-preview div').html('<img src="' + data.user_foto + '" class="card-img-top" id="imgView_user">'); // show photo
+          $('#file_firebase').val(data.user_foto);
         } else {
           $('#label-photo').text('Upload Photo'); // label photo upload
           $('#photo-preview div').text('(No photo)');
