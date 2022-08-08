@@ -60,7 +60,7 @@
 <script>
 	$(document).ready(function() {
 		$(".owl-carousel").owlCarousel({
-			loop: true,
+			loop: false,
 			margin: 10,
 			responsiveClass: true,
 			nav: true,
@@ -79,7 +79,7 @@
 				1000: {
 					items: 5,
 					nav: true,
-					loop: true,
+					loop: false,
 				}
 			}
 		});

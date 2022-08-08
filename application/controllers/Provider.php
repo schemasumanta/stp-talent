@@ -315,7 +315,8 @@ class Provider extends CI_Controller
 	}
 	public function application()
 	{
-		$data["lowongan"] = $this->db->query("SELECT lowongan_id,perusahaan_logo,lowongan_judul,kabkota_nama FROM tbl_lowongan_pekerjaan JOIN tbl_perusahaan on tbl_lowongan_pekerjaan.perusahaan_id = tbl_perusahaan.perusahaan_id JOIN tbl_master_kabkota ON tbl_perusahaan.perusahaan_kabkota = tbl_master_kabkota.kabkota_id")->result();
+		$id = $this->session->perusahaan_id;
+		$data["lowongan"] = $this->db->query("SELECT lowongan_id,perusahaan_logo,lowongan_judul,kabkota_nama FROM tbl_lowongan_pekerjaan JOIN tbl_perusahaan on tbl_lowongan_pekerjaan.perusahaan_id = tbl_perusahaan.perusahaan_id JOIN tbl_master_kabkota ON tbl_perusahaan.perusahaan_kabkota = tbl_master_kabkota.kabkota_id WHERE tbl_perusahaan.perusahaan_id = '$id' ")->result();
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
@@ -323,11 +324,10 @@ class Provider extends CI_Controller
 		$this->load->view('templates/footer');
 	}
 
-	public function tabel_application()
+	public function tabel_application($id)
 	{
-		$id = $this->input->post('id');
 		$data   = array();
-		$sort     = isset($_GET['columns'][$_GET['order'][0]['column']]['data']) ? strval($_GET['columns'][$_GET['order'][0]['column']]['data']) : 'lamaran_id';
+		$sort     = isset($_GET['columns'][$_GET['order'][0]['column']]['data']) ? strval($_GET['columns'][$_GET['order'][0]['column']]['data']) : 'lowongan_id';
 		$order    = isset($_GET['order'][0]['dir']) ? strval($_GET['order'][0]['dir']) : 'desc';
 		$search    = isset($_GET['search']['value']) ? strval($_GET['search']['value']) : null;
 		$no = $this->input->get('start');
@@ -344,10 +344,16 @@ class Provider extends CI_Controller
 				$status = "Accepted";
 			};
 
-			$l->isi_lowongan = '<div class="card border-left-success shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><img src="' . $l->perusahaan_logo . '" style="width:5%;margin-right:25px;">
+			if ($l->resume_lampiran) {
+				$resume = '<a href="' . $l->resume_lampiran . '" class="btn">Download CV</a>';
+			} else {
+				$resume = "CV tidak ada";
+			};
+
+			$l->isi_lowongan = '<div class="card border-left-success shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><img src="' . $l->resume_foto . '" style="width:5%;margin-right:25px;">
 			<div class="col mr-2"><div class="text-lg font-weight-bold text-danger text-uppercase mb-1">
-			' . $l->lowongan_judul . '</div>
-			<div class="h6 mb-2 text-gray-800">' . $l->kategori_nama . '</div>
+			' . $l->resume_nama_lengkap . '</div>
+			<div class="h6 mb-2 text-gray-800">' . $resume . '</div>
 			<div class="h6 mb-2 font-weight-bold text-gray-800">
 				<i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</i>
 			</div>
@@ -358,9 +364,9 @@ class Provider extends CI_Controller
 			</div>
 			<div class="col-auto">
 			<ul style="list-style: none">
-				<li class="p-2"><a href="' . base_url() . 'job/detail/' . $l->lowongan_id . '" class="btn btn-lg rounded mr-2 btn-success shadow item_detail_lowongan" data="' . $l->lamaran_id . '"><i class="fa fa-eye mr-2"></i>Detail</a>
+				<li class="p-2"><a href="javascript:;" onclick="cek_pelamar(' . $l->lamaran_id . ')" class="btn btn-lg rounded mr-2 btn-success shadow"><i class="fa fa-eye mr-2"></i>Cek</a>
 				</li>
-				<li class="p-2"><a href="' . base_url() . 'chat/' . $l->perusahaan_id . '" class="btn btn-lg rounded  mr-2 btn text-danger shadow item_chat" data="' . $l->perusahaan_id . '"><i class="fas fa-fw fa-comment mr-2"></i>Chat &nbsp;</a>
+				<li class="p-2"><a href="' . base_url() . 'chat/' . $l->user_id . '" class="btn btn-lg rounded  mr-2 btn text-danger shadow item_chat"><i class="fas fa-fw fa-comment mr-2"></i>Chat &nbsp;</a>
 				</li>
 			</ul>				
 			</div>
@@ -371,14 +377,35 @@ class Provider extends CI_Controller
 
 		$output = array(
 			"draw"              => $_GET['draw'],
-			"recordsTotal"      => $this->model_tabel->count_all('application', $sort, $order, $search),
-			"recordsFiltered"   => $this->model_tabel->count_filtered('application', $sort, $order, $search),
+			"recordsTotal"      => $this->model_tabel->count_all('application_provider', $sort, $order, $search, $id),
+			"recordsFiltered"   => $this->model_tabel->count_filtered('application_provider', $sort, $order, $search, $id),
 			"data"              => $data,
 		);
 		echo json_encode($output);
 	}
 
-	public function get_pelamar($id)
+	public function cek_pelamar($id)
 	{
+		$cek = $this->db->query("SELECT * FROM tbl_pelamar_pekerjaan as pp JOIN tbl_resume as r ON pp.pelamar_id = r.user_id WHERE pp.lamaran_id = $id")->row();
+		$skill = $this->db->query("SELECT skill_nama,skill_level_nama FROM tbl_skill_resume AS sr JOIN tbl_master_skill as ms on sr.skill_id = ms.skill_id JOIN tbl_skill_level AS sl ON sl.skill_level_id = sr.skill_level_id WHERE sr.user_id = $cek->pelamar_id ")->result();
+
+		$data = [
+			'resume' => $cek,
+			'skill'	=> $skill
+		];
+
+		echo json_encode($data);
+	}
+
+	public function update_pekerjaan()
+	{
+		$id = $this->input->post('id');
+		$data = [
+			'lamaran_status' => $this->input->post('status'),
+		];
+		$this->db->where('lamaran_id', $id);
+		$this->db->update('tbl_pelamar_pekerjaan', $data);
+
+		echo json_encode(['status' => true]);
 	}
 }

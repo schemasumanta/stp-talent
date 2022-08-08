@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Model_tabel extends CI_Model
 {
 
-    function get_datatables($type = null, $sort = null, $order = null, $search = null)
+    function get_datatables($type = null, $sort = null, $order = null, $search = null, $id = null)
     {
-        $this->_get_datatables_query($type, $sort, $order, $search);
+        $this->_get_datatables_query($type, $sort, $order, $search, $id);
         if ($type != 'laporan_pasien') {
             if ($_GET['length'] != -1) {
                 $this->db->limit($_GET['length'], $_GET['start']);
@@ -129,12 +129,13 @@ class Model_tabel extends CI_Model
 
             case 'application_provider':
                 $this->db->select('
-                user_email,user_telepon,lamaran_status,lamaran_tanggal,resume_foto,resume_nama_lengkap,resume_lampiran,kabkota_nama');
+                user_email,user_telepon,lamaran_id,lamaran_status,lamaran_tanggal,resume_foto,resume_nama_lengkap,resume_lampiran,kabkota_nama,prov_nama,r.user_id');
                 $this->db->join('tbl_lowongan_pekerjaan lp', 'lp.lowongan_id = pp.lowongan_id');
                 $this->db->join('tbl_master_user mu', 'mu.user_id = pp.pelamar_id');
                 $this->db->join('tbl_resume r', 'r.user_id = mu.user_id');
                 $this->db->join('tbl_resume_lampiran rl', 'rl.user_id = mu.user_id', 'LEFT');
                 $this->db->join('tbl_master_kabkota kk', 'kk.kabkota_id = r.kabkota_id');
+                $this->db->join('tbl_master_provinsi pr', 'pr.prov_id = r.prov_id');
                 $this->db->from('tbl_pelamar_pekerjaan pp');
                 $this->db->where('lp.lowongan_id', $id);
                 if ($_GET['order'][0]['column'] == 0) {
@@ -481,21 +482,19 @@ class Model_tabel extends CI_Model
         }
     }
 
-    function count_filtered($type = null, $sort = null, $order = null, $search = null)
+    function count_filtered($type = null, $sort = null, $order = null, $search = null, $id = null)
     {
 
-        $this->_get_datatables_query($type, $sort, $order, $search);
+        $this->_get_datatables_query($type, $sort, $order, $search, $id);
         return $this->db->get()->num_rows();
         // return $query->num_rows();
 
 
     }
 
-
-
-    public function count_all($type = null, $sort = null, $order = null, $search = null)
+    public function count_all($type = null, $sort = null, $order = null, $search = null, $id = null)
     {
-        $this->_get_datatables_query($type, $sort, $order, $search);
+        $this->_get_datatables_query($type, $sort, $order, $search, $id);
         return $this->db->get()->num_rows();
         // $results = $db_results->result();
         // $num_rows = $db_results->num_rows();
