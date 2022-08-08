@@ -33,20 +33,63 @@ class Dashboard extends CI_Controller {
 		}
 		
 		if ($this->session->user_level==2) {
-			$this->db->where('slider_tipe','main');
 			$this->db->where('slider_status',1);
-			$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
+			$this->db->where('slider_tipe','dashboard_seeker');
+			$this->db->or_where('slider_tipe','all');
+
+			$data['slider'] = $this->db->get('tbl_master_slider')->result();
 			
+			$this->db->where('user_id',$this->session->user_id);
+			$data['saved_job'] = $this->db->get('tbl_lowongan_tersimpan')->num_rows();
+
+			$this->db->where('a.pelamar_id',$this->session->user_id);
+			$data['submission'] = $this->db->get('tbl_pelamar_pekerjaan a')->num_rows();
+
+			$this->db->where('a.reported',$this->session->user_id);
+			$data['reported'] = $this->db->get('tbl_report a')->num_rows();
+
+			$this->db->select('a.resume_visitor');
+			$this->db->where('a.user_id',$this->session->user_id);
+			$resume = $this->db->get('tbl_resume a')->result();
+			$visitor = 0;
+			foreach ($resume as $key) {
+				$visitor +=floatval($key->resume_visitor);
+			}
+
+			$data['visitor'] = $visitor;
+
+
 			$this->load->view('templates/header');
 			$this->load->view('templates/sidebar'); 
 			$this->load->view('seeker/tampilan_dashboard',$data);
 			$this->load->view('templates/footer');
 		}
 		if ($this->session->user_level==3) {
-			$this->db->where('slider_tipe','main');
+			$this->db->where('user_id',$this->session->user_id);
+			$data['job_posting'] = $this->db->get('tbl_lowongan_pekerjaan')->num_rows();
+
+			$this->db->where('a.user_id',$this->session->user_id);
+			$this->db->join('tbl_pelamar_pekerjaan b','b.lowongan_id=a.lowongan_id');
+			$data['submission'] = $this->db->get('tbl_lowongan_pekerjaan a')->num_rows();
+
+			$this->db->where('a.reported',$this->session->user_id);
+			$data['reported'] = $this->db->get('tbl_report a')->num_rows();
+
+			$this->db->select('a.perusahaan_visitor');
+			$this->db->where('a.perusahaan_id',$this->session->perusahaan_id);
+			$perusahaan = $this->db->get('tbl_perusahaan a')->result();
+			$visitor = 0;
+			foreach ($perusahaan as $key) {
+				$visitor +=floatval($key->perusahaan_visitor);
+			}
+
+			$data['visitor'] = $visitor;
+
 			$this->db->where('slider_status',1);
-			$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
-			
+			$this->db->where('slider_tipe','dashboard_provider');
+			$this->db->or_where('slider_tipe','all');
+			$this->db->where('slider_status',1);
+			$data['slider'] = $this->db->get('tbl_master_slider')->result();
 			$this->load->view('templates/header');
 			$this->load->view('templates/sidebar'); 
 			$this->load->view('provider/tampilan_dashboard',$data);

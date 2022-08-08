@@ -25,8 +25,8 @@
           <h1 class="h3 mb-3 ml-5 text-gray-800">Notifikasi</h1>
           <div class="card">
             <div class="card-header">
-              <div class="col-sm-6"> 
-              </div>
+
+
               <div class="col-sm-12"> 
 
                <!-- Button trigger modal -->
@@ -83,7 +83,6 @@
 
                  <div class="col-md-12 mb-3"> 
                    <label style="color:#343a40;" for="notifikasi_link">Direct URL</label>
-                   <input type="hidden" name="notifikasi_id" id="notifikasi_id">
                    <input type="text" class="form-control" id="notifikasi_link"  name="notifikasi_link" required>
                  </div>
                  <div class="col-md-12 mb-3"> 
@@ -148,33 +147,6 @@
   $(document).ready(function(){
 
 
-    let notifRef = firebase.database().ref('/Notification/').orderByChild('notifikasi_tanggal').limitToLast(1); 
-    notifRef.on('child_added', function(snapshot) { 
-     let data = snapshot.val();  
-     console.log(data);
-     if(data.notifikasi_penerima == 'All')
-     {
-
-      $('.chatbox').append(`<div class="col-md-6 mt-3"></div>  
-        <div class="col-md-6 mt-3 isi_chatting_pengirim float-right"><div class="row"><img id="profil" class="rounded-circle " src="<?php echo base_url() ?>`+data.chat_photo+`" style="width:35px;position: absolute;top:-15px;right:-15px">
-        <div class="col-md-12 text-justify">
-        <span class="chat_text" style="color: black;font-size: 14px;margin-left:15px">`+data.chat_isi+`</span>
-        <span style="position: absolute;bottom:-15px;right: 10px;font-size: 12px;color: black;font-weight: bold;">`+data.chat_tanggal+`</span>
-        </div></div></div>`);
-
-    }else if(data.chat_penerima== '<?php echo $this->session->user_id; ?>')
-    {
-     $('.chatbox').append(`<div class="col-md-6 mt-3 isi_chatting_penerima mr-2">
-      <div class="row">
-      <img id="profil" class="rounded-circle " src="<?php echo base_url() ?>`+data.chat_photo+`" style="width:35px;position: absolute;top:-15px;left:-15px">
-      <div class="col-md-12 text-justify">
-      <span class="chat_text" style="color: white;font-size: 14px;margin-left:15px">`+data.chat_isi+`</span>
-      <span style="position: absolute;bottom:-15px;right: 10px;font-size: 12px;color: white;font-weight: bold;">`+data.chat_tanggal+`</span>
-      </div>
-      </div>
-      </div>`);
-   }
- }); 
 
 
 
@@ -395,93 +367,114 @@
       return false;
     }
 
-  // let key = $('#notifikasi_key').val()!='' ? $('#notifikasi_key').val() :randomkey();
-  // $('#notifikasi_key').val(key);
-  let notifikasi_lampiran =$('#lampiran_notifikasi_lama').val();
+    $('#btn_simpan').attr('disabled','disabled');
+    $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
+    let notifikasi_lampiran =$('#lampiran_notifikasi_lama').val();
 
-  if (files.length  >  0) {
-    for (let i = 0; i < files.length; i++) {
-      let storage = firebase.storage().ref('talent_hub/notifikasi/' + files[i].name);
-      let upload = storage.put(files[i]);
-      upload.on(
-        "state_changed",
-        function progress(snapshot) {},
+    if (files.length  >  0) {
+      for (let i = 0; i < files.length; i++) {
+        let storage = firebase.storage().ref('talent_hub/notifikasi/' + files[i].name);
+        let upload = storage.put(files[i]);
+        upload.on(
+          "state_changed",
+          function progress(snapshot) {},
 
-        function error() {
-          $('.error-file-photo').html("Upload File Error");
-        },
-        function complete() {
-          storage
-          .getDownloadURL()
-          .then(function(url) {
-            $('#lampiran_notifikasi_lama').val(url);
-            let post = {  
-              notifikasi_judul    : $('#notifikasi_judul').val(),  
-              notifikasi_isi      : $('#notifikasi_isi').val(),  
-              notifikasi_penerima : $('#notifikasi_penerima').val(),  
-              notifikasi_link     : $('#notifikasi_link').val(),  
-              notifikasi_lampiran : url,  
-              notifikasi_tanggal  : $.now(),  
-              notifikasi_pengirim : '<?php echo $this->session->user_id ?>',
-            };
+          function error() {
+            $('.error-file-photo').html("Upload File Error");
+          },
+          function complete() {
+            storage
+            .getDownloadURL()
+            .then(function(url) {
+              $('#lampiran_notifikasi_lama').val(url);
+              let post = {  
+                notifikasi_judul    : $('#notifikasi_judul').val(),  
+                notifikasi_isi      : $('#notifikasi_isi').val(),  
+                notifikasi_penerima : $('#notifikasi_penerima').val(),  
+                notifikasi_link     : $('#notifikasi_link').val(),  
+                notifikasi_lampiran : url,  
+                notifikasi_order    : $.now(),  
+                notifikasi_tanggal  : '<?php echo date('Y-m-d H:i:s') ?>',  
+                notifikasi_pengirim : '<?php echo $this->session->user_id ?>',
+              };
 
-            let newpost = firebase.database().ref().child('/Notification/').push().key;
-            $('#notifikasi_key').val(newpost);
+              let newpost = firebase.database().ref().child('/Notification/').push().key;
+              $('#notifikasi_key').val(newpost);
 
-            let update = {};
-            update['/Notification/'+newpost+'/'] = post;
-            firebase.database().ref().update(update, (error) => {
-              if (error) {
-                console.log('Data could not be saved.' + error);
-              } else {
-                $('#btn_simpan').attr('disabled','disabled');
-                $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
-                $('#form_notifikasi').submit();
-              }
+              let update = {};
+              update['/Notification/'+newpost+'/'] = post;
+              firebase.database().ref().update(update, (error) => {
+                if (error) {
+                  console.log('Data could not be saved.' + error);
+                } else {
+
+                  $('#form_notifikasi').submit();
+                }
+              });
+
+            })
+            .catch(function(error) {
+              console.log("error encountered");
             });
-
-          })
-          .catch(function(error) {
-            console.log("error encountered");
-          });
-        },
-        );
-    }
-  }else{
-
-    let post = {  
-      notifikasi_judul    : $('#notifikasi_judul').val(),  
-      notifikasi_isi      : $('#notifikasi_isi').val(),  
-      notifikasi_penerima : $('#notifikasi_penerima').val(),  
-      notifikasi_link     : $('#notifikasi_link').val(),  
-      notifikasi_lampiran : notifikasi_lampiran,  
-      notifikasi_tanggal  : $.now(),  
-      notifikasi_pengirim : '<?php echo $this->session->user_id ?>',
-    };
-
-    let newpost = firebase.database().ref().child('/Notification/').push().key;
-    $('#notifikasi_key').val(newpost);
-
-    let update = {};
-    update['/Notification/'+newpost+'/'] = post;
-    firebase.database().ref().update(update, (error) => {
-      if (error) {
-        console.log('Data could not be saved.' + error);
-      } else {
-        $('#btn_simpan').attr('disabled','disabled');
-        $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
-        $('#form_notifikasi').submit();
+          },
+          );
       }
-    });
+    }else{
 
-  }
-  
+      let post = {  
+        notifikasi_judul    : $('#notifikasi_judul').val(),  
+        notifikasi_isi      : $('#notifikasi_isi').val(),  
+        notifikasi_penerima : $('#notifikasi_penerima').val(),  
+        notifikasi_link     : $('#notifikasi_link').val(),  
+        notifikasi_lampiran : notifikasi_lampiran,  
+        notifikasi_order    : $.now(),  
+        notifikasi_tanggal  : '<?php echo date('Y-m-d H:i:s'); ?>',  
+        notifikasi_pengirim : '<?php echo $this->session->user_id ?>',
+      };
 
-});
+      let newpost = firebase.database().ref().child('/Notification/').push().key;
+      $('#notifikasi_key').val(newpost);
+
+      let update = {};
+      update['/Notification/'+newpost+'/'] = post;
+      firebase.database().ref().update(update, (error) => {
+        if (error) {
+          Swal.fire({
+          title:'Error',
+          text:'Notifikasi Gagal Dikirim!',
+          icon:'error'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.close();
+            location.reload();
+          }
+        });
+        } else {
+         Swal.fire({
+          title:'Berhasil',
+          text:'Notifikasi Berhasil Dikirim!',
+          icon:'success'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.close();
+            location.reload();
+          }
+        });
+
+      
+        }
+      });
+
+    }
+
+
+  });
 
 
 </script>
-
+<div class="col-sm-6 d-none"> 
+  <?php  $this->load->view('templates/header'); ?>
+</div>
 
 
 

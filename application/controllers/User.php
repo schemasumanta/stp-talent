@@ -176,6 +176,7 @@ class User extends CI_Controller
 	public function index()
 	{
 		$data['level'] = $this->db->get('tbl_master_level')->result();
+		$data['menu'] = $this->db->get('tbl_master_role')->result();
 		$this->load->view('admin/header');
 		$this->load->view('admin/sidebar');
 		$this->load->view('admin/tampilan_user', $data);
@@ -500,6 +501,17 @@ class User extends CI_Controller
 			$data['user_foto'] = $this->input->post('file_firebase');
 		}
 		$this->db->insert("tbl_master_user", $data);
+		$insert_id = $this->db->insert_id();
+
+		$role_id = count($this->input->post('role_id'));
+
+		for ($i = 0; $i < $role_id; $i++) {
+			$datas[$i] = array(
+				'user_id'     => $insert_id,
+				'role_id'     => $this->input->post('role_id[' . $i . ']'),
+			);
+			$this->db->insert("tbl_admin_role", $datas[$i]);
+		}
 
 		echo json_encode(array("status" => TRUE));
 	}
@@ -642,7 +654,13 @@ class User extends CI_Controller
 
 	public function get_data_user($id)
 	{
-		$data = $this->db->get_where('tbl_master_user', ['user_id' => $id])->row();
+		$isi = $this->db->get_where('tbl_master_user', ['user_id' => $id])->row();
+		$menu = $this->db->query("SELECT mr.role_id FROM tbl_admin_role as ar JOIN tbl_master_role as mr ON ar.role_id = mr.role_id WHERE ar.user_id = $id")->result_array();
+		$data = [
+			'isi'	=> $isi,
+			'menu'	=> $menu
+		];
+
 		echo json_encode($data);
 	}
 
@@ -672,6 +690,18 @@ class User extends CI_Controller
 
 		$this->db->where('user_id', $this->input->post('id'));
 		$this->db->update('tbl_master_user', $data);
+
+		$this->db->delete('tbl_admin_role', array('user_id' => $this->input->post('id')));
+		$role_id = count($this->input->post('role_id'));
+
+		for ($i = 0; $i < $role_id; $i++) {
+			$datas[$i] = array(
+				'user_id'     => $this->input->post('id'),
+				'role_id'     => $this->input->post('role_id[' . $i . ']'),
+			);
+			$this->db->insert("tbl_admin_role", $datas[$i]);
+		}
+
 		echo json_encode(array("status" => TRUE));
 	}
 }

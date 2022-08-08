@@ -21,160 +21,116 @@ $sub_active = $this->uri->segment(2);
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
         </li>
-        <hr class="sidebar-divider">
-        <li class="nav-item 
-        <?php if ($active == "user" && $sub_active == "") {
-            echo "active";
-        } ?> ">
-        <a class="nav-link" href="<?php echo base_url('user') ?>">
-            <i class="fas fa-fw fa-user"></i>User
-        </a>
-    </li>
-    <li class="nav-item 
-    <?php if ($active == "user" && $sub_active == "admin_role") {
-        echo "active";
-    } ?> ">
-    <a class="nav-link" href="<?php echo base_url('user') ?>">
-        <i class="fas fa-fw fa-user"></i>Admin Role
-    </a>
-</li>
-<li class="nav-item 
-<?php if ($active == "user" && $sub_active == "job_provider") {
-    echo "active";
-} ?> ">
-<a class="nav-link" href="<?php echo base_url('user/job_provider') ?>">
-    <i class="fas fa-fw fa-user"></i>Job Provider
-</a>
-</li>
-<li class="nav-item 
-<?php if ($active == "user"  && $sub_active == "job_seeker") {
-    echo "active";
-} ?> ">
-<a class="nav-link" href="<?php echo base_url('user/job_seeker') ?>">
-    <i class="fas fa-fw fa-user"></i>Job Seeker
-</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="<?php echo base_url('') ?>">
-        <i class="fas fa-fw fa-book"></i>Fitur Premium
-    </a>
-</li>
-<li class="nav-item 
-<?php if ($active == "user"  && $sub_active == "job_posting") {
-    echo "active";
-} ?> ">
+        <hr class="sidebar-divider" id="list_menu">
+        <?php
+        $userid = $this->session->user_id;
+        $menu_user = $this->db->query("SELECT mr.* FROM tbl_admin_role as ar JOIN tbl_master_role as mr ON ar.role_id = mr.role_id WHERE ar.user_id = $userid ORDER BY role_id")->result();
+         foreach ($menu_user as $key) { ?>
+            <?php if ($key->role_menu=="Settings"): ?>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
 
-<a class="nav-link " href="<?php echo base_url('user/job_posting') ?>">
-    <i class="fas fa-fw fa-database"></i>Job Posting
-</a>
-</li>
-<li class="nav-item
-<?php if ($active == "notifikasi"  && $sub_active == "") {
-    echo "active";
-} ?> ">
-    <a class="nav-link" href="<?php echo base_url('notifikasi') ?>">
-        <i class="fas fa-fw fa-bell"></i>Notifikasi
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="<?php echo base_url('chat') ?>">
-        <i class="fas fa-fw fa-comments"></i>Inbox
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="<?php echo base_url('report') ?>">
-        <i class="fas fa-fw fa-flag"></i>Report
-    </a>
-</li>
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Settings</span>
-    </a>
+                    <div id="collapseUtilities" class="collapse <?php if ($active == "stp" || $active == "slider" || $active == "agama" || $active == "bahasa" || $active == "level"  || $active == "pendidikan" || $active == "jabatan" || $active == "skill" || $active == "job") {
+                        echo "show";
+                    } ?>" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+                        <a class="collapse-item
 
-    <div id="collapseUtilities" class="collapse <?php if ($active == "stp" || $active == "slider" || $active == "agama" || $active == "bahasa" || $active == "level"  || $active == "pendidikan" || $active == "jabatan" || $active == "skill" || $active == "job") {
-        echo "show";
-    } ?>" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-        <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-        <a class="collapse-item
+                        <?php if ($active == "stp" && $sub_active == "") {
+                            echo "bg-danger text-light";
+                        } ?>
 
-        <?php if ($active == "stp" && $sub_active == "") {
-            echo "bg-danger text-light";
-        } ?>
+                        " href="<?php echo base_url('stp') ?>">Profil STP</a>
+                        <a class="collapse-item 
 
-        " href="<?php echo base_url('stp') ?>">Profil STP</a>
-        <a class="collapse-item 
+                        <?php if ($active == "slider" && $sub_active == "") {
+                            echo "bg-danger text-light";
+                        } ?>" href="<?php echo base_url('slider') ?>">Slider</a>
 
-        <?php if ($active == "slider" && $sub_active == "") {
-            echo "bg-danger text-light";
-        } ?>" href="<?php echo base_url('slider') ?>">Slider</a>
+                        <a class="collapse-item 
+                        <?php if ($active == "agama" && $sub_active == "") {
+                            echo "bg-danger text-light";
+                        } ?>
+                        " href="<?php echo base_url('agama') ?>">Agama</a>
 
-        <a class="collapse-item 
-        <?php if ($active == "agama" && $sub_active == "") {
-            echo "bg-danger text-light";
-        } ?>
-        " href="<?php echo base_url('agama') ?>">Agama</a>
+                        <a class="collapse-item 
+                        <?php if ($active == "bahasa" && $sub_active == "") {
+                            echo "bg-danger text-light";
+                        } ?>
+                        " href="<?php echo base_url('bahasa') ?>">Bahasa</a>
 
-        <a class="collapse-item 
-        <?php if ($active == "bahasa" && $sub_active == "") {
-            echo "bg-danger text-light";
-        } ?>
-        " href="<?php echo base_url('bahasa') ?>">Bahasa</a>
+                        <a class="collapse-item
+                        <?php if ($active == "jabatan" && $sub_active == "") {
+                            echo "bg-danger text-light";
+                        } ?>
+                        " href="<?php echo base_url('jabatan') ?>">Jabatan</a>
+                        <a class="collapse-item
+                        <?php if ($active == "level" && $sub_active == "") {
+                            echo "bg-danger text-light";
+                        } ?>
 
-        <a class="collapse-item
-        <?php if ($active == "jabatan" && $sub_active == "") {
-            echo "bg-danger text-light";
-        } ?>
-        " href="<?php echo base_url('jabatan') ?>">Jabatan</a>
-        <a class="collapse-item
-        <?php if ($active == "level" && $sub_active == "") {
-            echo "bg-danger text-light";
-        } ?>
+                        " href="<?php echo base_url('level') ?>">Level</a>
+                        <a class="collapse-item
+                        <?php if ($active == "pendidikan" && $sub_active == "") {
+                            echo "bg-danger text-light";
+                        } ?>
 
-        " href="<?php echo base_url('level') ?>">Level</a>
-        <a class="collapse-item
-        <?php if ($active == "pendidikan" && $sub_active == "") {
-            echo "bg-danger text-light";
-        } ?>
+                        " href="<?php echo base_url('pendidikan') ?>">Pendidikan</a>
+                        <a class="collapse-item
+                        <?php if ($active == "skill" && $sub_active == "") {
+                            echo "bg-danger text-light";
+                        } ?>
 
-        " href="<?php echo base_url('pendidikan') ?>">Pendidikan</a>
-        <a class="collapse-item
-        <?php if ($active == "skill" && $sub_active == "") {
-            echo "bg-danger text-light";
-        } ?>
+                        " href="<?php echo base_url('skill') ?>">Skill</a>
 
-        " href="<?php echo base_url('skill') ?>">Skill</a>
-
-        <a class="collapse-item
-        <?php if ($active == "skill" && $sub_active == "skill_level") {
-            echo "bg-danger text-light";
-        } ?>
-        " href="<?php echo base_url('skill/skill_level') ?>">Level Skill</a>
+                        <a class="collapse-item
+                        <?php if ($active == "skill" && $sub_active == "skill_level") {
+                            echo "bg-danger text-light";
+                        } ?>
+                        " href="<?php echo base_url('skill/skill_level') ?>">Level Skill</a>
 
 
 
-        <a class="collapse-item
-        <?php if ($active == "job" && $sub_active == "kategori") {
-            echo "bg-danger text-light";
-        } ?>
+                        <a class="collapse-item
+                        <?php if ($active == "job" && $sub_active == "kategori") {
+                            echo "bg-danger text-light";
+                        } ?>
 
-        " href="<?php echo base_url('job/kategori') ?>">Kategori Pekerjaan</a>
+                        " href="<?php echo base_url('job/kategori') ?>">Kategori Pekerjaan</a>
 
-        <a class="collapse-item
-        <?php if ($active == "job" && $sub_active == "level") {
-            echo "bg-danger text-light";
-        } ?>
+                        <a class="collapse-item
+                        <?php if ($active == "job" && $sub_active == "level") {
+                            echo "bg-danger text-light";
+                        } ?>
 
-        " href="<?php echo base_url('job/level') ?>">Level Pekerjaan</a>
-    </div>
-</div>
-</li>
+                        " href="<?php echo base_url('job/level') ?>">Level Pekerjaan</a>
+                    </div>
+                </div>
+            </li>
+            <?php else: ?>
+
+
+                <li class="nav-item 
+                <?php if ($active == $key->role_active && $sub_active == $key->role_subactive) {
+                    echo "active";
+                } ?> ">
+                <a class="nav-link" href="<?php echo base_url() . $key->role_active . "/" . $key->role_subactive; ?>">
+                    <i class="fas fa-fw fa-user"></i><?= $key->role_menu; ?>
+                </a>
+            </li>
+        <?php endif ?>
+
+    <?php }
+
+?>
 
 
 
 <!-- Divider -->
-<hr class="sidebar-divider">
 
 <!-- Heading -->
     <!--    <div class="sidebar-heading">

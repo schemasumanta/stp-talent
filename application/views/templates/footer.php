@@ -143,59 +143,155 @@
 
 	});
 
+	// $(document).ready(function(){
+	// 	$.ajax({
+	// 		type : "GET",
+	// 		url  : "<?php echo base_url('notifikasi/get_notifikasi')?>",
+	// 		dataType : "JSON",
+	// 		success: function(result){
+	// 			let judul_notif = `<h6 class="dropdown-header" style="background-color: #dd2727;border-color:#dd2727">
+	// 			Notification
+	// 			</h6>`;
+	// 			let isi_notif ='';
+	// 			let show_notif ;
+
+				
+	// 			for (let i = 0; i < result.length; i++) {
+
+	// 				isi_notif+=`
+	// 				<a class="dropdown-item d-flex align-items-center" href="`+result[i].notifikasi_link+`" onclick="readnotif(`+result[i].penerima_notifikasi_id+`)" >
+	// 				<div class="mr-3">
+	// 				<div class="icon-circle" style="overflow:hidden">
+	// 				<img class"rounded" src="<?php echo base_url() ?>`+result[i].user_foto+`" width="50px">
+	// 				</div>
+	// 				</div>
+	// 				<div>
+	// 				<div class="small text-gray-500">`+result[i].notifikasi_tanggal+`</div>
+	// 				<span class="font-weight-bold">`+result[i].notifikasi_isi+`</span>
+	// 				</div>
+	// 				</a>`;
+	// 			}
+	// 			let notifikasi =judul_notif+isi_notif+show_notif;
+	// 			$('#list_notifikasi_user').html(notifikasi);
+	// 		}
+	// 	});
+
+	// });
+
+	function randomkey() {
+		var text = "";
+		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		for (var i = 0; i < 16; i++)
+			text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+		return text;
+	}
+
 	$(document).ready(function(){
-      $.ajax({
-        type : "GET",
-        url  : "<?php echo base_url('notifikasi/get_notifikasi')?>",
-        dataType : "JSON",
-        success: function(result){
-          let judul_notif = `<h6 class="dropdown-header" style="background-color: #dd2727;border-color:#dd2727">
-          Notification
-          </h6>`;
-          let isi_notif ='';
-          let show_notif ;
 
-          if(result.length > 0)
-          {
-           show_notif =`<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
-           $('.badge-counter').removeClass('d-none');
 
-         }else{
-           show_notif =`<a class="dropdown-item text-center small text-danger-500" href="#">Nothing Notifications</a>`;
-           $('.badge-counter').addClass('d-none');
 
-         }
-         for (let i = 0; i < result.length; i++) {
+		let notifRef = firebase.database().ref('/Notification/').orderByChild('notifikasi_order'); 
 
-          isi_notif+=`
-          <a class="dropdown-item d-flex align-items-center" href="`+result[i].notifikasi_link+`" onclick="readnotif(`+result[i].penerima_notifikasi_id+`)" >
-          <div class="mr-3">
-          <div class="icon-circle" style="overflow:hidden">
-          <img class"rounded" src="<?php echo base_url() ?>`+result[i].user_foto+`" width="50px">
-          </div>
-          </div>
-          <div>
-          <div class="small text-gray-500">`+result[i].notifikasi_tanggal+`</div>
-          <span class="font-weight-bold">`+result[i].notifikasi_isi+`</span>
-          </div>
-          </a>`;
-        }
-        let notifikasi =judul_notif+isi_notif+show_notif;
-        $('#list_notifikasi').html(notifikasi);
-        $('.badge-counter').html(result.length);
-      }
-    });
+		notifRef.on('value', function(snapshot) { 
 
-    });
+			let judul_notif = `<h6 class="dropdown-header" style="background-color: #dd2727;border-color:#dd2727">
+			Notification
+			</h6>`;
+			let isi_notif ='';
+			let show_notif ;
+			let counter =0;
 
-    function randomkey() {
-      var text = "";
-      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for (var i = 0; i < 16; i++)
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
+			if(snapshot.numChildren()> 0){
+				show_notif =`<a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>`;
+				let level = '<?php echo $this->session->user_level ?>';
+				snapshot.forEach((isi) => {
+					let data = isi.val();  
 
-      return text;
-    }
+					if(data.notifikasi_penerima == "All")
+					{
+						if (level!=1) {
+							counter++;
+							isi_notif+=`
+							<a class="dropdown-item d-flex align-items-center" href="`+data.notifikasi_link+`" onclick="readnotif(`+data.penerima_notifikasi_id+`)" >
+							<div class="mr-3">
+							<div class="icon-circle" style="overflow:hidden">
+							<img class"rounded" src="https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fphoto_user%2Fprofile.svg?alt=media&token=a595aaab-3258-4367-a935-e0e245b18588" width="50px">
+							</div>
+							</div>
+							<div>
+							<div class="small text-gray-500">`+data.notifikasi_tanggal+`</div>
+							`+data.notifikasi_isi+`
+							</div>
+							</a>`;
+
+						}
+
+					}
+
+					else if(data.notifikasi_penerima == "Job Provider")
+					{
+						if (level==3) {
+							counter++;
+							isi_notif+=`
+							<a class="dropdown-item d-flex align-items-center" href="`+data.notifikasi_link+`" onclick="readnotif(`+data.penerima_notifikasi_id+`)" >
+							<div class="mr-3">
+							<div class="icon-circle" style="overflow:hidden">
+							<img class"rounded" src="https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fphoto_user%2Fprofile.svg?alt=media&token=a595aaab-3258-4367-a935-e0e245b18588" width="50px">
+							</div>
+							</div>
+							<div>
+							<div class="small text-gray-500">`+data.notifikasi_tanggal+`</div>
+							`+data.notifikasi_isi+`
+							</div>
+							</a>`;
+
+						}
+
+					}
+
+					else if(data.notifikasi_penerima == "Job Seeker")
+					{
+						if (level==2) {
+							counter++;
+							isi_notif+=`
+							<a class="dropdown-item d-flex align-items-center" href="`+data.notifikasi_link+`" onclick="readnotif(`+data.penerima_notifikasi_id+`)" >
+							<div class="mr-3">
+							<div class="icon-circle" style="overflow:hidden">
+							<img class"rounded" src="https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fphoto_user%2Fprofile.svg?alt=media&token=a595aaab-3258-4367-a935-e0e245b18588" width="50px">
+							</div>
+							</div>
+							<div>
+							<div class="small text-gray-500">`+data.notifikasi_tanggal+`</div>
+							`+data.notifikasi_isi+`
+							</div>
+							</a>`;
+
+						}
+
+					}
+
+				});
+
+				$('.badge-counter-user').html(counter);
+				
+			}else{
+				show_notif =`<a class="dropdown-item text-center small text-danger-500" href="#">Nothing Notifications</a>`;
+				$('.badge-counter-user').html('');
+
+			}
+
+			let notifikasi =judul_notif+isi_notif+show_notif;
+			$('#list_notifikasi_user').html(notifikasi);
+
+
+		}); 
+
+
+
+	});
+
+
 </script>
 
 </body>

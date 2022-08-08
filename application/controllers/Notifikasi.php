@@ -8,16 +8,31 @@ class Notifikasi extends CI_Controller {
 		if ($this->session->userdata('login')==FALSE) {
 			redirect('landing','refresh');
 		}
+
+		// if ($this->session->user_level!=1) {
+		// 	redirect('landing','refresh');
+		// }
 		
 		date_default_timezone_set('Asia/Jakarta');	
 	}
 	
 	public function index()
 	{
-		$this->load->view('admin/header');
-		$this->load->view('admin/sidebar'); 
-		$this->load->view('admin/tampilan_notifikasi'); 
-		$this->load->view('admin/footer');
+
+		if ($this->session->user_level==1) {
+			
+
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar'); 
+			$this->load->view('admin/tampilan_notifikasi'); 
+			$this->load->view('admin/footer');
+		}else {
+			
+			$this->load->view('templates/header');
+			$this->load->view('templates/sidebar'); 
+			$this->load->view('web/tampilan_notifikasi'); 
+			$this->load->view('templates/footer');
+		}
 	}
 
 	public function get_notifikasi()
@@ -89,11 +104,15 @@ class Notifikasi extends CI_Controller {
 			$this->db->select('user_id');
 			$this->db->where('user_status',1);
 			if ($this->input->post('notifikasi_penerima')=="Job Provider") {
+
 				$this->db->where('user_level',3);
 			}
 
-			if ($this->input->post('notifikasi_penerima')=="Job Seeker") {
-				$this->db->where('user_level',1);
+			else if ($this->input->post('notifikasi_penerima')=="Job Seeker") {
+				$this->db->where('user_level',2);
+			}else{
+				$this->db->where('user_level!=',1);
+
 			}
 
 			$data_user = $this->db->get('tbl_master_user')->result();

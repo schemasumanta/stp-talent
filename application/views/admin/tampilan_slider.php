@@ -80,7 +80,12 @@
                        <option value="main">Main Panel</option>
                        <option value="cv">CV Panel</option>
                        <option value="how">How It Works Panel</option>
+                       <option value="dashboard_seeker">Dashboard Seeker</option>
+                       <option value="dashboard_provider">Dashboard Provider</option>
+                       <option value="all">Dashboard Seeker & Provider</option>
                      </select>
+                     <br>
+                     <small class="text-dark"><b>Catatan</b> : <br>Dimensi Tinggi Proporsional Untuk Tipe Slider Dashboard (250px)</small>
                    </div>   
                    <div class="col-md-12 mb-3"> 
                      <input type="hidden" name="slider_id" id="slider_id">
