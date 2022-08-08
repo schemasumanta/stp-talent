@@ -11,7 +11,7 @@
 
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
 
@@ -22,7 +22,7 @@
 
       <div class="row">
         <div class="col-12">
-          <h1 class="h3 mb-3 ml-5 text-gray-800">Profil Solo Techno Park</h1>
+          <h1 class="h3 mb-3 ml-5 text-gray-800">Notifikasi</h1>
           <div class="card">
             <div class="card-header">
               <div class="col-sm-6"> 

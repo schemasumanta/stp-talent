@@ -100,7 +100,7 @@
               <!-- logo -->
               <div class="footer-logo mb-20">
                 <a href="index.html"
-                  ><img src="<?php echo base_url().$s->stp_logo ?>" alt=""
+                  ><img src="<?php echo base_url().$s->stp_logo ?>" style="filter: brightness(0) invert(1);" alt=""
                 /></a>
               </div>
               <div class="footer-tittle-bottom">
@@ -141,7 +141,7 @@
                 <div class="footer-copy-right">
                   <p>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright ICT &copy;
+                    Copyright <?php echo  $s->stp_nama; ?> &copy;
                     <script>
                       document.write(new Date().getFullYear());
                     </script>

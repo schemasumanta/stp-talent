@@ -142,6 +142,60 @@
 		}
 
 	});
+
+	$(document).ready(function(){
+      $.ajax({
+        type : "GET",
+        url  : "<?php echo base_url('notifikasi/get_notifikasi')?>",
+        dataType : "JSON",
+        success: function(result){
+          let judul_notif = `<h6 class="dropdown-header" style="background-color: #dd2727;border-color:#dd2727">
+          Notification
+          </h6>`;
+          let isi_notif ='';
+          let show_notif ;
+
+          if(result.length > 0)
+          {
+           show_notif =`<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>`;
+           $('.badge-counter').removeClass('d-none');
+
+         }else{
+           show_notif =`<a class="dropdown-item text-center small text-danger-500" href="#">Nothing Notifications</a>`;
+           $('.badge-counter').addClass('d-none');
+
+         }
+         for (let i = 0; i < result.length; i++) {
+
+          isi_notif+=`
+          <a class="dropdown-item d-flex align-items-center" href="`+result[i].notifikasi_link+`" onclick="readnotif(`+result[i].penerima_notifikasi_id+`)" >
+          <div class="mr-3">
+          <div class="icon-circle" style="overflow:hidden">
+          <img class"rounded" src="<?php echo base_url() ?>`+result[i].user_foto+`" width="50px">
+          </div>
+          </div>
+          <div>
+          <div class="small text-gray-500">`+result[i].notifikasi_tanggal+`</div>
+          <span class="font-weight-bold">`+result[i].notifikasi_isi+`</span>
+          </div>
+          </a>`;
+        }
+        let notifikasi =judul_notif+isi_notif+show_notif;
+        $('#list_notifikasi').html(notifikasi);
+        $('.badge-counter').html(result.length);
+      }
+    });
+
+    });
+
+    function randomkey() {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for (var i = 0; i < 16; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
+    }
 </script>
 
 </body>

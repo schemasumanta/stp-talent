@@ -22,8 +22,11 @@ class Notifikasi extends CI_Controller {
 
 	public function get_notifikasi()
 	{
+		$this->db->select('a.*,b.*,c.user_foto');
 		$this->db->where('a.user_id',$this->session->user_id);
 		$this->db->join('tbl_notifikasi b','b.notifikasi_key=a.notifikasi_key');
+		$this->db->join('tbl_master_user c','c.user_id=b.notifikasi_pengirim');
+
 		$data = $this->db->get('tbl_penerima_notifikasi a')->result();
 		echo json_encode($data);
 	}

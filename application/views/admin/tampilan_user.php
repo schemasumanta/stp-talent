@@ -116,26 +116,26 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Bootstrap modal -->
-
+<!-- 
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script> -->
 
 
 <script type="text/javascript">
   $(document).ready(function() {
-    const firebaseConfig = {
-      apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
-      authDomain: "solo-digital-tech.firebaseapp.com",
-      databaseURL: "https://solo-digital-tech-default-rtdb.firebaseio.com",
-      projectId: "solo-digital-tech",
-      storageBucket: "solo-digital-tech.appspot.com",
-      messagingSenderId: "608688468148",
-      appId: "1:608688468148:web:e503938ea2f4ea0eaa27e1",
-      measurementId: "G-6GFS5NPL12"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
+    //   authDomain: "solo-digital-tech.firebaseapp.com",
+    //   databaseURL: "https://solo-digital-tech-default-rtdb.firebaseio.com",
+    //   projectId: "solo-digital-tech",
+    //   storageBucket: "solo-digital-tech.appspot.com",
+    //   messagingSenderId: "608688468148",
+    //   appId: "1:608688468148:web:e503938ea2f4ea0eaa27e1",
+    //   measurementId: "G-6GFS5NPL12"
+    // };
+    // // Initialize Firebase
+    // firebase.initializeApp(firebaseConfig);
 
     const notif = $('.flashdatart').data('title');
     if (notif) {
@@ -426,11 +426,7 @@
     var isChecked = $('#set_active' + id);
     $.ajax({
       type: "POST",
-<<<<<<< HEAD
       url: '<?php echo base_url() ?>user/setStatus',
-=======
-      url: '<?php echo site_url('user/setStatus') ?>',
->>>>>>> 3f6b501e457720f8f19107f6f70f2be53d68497d
       data: {
         id: id
       },
