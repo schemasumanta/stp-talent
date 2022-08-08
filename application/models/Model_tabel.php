@@ -16,7 +16,7 @@ class Model_tabel extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
-    private function _get_datatables_query($type = null, $sort = null, $order = null, $search = null)
+    private function _get_datatables_query($type = null, $sort = null, $order = null, $search = null, $id = null)
     {
         switch ($type) {
             case 'agama':
@@ -109,6 +109,31 @@ class Model_tabel extends CI_Model
                     $this->db->where('pp.pelamar_id', $this->session->user_id);
                     $this->db->or_like('lp.lowongan_deskripsi', $search);
                     $this->db->where('pp.pelamar_id', $this->session->user_id);
+                }
+
+                break;
+
+            case 'application_provider':
+                $this->db->select('
+                user_email,user_telepon,lamaran_status,lamaran_tanggal,resume_foto,resume_nama_lengkap,resume_lampiran,kabkota_nama');
+                $this->db->join('tbl_lowongan_pekerjaan lp', 'lp.lowongan_id = pp.lowongan_id');
+                $this->db->join('tbl_master_user mu', 'mu.user_id = pp.pelamar_id');
+                $this->db->join('tbl_resume r', 'r.user_id = mu.user_id');
+                $this->db->join('tbl_resume_lampiran rl', 'rl.user_id = mu.user_id', 'LEFT');
+                $this->db->join('tbl_master_kabkota kk', 'kk.kabkota_id = r.kabkota_id');
+                $this->db->from('tbl_pelamar_pekerjaan pp');
+                $this->db->where('lp.lowongan_id', $id);
+                if ($_GET['order'][0]['column'] == 0) {
+                    $this->db->order_by('pp.lamaran_tanggal', $order);
+                } else {
+                    $this->db->order_by($sort, $order);
+                }
+
+                if ($search != null && $search != '') {
+                    $this->db->like('r.nama_lengkap', $search);
+                    $this->db->where('lp.lowongan_id', $id);
+                    $this->db->or_like('kk.kabkota_nama', $search);
+                    $this->db->where('lp.lowongan_id', $id);
                 }
 
                 break;

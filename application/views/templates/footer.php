@@ -56,69 +56,92 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
 
+<script src="<?= base_url(); ?>assets/js/owl-carousel.js"></script>
 <script>
+	$(document).ready(function() {
+		$(".owl-carousel").owlCarousel({
+			loop: true,
+			margin: 10,
+			responsiveClass: true,
+			nav: true,
+			navText: ["<div class='nav-btn prev-slide'><img src='<?= base_url('assets/img/icon/arrow-left.png'); ?>' height='30'></div>", "<div class='nav-btn next-slide'><img src='<?= base_url('assets/img/icon/arrow-right.png'); ?>' height='30'></div>"],
+			responsive: {
+				0: {
+					items: 1,
+					nav: true,
+					loop: true
+				},
+				600: {
+					items: 3,
+					nav: false,
+					loop: true,
+				},
+				1000: {
+					items: 5,
+					nav: true,
+					loop: true,
+				}
+			}
+		});
+	});
 
-	function show_password_user(id)
-	{
-		if($('#'+id).attr('type')=="password")
-		{
-			$('#'+id).attr('type','text');
-			$('.'+id).html('<i class="fa fa-eye-slash"></i>');
-		}else{
-			$('#'+id).attr('type','password');
-			$('.'+id).html('<i class="fa fa-eye"></i>');
+	function show_password_user(id) {
+		if ($('#' + id).attr('type') == "password") {
+			$('#' + id).attr('type', 'text');
+			$('.' + id).html('<i class="fa fa-eye-slash"></i>');
+		} else {
+			$('#' + id).attr('type', 'password');
+			$('.' + id).html('<i class="fa fa-eye"></i>');
 
 		}
 	}
 
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-	apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
-	authDomain: "solo-digital-tech.firebaseapp.com",
-	databaseURL: "https://solo-digital-tech-default-rtdb.firebaseio.com",
-	projectId: "solo-digital-tech",
-	storageBucket: "solo-digital-tech.appspot.com",
-	messagingSenderId: "608688468148",
-	appId: "1:608688468148:web:e503938ea2f4ea0eaa27e1",
-	measurementId: "G-6GFS5NPL12"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+	// Your web app's Firebase configuration
+	const firebaseConfig = {
+		apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
+		authDomain: "solo-digital-tech.firebaseapp.com",
+		databaseURL: "https://solo-digital-tech-default-rtdb.firebaseio.com",
+		projectId: "solo-digital-tech",
+		storageBucket: "solo-digital-tech.appspot.com",
+		messagingSenderId: "608688468148",
+		appId: "1:608688468148:web:e503938ea2f4ea0eaa27e1",
+		measurementId: "G-6GFS5NPL12"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
 
 
 
 
-$('#btn_ubah_password_user').on('click',function(){
-	let cek = 0;
+	$('#btn_ubah_password_user').on('click', function() {
+		let cek = 0;
 
-	let password = $('#password_baru_user').val();
-	let confirm = $('#confirm_password_baru_user').val();
-	if (password=="") {
-		cek++;
-		$('#password_baru_user').focus();
-		$('.error-password_baru_user').html('Silahkan Masukkan Password Baru');
-	}else{
-		$('.error-password_baru_user').html('');
-	}
-	if (password!==confirm) {
-		cek++;
-		$('#confirm_password_baru_user').focus();
-		$('#confirm_password_baru_user').val();
-		$('.error-confirm_password_baru_user').html('Konfirmasi Password Tidak Valid');
-	}else{
-		$('.error-confirm_password_baru_user').html('');
-	}
-	if (cek > 0) {
-		return false;
-	}else{
-		$('#form_ubah_password_user').submit();
-		
-	}
+		let password = $('#password_baru_user').val();
+		let confirm = $('#confirm_password_baru_user').val();
+		if (password == "") {
+			cek++;
+			$('#password_baru_user').focus();
+			$('.error-password_baru_user').html('Silahkan Masukkan Password Baru');
+		} else {
+			$('.error-password_baru_user').html('');
+		}
+		if (password !== confirm) {
+			cek++;
+			$('#confirm_password_baru_user').focus();
+			$('#confirm_password_baru_user').val();
+			$('.error-confirm_password_baru_user').html('Konfirmasi Password Tidak Valid');
+		} else {
+			$('.error-confirm_password_baru_user').html('');
+		}
+		if (cek > 0) {
+			return false;
+		} else {
+			$('#form_ubah_password_user').submit();
 
-});
+		}
 
-
+	});
 </script>
 
 </body>
