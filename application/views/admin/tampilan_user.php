@@ -426,7 +426,7 @@
     var isChecked = $('#set_active' + id);
     $.ajax({
       type: "POST",
-      url: '/user/setStatus',
+      url: '<?php echo site_url('user/setStatus') ?>',
       data: {
         id: id
       },
