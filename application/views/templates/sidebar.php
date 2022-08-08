@@ -130,10 +130,10 @@ $sub_active = $this->uri->segment(2);
 
         <li class="nav-item 
 
-        <?php if ($active == "user" && $sub_active == "admin_role") {
+        <?php if ($active == "provider" && $sub_active == "application") {
             echo "active";
         } ?> ">
-            <a class="nav-link" href="<?php echo base_url('user') ?>">
+            <a class="nav-link" href="<?php echo base_url('provider/application'); ?>">
                 <i class="fas fa-fw fa-users mr-2"></i><span>Applicants</span>
             </a>
 
