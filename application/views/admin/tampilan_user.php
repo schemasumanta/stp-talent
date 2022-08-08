@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
 
   <h1 class="h3 mb-2 text-gray-800">User</h1>
@@ -12,505 +11,447 @@
 
         </div>
         <div class="col-md-12">
-         <button id="btn_tambah" class="btn btn-success btn-sm btn-md btn  mr-2" ><i class="fa fa-plus mr-2"></i> Tambah Data User</button>
-       </div>
+          <button id="btn_tambah" class="btn btn-success btn-sm btn-md btn  mr-2" onclick="add()"><i class="fa fa-plus mr-2"></i> Tambah Data User</button>
+        </div>
 
-     </div>
-   </div>
-   <div class="card-body">
-    <div class="table-responsive">
-     <table  id="tabel_user"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
-      <thead>
-        <tr class="bg-danger text-light text-center">
-          <th>No</th>
-          <th >Nama Lengkap</th>
-          <th >Email</th>
-          <th >Level</th>
-          <th >Telepon</th>
-          <th >Foto</th>
-          <th >Status</th>
-          <th style="text-align: center;" width="10%" >Opsi</th>
-        </tr>
-      </thead>
-      <tbody id="show_data">
-      </tbody>
-    </table>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table id="tabel_user" class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
+          <thead>
+            <tr class="bg-danger text-light text-center">
+              <th>No</th>
+              <th>Nama Lengkap</th>
+              <th>Email</th>
+              <th>Level</th>
+              <th>Telepon</th>
+              <th>Foto</th>
+              <th>Status</th>
+              <th style="text-align: center;" width="10%">Opsi</th>
+            </tr>
+          </thead>
+          <tbody id="show_data">
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 
 </div>
+
+<!-- Bootstrap modal -->
+<div class="modal fade" id="modal_user" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Person Form</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body form">
+        <form action="javascript:;" id="form" class="form-horizontal">
+          <input type="hidden" value="" name="id" id="id" />
+          <div class="form-body">
+            <div class="form-group">
+              <label class="control-label col-md-4">Nama Lengkap</label>
+              <div class="col-md-12">
+                <input name="user_nama" id="user_nama" placeholder="Nama Lengkap" class="form-control" type="text">
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4">Email</label>
+              <div class="col-md-12">
+                <input name="user_email" id="user_email" placeholder="contoh@gmail.com" class="form-control" type="email">
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4">No Tlp</label>
+              <div class="col-md-12">
+                <input name="user_telepon" id="user_telepon" placeholder="08xxx" class="form-control" type="text">
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4">Password</label>
+              <div class="col-md-12">
+                <div class="input-group mb-3">
+                  <input type="password" name="user_password" id="user_password" class="form-control" placeholder="Password">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="show_pw" onclick="show_password()"><i class="fa fa-eye"></i></button>
+                  </div>
+                </div>
+                <p id="pw_edit">
+                  <small class="text-danger">*Masukan Password jika ingin merubahnya</small>
+                </p>
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div class="form-group" id="photo-preview">
+              <label class="control-label col-md-4">Photo</label>
+              <div class="col-md-12">
+                <div class="card">
+                  <img src="<?php echo base_url('assets_admin/img/avatar.png'); ?>" class="card-img-top" alt="..." id="imgView_user">
+                </div>
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4" id="label-photo">Upload Photo </label>
+              <div class="col-md-12">
+                <input name="user_photo" id="user_photo" type="file" multiple>
+                <span class="help-block"></span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="btnSave" onclick="save()" class="btn btn-primary">Simpan</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal -->
 <script type="text/javascript">
-    $(document).ready(function(){
-   const notif = $('.flashdatart').data('title');
-   if (notif) {
-    Swal.fire({
-      title:notif,
-      text:$('.flashdatart').data('text'),
-      icon:$('.flashdatart').data('icon'),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.close(); 
+  $(document).ready(function() {
+    const notif = $('.flashdatart').data('title');
+    if (notif) {
+      Swal.fire({
+        title: notif,
+        text: $('.flashdatart').data('text'),
+        icon: $('.flashdatart').data('icon'),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close();
 
-      }
+        }
+      });
+    }
+
+    dataTable = $('#tabel_user').DataTable({
+      paginationType: 'full_numbers',
+      processing: true,
+      serverSide: true,
+      searching: true,
+
+      filter: false,
+      autoWidth: false,
+      aLengthMenu: [
+        [10, 25, 50, 100, -1],
+        [10, 25, 50, 100, "All"]
+      ],
+      ajax: {
+        url: '<?php echo base_url('user/tabel_user') ?>',
+        type: 'get',
+        data: function(data) {}
+      },
+      language: {
+        sProcessing: 'Sedang memproses...',
+        sLengthMenu: 'Tampilkan _MENU_ entri',
+        sZeroRecords: 'Tidak ditemukan data yang sesuai',
+        sInfo: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
+        sInfoEmpty: 'Menampilkan 0 sampai 0 dari 0 entri',
+        sInfoFiltered: '(disaring dari _MAX_ entri keseluruhan)',
+        sInfoPostFix: '',
+        sSearch: 'Cari:',
+        sUrl: '',
+        oPaginate: {
+          sFirst: '<<',
+          sPrevious: '<',
+          sNext: '>',
+          sLast: '>>'
+        }
+      },
+      // order: [1, 'asc'],
+      columns: [{
+          'data': 'no'
+        },
+        {
+          'data': 'user_nama'
+        },
+        {
+          'data': 'user_email'
+        },
+        {
+          'data': 'level_nama'
+        },
+        {
+          'data': 'user_telepon'
+        },
+        {
+          'data': 'user_foto'
+        },
+        {
+          'data': 'user_status'
+        },
+        {
+          'data': 'opsi',
+          orderable: false
+        },
+
+      ],
+      columnDefs: [{
+        targets: [0, 5, 6, -1],
+        className: 'text-center'
+      }, ]
+
     });
+
+
+    $(".refresh").click(function() {
+      location.reload();
+    });
+
+  });
+
+  function reload_table() {
+    dataTable.ajax.reload(null, false);
   }
 
-  dataTable = $('#tabel_user').DataTable( {
-    paginationType:'full_numbers',
-    processing: true,
-    serverSide: true,
-    searching: true,
 
-    filter: false,
-    autoWidth:false,
-    aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-    ajax: {
-     url: '<?php echo base_url('user/tabel_user')?>',
-     type: 'get',
-     data: function (data) {
-     }
-   },
-   language: {
-     sProcessing: 'Sedang memproses...',
-     sLengthMenu: 'Tampilkan _MENU_ entri',
-     sZeroRecords: 'Tidak ditemukan data yang sesuai',
-     sInfo: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
-     sInfoEmpty: 'Menampilkan 0 sampai 0 dari 0 entri',
-     sInfoFiltered: '(disaring dari _MAX_ entri keseluruhan)',
-     sInfoPostFix: '',
-     sSearch: 'Cari:',
-     sUrl: '',
-     oPaginate: {
-      sFirst: '<<',
-      sPrevious: '<',
-      sNext: '>',
-      sLast: '>>'
+  $("#user_photo").change(function(event) {
+    fadeInAdd();
+    getuser_photo(this);
+  });
+
+  $("#user_photo").on('click', function(event) {
+    fadeInAdd();
+  });
+
+  function getuser_photo(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      var filename = $("#user_photo").val();
+      filename = filename.substring(filename.lastIndexOf('\\') + 1);
+      reader.onload = function(e) {
+        // debugger;
+        $('#imgView_user').attr('src', e.target.result);
+        $('#imgView_user').hide();
+        $('#imgView_user').fadeIn(500);
+        $('.custom-file-label').text(filename);
+      }
+      reader.readAsDataURL(input.files[0]);
     }
-  },
-  // order: [1, 'asc'],
-  columns: [
-  {'data':'no'},
-  {'data':'user_nama'},
-  {'data':'user_email'},
-  {'data':'level_nama'},
-  {'data':'user_telepon'},
-  {'data':'user_foto'},
-  {'data':'user_status'},               
-  {'data':'opsi',orderable:false},
+    $(".alert").removeClass("loadAnimate").hide();
+  }
 
-  ],   
-  columnDefs: [
-  {
-    targets: [0,5,6,-1],
-    className: 'text-center'
-  },
-  ]
+  function fadeInAdd() {
+    fadeInAlert();
+  }
 
-});
+  function fadeInAlert(text) {
+    $(".alert").text(text).addClass("loadAnimate");
+  }
 
 
-  function table_data(){
-   dataTable.ajax.reload(null,true);
- }
-
-
- $(".refresh").click(function(){
-   location.reload();
- });
-
-
-
-
-});
 
   function previewFile(id) {
-    let file = $('#'+id)[0].files[0];
+    let file = $('#' + id)[0].files[0];
     let reader = new FileReader();
-    reader.addEventListener("load", function () {
-      $('#preview_'+id).attr('src',reader.result);
+    reader.addEventListener("load", function() {
+      $('#preview_' + id).attr('src', reader.result);
     }, false);
     if (file) {
       reader.readAsDataURL(file);
     }
   }
 
-  function show_password(id)
-  {
-    if($('#'+id).attr('type')=="password")
-    {
-      $('#'+id).attr('type','text');
-      $('.'+id).html('<i class="fa fa-eye-slash"></i>');
-    }else{
-      $('#'+id).attr('type','password');
-      $('.'+id).html('<i class="fa fa-eye"></i>');
-
+  function show_password() {
+    if ($('#user_password').attr('type') == "password") {
+      $('#user_password').attr('type', 'text');
+      $('#show_pw').html('<i class="fa fa-eye-slash"></i>');
+    } else {
+      $('#user_password').attr('type', 'password');
+      $('#show_pw').html('<i class="fa fa-eye"></i>');
     }
   }
 
+  function add() {
+    save_method = 'insert';
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+    $('#modal_user').modal('show'); // show bootstrap modal
+    $('.modal-title').text('Tambah User'); // Set Title to Bootstrap modal title
+    $('#pw_edit').hide();
+    // $('#photo-preview').hide(); // hide photo preview modal
 
-  $('#btn_aktivasi').on('click',function(){
-    var kode=$('#kode_user_aktivasi').val();
-    var isi=$('#isi_aktivasi').val();
+    $('#label-photo').text('Upload Photo'); // label photo upload
+  }
+  var files = [];
+  document.getElementById("user_photo").addEventListener("change", function(e) {
+    files = e.target.files;
+    previewFile('user_photo');
 
+  });
+
+  function save() {
+    $('#btnSave').text('saving...'); //change button text
+    $('#btnSave').attr('disabled', true); //set button disable 
+    var url;
+
+    if (save_method == 'insert') {
+      url = "<?php echo site_url('user/insert_user') ?>";
+    } else {
+      url = "<?php echo site_url('user/update_user') ?>";
+    }
+
+    // ajax adding data to database
+
+    var formData = new FormData($('#form')[0]);
     $.ajax({
-      type : "POST",
-      url  : "<?php echo base_url('user/aktivasi_user')?>",
-      dataType : "JSON",
-      data : {'kode': kode,'isi': isi},
-      success: function(data){
-        let pesan='';
-        if (data) {
-          if (isi==1) {
-            pesan = "Diaktifkan";
-          }else{
-            pesan = "DiNonaktifkan";
-          }
-          Swal.fire({
-            title:'Berhasil',
+      url: url,
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      dataType: "JSON",
+      success: function(data) {
 
-            text:'User Berhasil Di '+ pesan,
-            icon:'success'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.close();
-              $('#ModalAktivasi').modal('hide');
+        if (data.status) //if success close modal and reload ajax table
+        {
 
-              location.reload();
-
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
-          });
-        }
+          })
 
+          if (save_method == "insert") {
+            Toast.fire({
+              icon: 'success',
+              title: 'Tambah data berhasil'
+            })
+          } else if (save_method == "update") {
+            Toast.fire({
+              icon: 'success',
+              title: 'Ubah data berhasil'
+            })
+          }
+
+          $('#modal_user').modal('hide');
+          reload_table();
+          $('#imgView_user').attr('src', 'assets_admin/img/avatar.png');
+        } else {
+          for (var i = 0; i < data.inputerror.length; i++) {
+            $('[name="' + data.inputerror[i] + '"]').addClass('is-invalid'); //select parent twice to select div form-group class and add has-error class
+            Swal.fire({
+              icon: 'warning',
+              title: 'Oops...',
+              text: data.error_string[i]
+            })
+          }
+        }
+        $('#btnSave').text('Simpan'); //change button text
+        $('#btnSave').attr('disabled', false); //set button enable 
+
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: "error dicoding silahkan kontak developer"
+        });
+        $('#btnSave').text('Simpan'); //change button text
+        $('#btnSave').attr('disabled', false); //set button enable 
 
       }
     });
-    return false;
-  });
+  }
 
-  $('#show_data').on('click','.item_aktivasi_user',function(){
-    if ($(this).html().includes('check')) {
-      $('.notif_aktivasi').html('Aktifkan User... ?');
-      $('#isi_aktivasi').val(1);
-
-    }else{
-      $('.notif_aktivasi').html('Nonaktifkan User... ?');
-      $('#isi_aktivasi').val(0);
-    }
-
-    var kode= $(this).attr('data');
-    $('#ModalAktivasi').modal('show');
-    $('#kode_user_aktivasi').val(kode);
-
-    return false;
-  });
-
-  $('#show_data').on('click','.item_edit_user',function(){
-    let id_user = $(this).attr('data');
+  function changeStatus(id) {
+    var isChecked = $('#set_active' + id);
     $.ajax({
-      type : "GET",
-      url  : "<?php echo base_url('user/detail_user')?>",
-      dataType : "JSON",
-      data : {'id_user':id_user},
-      success: function(data){
+      type: "POST",
+      url: '/user/setStatus',
+      data: {
+        id: id
+      },
+      dataType: "JSON",
+      success: function(response) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
 
-        $('#modal_user').modal('show');
-        $('#form_user').attr('action','<?php echo base_url('user/ubah') ?>');
-        $('#btn_simpan').html('UBAH');
-        $('.inputpassword').addClass('d-none');
-        $('#label_header_user').html('<i class="fas fa-user mr-2"></i> UBAH DATA USER');
-        $('#id_user').val(id_user);
-        $('#user_nama').val(data[0].nama);
-        $('#level').val(data[0].level).trigger('change');
-        $('#cabang').val(data[0].id_cabang).trigger('change');
-        $('#jabatan').val(data[0].id_jabatan).trigger('change');
-        $('#email').val(data[0].email);
-        $('#username').val(data[0].username);
-        $('#telepon').val(data[0].telepon);
-        $('#username_lama').val(data[0].username);
-        $('#lampiran_user_lama').val(data[0].foto);
-        if(data[0].foto!='')
-        {
-          $('#preview_lampiran_user').attr('src','<?php echo base_url()?>'+data[0].foto);
-          
+        if (response.status) {
+          isChecked.next().text($(isChecked).is(':checked') ? 'Aktif' : 'Nonaktif');
+          Toast.fire({
+            icon: 'success',
+            title: 'Ubah status berhasil'
+          })
+        } else {
+          isChecked.prop('checked', isChecked.is(':checked') ? null : 'checked');
+          Toast.fire({
+            icon: 'warning',
+            title: 'Ubah status gagal'
+          })
         }
       },
-
-    });
-
-    return false;
-  });
-
-  $('#btn_tambah').on('click',function(){
-    $('#modal_user').modal('show');
-    $('#form_user').attr('action','<?php echo base_url('user/simpan') ?>');
-    $('#btn_simpan').html('SIMPAN');
-
-    $('#form_user').trigger("reset");
-    $('#preview_lampiran_user').attr('src','<?php echo base_url()?>assets/img/img03.jpg');
-
-    $('.inputpassword').removeClass('d-none');
-    $('#label_header_user').html('<i class="fas fa-user mr-2"></i> TAMBAH DATA USER');
-  });
-
-
-  $('#show_data').on('click','.item_edit_password',function(){
-    var kode=$(this).attr('data');
-    $('#modal_edit_password').modal('show');
-    $('#id_user_password').val(kode);
-    return false;
-  });
-
-
-function hanyaAngka(event) {
-  var angka = (event.which) ? event.which : event.keyCode
-  if (angka != 46 && angka != 8 && angka > 31 && (angka < 48 || angka > 57))
-    return false;
-  return true;
-}
-
-
-  $('#btn_ubah_password').on('click',function(){
-    let id_user   =   $('#id_user_password').val();
-    let password  =   $('#password_baru').val();
-    let confirm   =   $('#confirm_password').val();
-
-    if (password=="") {
-      $('#password_baru').focus();
-      Swal.fire({
-        title:'Password Baru Kosong',
-        text:'Silahkan Masukkan Password Baru!',
-        icon:'error'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.close();
-        }
-      });
-      return false;
-
-    }
-
-    if (password!==confirm) {
-      $('#confirm_password').focus();
-      $('#confirm_password').val('');
-
-      Swal.fire({
-        title:'Konfirmasi Password Tidak Cocok',
-        text:'Silahkan Masukkan Ulang Konfirmasi Password!',
-        icon:'error'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.close();
-        }
-      });
-      return false;
-
-    }
-
-    $.ajax({
-      type : "POST",
-      url  : "<?php echo base_url('user/ubah_password')?>",
-      dataType : "JSON",
-      data : {'id_user':id_user, 'password':password},
-      success: function(data){
-
-        if (data) {
-
-         Swal.fire({
-          title:'Berhasil',
-          text:'Password Berhasil Diubah',
-          icon:'success'
-
-
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.close();
-            $('#modal_edit_password').modal('hide');
-            location.reload();
-
-          }
+      error: function(jqXHR, textStatus, errorThrown) {
+        isChecked.prop('checked', isChecked.is(':checked') ? null : 'checked');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: "error dicoding silahkan kontak developer"
         });
-      } else{
-
-       Swal.fire({
-        title:'Gagal',
-        text:'Password Gagal Diubah',
-        icon:'error'
-
-
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.close();
-          $('#modal_edit_password').modal('hide');
-          location.reload();
-
-        }
-      });
-
-    }
-
-
-
+      },
+    });
   }
-});
-    return false;
-  });
 
-  $('#btn_simpan').on('click',function(){
+  function edit_user(id) {
+    save_method = 'update';
+    $('#form')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('is-invalid'); // clear error class
+    $('.help-block').empty(); // clear error string
 
-    let user_nama = $('#user_nama').val();
-    if (user_nama=="") {
-      $('#user_nama').focus();
-      Swal.fire({
-        title:'Nama Kosong',
-        text:'Silahkan Masukkan Nama!',
-        icon:'error'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.close();
+
+    //Ajax Load data from ajax
+    $.ajax({
+      url: "<?php echo site_url('user/get_data_user') ?>/" + id,
+      type: "GET",
+      dataType: "JSON",
+      success: function(data) {
+
+        $('[name="id"]').val(data.user_id);
+        $('[name="user_nama"]').val(data.user_nama);
+        $('[name="user_email"]').val(data.user_email);
+        $('[name="user_telepon"]').val(data.user_telepon);
+        $('#pw_edit').show();
+        $('#modal_user').modal('show'); // show bootstrap modal when complete loaded
+        $('.modal-title').text('Edit User'); // Set title to Bootstrap modal title
+        img = '<?= base_url('assets/img/foto_user/'); ?>'
+        if (data.user_foto) {
+          $('#label-photo').text('Change Photo'); // label photo upload
+          $('#photo-preview div').html('<img src="' + img + data.user_foto + '" class="card-img-top" id="imgView_user">'); // show photo
+
+        } else {
+          $('#label-photo').text('Upload Photo'); // label photo upload
+          $('#photo-preview div').text('(No photo)');
         }
-      });
-      return false;
-    }
 
 
-
-     let user_level = $('#user_level').val();
-    if (user_level==null) {
-     $('#user_level').focus();
-     Swal.fire({
-      title:'Level Kosong',
-      text:'Silahkan Pilih Level!',
-      icon:'error'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.close();
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert('Error get data from ajax');
       }
     });
-    return false;
   }
-  let user_email = $('#user_email').val();
-  if (user_email=="") {
-      $('#user_email').focus();
-      Swal.fire({
-        title:'Email Kosong',
-        text:'Silahkan Masukkan Email!',
-        icon:'error'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.close();
-        }
-      });
-      return false;
-    }else{
-
-    let testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-    if (!testEmail.test(user_email))
-    {
-     $('#user_email').focus();
-     Swal.fire({
-      title:'Format Email Salah',
-      text:'Silahkan Masukkan Email yang Valid!',
-      icon:'error'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.close();
-      }
-    });
-    return false;
-  }
-}
-let cek = 0;
-$.ajax({
-  type : "GET",
-  url  : "<?php echo base_url('user/cek_email')?>",
-  dataType : "JSON",
-  data : {'user_email': user_email},
-  success: function(data){
-   let link = $('#form_user').attr('action');
-   if (link.includes('simpan')) {
-    if (data > 0) {
-      cek+=1;
-      $('#username').focus();
-      Swal.fire({
-        title:'Username Sudah Digunakan',
-        text:'Silahkan Masukkan Username Lain!',
-        icon:'error'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.close();
-        }
-      });
-
-      return false;
-
-    }
-
-    else{
-
-     let password = $('#password').val();
-     if (password=="") {
-      cek +=1;
-      $('#password').focus();
-      Swal.fire({
-        title:'Password Kosong',
-        text:'Silahkan Masukkan Password!',
-        icon:'error'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.close();
-        }
-      });
-      return false;
-    }
-    else{
-
-      $('#btn_simpan').attr('disabled','disabled');
-      $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
-
-      $('#form_user').submit();
-    }
-
-  }
-
-} else{
-
-  let username_lama = $('#username_lama').val();
-
-  if (data > 0 && username_lama!=username) {
-    $('#username_lama').focus();
-    Swal.fire({
-      title:'Username Sudah Digunakan',
-      text:'Silahkan Masukkan Username Lain!',
-      icon:'error'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.close();
-      }
-    });
-
-    return false;
-
-
-  }else{
-    $('#btn_simpan').attr('disabled','disabled');
-    $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
-
-
-    $('#form_user').submit();
-  }
-
-}
-
-}
-
-});
-
-});
-
-
-
 </script>
-
-
-

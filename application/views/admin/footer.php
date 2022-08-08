@@ -45,6 +45,44 @@
 <script src="<?php echo base_url(); ?>assets_admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_admin/js/modules-datatables.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
+
+
+<script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAbDiylzDJ_ukXTyTYeq85-Usnkp85fW6o",
+        authDomain: "solo-digital-tech.firebaseapp.com",
+        databaseURL: "https://solo-digital-tech-default-rtdb.firebaseio.com",
+        projectId: "solo-digital-tech",
+        storageBucket: "solo-digital-tech.appspot.com",
+        messagingSenderId: "608688468148",
+        appId: "1:608688468148:web:e503938ea2f4ea0eaa27e1",
+        measurementId: "G-6GFS5NPL12"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    document.getElementById('btnSave').addEventListener('click', function() {
+        var file = document.getElementById('user_photo').files[0];
+        console.log(file.name);
+        var storage = firebase.storage().ref('talent_hub/foto_user/' + file.name);
+        var upload = storage.put(file);
+
+        upload.on('state_changed', function(snapshot) {
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("upload is " + progress + " done");
+        }, function(error) {
+            console.log(error.message);
+        }, function() {
+            upload.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                console.log(downloadURL);
+            })
+        })
+    })
+</script>
 </body>
 
 </html>
