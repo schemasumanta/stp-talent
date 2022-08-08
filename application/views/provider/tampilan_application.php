@@ -94,8 +94,7 @@
         <div class="owl-carousel">
             <?php
             foreach ($lowongan as $key) { ?>
-                <div class="card align-items-center d-flex justify-content-center mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>" style="height: 250px;">
-                    <img src="<?= $key->perusahaan_logo; ?>" alt="logo perusahaan" style="height: 100px; width: 150px;">
+                <div class="card align-items-center d-flex justify-content-center mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
                     <div class="card-body">
                         <a href="javascript:;" class="btn" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)">
                             <h5><?= $key->lowongan_judul; ?></h5>
@@ -109,6 +108,7 @@
             ?>
         </div>
     </div>
+    <hr>
     <div class="table-responsive">
 
         <table id="tabel_application" class="table " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
@@ -119,6 +119,41 @@
     </div>
 
 </div>
+
+<!-- Bootstrap modal -->
+<div class="modal fade" id="modal_pelamar" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Person Form</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body form">
+                <form action="javascript:;" id="form_pelamar" class="form-horizontal">
+                    <input type="hidden" value="" name="id" id="id" />
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Pilih</label>
+                            <div class="col-md-12">
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1">Assesment</option>
+                                    <option value="2">Rejected</option>
+                                </select>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-primary" onclick="save()">Simpan</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal -->
+
 <!-- /.container-fluid -->
 <script type="text/javascript">
     $(document).ready(function() {
@@ -138,13 +173,6 @@
 
 
 
-
-
-        function table_data() {
-            dataTable.ajax.reload(null, true);
-        }
-
-
         $(".refresh").click(function() {
             location.reload();
         });
@@ -158,7 +186,7 @@
             processing: true,
             serverSide: true,
             searching: true,
-
+            bDestroy: true,
             filter: false,
             autoWidth: false,
             aLengthMenu: [
@@ -166,11 +194,8 @@
                 [10, 25, 50, 100, "All"]
             ],
             ajax: {
-                url: '<?php echo base_url('provider/tabel_application') ?>',
-                type: 'post',
-                data: {
-                    id: id
-                },
+                url: '<?php echo base_url('provider/tabel_application') ?>/' + id,
+                type: 'get',
                 data: function(data) {}
             },
             language: {
@@ -212,4 +237,95 @@
         $('#ModalHapusBookmark').modal('show');
         $('#lowongan_tersimpan_id_hapus').val(id);
     });
+
+    function reload_table() {
+        dataTable.ajax.reload(null, true);
+    }
+
+    function cek_pelamar(id) {
+        //Ajax Load data from ajax
+        $.ajax({
+            url: "<?php echo site_url('provider/cek_pelamar') ?>/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+
+                $('[name="id"]').val(id);
+                $('#modal_pelamar').modal('show'); // show bootstrap modal when complete loaded
+                $('.modal-title').text('Detail Pelamar'); // Set title to Bootstrap modal title
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    }
+
+    function save() {
+        $('#btnSave').text('saving...'); //change button text
+        $('#btnSave').attr('disabled', true); //set button disable 
+        var url;
+
+        url = "<?php echo site_url('provider/update_pekerjaan') ?>";
+
+        // ajax adding data to database
+
+        var formData = new FormData($('#form_pelamar')[0]);
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: "JSON",
+            success: function(data) {
+
+                if (data.status) //if success close modal and reload ajax table
+                {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Data berhasil diupdate'
+                    })
+
+                    $('#modal_pelamar').modal('hide');
+                    reload_table();
+                } else {
+                    for (var i = 0; i < data.inputerror.length; i++) {
+                        $('[name="' + data.inputerror[i] + '"]').addClass('is-invalid'); //select parent twice to select div form-group class and add has-error class
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: data.error_string[i]
+                        })
+                    }
+                }
+                $('#btnSave').text('Simpan'); //change button text
+                $('#btnSave').attr('disabled', false); //set button enable 
+
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: "error dicoding silahkan kontak developer"
+                });
+                $('#btnSave').text('Simpan'); //change button text
+                $('#btnSave').attr('disabled', false); //set button enable 
+
+            }
+        });
+    }
 </script>
