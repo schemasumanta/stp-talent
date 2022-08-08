@@ -74,6 +74,18 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="control-label col-md-4">Pilih menu</label>
+              <div class="col-md-12">
+                <select name="role_id[]" id="role_id" class="form-control" multiple="multiple" style="width: 100%">
+                  <option value="0" disabled>Pilih Menu</option>
+                  <?php foreach ($menu as $key) { ?>
+                    <option value="<?= $key->role_id; ?>"> <?= $key->role_menu; ?></option>
+                  <?php }; ?>
+                </select>
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div class="form-group">
               <label class="control-label col-md-4">Password</label>
               <div class="col-md-12">
                 <div class="input-group mb-3">
@@ -136,6 +148,13 @@
     // };
     // // Initialize Firebase
     // firebase.initializeApp(firebaseConfig);
+    $('#role_id').select2({
+      placeholder: 'Pilih Menu',
+      allowClear: true,
+      dropdownParent: $('#modal_user'),
+      tags: true,
+    });
+
 
     const notif = $('.flashdatart').data('title');
     if (notif) {
@@ -243,7 +262,8 @@
 
   document.getElementById('btnSave').addEventListener('click', function() {
     var file = document.getElementById('user_photo').files[0];
-    if (file.name != "") {
+    console.log(file)
+    if (file != null) {
       console.log(file.name);
       var storage = firebase.storage().ref('talent_hub/foto_user/' + file.name);
       var upload = storage.put(file);
@@ -335,12 +355,6 @@
 
     $('#label-photo').text('Upload Photo'); // label photo upload
   }
-  var files = [];
-  document.getElementById("user_photo").addEventListener("change", function(e) {
-    files = e.target.files;
-    previewFile('user_photo');
-
-  });
 
   function save() {
     $('#btnSave').text('saving...'); //change button text
@@ -394,6 +408,9 @@
           $('#modal_user').modal('hide');
           reload_table();
           $('#imgView_user').attr('src', 'assets_admin/img/avatar.png');
+          setTimeout(function() {
+            location.reload();
+          }, 1000);
         } else {
           for (var i = 0; i < data.inputerror.length; i++) {
             $('[name="' + data.inputerror[i] + '"]').addClass('is-invalid'); //select parent twice to select div form-group class and add has-error class
@@ -485,23 +502,30 @@
       dataType: "JSON",
       success: function(data) {
 
-        $('[name="id"]').val(data.user_id);
-        $('[name="user_nama"]').val(data.user_nama);
-        $('[name="user_email"]').val(data.user_email);
-        $('[name="user_telepon"]').val(data.user_telepon);
+        $('[name="id"]').val(data.isi.user_id);
+        $('[name="user_nama"]').val(data.isi.user_nama);
+        $('[name="user_email"]').val(data.isi.user_email);
+        $('[name="user_telepon"]').val(data.isi.user_telepon);
         $('#pw_edit').show();
         $('#modal_user').modal('show'); // show bootstrap modal when complete loaded
         $('.modal-title').text('Edit User'); // Set title to Bootstrap modal title
-        img = '<?= base_url('assets/img/foto_user/'); ?>'
-        if (data.user_foto) {
+        if (data.isi.user_foto) {
           $('#label-photo').text('Change Photo'); // label photo upload
-          $('#photo-preview div').html('<img src="' + data.user_foto + '" class="card-img-top" id="imgView_user">'); // show photo
-          $('#file_firebase').val(data.user_foto);
+          $('#photo-preview div').html('<img src="' + data.isi.user_foto + '" class="card-img-top" id="imgView_user">'); // show photo
+          $('#file_firebase').val(data.isi.user_foto);
         } else {
           $('#label-photo').text('Upload Photo'); // label photo upload
           $('#photo-preview div').text('(No photo)');
         }
 
+        var selectM = [];
+        $.each(data.menu, function(i, v) {
+          selectM.push(v.role_id)
+        });
+        $("#role_id").select2({
+          multiple: true,
+        });
+        $('#role_id').val(selectM).trigger('change');
 
       },
       error: function(jqXHR, textStatus, errorThrown) {
