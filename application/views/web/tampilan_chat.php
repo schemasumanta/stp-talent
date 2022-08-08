@@ -409,7 +409,7 @@ $bulan = array(
 
     $('.contact_db').each(function(){
       let id_contact_chat = $(this).attr('id');
-      let contactref = firebase.database().ref('/Chat/'+id_contact_chat).orderByChild('chat_order').limitToLast(1)
+      let contactref = firebase.database().ref('/Chat/'+id_contact_chat).orderByChild('chat_order').limitToLast(1);
       contactref.on('value',function(snap){
         if(snap.numChildren()> 0){
           $('.contact_db_'+id_contact_chat).removeClass('d-none');
@@ -421,6 +421,7 @@ $bulan = array(
       });
     });
     let chat_id = $('#chat_id').val();
+    
     let chatref = firebase.database().ref('/Chat/'+chat_id+'/').orderByChild('chat_order'); 
 
      chatref.on('child_added', function(snapshot) { 
