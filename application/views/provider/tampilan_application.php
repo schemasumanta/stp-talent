@@ -108,6 +108,7 @@
             ?>
         </div>
     </div>
+    <hr>
     <div class="table-responsive">
 
         <table id="tabel_application" class="table " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">

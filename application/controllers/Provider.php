@@ -335,17 +335,17 @@ class Provider extends CI_Controller
 		foreach ($list as $l) {
 			$no++;
 			if ($l->lamaran_status == 0) {
-				$status = "In Review";
+				$status = '<label class="badge badge-pill badge-success">In Review</label>';
 			} elseif ($l->lamaran_status == 1) {
-				$status = "Assesment";
+				$status = '<label class="badge badge-pill badge-success">Assesment</label>';
 			} elseif ($l->lamaran_status == 2) {
-				$status = "Rejected";
+				$status = '<label class="badge badge-pill badge-danger">Rejected</label>';
 			} elseif ($l->lamaran_status == 3) {
-				$status = "Accepted";
+				$status = '<label class="badge badge-pill badge-success">Accepted</label>';
 			};
 
 			if ($l->resume_lampiran) {
-				$resume = '<a href="' . $l->resume_lampiran . '" class="btn">Download CV</a>';
+				$resume = '<a href="' . $l->resume_lampiran . '" class="btn" target="_blank">Download CV</a>';
 			} else {
 				$resume = "CV tidak ada";
 			};
@@ -358,7 +358,7 @@ class Provider extends CI_Controller
 				<i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</i>
 			</div>
 			<div class="h6 mb-2 font-weight-bold text-gray-800">
-				<label class="badge badge-pill badge-success">' . $status . '</label>
+				' . $status . '
 				<label class="badge badge-pill ">' . date('d M Y, H:i:s', strtotime($l->lamaran_tanggal)) . '</label>
 			</div>
 			</div>

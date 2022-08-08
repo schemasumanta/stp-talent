@@ -323,14 +323,15 @@ class Seeker extends CI_Controller
 		foreach ($list as $l) {
 			$no++;
 			if ($l->lamaran_status == 0) {
-				$status = "In Review";
+				$status = '<label class="badge badge-pill badge-success">In Review</label>';
 			} elseif ($l->lamaran_status == 1) {
-				$status = "Assesment";
+				$status = '<label class="badge badge-pill badge-success">Assesment</label>';
 			} elseif ($l->lamaran_status == 2) {
-				$status = "Rejected";
+				$status = '<label class="badge badge-pill badge-danger">Rejected</label>';
 			} elseif ($l->lamaran_status == 3) {
-				$status = "Accepted";
+				$status = '<label class="badge badge-pill badge-success">Accepted</label>';
 			};
+
 
 			$l->isi_lowongan = '<div class="card border-left-success shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><img src="' . $l->perusahaan_logo . '" style="width:5%;margin-right:25px;">
 			<div class="col mr-2"><div class="text-lg font-weight-bold text-danger text-uppercase mb-1">
@@ -340,7 +341,7 @@ class Seeker extends CI_Controller
 				<i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</i>
 			</div>
 			<div class="h6 mb-2 font-weight-bold text-gray-800">
-				<label class="badge badge-pill badge-success">' . $status . '</label>
+				' . $status . '
 				<label class="badge badge-pill ">' . date('d M Y, H:i:s', strtotime($l->lamaran_tanggal)) . '</label>
 			</div>
 			</div>
