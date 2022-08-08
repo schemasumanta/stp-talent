@@ -35,7 +35,21 @@ class Model_tabel extends CI_Model
 
                 break;
 
+                case 'notifikasi':
+                $this->db->select('a.*');
+                $this->db->from('tbl_notifikasi a');
 
+                if ($_GET['order'][0]['column'] == 0) {
+                    $this->db->order_by('a.notifikasi_tanggal', $order);
+                } else {
+                    $this->db->order_by($sort, $order);
+                }
+                if ($search != null && $search != '') {
+                    $this->db->like('a.notifikasi_judul', $search);
+                    $this->db->or_like('a.notifikasi_isi', $search);
+                }
+
+                break;
 
             case 'lowongan_tersimpan':
                 $this->db->select('

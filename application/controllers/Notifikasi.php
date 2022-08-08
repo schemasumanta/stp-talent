@@ -29,6 +29,43 @@ class Notifikasi extends CI_Controller {
 	}
 
 
+	public function tabel_notifikasi(){
+		$data   = array();
+		$sort     = isset($_GET['columns'][$_GET['order'][0]['column']]['data']) ? strval($_GET['columns'][$_GET['order'][0]['column']]['data']) : 'notifikasi_tanggal';
+		$order    = isset($_GET['order'][0]['dir']) ? strval($_GET['order'][0]['dir']) : 'asc';
+		$search    = isset($_GET['search']['value']) ? strval($_GET['search']['value']):null;
+		$no = $this->input->get('start');
+
+		$list = $this->model_tabel->get_datatables('notifikasi',$sort,$order,$search);
+
+		foreach ($list as $l) {
+			$no++;
+			$l->no = $no;
+
+			$opsi ='
+			<div class="btn-group">
+			<a href="javascript:;" class="btn btn-sm btn-circle  btn-success  item_edit_notifikasi" data="'.$l->notifikasi_key.'"><i class="fa fa-edit"></i></a>';
+			$opsi .='</div>';
+			$l->opsi = $opsi;
+			if ($l->notifikasi_lampiran !='') {
+				$l->notifikasi_lampiran = '<a href="'.$l->notifikasi_lampiran.'" target="_blank" class="btn btn-sm btn-circle  btn-success " ><i class="fa fa-download"></i></a>';
+			}
+			$data[] = $l;
+		}
+
+
+
+		$output = array(
+			"draw"              => $_GET['draw'],
+			"recordsTotal"      => $this->model_tabel->count_all('notifikasi',$sort,$order,$search),
+			"recordsFiltered"   => $this->model_tabel->count_filtered('notifikasi',$sort,$order,$search),
+			"data"              => $data,
+		);  
+		echo json_encode($output); 
+	}
+
+
+
 	public function simpan()
 	{
 

@@ -14,9 +14,20 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		if ($this->session->user_level==1) {
+			$data['job_posting'] = $this->db->get('tbl_lowongan_pekerjaan')->num_rows();
+
+			$this->db->where('a.user_level',2);
+			$this->db->where('a.user_status',1);
+			$data['seeker'] = $this->db->get('tbl_master_user a')->num_rows();
+
+			$this->db->where('a.user_level',3);
+			$this->db->where('a.user_status',1);
+			$data['provider'] = $this->db->get('tbl_master_user a')->num_rows();
+
+
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar'); 
-			$this->load->view('admin/tampilan_dashboard'); 
+			$this->load->view('admin/tampilan_dashboard',$data); 
 			$this->load->view('admin/footer');
 			
 		}

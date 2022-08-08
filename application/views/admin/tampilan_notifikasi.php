@@ -44,9 +44,7 @@
                     <th>No</th>
                     <th >Judul</th>
                     <th >Isi</th>
-                    <th >Email</th>
-                    <th >Telepon</th>
-                    <th >Logo</th>
+                    <th >Lampiran</th>
                     <th style="text-align: center;" width="10%" >Opsi</th>
                   </tr>
                 </thead>
@@ -232,16 +230,14 @@
   columns: [
   {'data':'no'},
   {'data':'notifikasi_judul'},
-  {'data':'stp_pemilik'},
-  {'data':'stp_email'},
-  {'data':'stp_telepon'},
-  {'data':'stp_logo'},
+  {'data':'notifikasi_isi'},
+  {'data':'notifikasi_lampiran'},
   {'data':'opsi',orderable:false},
 
   ],   
   columnDefs: [
   {
-    targets: [0,4,5,-1],
+    targets: [0,3,-1],
     className: 'text-center'
   },
   ]
