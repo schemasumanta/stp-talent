@@ -1,33 +1,34 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Dashboard extends CI_Controller
+{
 	function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('login')==FALSE) {
-			redirect('landing','refresh');
+		if ($this->session->userdata('login') == FALSE) {
+			redirect('landing', 'refresh');
 		}
-		date_default_timezone_set('Asia/Jakarta');	
+		date_default_timezone_set('Asia/Jakarta');
 	}
 
 	public function index()
 	{
-		if ($this->session->user_level==1) {
+		if ($this->session->user_level == 1) {
 			$data['job_posting'] = $this->db->get('tbl_lowongan_pekerjaan')->num_rows();
 
-			$this->db->where('a.user_level',2);
-			$this->db->where('a.user_status',1);
+			$this->db->where('a.user_level', 2);
+			$this->db->where('a.user_status', 1);
 			$data['seeker'] = $this->db->get('tbl_master_user a')->num_rows();
 
-			$this->db->where('a.user_level',3);
-			$this->db->where('a.user_status',1);
+			$this->db->where('a.user_level', 3);
+			$this->db->where('a.user_status', 1);
 			$data['provider'] = $this->db->get('tbl_master_user a')->num_rows();
 
 
 			$this->load->view('admin/header');
-			$this->load->view('admin/sidebar'); 
-			$this->load->view('admin/tampilan_dashboard',$data); 
+			$this->load->view('admin/sidebar', $data);
+			$this->load->view('admin/tampilan_dashboard', $data);
 			$this->load->view('admin/footer');
 			
 		}
@@ -95,8 +96,7 @@ class Dashboard extends CI_Controller {
 			$this->load->view('provider/tampilan_dashboard',$data);
 			$this->load->view('templates/footer');
 			
-		}
-
+	}
 	}
 
 	public function ubah_password()
@@ -105,32 +105,28 @@ class Dashboard extends CI_Controller {
 			'user_password' => md5($this->input->post('password_baru_user')),
 		);
 
-		$this->db->where('user_id',$this->session->user_id);
-		$result = $this->db->update('tbl_master_user',$data_password);
+		$this->db->where('user_id', $this->session->user_id);
+		$result = $this->db->update('tbl_master_user', $data_password);
 		if ($result) {
 			$data['title'] = 'Berhasil';
 			$data['text'] = 'Password Berhasil Diubah!';
 			$data['icon'] = 'success';
-			
-
-		}else{
+		} else {
 			$data['title'] = 'Gagal';
 			$data['text'] = 'Password Gagal Diubah!';
 			$data['icon'] = 'error';
-			
-		}	
+		}
 		$this->session->set_flashdata($data);
-		redirect('dashboard','refresh');
+		redirect('dashboard', 'refresh');
 	}
 
 	public function logout()
 	{
-		$this->db->where('user_id',$this->session->user_id);
-		$logout = $this->db->update('tbl_master_user',array('user_login_status' => 0, ));
+		$this->db->where('user_id', $this->session->user_id);
+		$logout = $this->db->update('tbl_master_user', array('user_login_status' => 0,));
 		if ($logout) {
 			$this->session->sess_destroy();
 			redirect('landing');
 		}
 	}
-
 }
