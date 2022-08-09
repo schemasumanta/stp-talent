@@ -7,7 +7,8 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		if ($this->session->login==FALSE) {
-		$this->load->view('admin/tampilan_login');
+				$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		$this->load->view('admin/tampilan_login',$data);
 
 		}else{
 			redirect('dashboard','refresh');
