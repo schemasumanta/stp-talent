@@ -122,7 +122,7 @@
 
 <!-- Bootstrap modal -->
 <div class="modal fade" id="modal_pelamar" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Person Form</h3>
@@ -130,6 +130,29 @@
             </div>
             <div class="modal-body form">
                 <form action="javascript:;" id="form_pelamar" class="form-horizontal">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="..." alt="..." id="foto_pelamar" class="img-fluid rounded mb-2 ml-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title" id="nama_pelamar">Card title</h5>
+                                    <p class="card-text" id="nik_pelamar"></p>
+                                    <p class="card-text" id="tempat_tgl_lhr_pelamar"></p>
+                                    <p class="card-text" id="jk_pelamar"></p>
+                                    <p class="card-text" id="email_pelamar"></p>
+                                    <p class="card-text" id="telp_pelamar"></p>
+                                    <p class="card-text" id="pendidikan_pelamar"></p>
+                                    <p class="card-text" id="alamat_pelamar"></p>
+                                    <div id="skill_pelamar">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <input type="hidden" value="" name="id" id="id" />
                     <div class="form-body">
                         <div class="form-group">
@@ -251,6 +274,20 @@
             success: function(data) {
 
                 $('[name="id"]').val(id);
+                $('#foto_pelamar').attr('src', data.resume.resume_foto);
+                $('#nama_pelamar').text(data.resume.resume_nama_lengkap);
+                $('#nik_pelamar').text(data.resume.resume_nik);
+                $('#pendidikan_pelamar').text(data.resume.resume_nama_pendidikan_terakhir);
+                $('#alamat_pelamar').text(data.resume.resume_alamat_lengkap);
+                $('#email_pelamar').text(data.resume.user_email);
+                $('#telp_pelamar').text(data.resume.user_telepon);
+                $('#tempat_tgl_lhr_pelamar').text(data.resume.resume_tempat_lahir + ", " + data.resume.resume_tanggal_lahir);
+                $('#skill_pelamar').empty();
+                $.each(data.skill, function(i, v) {
+                    $('#skill_pelamar').append(`
+                    <span class="badge badge-pill badge-success">` + v.skill_nama + ` - ` + v.skill_level_nama + `</span>
+                    `);
+                });
                 $('#modal_pelamar').modal('show'); // show bootstrap modal when complete loaded
                 $('.modal-title').text('Detail Pelamar'); // Set title to Bootstrap modal title
 

@@ -386,7 +386,7 @@ class Provider extends CI_Controller
 
 	public function cek_pelamar($id)
 	{
-		$cek = $this->db->query("SELECT * FROM tbl_pelamar_pekerjaan as pp JOIN tbl_resume as r ON pp.pelamar_id = r.user_id WHERE pp.lamaran_id = $id")->row();
+		$cek = $this->db->query("SELECT r.*,mu.user_email,mu.user_telepon,pp.pelamar_id FROM tbl_pelamar_pekerjaan as pp JOIN tbl_resume as r ON pp.pelamar_id = r.user_id JOIN tbl_master_user as mu on mu.user_id = pp.pelamar_id WHERE pp.lamaran_id = $id")->row();
 		$skill = $this->db->query("SELECT skill_nama,skill_level_nama FROM tbl_skill_resume AS sr JOIN tbl_master_skill as ms on sr.skill_id = ms.skill_id JOIN tbl_skill_level AS sl ON sl.skill_level_id = sr.skill_level_id WHERE sr.user_id = $cek->pelamar_id ")->result();
 
 		$data = [
