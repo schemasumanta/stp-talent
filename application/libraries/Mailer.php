@@ -14,7 +14,6 @@ class Mailer {
         require_once(APPPATH.'third_party/phpmailer/PHPMailer.php');
         require_once(APPPATH.'third_party/phpmailer/SMTP.php');
     }
-
     public function send($data){
         $mail = new PHPMailer;
         $mail->isSMTP();

@@ -82,21 +82,15 @@ $sub_active = $this->uri->segment(2);
                     echo "bg-danger text-light";
                 } ?>
                 " href="<?php echo base_url('skill/skill_level') ?>">Level Skill</a>
-
-
-
                 <a class="collapse-item
                 <?php if($active=="job" && $sub_active=="kategori"){
                     echo "bg-danger text-light";
                 } ?>
-
                 " href="<?php echo base_url('job/kategori') ?>">Kategori Pekerjaan</a>
-
                 <a class="collapse-item
                 <?php if($active=="job" && $sub_active=="level"){
                     echo "bg-danger text-light";
                 } ?>
-
                 " href="<?php echo base_url('job/level') ?>">Level Pekerjaan</a>
 
             </div>
@@ -110,8 +104,8 @@ $sub_active = $this->uri->segment(2);
         <?php if ($active == $key->role_active && $sub_active == $key->role_subactive) {
             echo "active";
         } ?> ">
-        <a class="nav-link" href="<?php echo base_url() . $key->role_active . "/" . $key->role_subactive; ?>">
-            <i class="fas fa-fw fa-user"></i><?= $key->role_menu; ?>
+        <a class="nav-link" href="<?php echo base_url() . $key->role_active . "/" . $key->role_subactive; ?>"><?= $key->role_icon; ?>
+            <?= $key->role_menu; ?>
         </a>
     </li>
 <?php endif ?>
@@ -230,7 +224,7 @@ $sub_active = $this->uri->segment(2);
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 medium">Hello, <?php echo $this->session->user_nama; ?></span>
-                            <img class="img-profile rounded-circle" src="<?php if(strpos($this->session->user_foto,'firebase')){ echo $this->session->user_foto; }else{ echo base_url().$this->session->user_foto;} ?>">
+                            <img class="img-profile rounded-circle" src="<?php if(strpos($this->session->user_foto,'firebase') !=false ){ echo $this->session->user_foto; }else{ echo base_url().$this->session->user_foto;} ?>">
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 

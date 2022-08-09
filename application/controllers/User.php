@@ -25,6 +25,22 @@ class User extends CI_Controller
 		echo json_encode($data);
 	}
 
+	public function get_user()
+	{
+		$this->db->select('a.user_id');
+		$penerima = $this->input->get('penerima');
+		$this->db->where('a.user_status',1);
+		if ($penerima =="Job Seeker") {
+		$this->db->where('a.user_level',2);
+		}
+
+		if ($penerima =="Job Provider") {
+		$this->db->where('a.user_level',3);
+		}
+		$data = $this->db->get('tbl_master_user a')->result();
+		echo json_encode($data);
+	}
+
 	public function tabel_user()
 	{
 		$data   = array();

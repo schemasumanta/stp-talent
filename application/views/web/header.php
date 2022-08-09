@@ -134,15 +134,13 @@
                         <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Register</a>
                         <?php else: ?>
                           <?php if ($this->session->user_level==1): ?>
-
-
                             <div class="row">
                               <div class="col-12">
                                <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link align-items-center" href="<?php echo base_url('admin') ?>" id="userDropdown" role="button"
                                  >
                                  <img class="img-profile rounded-circle"
-                                 src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
+                                 src="<?php echo $this->session->user_foto ?>" style="width: 50px">
                                  <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?></span>
                                </a>
                              </li>

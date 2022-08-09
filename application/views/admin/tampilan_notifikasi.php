@@ -136,15 +136,34 @@
 </div>
 
 <script type="text/javascript">
-
   var files = [];
   document.getElementById("lampiran_notifikasi").addEventListener("change", function(e) {
     files = e.target.files;
-    console.log(files);
   });
-
-
   $(document).ready(function(){
+    let allRef = firebase.database().ref('Notification/MasterNotification/').orderByChild('notifikasi_order'); 
+    allRef.on('value', function(snapshot) {
+      let datasrc='';
+      let no=0;
+      if(snapshot.numChildren()> 0){
+        snapshot.forEach((isi) => {
+          let key = isi['ref']['path']['pieces_'][1];
+          let data = isi.val();
+          datasrc+='<tr><td class="text-center">'+(++no)+'</td><td>'+data.notifikasi_judul+'</td><td>'+data.notifikasi_isi+'</td>'+data.notifikasi_lampiran+'<td></td><td></td></tr>';
+        });
+
+        
+        
+      }else{
+        datasrc =`<tr><td colspan="5">Data Tidak ditemukan</td></tr>`;
+        $('.badge-counter-user').html('');
+
+      }
+
+      $('#show_data').html(datasrc);
+      $('#tabel_notifikasi').dataTable();
+
+    }); 
 
 
 
@@ -166,67 +185,66 @@
 
 
 
-    dataTable = $('#tabel_notifikasi').DataTable( {
-      paginationType:'full_numbers',
-      processing: true,
-      serverSide: true,
-      searching: true,
+//     dataTable = $('#tabel_notifikasi').DataTable( {
+//       paginationType:'full_numbers',
+//       processing: true,
+//       serverSide: true,
+//       searching: true,
+//       filter: false,
+//       autoWidth:false,
+//       aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+//       ajax: {
+//        url: '<?php echo base_url('notifikasi/tabel_notifikasi')?>',
+//        type: 'get',
+//        data: function (data) {
+//        }
+//      },
+//      language: {
+//        sProcessing: 'Sedang memproses...',
+//        sLengthMenu: 'Tampilkan _MENU_ entri',
+//        sZeroRecords: 'Tidak ditemukan data yang sesuai',
+//        sInfo: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
+//        sInfoEmpty: 'Menampilkan 0 sampai 0 dari 0 entri',
+//        sInfoFiltered: '(disaring dari _MAX_ entri keseluruhan)',
+//        sInfoPostFix: '',
+//        sSearch: 'Cari:',
+//        sUrl: '',
+//        oPaginate: {
+//         sFirst: '<<',
+//         sPrevious: '<',
+//         sNext: '>',
+//         sLast: '>>'
+//       }
+//     },
+//   // order: [1, 'asc'],
+//   columns: [
+//   {'data':'no'},
+//   {'data':'notifikasi_judul'},
+//   {'data':'notifikasi_isi'},
+//   {'data':'notifikasi_lampiran'},
+//   {'data':'opsi',orderable:false},
 
-      filter: false,
-      autoWidth:false,
-      aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-      ajax: {
-       url: '<?php echo base_url('notifikasi/tabel_notifikasi')?>',
-       type: 'get',
-       data: function (data) {
-       }
-     },
-     language: {
-       sProcessing: 'Sedang memproses...',
-       sLengthMenu: 'Tampilkan _MENU_ entri',
-       sZeroRecords: 'Tidak ditemukan data yang sesuai',
-       sInfo: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
-       sInfoEmpty: 'Menampilkan 0 sampai 0 dari 0 entri',
-       sInfoFiltered: '(disaring dari _MAX_ entri keseluruhan)',
-       sInfoPostFix: '',
-       sSearch: 'Cari:',
-       sUrl: '',
-       oPaginate: {
-        sFirst: '<<',
-        sPrevious: '<',
-        sNext: '>',
-        sLast: '>>'
-      }
-    },
-  // order: [1, 'asc'],
-  columns: [
-  {'data':'no'},
-  {'data':'notifikasi_judul'},
-  {'data':'notifikasi_isi'},
-  {'data':'notifikasi_lampiran'},
-  {'data':'opsi',orderable:false},
+//   ],   
+//   columnDefs: [
+//   {
+//     targets: [0,3,-1],
+//     className: 'text-center'
+//   },
+//   ]
 
-  ],   
-  columnDefs: [
-  {
-    targets: [0,3,-1],
-    className: 'text-center'
-  },
-  ]
+// });
 
+
+//     function table_data(){
+//      dataTable.ajax.reload(null,true);
+//    }
+
+
+$(".refresh").click(function(){
+ location.reload();
 });
 
-
-    function table_data(){
-     dataTable.ajax.reload(null,true);
-   }
-
-
-   $(".refresh").click(function(){
-     location.reload();
-   });
-
- });
+});
 
   function previewFile(id) {
     let file = $('#'+id)[0].files[0];
@@ -239,47 +257,7 @@
     }
   }
 
-  $('#show_data').on('click','.item_edit_stp',function(){
-    let stp_id = $(this).attr('data');
-    $.ajax({
-      type : "GET",
-      url  : "<?php echo base_url('notifikasi/detail_stp')?>",
-      dataType : "JSON",
-      data : {'stp_id':stp_id},
-      success: function(data){
 
-        $('#modal_notifikasi').modal('show');
-        $('#form_notifikasi').attr('action','<?php echo base_url('notifikasi/ubah') ?>');
-        $('#btn_simpan').html('UBAH');
-        $('#label_header_notifikasi').html('<i class="fas fa-bell mr-2"></i> UBAH NOTIFIKASI');
-        $('#stp_id').val(stp_id);
-        $('#notifikasi_judul').val(data[0].notifikasi_judul);
-        $('#notifikasi_penerima').val(data[0].notifikasi_penerima);
-        $('#stp_pemilik').val(data[0].stp_pemilik);
-        $('#stp_telepon').val(data[0].stp_telepon);
-        $('#stp_email').val(data[0].stp_email);
-        $('#stp_facebook').val(data[0].stp_facebook);
-        $('#stp_instagram').val(data[0].stp_instagram);
-        $('#stp_website').val(data[0].stp_website);
-        $('#stp_alamat').val(data[0].stp_alamat);
-        $('#lampiran_notifikasi_lama').val(data[0].stp_logo);
-        $('#lampiran_icon_lama').val(data[0].stp_brand_icon);
-
-        if(data[0].stp_logo!='')
-        {
-          $('#preview_lampiran_notifikasi').attr('src','<?php echo base_url()?>'+data[0].stp_logo);
-        }
-
-        if(data[0].stp_brand_icon!='')
-        {
-          $('#preview_lampiran_icon').attr('src','<?php echo base_url()?>'+data[0].stp_brand_icon);
-        }
-      },
-
-    });
-
-    return false;
-  });
 
 
   function uploadImage(id, image) {
@@ -296,7 +274,6 @@
         $('#' + id).summernote("insertImage", url);
       },
       error: function(id, data) {
-        console.log(data);
       }
     });
   }
@@ -369,10 +346,14 @@
 
     $('#btn_simpan').attr('disabled','disabled');
     $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
-    let notifikasi_lampiran =$('#lampiran_notifikasi_lama').val();
+    let notifikasi_lampiran ='';
 
+    let cek =0;
+    let newpost ='';
     if (files.length  >  0) {
       for (let i = 0; i < files.length; i++) {
+        cek+=1;
+
         let storage = firebase.storage().ref('talent_hub/notifikasi/' + files[i].name);
         let upload = storage.put(files[i]);
         upload.on(
@@ -386,7 +367,8 @@
             storage
             .getDownloadURL()
             .then(function(url) {
-              $('#lampiran_notifikasi_lama').val(url);
+              notifikasi_lampiran = url;
+
               let post = {  
                 notifikasi_judul    : $('#notifikasi_judul').val(),  
                 notifikasi_isi      : $('#notifikasi_isi').val(),  
@@ -398,28 +380,28 @@
                 notifikasi_pengirim : '<?php echo $this->session->user_id ?>',
               };
 
-              let newpost = firebase.database().ref().child('/Notification/').push().key;
+              newpost = firebase.database().ref('Notification/').child('MasterNotification').push().key;
               $('#notifikasi_key').val(newpost);
-
               let update = {};
-              update['/Notification/'+newpost+'/'] = post;
+              update['/Notification/MasterNotification/'+newpost+'/'] = post;
               firebase.database().ref().update(update, (error) => {
                 if (error) {
                   console.log('Data could not be saved.' + error);
-                } else {
-
-                  $('#form_notifikasi').submit();
+                } 
+                else {
                 }
               });
-
             })
+            
             .catch(function(error) {
               console.log("error encountered");
             });
           },
           );
       }
-    }else{
+    }
+
+    else{
 
       let post = {  
         notifikasi_judul    : $('#notifikasi_judul').val(),  
@@ -432,14 +414,96 @@
         notifikasi_pengirim : '<?php echo $this->session->user_id ?>',
       };
 
-      let newpost = firebase.database().ref().child('/Notification/').push().key;
+      newpost = firebase.database().ref('/Notification/').child('MasterNotification').push().key;
       $('#notifikasi_key').val(newpost);
+      cek+=1;
 
       let update = {};
-      update['/Notification/'+newpost+'/'] = post;
+      update['/Notification/MasterNotification/'+newpost+'/'] = post;
+
       firebase.database().ref().update(update, (error) => {
-        if (error) {
-          Swal.fire({
+       if (error) {
+        Swal.fire({
+          title:'Error',
+          text:'Notifikasi Gagal Dikirim!',
+          icon:'error'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.close();
+            return false;
+          }
+        });
+      } else {
+
+      }
+    });
+
+    }
+    if (cek > 0) {
+      let penerima = $('#notifikasi_penerima').val();
+
+      $.ajax({
+        type : "GET",
+        url  : "<?php echo base_url('user/get_user')?>",
+        dataType : "JSON",
+        data : {'penerima':penerima},
+        success: function(data){
+          if (data.length > 0) {
+            let cek_send = 1;
+            for (var i = 0; i < data.length; i++) {
+              let post = {  
+                notifikasi_judul          : $('#notifikasi_judul').val(),  
+                notifikasi_isi            : $('#notifikasi_isi').val(),
+                notifikasi_key            : newpost,  
+                notifikasi_penerima       : data[i].user_id,  
+                notifikasi_link           : $('#notifikasi_link').val(),  
+                notifikasi_lampiran       : notifikasi_lampiran,  
+                notifikasi_order          : $.now(),  
+                notifikasi_read_status    : 0,  
+                notifikasi_tanggal        : '<?php echo date('Y-m-d H:i:s'); ?>',  
+                notifikasi_pengirim       : '<?php echo $this->session->user_id ?>',
+              };
+
+              let newnotif = firebase.database().ref().child('/UserNotification/').push().key;
+              let update = {};
+              update['/UserNotification/'+newnotif+'/'] = post;
+              firebase.database().ref().update(update, (error) => {
+               if (error) {
+              } else {
+                cek_send+=1;
+              }
+            });
+            }
+
+            if (cek_send > 0) {
+             Swal.fire({
+              title:'Berhasil',
+              text:'Notifikasi Berhasil Dikirim!',
+              icon:'success'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.close();
+                location.reload();
+              }
+            });
+
+          }else{
+            Swal.fire({
+              title:'Error',
+              text:'Notifikasi Gagal Dikirim!',
+              icon:'error'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.close();
+                location.reload();
+              }
+            });
+          }
+
+
+
+        }else{
+         Swal.fire({
           title:'Error',
           text:'Notifikasi Gagal Dikirim!',
           icon:'error'
@@ -449,24 +513,23 @@
             location.reload();
           }
         });
-        } else {
-         Swal.fire({
-          title:'Berhasil',
-          text:'Notifikasi Berhasil Dikirim!',
-          icon:'success'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.close();
-            location.reload();
-          }
-        });
+      }
+    }
+  });
 
-      
+    }else{
+
+      Swal.fire({
+        title:'Error',
+        text:'Notifikasi Gagal Dikirim!',
+        icon:'error'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.close();
+          location.reload();
         }
       });
-
     }
-
 
   });
 

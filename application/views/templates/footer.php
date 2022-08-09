@@ -146,7 +146,7 @@
 	// $(document).ready(function(){
 	// 	$.ajax({
 	// 		type : "GET",
-	// 		url  : "<?php echo base_url('notifikasi/get_notifikasi')?>",
+	// 		url  : "<php echo base_url('notifikasi/get_notifikasi')?>",
 	// 		dataType : "JSON",
 	// 		success: function(result){
 	// 			let judul_notif = `<h6 class="dropdown-header" style="background-color: #dd2727;border-color:#dd2727">
@@ -155,7 +155,7 @@
 	// 			let isi_notif ='';
 	// 			let show_notif ;
 
-				
+
 	// 			for (let i = 0; i < result.length; i++) {
 
 	// 				isi_notif+=`
@@ -187,11 +187,13 @@
 		return text;
 	}
 
+	
+
 	$(document).ready(function(){
 
 
 
-		let notifRef = firebase.database().ref('/Notification/').orderByChild('notifikasi_order'); 
+		let notifRef = firebase.database().ref('/UserNotification/').orderByChild('notifikasi_penerima').equalTo('<?php echo $this->session->user_id; ?>'); 
 
 		notifRef.on('value', function(snapshot) { 
 
@@ -201,74 +203,25 @@
 			let isi_notif ='';
 			let show_notif ;
 			let counter =0;
-
 			if(snapshot.numChildren()> 0){
-				show_notif =`<a class="dropdown-item text-center small text-gray-500" href="#">Show All Notifications</a>`;
+				show_notif =`<a class="dropdown-item text-center small text-gray-500" href="<?php echo base_url('notifikasi') ?>">Show All Notifications</a>`;
 				let level = '<?php echo $this->session->user_level ?>';
+
 				snapshot.forEach((isi) => {
+					let key = isi['ref']['path']['pieces_'][1];
 					let data = isi.val();  
-
-					if(data.notifikasi_penerima == "All")
-					{
-						if (level!=1) {
-							counter++;
-							isi_notif+=`
-							<a class="dropdown-item d-flex align-items-center" href="`+data.notifikasi_link+`" onclick="readnotif(`+data.penerima_notifikasi_id+`)" >
-							<div class="mr-3">
-							<div class="icon-circle" style="overflow:hidden">
-							<img class"rounded" src="https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fphoto_user%2Fprofile.svg?alt=media&token=a595aaab-3258-4367-a935-e0e245b18588" width="50px">
-							</div>
-							</div>
-							<div>
-							<div class="small text-gray-500">`+data.notifikasi_tanggal+`</div>
-							`+data.notifikasi_isi+`
-							</div>
-							</a>`;
-
-						}
-
-					}
-
-					else if(data.notifikasi_penerima == "Job Provider")
-					{
-						if (level==3) {
-							counter++;
-							isi_notif+=`
-							<a class="dropdown-item d-flex align-items-center" href="`+data.notifikasi_link+`" onclick="readnotif(`+data.penerima_notifikasi_id+`)" >
-							<div class="mr-3">
-							<div class="icon-circle" style="overflow:hidden">
-							<img class"rounded" src="https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fphoto_user%2Fprofile.svg?alt=media&token=a595aaab-3258-4367-a935-e0e245b18588" width="50px">
-							</div>
-							</div>
-							<div>
-							<div class="small text-gray-500">`+data.notifikasi_tanggal+`</div>
-							`+data.notifikasi_isi+`
-							</div>
-							</a>`;
-
-						}
-
-					}
-
-					else if(data.notifikasi_penerima == "Job Seeker")
-					{
-						if (level==2) {
-							counter++;
-							isi_notif+=`
-							<a class="dropdown-item d-flex align-items-center" href="`+data.notifikasi_link+`" onclick="readnotif(`+data.penerima_notifikasi_id+`)" >
-							<div class="mr-3">
-							<div class="icon-circle" style="overflow:hidden">
-							<img class"rounded" src="https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fphoto_user%2Fprofile.svg?alt=media&token=a595aaab-3258-4367-a935-e0e245b18588" width="50px">
-							</div>
-							</div>
-							<div>
-							<div class="small text-gray-500">`+data.notifikasi_tanggal+`</div>
-							`+data.notifikasi_isi+`
-							</div>
-							</a>`;
-
-						}
-
+					if (data.notifikasi_read_status==0) {
+						counter++;
+						isi_notif+=`
+						<a class="dropdown-item item_notifikasi" href="javaScript:;" data-link="`+data.notifikasi_link+`" data-key="`+key+`">
+						<div clas="col-md-12 mb-1">
+						<b>`+data.notifikasi_judul+`</b>
+						</div>
+						<div clas="col-md-12">
+						<div class="small text-gray-500 mb-2">`+data.notifikasi_tanggal+`</div>
+						`+data.notifikasi_isi+`
+						</div>
+						</a>`;
 					}
 
 				});
@@ -286,8 +239,24 @@
 
 
 		}); 
+		$(document).on('click','.item_notifikasi',function(){
+			let link = $(this).data('link');
+			let key =   $(this).data('key');
+			firebase.database().ref('/UserNotification/'+key+'/notifikasi_read_status/').set('1',(error)=> {
+				if (error) {
+					return false;
+				} else {
+					if (link!='') {
+						window.location.href=link;
+					}else{
+						window.location.href='<?php echo  base_url(); ?>';
+
+					}
+				}
+			})
 
 
+		});
 
 	});
 
