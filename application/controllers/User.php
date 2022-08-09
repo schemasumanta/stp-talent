@@ -544,27 +544,10 @@ class User extends CI_Controller
 				$data['status'] = FALSE;
 			}
 
-			if ($this->input->post('user_telepon') == '') {
-				$data['inputerror'][] = 'user_telepon';
-				$data['error_string'][] = 'No telepon wajib diisi';
-				$data['status'] = FALSE;
-			} elseif (!is_numeric($this->input->post('user_telepon'))) {
-				$data['inputerror'][] = 'user_telepon';
-				$data['error_string'][] = 'No telepon wajib angkat';
-				$data['status'] = FALSE;
-			} elseif (strlen($this->input->post('user_telepon')) < 11 || strlen($this->input->post('user_telepon')) > 14) {
-				$data['inputerror'][] = 'user_telepon';
-				$data['error_string'][] = 'No telepon tidak boleh kurang dari 11 angka atau lebih dari 14 angka';
-				$data['status'] = FALSE;
-			}
 
 			if ($this->input->post('user_password') == '') {
 				$data['inputerror'][] = 'user_password';
 				$data['error_string'][] = 'Password wajib diisi';
-				$data['status'] = FALSE;
-			} elseif (strlen($this->input->post('user_password')) < 6) {
-				$data['inputerror'][] = 'user_password';
-				$data['error_string'][] = 'Password tidak boleh kurang dari 6 karakter';
 				$data['status'] = FALSE;
 			}
 		} else {
@@ -584,29 +567,6 @@ class User extends CI_Controller
 				if ($cek_data->user_email != $email) {
 					$data['inputerror'][] = 'user_email';
 					$data['error_string'][] = 'Email sudah terdaftar';
-					$data['status'] = FALSE;
-				}
-			}
-
-			if ($this->input->post('user_telepon') == '') {
-				$data['inputerror'][] = 'user_telepon';
-				$data['error_string'][] = 'No telepon wajib diisi';
-				$data['status'] = FALSE;
-			} elseif (!is_numeric($this->input->post('user_telepon'))) {
-				$data['inputerror'][] = 'user_telepon';
-				$data['error_string'][] = 'No telepon wajib angkat';
-				$data['status'] = FALSE;
-			} elseif (strlen($this->input->post('user_telepon')) < 11 || strlen($this->input->post('user_telepon')) > 14) {
-				$data['inputerror'][] = 'user_telepon';
-				$data['error_string'][] = 'No telepon tidak boleh kurang dari 11 angka atau lebih dari 14 angka';
-				$data['status'] = FALSE;
-			}
-
-
-			if ($this->input->post('user_password') != '') {
-				if (strlen($this->input->post('user_password')) < 6) {
-					$data['inputerror'][] = 'user_password';
-					$data['error_string'][] = 'Password tidak boleh kurang dari 6 karakter';
 					$data['status'] = FALSE;
 				}
 			}
