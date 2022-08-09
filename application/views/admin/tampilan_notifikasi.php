@@ -75,7 +75,7 @@
                  <div class="col-md-12 mb-3"> 
                    <label style="color:#343a40;" for="notifikasi_penerima">Penerima</label>
                    <select  class="form-control" id="notifikasi_penerima"  name="notifikasi_penerima">
-                     <option value="All">All</option>
+                     <option value="All">Job Seeker dan Job Provider</option>
                      <option value="Job Seeker">Job Seeker</option>
                      <option value="Job Provider">Job Provider</option>
                    </select>

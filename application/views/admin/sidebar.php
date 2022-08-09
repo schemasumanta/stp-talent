@@ -29,7 +29,7 @@ $sub_active = $this->uri->segment(2);
         foreach ($menu_user as $key) { ?>
             <?php if ($key->role_menu=="Settings"): ?>
 
-             <li class="nav-item">
+               <li class="nav-item">
                 <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
@@ -93,6 +93,21 @@ $sub_active = $this->uri->segment(2);
                 } ?>
                 " href="<?php echo base_url('job/level') ?>">Level Pekerjaan</a>
 
+                <a class="collapse-item
+
+                <?php if($active=="stp" && $sub_active==""){
+                    echo "bg-danger text-light";
+                } ?>
+
+                " href="<?php echo base_url('stp') ?>">Profil STP</a>
+                <a class="collapse-item 
+
+                <?php if($active=="slider" && $sub_active==""){
+                    echo "bg-danger text-light";
+                } ?>"
+                href="<?php echo base_url('slider') ?>">Slider</a>
+                
+
             </div>
         </div>
     </li>
@@ -105,9 +120,9 @@ $sub_active = $this->uri->segment(2);
             echo "active";
         } ?> ">
         <a class="nav-link" href="<?php echo base_url() . $key->role_active . "/" . $key->role_subactive; ?>"><?= $key->role_icon; ?>
-            <?= $key->role_menu; ?>
-        </a>
-    </li>
+        <?= $key->role_menu; ?>
+    </a>
+</li>
 <?php endif ?>
 
 <?php }

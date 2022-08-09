@@ -42,8 +42,8 @@
 
 <!-- Bootstrap modal -->
 <div class="modal fade" id="modal_user" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content ">
       <div class="modal-header">
         <h3 class="modal-title">Person Form</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -102,7 +102,7 @@
             </div>
             <div class="form-group" id="photo-preview">
               <label class="control-label col-md-4">Photo</label>
-              <div class="col-md-12">
+              <div class="col-md-4">
                 <div class="card">
                   <img src="<?php echo base_url('assets_admin/img/avatar.png'); ?>" class="card-img-top" alt="..." id="imgView_user">
                 </div>
