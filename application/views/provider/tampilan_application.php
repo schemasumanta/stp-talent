@@ -5,7 +5,7 @@
         outline: none;
     }
 
-    .card {
+    .card-radious {
         padding: 1.5em .5em .5em;
         border-radius: 2em;
         text-align: center;
@@ -94,23 +94,36 @@
         <div class="owl-carousel">
             <?php
             foreach ($lowongan as $key) { ?>
-                <div class="card align-items-center d-flex justify-content-center mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
-                    <div class="card-body">
-                        <a href="javascript:;" class="btn" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)">
+                <div class="card-radious align-items-center d-flex justify-content-center mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
+                    <a href="javascript:;" class="btn" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)">
+                        <div class="card-body">
                             <h5><?= $key->lowongan_judul; ?></h5>
                             <label>
                                 <i class="fa fa-map-marker" style="font-size:24px;color:red"></i> <?= $key->kabkota_nama; ?>
                             </label>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             <?php }
             ?>
         </div>
     </div>
     <hr>
-    <div class="table-responsive">
+    <div class="d-none" id="for_filter">
+        <div class="d-flex justify-content-end mr-4 mb-2">
+            <label>Filter Status :</label>
+            <select id="status_filter">
+                <option value="">Show All</option>
+                <option value="0">In Review</option>
+                <option value="1">Assesment</option>
+                <option value="2">Rejected</option>
+                <option value="4">Accepted</option>
+            </select>
+            <input type="hidden" name="id_lowongan" id="id_lowongan">
+        </div>
+    </div>
 
+    <div class="table-responsive">
         <table id="tabel_application" class="table " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
             <tbody id="show_data">
 
@@ -133,18 +146,53 @@
                     <div class="card mb-3">
                         <div class="row no-gutters">
                             <div class="col-md-4">
-                                <img src="..." alt="..." id="foto_pelamar" class="img-fluid rounded mb-2 ml-2">
+                                <img src="..." alt="..." id="foto_pelamar" class="img-fluid rounded">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title" id="nama_pelamar">Card title</h5>
-                                    <p class="card-text" id="nik_pelamar"></p>
-                                    <p class="card-text" id="tempat_tgl_lhr_pelamar"></p>
-                                    <p class="card-text" id="jk_pelamar"></p>
-                                    <p class="card-text" id="email_pelamar"></p>
-                                    <p class="card-text" id="telp_pelamar"></p>
-                                    <p class="card-text" id="pendidikan_pelamar"></p>
-                                    <p class="card-text" id="alamat_pelamar"></p>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Nama Lengkap</label>
+                                        <div class="col-sm-8">
+                                            <p class="card-title" id="nama_pelamar">Card title</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">NIK</label>
+                                        <div class="col-sm-8">
+                                            <p class="card-text" id="nik_pelamar"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Tempat, Tanggal Lahir</label>
+                                        <div class="col-sm-8">
+                                            <p class="card-text" id="tempat_tgl_lhr_pelamar"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Email</label>
+                                        <div class="col-sm-8">
+                                            <p class="card-text" id="email_pelamar"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">No Telp</label>
+                                        <div class="col-sm-8">
+                                            <p class="card-text" id="telp_pelamar"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Pendidikan Terakhir</label>
+                                        <div class="col-sm-8">
+                                            <p class="card-text" id="pendidikan_pelamar"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Alamat</label>
+                                        <div class="col-sm-8">
+                                            <p class="card-text" id="alamat_pelamar"></p>
+                                        </div>
+                                    </div>
                                     <div id="skill_pelamar">
 
                                     </div>
@@ -158,7 +206,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-4">Pilih</label>
                             <div class="col-md-12">
-                                <select name="status" id="status" class="form-control">
+                                <select name="status_pelamar" id="status_pelamar" class="form-control">
                                     <option value="1">Assesment</option>
                                     <option value="2">Rejected</option>
                                 </select>
@@ -198,19 +246,19 @@
 
         $(".refresh").click(function() {
             location.reload();
-        });
-
+        });;
     });
 
     function cek_lowongan(id) {
-
+        $('#for_filter').removeClass('d-none');
+        $('#id_lowongan').val(id);
         dataTable = $('#tabel_application').DataTable({
             paginationType: 'full_numbers',
             processing: true,
             serverSide: true,
             searching: true,
             bDestroy: true,
-            filter: false,
+            filter: true,
             autoWidth: false,
             aLengthMenu: [
                 [10, 25, 50, 100, -1],
@@ -254,7 +302,26 @@
             // ]
 
         });
+
     }
+
+    $("#status_filter").change(function() {
+        var value = $(this).val();
+        var id = $('#id_lowongan').val();
+
+        $.ajax({
+            type: "POST",
+            url: '<?php echo site_url('provider/get_filter') ?>',
+            cache: false,
+            data: {
+                status: value
+            },
+            success: function(respond) {
+                cek_lowongan(id)
+            }
+        })
+
+    });
     $('#show_data').on('click', '.item_hapus_lowongan', function() {
         let id = $(this).attr('data');
         $('#ModalHapusBookmark').modal('show');

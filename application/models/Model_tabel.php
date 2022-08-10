@@ -35,7 +35,7 @@ class Model_tabel extends CI_Model
 
                 break;
 
-                case 'notifikasi':
+            case 'notifikasi':
                 $this->db->select('a.*');
                 $this->db->from('tbl_notifikasi a');
 
@@ -128,6 +128,70 @@ class Model_tabel extends CI_Model
 
                 break;
 
+            case 'lowongan_pekerjaan':
+                $this->db->select('
+                lp.lowongan_id,
+                lp.lowongan_judul,
+                lp.lowongan_gaji_min,
+                lp.lowongan_gaji_max,
+                lp.lowongan_gaji_secret,
+                lp.lowongan_created_date,
+                lp.perusahaan_id,
+                p.perusahaan_nama,
+                p.perusahaan_logo,
+                pr.prov_nama,
+                kk.kabkota_nama,
+                kj.kategori_nama
+                ');
+                $this->db->join('tbl_perusahaan p', 'p.perusahaan_id=lp.perusahaan_id');
+                $this->db->join('tbl_master_provinsi pr', 'pr.prov_id=p.perusahaan_prov');
+                $this->db->join('tbl_master_kabkota kk', 'kk.kabkota_id=p.perusahaan_kabkota');
+                $this->db->join('tbl_master_kategori_job kj', 'kj.kategori_id=lp.kategori_id');
+                $this->db->from('tbl_lowongan_pekerjaan lp');
+                $kategori = $this->session->kategori_job;
+                if ($kategori) {
+                    $this->db->where('lp.kategori_id', $kategori);
+                }
+                $prov = $this->session->prov_job;
+                if ($prov) {
+                    $this->db->where('p.perusahaan_prov', $prov);
+                }
+                $kota = $this->session->kota_job;
+                if ($kota) {
+                    $this->db->where('p.perusahaan_kabkota', $kota);
+                }
+                $dari_gaji = $this->session->kota_job;
+                if ($dari_gaji) {
+                    $this->db->where('lp.lowongan_gaji_min >=', $dari_gaji);
+                }
+                $dari_gaji = $this->session->dari_gaji_job;
+                if ($dari_gaji) {
+                    $this->db->where('lp.lowongan_gaji_min >=', $dari_gaji);
+                }
+                $ke_gaji = $this->session->ke_gaji_job;
+                if ($ke_gaji) {
+                    $this->db->where('lp.lowongan_gaji_max <=', $ke_gaji);
+                }
+                $nm_lowongan = $this->session->nama_lowongan;
+                if ($nm_lowongan) {
+                    $this->db->like('lp.lowongan_judul', $nm_lowongan);
+                }
+                $sort_by = $this->session->sort_by;
+                if ($sort_by) {
+                    $this->db->order_by('lp.lowongan_created_date', $sort_by);
+                }
+                if ($_GET['order'][0]['column'] == 0) {
+                    $this->db->order_by('lp.lowongan_created_date', $order);
+                } else {
+                    $this->db->order_by($sort, $order);
+                }
+
+                if ($search != null && $search != '') {
+                    $this->db->like('lp.lowongan_judul', $search);
+                    $this->db->or_like('lp.lowongan_deskripsi', $search);
+                }
+
+                break;
             case 'application_provider':
                 $this->db->select('
                 user_email,user_telepon,lamaran_id,lamaran_status,lamaran_tanggal,resume_foto,resume_nama_lengkap,resume_lampiran,kabkota_nama,prov_nama,r.user_id');
@@ -138,6 +202,10 @@ class Model_tabel extends CI_Model
                 $this->db->join('tbl_master_kabkota kk', 'kk.kabkota_id = r.kabkota_id');
                 $this->db->join('tbl_master_provinsi pr', 'pr.prov_id = r.prov_id');
                 $this->db->from('tbl_pelamar_pekerjaan pp');
+                $filter = $this->session->status_lowongan;
+                if ($filter != null) {
+                    $this->db->where('pp.lamaran_status', $filter);
+                }
                 $this->db->where('lp.lowongan_id', $id);
                 if ($_GET['order'][0]['column'] == 0) {
                     $this->db->order_by('pp.lamaran_tanggal', $order);
