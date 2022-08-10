@@ -366,7 +366,7 @@ class Provider extends CI_Controller
 			<ul style="list-style: none">
 				<li class="p-2"><a href="javascript:;" onclick="cek_pelamar(' . $l->lamaran_id . ')" class="btn btn-lg rounded mr-2 btn-success shadow"><i class="fa fa-eye mr-2"></i>Cek</a>
 				</li>
-				<li class="p-2"><a href="' . base_url() . 'chat/' . $l->user_id . '" class="btn btn-lg rounded  mr-2 btn text-danger shadow item_chat"><i class="fas fa-fw fa-comment mr-2"></i>Chat &nbsp;</a>
+				<li class="p-2"><a href="' . base_url() . 'chat/index/' . md5($l->user_id) . '" class="btn btn-lg rounded  mr-2 btn text-danger shadow item_chat"><i class="fas fa-fw fa-comment mr-2"></i>Chat &nbsp;</a>
 				</li>
 			</ul>				
 			</div>

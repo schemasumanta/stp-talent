@@ -7,6 +7,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
   <?php 
+
   $bulan = array(
     '01' => 'Januari',
     '02' => 'Februari',
@@ -21,6 +22,7 @@
     '11' => 'November',
     '12' => 'Desember'
   );
+
   ?>
 
   <?php foreach ($lowongan as $job): ?>
@@ -159,7 +161,7 @@
                       <a href="javascript:;" class="genric-btn2 danger large w-50 applied" disabled><i class="fas fa-check mr-2"></i>Applied</a>
                     <?php } ?>
 
-                  <a href="<?php echo base_url() ?>chat/index/<?php echo $job->user_id ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
+                  <a href="<?php echo base_url() ?>chat/index/<?php echo md5($job->user_id); ?>" class="genric-btn  primary  w-50 "><i class="fas fa-comments mr-3"></i>Chat</a>
                 <?php } ?>
                 <?php  }else{ ?>
                   <a href="<?php echo base_url() ?>landing/login/<?php echo $job->lowongan_id ?>" class="genric-btn2 danger large w-50">Apply Now</a>

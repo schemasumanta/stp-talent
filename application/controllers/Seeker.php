@@ -349,7 +349,7 @@ class Seeker extends CI_Controller
 			<ul style="list-style: none">
 				<li class="p-2"><a href="' . base_url() . 'job/detail/' . $l->lowongan_id . '" class="btn btn-lg rounded mr-2 btn-success shadow item_detail_lowongan" data="' . $l->lamaran_id . '"><i class="fa fa-eye mr-2"></i>Detail</a>
 				</li>
-				<li class="p-2"><a href="' . base_url() . 'chat/' . $l->perusahaan_id . '" class="btn btn-lg rounded  mr-2 btn text-danger shadow item_chat" data="' . $l->perusahaan_id . '"><i class="fas fa-fw fa-comment mr-2"></i>Chat &nbsp;</a>
+				<li class="p-2"><a href="' . base_url() . 'chat/index/' . md5($l->user_id) . '" class="btn btn-lg rounded  mr-2 btn text-danger shadow item_chat" data="' . md5($l->user_id) . '"><i class="fas fa-fw fa-comment mr-2"></i>Chat &nbsp;</a>
 				</li>
 			</ul>				
 			</div>

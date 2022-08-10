@@ -84,7 +84,7 @@
 <script src="<?php echo base_url(); ?>assets_admin/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_admin/js/modules-datatables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
+<script src="<?php echo base_url() ?>assets/js/jquery.cookie.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use -->

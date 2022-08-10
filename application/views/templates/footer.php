@@ -56,6 +56,9 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
 
+<script src="<?php echo base_url() ?>assets/js/jquery.cookie.js"></script>
+
+
 <script src="<?= base_url(); ?>assets/js/owl-carousel.js"></script>
 <script>
 	$(document).ready(function() {
@@ -239,6 +242,8 @@
 
 
 		}); 
+
+		
 		$(document).on('click','.item_notifikasi',function(){
 			let link = $(this).data('link');
 			let key =   $(this).data('key');

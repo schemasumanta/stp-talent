@@ -94,6 +94,7 @@ class Model_tabel extends CI_Model
                 $this->db->select('
                 pp.*,
                 lp.lowongan_judul,
+                lp.user_id,
                 lp.lowongan_gaji_min,
                 lp.lowongan_gaji_max,
                 lp.lowongan_gaji_secret,
@@ -103,7 +104,7 @@ class Model_tabel extends CI_Model
                 p.perusahaan_logo,
                 pr.prov_nama,
                 kk.kabkota_nama,
-                kj.kategori_nama
+                kj.kategori_nama,
                 ');
                 $this->db->join('tbl_lowongan_pekerjaan lp', 'lp.lowongan_id=pp.lowongan_id');
                 $this->db->join('tbl_perusahaan p', 'p.perusahaan_id=lp.perusahaan_id');

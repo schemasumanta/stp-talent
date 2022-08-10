@@ -7,7 +7,7 @@ $sub_active = $this->uri->segment(2);
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex " href="javascript:;">
             <div class="sidebar-brand-icon justify-content-center">
-                <img class="img-profile rounded-circle" src="<?php echo base_url() . $this->session->user_foto ?>" style="width: 50px">
+                <img class="img-profile rounded-circle" src="<?php echo $this->session->user_foto ?>" style="width: 50px">
                 <br>
             </div>
 

@@ -50,6 +50,7 @@
 <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-database.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="<?php echo base_url() ?>assets/js/jquery.cookie.js"></script>
 
 <script>
     // Your web app's Firebase configuration
