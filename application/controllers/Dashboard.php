@@ -47,6 +47,7 @@ class Dashboard extends CI_Controller
 			$data['submission'] = $this->db->get('tbl_pelamar_pekerjaan a')->num_rows();
 
 			$this->db->where('a.reported',$this->session->user_id);
+			$this->db->where('a.report_status',1);
 			$data['reported'] = $this->db->get('tbl_report a')->num_rows();
 
 			$this->db->select('a.resume_visitor');
@@ -74,6 +75,7 @@ class Dashboard extends CI_Controller
 			$data['submission'] = $this->db->get('tbl_lowongan_pekerjaan a')->num_rows();
 
 			$this->db->where('a.reported',$this->session->user_id);
+			$this->db->where('a.report_status',1);
 			$data['reported'] = $this->db->get('tbl_report a')->num_rows();
 
 			$this->db->select('a.perusahaan_visitor');

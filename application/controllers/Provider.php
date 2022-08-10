@@ -32,17 +32,53 @@ class Provider extends CI_Controller
 	public function company()
 	{
 		$this->db->where('a.perusahaan_id', $this->session->perusahaan_id);
-		$this->db->join('tbl_master_provinsi b', 'b.prov_id=a.perusahaan_prov');
-		$this->db->join('tbl_master_kabkota c', 'c.kabkota_id=a.perusahaan_kabkota');
-
+		$this->db->join('tbl_master_provinsi b', 'b.prov_id=a.perusahaan_prov','left');
+		$this->db->join('tbl_master_kabkota c', 'c.kabkota_id=a.perusahaan_kabkota','left');
 		$data['perusahaan'] = $this->db->get('tbl_perusahaan a')->result();
-
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
 		$this->load->view('provider/tampilan_perusahaan', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function ubah_sampul()
+	{
+		$this->db->where('perusahaan_id',$this->session->perusahaan_id);
+		$result =$this->db->update('tbl_perusahaan',array('perusahaan_sampul' =>$this->input->post('lampiran_sampul_lama')));
+		if ($result) {
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'Lini Masa Perusahaan Berhasil Diubah!';
+			$data['icon'] = 'success';
+		} else {
+
+			$data['title'] = 'Gagal';
+			$data['text'] = 'Lini Masa Perusahaan Gagal Diubah!';
+			$data['icon'] = 'error';
+		}
+
+		$this->session->set_flashdata($data);
+		redirect('provider/company', 'refresh');
+	}
+
+	public function ubah_logo()
+	{
+		$this->db->where('perusahaan_id',$this->session->perusahaan_id);
+		$result =$this->db->update('tbl_perusahaan',array('perusahaan_logo' =>$this->input->post('lampiran_logo_lama')));
+		if ($result) {
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'Logo Perusahaan Berhasil Diubah!';
+			$data['icon'] = 'success';
+		} else {
+
+			$data['title'] = 'Gagal';
+			$data['text'] = 'Logo Perusahaan Gagal Diubah!';
+			$data['icon'] = 'error';
+		}
+		
+		$this->session->set_flashdata($data);
+		redirect('provider/company', 'refresh');
 	}
 
 	public function ubah_perusahaan()
@@ -57,7 +93,6 @@ class Provider extends CI_Controller
 			'perusahaan_website' => $this->input->post('perusahaan_website_edit'),
 			'perusahaan_jml_karyawan' => $this->input->post('perusahaan_jml_karyawan_edit'),
 			'perusahaan_sambutan' => $this->input->post('perusahaan_sambutan_edit'),
-			'perusahaan_logo' => $this->input->post('lampiran_logo_perusahaan_lama'),
 		);
 
 		$this->db->where('perusahaan_id', $this->session->perusahaan_id);
@@ -82,7 +117,7 @@ class Provider extends CI_Controller
 			$data['icon'] = 'error';
 		}
 		$this->session->set_flashdata($data);
-		redirect('dashboard', 'refresh');
+		redirect('provider/company', 'refresh');
 	}
 
 
@@ -355,19 +390,19 @@ class Provider extends CI_Controller
 			' . $l->resume_nama_lengkap . '</div>
 			<div class="h6 mb-2 text-gray-800">' . $resume . '</div>
 			<div class="h6 mb-2 font-weight-bold text-gray-800">
-				<i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</i>
+			<i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</i>
 			</div>
 			<div class="h6 mb-2 font-weight-bold text-gray-800">
-				' . $status . '
-				<label class="badge badge-pill ">' . date('d M Y, H:i:s', strtotime($l->lamaran_tanggal)) . '</label>
+			' . $status . '
+			<label class="badge badge-pill ">' . date('d M Y, H:i:s', strtotime($l->lamaran_tanggal)) . '</label>
 			</div>
 			</div>
 			<div class="col-auto">
 			<ul style="list-style: none">
-				<li class="p-2"><a href="javascript:;" onclick="cek_pelamar(' . $l->lamaran_id . ')" class="btn btn-lg rounded mr-2 btn-success shadow"><i class="fa fa-eye mr-2"></i>Cek</a>
-				</li>
-				<li class="p-2"><a href="' . base_url() . 'chat/index/' . md5($l->user_id) . '" class="btn btn-lg rounded  mr-2 btn text-danger shadow item_chat"><i class="fas fa-fw fa-comment mr-2"></i>Chat &nbsp;</a>
-				</li>
+			<li class="p-2"><a href="javascript:;" onclick="cek_pelamar(' . $l->lamaran_id . ')" class="btn btn-lg rounded mr-2 btn-success shadow"><i class="fa fa-eye mr-2"></i>Cek</a>
+			</li>
+			<li class="p-2"><a href="' . base_url() . 'chat/index/' . md5($l->user_id) . '" class="btn btn-lg rounded  mr-2 btn text-danger shadow item_chat"><i class="fas fa-fw fa-comment mr-2"></i>Chat &nbsp;</a>
+			</li>
 			</ul>				
 			</div>
 			</div></div></div>';

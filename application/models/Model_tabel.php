@@ -65,7 +65,6 @@ class Model_tabel extends CI_Model
                 d.prov_nama,
                 e.kabkota_nama,
                 f.kategori_nama,
-
                 ');
                 $this->db->join('tbl_lowongan_pekerjaan b', 'b.lowongan_id=a.lowongan_id');
                 $this->db->join('tbl_perusahaan c', 'c.perusahaan_id=b.perusahaan_id');
@@ -87,8 +86,35 @@ class Model_tabel extends CI_Model
                     $this->db->or_like('b.lowongan_deskripsi', $search);
                     $this->db->where('a.user_id', $this->session->user_id);
                 }
+                break;
+                case 'report':
+                $this->db->select('
+                a.*,
+                b.user_nama as reporter_nama,
+                c.user_nama as reported_nama,
+                d.perusahaan_nama as reporter_perusahaan,
+                e.perusahaan_nama as reported_perusahaan,
+                ');
+                $this->db->join('tbl_master_user b', 'b.user_id=a.reporter');
+                $this->db->join('tbl_master_user c', 'c.user_id=a.reported');
+                $this->db->join('tbl_perusahaan d', 'd.perusahaan_id=b.perusahaan_id','left');
+                $this->db->join('tbl_perusahaan e', 'e.perusahaan_id=c.perusahaan_id','left');
+                $this->db->from('tbl_report a');
+                if ($_GET['order'][0]['column'] == 0) {
+                    $this->db->order_by('a.report_id', $order);
+                } else {
+                    $this->db->order_by($sort, $order);
+                }
+
+                if ($search != null && $search != '') {
+                    $this->db->like('b.reported_nama', $search);
+                    $this->db->or_like('c.reported_nama', $search);
+                    $this->db->or_like('a.report_keterangan', $search);
+                }
 
                 break;
+
+
 
             case 'application':
                 $this->db->select('

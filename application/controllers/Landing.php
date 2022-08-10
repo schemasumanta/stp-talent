@@ -90,9 +90,12 @@ class Landing extends CI_Controller
 			$this->db->where('md5(perusahaan_id)', $perusahaan_id);
 			$this->db->update('tbl_perusahaan', array('perusahaan_visitor' => floatval($key->perusahaan_visitor) + 1,));
 		}
+		$this->db->select('a.*,b.*,c.*,d.user_id');
 		$this->db->where('md5(a.perusahaan_id)', $perusahaan_id);
-		$this->db->join('tbl_master_provinsi b', 'b.prov_id=a.perusahaan_prov');
-		$this->db->join('tbl_master_kabkota c', 'c.kabkota_id=a.perusahaan_kabkota');
+
+		$this->db->join('tbl_master_provinsi b', 'b.prov_id=a.perusahaan_prov','left');
+		$this->db->join('tbl_master_kabkota c', 'c.kabkota_id=a.perusahaan_kabkota','left');
+		$this->db->join('tbl_master_user d', 'd.perusahaan_id=a.perusahaan_id','left');
 
 		$data['perusahaan'] = $this->db->get('tbl_perusahaan a')->result();
 
@@ -233,10 +236,31 @@ class Landing extends CI_Controller
 	}
 
 
-
+	public function laporkan()
+	{
+		$data_laporan = array(
+			'reporter' 			=>$this->session->user_id,
+			'reported' 			=>$this->input->post('user_id_report'), 
+			'report_keterangan' =>$this->input->post('report_deskripsi'), 
+			'report_tanggal' 	=>date('Y-m-d H:i:s'), 
+			'report_status' 	=>0, 
+		);
+		$result = $this->db->insert('tbl_report',$data_laporan);
+		if ($result) {
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'Report Pelanggaran Berhasil Dikirim!';
+			$data['icon'] = 'success';
+		} else {
+			$data['title'] = 'Error';
+			$data['text'] = 'Report Pelanggaran Gagal Dikirim!';
+			$data['icon'] = 'error';
+			
+		}
+		$this->session->set_flashdata($data);
+		redirect('landing/profil_perusahaan/'.md5($this->input->post('perusahaan_id_report')), 'refresh');
+	}
 	public function reset_password($token)
 	{
-
 		$this->db->where('token_isi', $token);
 		$data_token = $this->db->get('tbl_token');
 		if ($data_token->num_rows() > 0) {

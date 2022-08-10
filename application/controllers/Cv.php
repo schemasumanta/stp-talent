@@ -35,8 +35,6 @@ class Cv extends CI_Controller {
 		$this->db->join('tbl_master_jabatan d','d.jabatan_id=a.jabatan_id');
 		$this->db->order_by('a.pengalaman_tanggal_awal','asc');
 		$data['pengalaman'] = $this->db->get('tbl_pengalaman_resume a')->result();
-
-
 		$this->db->where('a.user_id',$this->session->user_id);
 		$this->db->join('tbl_master_skill b','b.skill_id=a.skill_id');
 		$this->db->join('tbl_skill_level c','c.skill_level_id=a.skill_level_id');

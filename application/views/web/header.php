@@ -155,7 +155,7 @@
                             <a class="nav-link dropdown-toggle align-items-center" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img class="img-profile rounded-circle"
-                            src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
+                            src="<?php echo $this->session->user_foto ?>" style="width: 50px">
                             <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?><i class="fa fa-chevron-down ml-5" aria-hidden="true"></i></span>
                           </a>
                           <div class="dropdown-menu text-danger dropdown-menu-right shadow animated--grow-in"
@@ -180,7 +180,7 @@
                     <a class="nav-link dropdown-toggle align-items-center" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="img-profile rounded-circle"
-                    src="<?php echo base_url().$this->session->user_foto ?>" style="width: 50px">
+                    src="<?php echo $this->session->user_foto ?>" style="width: 50px">
                     <span class="ml-2 text-danger"><?php echo $this->session->user_nama; ?><i class="fa fa-chevron-down ml-5" aria-hidden="true"></i></span>
                   </a>
                   <div class="dropdown-menu text-danger dropdown-menu-right shadow animated--grow-in"

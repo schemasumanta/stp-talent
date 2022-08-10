@@ -30,8 +30,6 @@
     -moz-box-shadow: -1px 8px 5px -1px rgba(0,0,0,0.57);
   }
 
-
-
   .search{
    position: relative;
    box-shadow: 0 0 40px rgba(51, 51, 51, .1);
@@ -352,40 +350,6 @@ $bulan = array(
     }
   });
 
-
-
-
-  function getchat(chat_id)
-  {
-//       let chatref = firebase.database().ref('/Chat/'+chat_id+'/').orderByChild('chat_order').limitToLast(1); 
-//   chatref.once('child_added', function(snapshot) { 
-//    let data = snapshot.val();  
-//    if(data.chat_pengirim == '<?php echo $this->session->user_id; ?>')
-//    {
-//     $('.chatbox').append(`<div class="col-md-6 mt-3"></div>  
-//       <div class="col-md-6 mt-3 isi_chatting_pengirim float-right"><div class="row"><img id="profil" class="rounded-circle " src="<?php echo base_url() ?>`+data.chat_photo+`" style="width:35px;position: absolute;top:-15px;right:-15px">
-//       <div class="col-md-12 text-justify">
-//       <span class="chat_text" style="color: black;font-size: 1em;">`+data.chat_isi+`</span>
-//       <span style="position: absolute;bottom:-15px;right: 10px;font-size: 0.5em;color: black;font-weight: bold;">`+data.chat_tanggal+`</span>
-//       </div></div></div>`);
-//   }
-
-//   if(data.chat_penerima== '<?php echo $this->session->user_id; ?>')
-//   {
-//    $('.chatbox').append(`<div class="col-md-6 mt-3 isi_chatting_penerima mr-2">
-//     <div class="row">
-//     <img id="profil" class="rounded-circle " src="<?php echo base_url() ?>`+data.chat_photo+`" style="width:35px;position: absolute;top:-15px;left:-15px">
-//     <div class="col-md-12 text-justify">
-//     <span class="chat_text" style="color: white;font-size: 1em;">`+data.chat_isi+`</span>
-//     <span style="position: absolute;bottom:-15px;right: 10px;font-size: 0.5em;color: white;font-weight: bold;">`+data.chat_tanggal+`</span>
-//     </div>
-//     </div>
-//     </div>`);
-//  }
-// }); 
-
-}
-
 $(document).ready(function(){
 
  const notif = $('.flashdatart').data('title');
@@ -474,12 +438,6 @@ list_contact.on('value', function(snapshot) {
   });
 });
 
-
-
-
-
-    // });
-
     let chatref = firebase.database().ref('Chat/'); 
     chatref.endAt().limitToLast(1).on('child_added', function(snapshot) {
       let data_chat = snapshot.val();
@@ -511,25 +469,6 @@ list_contact.on('value', function(snapshot) {
 
   });  
 
-  // function writeChat(chat_pengirim,chat_penerima, chat_isi,chat_tanggal,chat_photo,chat_order) {  
-  //           // A post entry. 
-  //           chat_id =  $('#chat_id').val();
-  //           let postData = {  
-  //             chat_pengirim : chat_pengirim,  
-  //             chat_penerima: chat_penerima,
-  //             chat_isi: chat_isi,  
-  //             chat_tanggal: chat_tanggal,  
-  //             chat_photo: chat_photo,  
-  //             chat_order: chat_order,  
-  //           };  
-  //           // Get a key for a new Post.  
-  //           let newPostKey = firebase.database().ref().child('Chat/'+$('#chat_id').val()+'/').push().key;  
-  //           let updates = {}; 
-  //           updates['/Chat/'+$('#chat_id').val()+'/'+newPostKey] = postData;  
-  //           return firebase.database().ref().update(updates);  
-  //         }  
-
-  
 
   $('#isi_pesan').keypress(function(e) {  
     let chat_pengirim = '<?php echo $this->session->user_id ?>';
@@ -666,8 +605,6 @@ list_contact.on('value', function(snapshot) {
     dataType : "JSON",
     data : {'user_id':chat_user_id},
     success: function(data){
-
-
       $('.chat_user_nama').html(chat_nama);
       $('.foto_chat').attr('src',chat_foto);
       if (data[0].user_login_status==1) {
@@ -696,7 +633,6 @@ list_contact.on('value', function(snapshot) {
                   <p style="font-size: 0.5em;color: black;font-weight: bold;position:relative;bottom:-10px;right:0px;">`+data_chat.chat_tanggal+`</p></div>
                   `);
               }
-
               if(data_chat.chat_penerima== '<?php echo $this->session->user_id; ?>')
               {
                $('.chatbox').append(`<div class=" mb-1 chat_message isi_chatting_penerima" id="`+isi['ref']['path']['pieces_'][2]+`">
