@@ -403,7 +403,7 @@ class Provider extends CI_Controller
 	{
 		$id = $this->input->post('id');
 		$data = [
-			'lamaran_status' => $this->input->post('status'),
+			'lamaran_status' => $this->input->post('status_pelamar'),
 		];
 		$this->db->where('lamaran_id', $id);
 		$this->db->update('tbl_pelamar_pekerjaan', $data);
