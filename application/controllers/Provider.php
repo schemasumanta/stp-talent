@@ -382,6 +382,8 @@ class Provider extends CI_Controller
 			"data"              => $data,
 		);
 		echo json_encode($output);
+
+		unset($_SESSION['status_lowongan']);
 	}
 
 	public function cek_pelamar($id)
@@ -407,5 +409,17 @@ class Provider extends CI_Controller
 		$this->db->update('tbl_pelamar_pekerjaan', $data);
 
 		echo json_encode(['status' => true]);
+	}
+
+	public function get_filter()
+	{
+		$status = $this->input->post('status');
+		$newdata = array(
+			'status_lowongan'  => $status
+		);
+
+		$this->session->set_userdata($newdata);
+		$x = $this->session->status_lowongan;
+		echo json_encode(['status' => true, 'status_lowongan' => $x]);
 	}
 }

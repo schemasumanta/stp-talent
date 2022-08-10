@@ -95,22 +95,35 @@
             <?php
             foreach ($lowongan as $key) { ?>
                 <div class="card align-items-center d-flex justify-content-center mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
-                    <div class="card-body">
-                        <a href="javascript:;" class="btn" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)">
+                    <a href="javascript:;" class="btn" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)">
+                        <div class="card-body">
                             <h5><?= $key->lowongan_judul; ?></h5>
                             <label>
                                 <i class="fa fa-map-marker" style="font-size:24px;color:red"></i> <?= $key->kabkota_nama; ?>
                             </label>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             <?php }
             ?>
         </div>
     </div>
     <hr>
-    <div class="table-responsive">
+    <div class="d-none" id="for_filter">
+        <div class="d-flex justify-content-end mr-4 mb-2">
+            <label>Filter Status :</label>
+            <select id="status_filter">
+                <option value="">Show All</option>
+                <option value="0">In Review</option>
+                <option value="1">Assesment</option>
+                <option value="2">Rejected</option>
+                <option value="4">Accepted</option>
+            </select>
+            <input type="hidden" name="id_lowongan" id="id_lowongan">
+        </div>
+    </div>
 
+    <div class="table-responsive">
         <table id="tabel_application" class="table " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
             <tbody id="show_data">
 
@@ -198,19 +211,19 @@
 
         $(".refresh").click(function() {
             location.reload();
-        });
-
+        });;
     });
 
     function cek_lowongan(id) {
-
+        $('#for_filter').removeClass('d-none');
+        $('#id_lowongan').val(id);
         dataTable = $('#tabel_application').DataTable({
             paginationType: 'full_numbers',
             processing: true,
             serverSide: true,
             searching: true,
             bDestroy: true,
-            filter: false,
+            filter: true,
             autoWidth: false,
             aLengthMenu: [
                 [10, 25, 50, 100, -1],
@@ -254,7 +267,26 @@
             // ]
 
         });
+
     }
+
+    $("#status_filter").change(function() {
+        var value = $(this).val();
+        var id = $('#id_lowongan').val();
+
+        $.ajax({
+            type: "POST",
+            url: '<?php echo site_url('provider/get_filter') ?>',
+            cache: false,
+            data: {
+                status: value
+            },
+            success: function(respond) {
+                cek_lowongan(id)
+            }
+        })
+
+    });
     $('#show_data').on('click', '.item_hapus_lowongan', function() {
         let id = $(this).attr('data');
         $('#ModalHapusBookmark').modal('show');
