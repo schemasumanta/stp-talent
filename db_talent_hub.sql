@@ -14,6 +14,27 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- membuang struktur untuk table db_talent_hub.tbl_admin_role
+CREATE TABLE IF NOT EXISTS `tbl_admin_role` (
+  `admin_role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`admin_role_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+-- Membuang data untuk tabel db_talent_hub.tbl_admin_role: ~10 rows (lebih kurang)
+INSERT INTO `tbl_admin_role` (`admin_role_id`, `user_id`, `role_id`) VALUES
+	(38, 1, 1),
+	(39, 1, 2),
+	(40, 1, 3),
+	(41, 1, 4),
+	(42, 1, 5),
+	(43, 1, 6),
+	(44, 1, 7),
+	(45, 1, 8),
+	(46, 1, 9),
+	(48, 38, 7);
+
 -- membuang struktur untuk table db_talent_hub.tbl_bahasa_resume
 CREATE TABLE IF NOT EXISTS `tbl_bahasa_resume` (
   `bahasa_resume_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -39,15 +60,17 @@ CREATE TABLE IF NOT EXISTS `tbl_chat` (
   PRIMARY KEY (`chat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_chat: ~11 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_chat: ~12 rows (lebih kurang)
 INSERT INTO `tbl_chat` (`chat_id`, `chat_pengirim`, `chat_penerima`, `chat_isi`, `chat_tanggal`, `chat_lampiran`) VALUES
 	('baHFuIVDYXIUmfKC', 32, 34, '', '2022-08-03 19:55:51', ''),
 	('chC5cOm49Z9OBFJS', 32, 1, '', '2022-08-03 19:55:38', ''),
 	('cOqO2TxPH4Kjr8Gk', 3, 34, '', '2022-07-29 17:33:34', ''),
 	('gVnLEEBEuktUvOIj', 3, 33, '', '2022-07-29 21:51:44', ''),
+	('hG4NvrkRSatJJWrj', 3, 6364, '', '2022-08-09 23:51:21', ''),
 	('KhonU5WS6xBeQ315', 32, 4, '', '2022-08-03 19:55:45', ''),
 	('lzY7Ga3NtDUBiezQ', 3, 35, '', '2022-07-29 23:30:15', ''),
 	('MFf59Qr0SQFihXBW', 32, 33, '', '2022-08-03 19:27:42', ''),
+	('OqEjZmBMvkmMGpXc', 1, 3, '', '2022-08-08 20:19:21', ''),
 	('qg0JeCJ7nkmeRZTL', 3, 3, '', '2022-07-30 00:30:30', ''),
 	('r8mGzt5lKFYSumrf', 3, 4, '', '2022-07-29 21:47:02', ''),
 	('xrAxn9L834mkDxUW', 36, 4, '', '2022-08-02 15:21:31', ''),
@@ -61,9 +84,9 @@ CREATE TABLE IF NOT EXISTS `tbl_history` (
   `id_user` int(11) DEFAULT NULL,
   `aktivitas` text NOT NULL,
   PRIMARY KEY (`kode_history`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=latin1 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=latin1 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_history: ~169 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_history: ~202 rows (lebih kurang)
 INSERT INTO `tbl_history` (`kode_history`, `tanggal`, `ip_address`, `id_user`, `aktivitas`) VALUES
 	(13, '2022-07-04 08:10:44', '::1', 1, 'Menambah Data Skill Baru Corel Draw'),
 	(14, '2022-07-04 08:11:53', '::1', 1, 'Menambah Data Skill Baru Corel Draw'),
@@ -233,7 +256,43 @@ INSERT INTO `tbl_history` (`kode_history`, `tanggal`, `ip_address`, `id_user`, `
 	(178, '2022-08-02 06:15:31', '::1', 3, 'Mengubah Biodata Sumanta'),
 	(179, '2022-08-03 07:41:01', '::1', 3, 'Mengupload CV '),
 	(180, '2022-08-03 12:52:20', '::1', 3, 'Mengubah Data Pengalaman'),
-	(181, '2022-08-05 08:54:01', '::1', 3, 'Mengupload CV ');
+	(181, '2022-08-05 08:54:01', '::1', 3, 'Mengupload CV '),
+	(182, '2022-08-08 08:26:38', '::1', NULL, 'Blast Notifikasi Baru'),
+	(183, '2022-08-08 09:04:36', '::1', NULL, 'Blast Notifikasi Baru'),
+	(184, '2022-08-08 09:05:58', '::1', NULL, 'Blast Notifikasi Baru'),
+	(185, '2022-08-08 09:11:21', '::1', NULL, 'Blast Notifikasi Baru'),
+	(186, '2022-08-08 09:16:57', '::1', NULL, 'Blast Notifikasi Baru'),
+	(187, '2022-08-08 09:19:17', '::1', NULL, 'Blast Notifikasi Baru'),
+	(188, '2022-08-08 09:20:22', '::1', NULL, 'Blast Notifikasi Baru'),
+	(189, '2022-08-08 09:40:03', '::1', NULL, 'Blast Notifikasi Baru'),
+	(190, '2022-08-08 09:44:27', '::1', NULL, 'Blast Notifikasi Baru'),
+	(191, '2022-08-08 09:45:16', '::1', NULL, 'Blast Notifikasi Baru'),
+	(192, '2022-08-08 09:54:06', '::1', NULL, 'Blast Notifikasi Baru'),
+	(193, '2022-08-08 09:55:51', '::1', NULL, 'Blast Notifikasi Baru'),
+	(194, '2022-08-08 10:02:52', '::1', NULL, 'Blast Notifikasi Baru'),
+	(195, '2022-08-08 17:12:07', '::1', NULL, 'Blast Notifikasi Baru'),
+	(196, '2022-08-08 17:19:37', '::1', NULL, 'Blast Notifikasi Baru'),
+	(197, '2022-08-08 17:21:29', '::1', NULL, 'Blast Notifikasi Baru'),
+	(198, '2022-08-08 18:10:23', '::1', NULL, 'Blast Notifikasi Baru'),
+	(199, '2022-08-08 18:11:57', '::1', NULL, 'Blast Notifikasi Baru'),
+	(200, '2022-08-08 18:13:25', '::1', NULL, 'Blast Notifikasi Baru'),
+	(201, '2022-08-08 18:14:50', '::1', NULL, 'Blast Notifikasi Baru'),
+	(202, '2022-08-08 18:17:37', '::1', NULL, 'Blast Notifikasi Baru'),
+	(203, '2022-08-08 18:21:18', '::1', NULL, 'Blast Notifikasi Baru'),
+	(204, '2022-08-08 18:24:14', '::1', NULL, 'Blast Notifikasi Baru'),
+	(205, '2022-08-08 18:25:06', '::1', NULL, 'Blast Notifikasi Baru'),
+	(206, '2022-08-08 18:27:47', '::1', NULL, 'Blast Notifikasi Baru'),
+	(207, '2022-08-08 18:32:43', '::1', NULL, 'Blast Notifikasi Baru'),
+	(208, '2022-08-08 18:43:39', '::1', NULL, 'Blast Notifikasi Baru'),
+	(209, '2022-08-08 18:47:53', '::1', NULL, 'Blast Notifikasi Baru'),
+	(210, '2022-08-08 18:49:16', '::1', NULL, 'Blast Notifikasi Baru'),
+	(211, '2022-08-08 20:10:26', '::1', NULL, 'Blast Notifikasi Baru'),
+	(212, '2022-08-08 21:01:00', '::1', 1, 'Menambah Data Slider Baru '),
+	(213, '2022-08-08 21:11:48', '::1', 1, 'Menambah Data Slider Baru '),
+	(214, '2022-08-09 15:00:53', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(215, '2022-08-10 17:38:21', '::1', 32, 'Mengubah Data Profil Perusahaan'),
+	(216, '2022-08-10 17:38:42', '::1', 32, 'Mengubah Data Profil Perusahaan'),
+	(217, '2022-08-10 17:44:43', '::1', 36, 'Mengubah Data Profil Perusahaan');
 
 -- membuang struktur untuk table db_talent_hub.tbl_langganan_premium
 CREATE TABLE IF NOT EXISTS `tbl_langganan_premium` (
@@ -272,7 +331,8 @@ INSERT INTO `tbl_lowongan_pekerjaan` (`lowongan_id`, `joblevel_id`, `kategori_id
 	(5, 20, 9, 3, 32, 6, 'Junior IT Programmer', '8000000', '10000000', NULL, '2022-07-22 14:55:25', '2022-07-22', NULL, '<p>Kami Mencari Depelover Yang Dapat bekerja di bawah tekanan</p>', 1),
 	(6, 20, 1, 4, 33, 7, 'Digital Marketing', '1500000', '3000000', NULL, '2022-07-22 15:34:19', '2022-07-22', NULL, '<p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;">The ideal candidate will oversee the online marketing strategy for the organization by planning and executing digital marketing campaigns. This candidate will launch advertisements and create content to increase brand awareness. This candidate will have previous marketing experience and be able to monitor the company\'s social media presence.</p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: var(--artdeco-reset-base-font-size-hundred-percent); vertical-align: var(--artdeco-reset-base-vertical-align-baseline); background: var(--artdeco-reset-base-background-transparent); outline: var(--artdeco-reset-base-outline-zero); font-weight: var(--artdeco-reset-typography-font-weight-bold);"><br></span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: var(--artdeco-reset-base-font-size-hundred-percent); vertical-align: var(--artdeco-reset-base-vertical-align-baseline); background: var(--artdeco-reset-base-background-transparent); outline: var(--artdeco-reset-base-outline-zero);"><b>Responsibilities</b></span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent); text-align: left;">Design, maintain, and supply content for the organization\'s website</span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent); text-align: left;">Formulate strategies to build lasting digital connection with customers</span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent); text-align: left;">Monitor company presence on social media</span></p><p style="text-align: justify; box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent); text-align: left;">Launch advertisements to increase brand awareness</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><br style="box-sizing: inherit;"></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: var(--artdeco-reset-base-font-size-hundred-percent); vertical-align: var(--artdeco-reset-base-vertical-align-baseline); background: var(--artdeco-reset-base-background-transparent); outline: var(--artdeco-reset-base-outline-zero);"><b>Qualifications</b></span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">Bachelor\'s degree in Marketing or related field</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">at least 1-2 years in the same field</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">Excellent understanding of digital marketing concepts</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">Experience with business to customer social media and content generation</span></p><p style="box-sizing: inherit; margin: var(--artdeco-reset-base-margin-zero); padding: var(--artdeco-reset-base-padding-zero); border: var(--artdeco-reset-base-border-zero); font-size: 14px; vertical-align: var(--artdeco-reset-base-vertical-align-baseline); --artdeco-reset-typography_getFontSize:1.6rem; --artdeco-reset-typography_getLineHeight:1.5; line-height: var(--artdeco-reset-typography_getLineHeight); color: rgba(0, 0, 0, 0.9); font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, &quot;Fira Sans&quot;, Ubuntu, Oxygen, &quot;Oxygen Sans&quot;, Cantarell, &quot;Droid Sans&quot;, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Lucida Grande&quot;, Helvetica, Arial, sans-serif;"><span style="font-size: var(--artdeco-reset-base-font-size-hundred-percent);">Strong creative and analytical skills</span></p>', 1),
 	(7, 20, 1, 5, 35, 7, 'Marketing Manager', '50000', '100000', NULL, '2022-07-27 20:27:22', '2022-09-27', NULL, '<p>Kami Mencari tim yang biasa aja&nbsp;</p>', 1),
-	(8, 20, 1, 3, 32, 9, 'Desain Grafis Full Time', '5000000', '0', NULL, '2022-08-02 14:22:04', '2022-08-27', NULL, '<p>Mencari Desain Graphis dengan wajah tampan dan memiliki saldo crypto $500</p>', 1);
+	(8, 20, 1, 3, 32, 9, 'Desain Grafis Full Time', '5000000', '0', NULL, '2022-08-02 14:22:04', '2022-08-27', NULL, '<p>Mencari Desain Graphis dengan wajah tampan dan memiliki saldo crypto $500</p>', 1),
+	(9, 15, 2, 10, 36, 5, 'Office Boy Berpengalaman', '3500000', '0', NULL, '2022-08-11 00:49:09', '2022-08-11', NULL, '<p>Mencari office boy berpengalaman dengan penampilan good looking</p>', 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_lowongan_skill
 CREATE TABLE IF NOT EXISTS `tbl_lowongan_skill` (
@@ -301,7 +361,9 @@ INSERT INTO `tbl_lowongan_skill` (`lowongan_skill_id`, `lowongan_id`, `skill_id`
 	(15, 8, 4),
 	(16, 8, 21),
 	(17, 8, 22),
-	(18, 8, 23);
+	(18, 8, 23),
+	(19, 9, 9),
+	(20, 9, 24);
 
 -- membuang struktur untuk table db_talent_hub.tbl_lowongan_tersimpan
 CREATE TABLE IF NOT EXISTS `tbl_lowongan_tersimpan` (
@@ -309,13 +371,14 @@ CREATE TABLE IF NOT EXISTS `tbl_lowongan_tersimpan` (
   `user_id` int(11) NOT NULL DEFAULT 0,
   `lowongan_id` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`lowongan_tersimpan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_lowongan_tersimpan: ~3 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_lowongan_tersimpan: ~4 rows (lebih kurang)
 INSERT INTO `tbl_lowongan_tersimpan` (`lowongan_tersimpan_id`, `user_id`, `lowongan_id`) VALUES
 	(11, 3, 6),
 	(12, 3, 7),
-	(14, 3, 5);
+	(14, 3, 5),
+	(15, 3, 8);
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_agama
 CREATE TABLE IF NOT EXISTS `tbl_master_agama` (
@@ -1018,6 +1081,28 @@ INSERT INTO `tbl_master_provinsi` (`prov_id`, `prov_nama`, `prov_Lat`, `prov_Lon
 	('SU', 'Sumatera Utara', '2.1153547', '99.5450974'),
 	('YO', 'Yogyakarta', '-7.8753849', '110.4262088');
 
+-- membuang struktur untuk table db_talent_hub.tbl_master_role
+CREATE TABLE IF NOT EXISTS `tbl_master_role` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_menu` varchar(255) DEFAULT NULL,
+  `role_active` varchar(255) DEFAULT NULL,
+  `role_subactive` varchar(255) DEFAULT NULL,
+  `role_icon` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
+-- Membuang data untuk tabel db_talent_hub.tbl_master_role: ~9 rows (lebih kurang)
+INSERT INTO `tbl_master_role` (`role_id`, `role_menu`, `role_active`, `role_subactive`, `role_icon`) VALUES
+	(1, 'Admin Role', 'user', NULL, '<i class="fas fa-fw fa-user"></i>'),
+	(2, 'Job Provider', 'user', 'job_provider', '<i class="fas fa-fw fa-users"></i>'),
+	(3, 'Job Seeker', 'user', 'job_seeker', '<i class="fas fa-fw fa-users"></i>'),
+	(4, 'Job Posting', 'user', 'job_posting', '<i class="fas fa-fw fa-calendar-check"></i>'),
+	(5, 'Fitur Premium', 'premium', NULL, '<i class="fas fa-fw fa-trophy"></i>'),
+	(6, 'Notifikasi', 'notifikasi', NULL, '<i class="fas fa-bell fa-fw"></i>'),
+	(7, 'Inbox', 'chat', NULL, '<i class="fas fa-comments fa-fw"></i>'),
+	(8, 'Report', 'report', NULL, '<i class="fas fa-flag fa-fw"></i>'),
+	(9, 'Settings', NULL, NULL, '<i class="fas fa-cog fa-fw"></i>');
+
 -- membuang struktur untuk table db_talent_hub.tbl_master_skill
 CREATE TABLE IF NOT EXISTS `tbl_master_skill` (
   `skill_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -1047,7 +1132,8 @@ INSERT INTO `tbl_master_skill` (`skill_id`, `skill_nama`, `skill_status`) VALUES
 	(20, NULL, 1),
 	(21, 'Adobe Illustrator', 1),
 	(22, 'Figma', 1),
-	(23, 'Adobe Premiere', 1);
+	(23, 'Adobe Premiere', 1),
+	(24, 'Cleaning Services', 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_slider
 CREATE TABLE IF NOT EXISTS `tbl_master_slider` (
@@ -1056,13 +1142,15 @@ CREATE TABLE IF NOT EXISTS `tbl_master_slider` (
   `slider_tipe` varchar(50) DEFAULT NULL,
   `slider_status` int(11) DEFAULT 1,
   PRIMARY KEY (`slider_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_slider: ~3 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_slider: ~5 rows (lebih kurang)
 INSERT INTO `tbl_master_slider` (`slider_id`, `slider_gambar`, `slider_tipe`, `slider_status`) VALUES
 	(1, 'assets/img/slider/slider1657552714jobless.jpg', 'main', 1),
 	(2, 'assets/img/slider/slider1657553191cv_bg.jpg', 'cv', 1),
-	(4, 'assets/img/slider/slider1657558456product7.jpg', 'how', 1);
+	(4, 'assets/img/slider/slider1657558456product7.jpg', 'how', 1),
+	(5, 'assets/img/slider/slider1659992460talenthub.png', 'all', 1),
+	(6, 'assets/img/slider/slider1659993108backgroundbawah.jpg', 'dashboard_seeker', 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_stp
 CREATE TABLE IF NOT EXISTS `tbl_master_stp` (
@@ -1101,31 +1189,35 @@ CREATE TABLE IF NOT EXISTS `tbl_master_user` (
   `user_telepon` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_email` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_user: ~11 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_user: ~12 rows (lebih kurang)
 INSERT INTO `tbl_master_user` (`user_id`, `user_email`, `user_nama`, `user_password`, `user_status`, `perusahaan_id`, `user_level`, `user_login_status`, `user_foto`, `user_created_date`, `user_updated_date`, `user_telepon`) VALUES
-	(1, 'athoxusdah@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 1, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978'),
-	(3, 'schemasumanta@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 1, 'assets/img/personnel_boy.png', '2022-06-28 11:14:54', NULL, '085921923978'),
-	(4, 'athoxzoemanta@gmail.com', 'Super Door', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 3, 0, 'assets_admin/img/profile.svg', '2022-06-28 11:14:54', NULL, '085921923978'),
-	(28, 'janu@gmail.com', 'Janu', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-07-20 08:11:11', NULL, '08787878787877'),
-	(31, 'jimy@gmail.com', 'Jimy', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-07-20 10:08:25', NULL, '0878787878'),
-	(32, 'metrotv212@gmail.com', 'MetrotvNews', '9dd4e461268c8034f5c8564e155c67a6', 1, 3, 3, 1, 'assets_admin/img/profile.svg', '2022-07-22 09:50:27', NULL, '0878787878'),
-	(33, 'suherman@gg.com', 'Suherman', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 4, 3, 0, 'assets_admin/img/profile.svg', '2022-07-22 10:27:03', NULL, '0879759878'),
-	(34, 'mayang@gmail.com', 'mayang', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-07-27 15:15:48', NULL, '08787878787'),
-	(35, 'mayang2@gmail.com', 'Hamdani', '21c2e59531c8710156d34a3c30ac81d5', 1, 5, 3, 0, 'assets_admin/img/profile.svg', '2022-07-27 15:17:23', NULL, '08787878'),
-	(36, 'asih_schema@gmail.com', 'Asih', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 10, 3, 0, 'assets_admin/img/profile.svg', '2022-08-02 09:25:06', NULL, '0898 0723 2633'),
-	(37, 'a@bcc.com', 'ucup2', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 11, 3, 0, 'assets_admin/img/profile.svg', '2022-08-03 14:43:33', NULL, '0858585858588');
+	(1, 'athoxusdah@gmail.com', 'Superadmin', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 1, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-06-28 11:14:54', '2022-08-09 11:45:29', '085921923978'),
+	(3, 'schemasumanta@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-06-28 11:14:54', NULL, '085921923978'),
+	(4, 'athoxzoemanta@gmail.com', 'Super Door', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 6, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-06-28 11:14:54', NULL, '085921923978'),
+	(28, 'janu@gmail.com', 'Janu', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-20 08:11:11', NULL, '08787878787877'),
+	(31, 'jimy@gmail.com', 'Jimy', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-20 10:08:25', NULL, '0878787878'),
+	(32, 'metrotv212@gmail.com', 'MetrotvNews', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 3, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-22 09:50:27', NULL, '0878787878'),
+	(33, 'suherman@gg.com', 'Suherman', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 4, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-22 10:27:03', NULL, '0879759878'),
+	(34, 'mayang@gmail.com', 'mayang', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-27 15:15:48', NULL, '08787878787'),
+	(35, 'mayang2@gmail.com', 'Hamdani', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 5, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-27 15:17:23', NULL, '08787878'),
+	(36, 'asih_schema@gmail.com', 'Asih', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 10, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-08-02 09:25:06', NULL, '0898 0723 2633'),
+	(37, 'a@bcc.com', 'ucup2', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 11, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-08-03 14:43:33', NULL, '0858585858588'),
+	(38, 'a@b.com', 'admin2', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 1, 1, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser-p.png?alt=media&token=01d48e7e-f959-4eff-a57b-af329fbb00aa', '2022-08-09 02:38:21', '2022-08-10 22:07:54', '087878878687');
 
 -- membuang struktur untuk table db_talent_hub.tbl_notifikasi
 CREATE TABLE IF NOT EXISTS `tbl_notifikasi` (
   `notifikasi_id` int(11) NOT NULL AUTO_INCREMENT,
   `notifikasi_pengirim` int(11) DEFAULT NULL,
-  `notifikasi_penerima` int(11) DEFAULT NULL,
+  `notifikasi_key` varchar(50) DEFAULT NULL,
   `notifikasi_isi` text DEFAULT NULL,
+  `notifikasi_judul` text DEFAULT NULL,
   `notifikasi_tanggal` datetime DEFAULT NULL,
+  `notifikasi_lampiran` text DEFAULT NULL,
+  `notifikasi_link` text DEFAULT NULL,
   PRIMARY KEY (`notifikasi_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_notifikasi: ~0 rows (lebih kurang)
 
@@ -1138,11 +1230,23 @@ CREATE TABLE IF NOT EXISTS `tbl_pelamar_pekerjaan` (
   `lamaran_deskripsi` text NOT NULL,
   `lamaran_status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`lamaran_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_pelamar_pekerjaan: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_pelamar_pekerjaan: ~2 rows (lebih kurang)
 INSERT INTO `tbl_pelamar_pekerjaan` (`lamaran_id`, `pelamar_id`, `lowongan_id`, `lamaran_tanggal`, `lamaran_deskripsi`, `lamaran_status`) VALUES
-	(2, 3, 7, '2022-08-05 18:56:39', 'Saya Seorang Pekerja Keras dan Berparas anggun', 0);
+	(2, 3, 7, '2022-08-05 18:56:39', 'Saya Seorang Pekerja Keras dan Berparas anggun', 1),
+	(3, 3, 8, '2022-08-05 19:36:04', 'gjkgjk', 1);
+
+-- membuang struktur untuk table db_talent_hub.tbl_penerima_notifikasi
+CREATE TABLE IF NOT EXISTS `tbl_penerima_notifikasi` (
+  `penerima_notifikasi_id` int(11) NOT NULL AUTO_INCREMENT,
+  `notifikasi_key` varchar(50) NOT NULL DEFAULT '0',
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `read_status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`penerima_notifikasi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb4;
+
+-- Membuang data untuk tabel db_talent_hub.tbl_penerima_notifikasi: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table db_talent_hub.tbl_pengalaman_resume
 CREATE TABLE IF NOT EXISTS `tbl_pengalaman_resume` (
@@ -1179,21 +1283,22 @@ CREATE TABLE IF NOT EXISTS `tbl_perusahaan` (
   `perusahaan_jml_karyawan` int(11) DEFAULT NULL,
   `perusahaan_logo` text DEFAULT NULL,
   `perusahaan_sampul` text DEFAULT NULL,
+  `perusahaan_visitor` int(11) DEFAULT NULL,
   PRIMARY KEY (`perusahaan_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_perusahaan: ~10 rows (lebih kurang)
-INSERT INTO `tbl_perusahaan` (`perusahaan_id`, `perusahaan_nama`, `perusahaan_sambutan`, `perusahaan_prov`, `perusahaan_kabkota`, `perusahaan_alamat`, `perusahaan_telepon`, `perusahaan_email`, `perusahaan_website`, `perusahaan_jml_karyawan`, `perusahaan_logo`, `perusahaan_sampul`) VALUES
-	(1, 'PT KEBUN SAWIT', '', 'BT', 50, 'Jl. Sunan Giri No 18L\r\nRangkasbitung - Banten', '0215212562367', 'a@b.com', 'www.mantaapps.com', 250, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658427796260stempel%20clear.png?alt=media&token=373dc453-7ca3-4a6d-bbf9-fe13128a6bfd', NULL),
-	(3, 'PT. Metro News TV', '', 'JK', 142, 'Jl. Kapten Pierre Tendean No. 57 Gambir', '0215212562367', 'a@b.com', 'www.metrotv.com', 5000, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658476416689Metro%20TV.png?alt=media&token=9b7b1416-45e6-4e0f-b224-88aa10972661', NULL),
-	(4, 'MANTA APPS', 'Perusahaan yang dibidang Jasa Pemesanan Pesawat Pesiar dan Pesaing Terberat Hollywoods yang terevakuasi dengan integritas yang solid dan dominan dalam kesenjangan sosial', 'JT', 179, 'Jl. Malioboro 27 Blok F29 Solo', '0215212562367', 'a@b.com', 'www.mantaapps.com', 50, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658478597932MANTAAPPS.png?alt=media&token=e4fc698d-d1b8-498d-8001-c37fc9e6a1f0', NULL),
-	(5, 'PT UNTUNG RUGI', 'Kami bergerak cepat seperti KRL dan MRT', 'BA', 25, 'Jl. Tani No 99 Namek', '', '', '', 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658928070274pngtree-vector-illustration-lovely-mother-png-image_1115780.jpg?alt=media&token=eb071e0a-76bd-4034-a85c-48c4ce452ccf', NULL),
-	(6, 'Super Door', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
-	(7, 'PT. Super Teknik', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
-	(8, 'PT. AbyNET', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
-	(9, 'PT. Raja Pintu Baja', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
-	(10, 'PT. Super Teknik', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL),
-	(11, 'PT SLEBEW', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL);
+INSERT INTO `tbl_perusahaan` (`perusahaan_id`, `perusahaan_nama`, `perusahaan_sambutan`, `perusahaan_prov`, `perusahaan_kabkota`, `perusahaan_alamat`, `perusahaan_telepon`, `perusahaan_email`, `perusahaan_website`, `perusahaan_jml_karyawan`, `perusahaan_logo`, `perusahaan_sampul`, `perusahaan_visitor`) VALUES
+	(1, 'Solo Techno Park', '', 'BT', 50, '', '0215212562367', 'a@b.com', '', 250, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658427796260stempel%20clear.png?alt=media&token=373dc453-7ca3-4a6d-bbf9-fe13128a6bfd', NULL, NULL),
+	(3, 'PT. Metro News TV', 'Perusahaan yang dibidang Jasa Pemesanan Pesawat Pesiar dan Pesaing Terberat Hollywoods yang terevakuasi dengan integritas yang solid dan dominan dalam kesenjangan sosial', 'JK', 142, 'Jl. Kapten Pierre Tendean No. 57 Gambir', '0215212562367', 'metroku@b.com', 'www.metrotv.com', 5000, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fperusahaan%2Fsbi%20logo.jpg?alt=media&token=56d472cc-f85d-4b56-862f-8f98ebfb0718', 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fperusahaan%2Fsampul.jpg?alt=media&token=1ee556ba-9b69-4f28-a597-cfb1c209d845', 2),
+	(4, 'MANTA APPS', 'Perusahaan yang dibidang Jasa Pemesanan Pesawat Pesiar dan Pesaing Terberat Hollywoods yang terevakuasi dengan integritas yang solid dan dominan dalam kesenjangan sosial', 'JT', 179, 'Jl. Malioboro 27 Blok F29 Solo', '0215212562367', 'a@b.com', 'www.mantaapps.com', 50, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658478597932MANTAAPPS.png?alt=media&token=e4fc698d-d1b8-498d-8001-c37fc9e6a1f0', NULL, NULL),
+	(5, 'PT UNTUNG RUGI', 'Kami bergerak cepat seperti KRL dan MRT', 'BA', 25, 'Jl. Tani No 99 Namek', '', '', '', 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658928070274pngtree-vector-illustration-lovely-mother-png-image_1115780.jpg?alt=media&token=eb071e0a-76bd-4034-a85c-48c4ce452ccf', NULL, NULL),
+	(6, 'Super Door', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL, NULL),
+	(7, 'PT. Super Teknik', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL, NULL),
+	(8, 'PT. AbyNET', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL, NULL),
+	(9, 'PT. Raja Pintu Baja', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL, NULL),
+	(10, 'PT. Mayora Indah Jatake 2', 'Kami Bergerak di bidang food rescue', 'BT', 56, 'Jl. Jatake No. 18 Cikupa - Tangerang', '0215212562367', 'info@mayora.id', 'www.mayoraindah.com', 5000, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fperusahaan%2FMayora_logo.png?alt=media&token=db7af899-9ce5-40e3-aa8c-3e337a8ed0a3', 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fperusahaan%2F107041088-1649062227517-gettyimages-1235868440-INDONESIA_COAL.jpeg?alt=media&token=f6af4c6e-94be-4ded-8618-52b7e5e8efc1', 77),
+	(11, 'PT SLEBEW', '', '0', 0, NULL, '', '', '', NULL, NULL, NULL, NULL);
 
 -- membuang struktur untuk table db_talent_hub.tbl_premium
 CREATE TABLE IF NOT EXISTS `tbl_premium` (
@@ -1217,6 +1322,8 @@ CREATE TABLE IF NOT EXISTS `tbl_report` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_report: ~0 rows (lebih kurang)
+INSERT INTO `tbl_report` (`report_id`, `reporter`, `reported`, `report_keterangan`, `report_tanggal`, `report_status`) VALUES
+	(1, 3, 36, 'Penipuan', '2022-08-10 20:24:53', 1);
 
 -- membuang struktur untuk table db_talent_hub.tbl_resume
 CREATE TABLE IF NOT EXISTS `tbl_resume` (
@@ -1237,12 +1344,13 @@ CREATE TABLE IF NOT EXISTS `tbl_resume` (
   `resume_tempat_lahir` varchar(150) DEFAULT NULL,
   `resume_tanggal_lahir` date DEFAULT NULL,
   `resume_created_date` datetime DEFAULT NULL,
+  `resume_visitor` int(11) DEFAULT NULL,
   PRIMARY KEY (`resume_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_resume: ~1 rows (lebih kurang)
-INSERT INTO `tbl_resume` (`resume_id`, `user_id`, `pendidikan_id`, `prov_id`, `kabkota_id`, `agama_id`, `resume_nama_pendidikan_terakhir`, `resume_pendidikan_tahun_lulus`, `resume_nama_lengkap`, `resume_foto`, `resume_about`, `resume_nik`, `resume_alamat_lengkap`, `resume_jenis_kelamin`, `resume_tempat_lahir`, `resume_tanggal_lahir`, `resume_created_date`) VALUES
-	(4, 3, 3, 'BT', 50, 1, 'SMK Mulia Hati Insani', '2013', 'Sumanta', 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fcv%2FPas%20Photo%20merah%20sumanta.JPG?alt=media&token=8682bcd4-c467-4f3e-b6fe-bc3977540d70', '<p>Saya seorang pekerja keras yang memiliki otak seperti RUCIKA yang kepintarannya mengalir sampai jauh. dan juga seperti tepung bumbu yang harus SERBAGUNA</p>', '3602240704950004', 'Jl. Sunan Giri No. 18L Rangkasbitung', 'L', 'Lebak', '1995-08-08', '2022-07-26 14:02:02');
+INSERT INTO `tbl_resume` (`resume_id`, `user_id`, `pendidikan_id`, `prov_id`, `kabkota_id`, `agama_id`, `resume_nama_pendidikan_terakhir`, `resume_pendidikan_tahun_lulus`, `resume_nama_lengkap`, `resume_foto`, `resume_about`, `resume_nik`, `resume_alamat_lengkap`, `resume_jenis_kelamin`, `resume_tempat_lahir`, `resume_tanggal_lahir`, `resume_created_date`, `resume_visitor`) VALUES
+	(4, 3, 3, 'BT', 50, 1, 'SMK Mulia Hati Insani', '2013', 'Sumanta', 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fcv%2FPas%20Photo%20merah%20sumanta.JPG?alt=media&token=8682bcd4-c467-4f3e-b6fe-bc3977540d70', '<p>Saya seorang pekerja keras yang memiliki otak seperti RUCIKA yang kepintarannya mengalir sampai jauh. dan juga seperti tepung bumbu yang harus SERBAGUNA</p>', '3602240704950004', 'Jl. Sunan Giri No. 18L Rangkasbitung', 'L', 'Lebak', '1995-08-08', '2022-07-26 14:02:02', NULL);
 
 -- membuang struktur untuk table db_talent_hub.tbl_resume_lampiran
 CREATE TABLE IF NOT EXISTS `tbl_resume_lampiran` (
