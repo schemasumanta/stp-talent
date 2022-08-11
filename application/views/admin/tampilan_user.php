@@ -104,7 +104,7 @@
               <label class="control-label col-md-4">Photo</label>
               <div class="col-md-4">
                 <div class="card">
-                  <img src="<?php echo base_url('assets_admin/img/avatar.png'); ?>" class="card-img-top" alt="..." id="imgView_user">
+                  <img src="<?php echo base_url('assets_admin/img/avatar1.png'); ?>" class="card-img-top" alt="..." id="imgView_user">
                 </div>
                 <span class="help-block"></span>
               </div>
@@ -112,7 +112,7 @@
             <div class="form-group">
               <label class="control-label col-md-4" id="label-photo">Upload Photo </label>
               <div class="col-md-12">
-                <input name="user_photo" id="user_photo" type="file" multiple>
+                <input name="user_photo" id="user_photo" type="file" multiple accept="image/*" onchange="loadFile(event)">
                 <span class="help-block"></span>
                 <input type="hidden" name="file_firebase" id="file_firebase">
               </div>
@@ -407,7 +407,7 @@
 
           $('#modal_user').modal('hide');
           reload_table();
-          $('#imgView_user').attr('src', 'assets_admin/img/avatar.png');
+          $('#imgView_user').attr('src', 'assets_admin/img/avatar1.png');
           setTimeout(function() {
             location.reload();
           }, 1000);

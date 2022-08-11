@@ -45,7 +45,7 @@
             background: #3f00ff !important;
             color: white !important;
             text-align: center;
-            !important;
+             !important;
         }
 
         .popover-body {
@@ -134,81 +134,89 @@
         </button>
         <a href="<?php echo base_url() ?>">
             <img src="<?php echo base_url() . $this->session->stp_brand_icon ?>" style="max-height:  40px;margin-left: 5rem"></a>
-            <!-- Topbar Navbar -->
-            <ul class="navbar-nav ml-md-5" style="width: 100%">
-                <form class="d-none d-sm-inline-block form-inline mr-auto  my-2 my-md-0 navbar-search" style="width: 85%;margin-left: 3rem">
-                    <div class="input-group ">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-danger" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search " aria-label="Search" aria-describedby="basic-addon2">
-
+        <!-- Topbar Navbar -->
+        <ul class="navbar-nav ml-md-5" style="width: 100%">
+            <form class="d-none d-sm-inline-block form-inline mr-auto  my-2 my-md-0 navbar-search" style="width: 85%;margin-left: 3rem">
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-danger" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
                     </div>
-                </form>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                <li class="nav-item dropdown no-arrow d-sm-none">
-                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-search fa-fw"></i>
-                    </a>
-                    <!-- Dropdown - Messages -->
-                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                        <form class="form-inline mr-auto w-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search " aria-label="Search" aria-describedby="basic-addon2">
+
+                </div>
+            </form>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-search fa-fw"></i>
+                </a>
+                <!-- Dropdown - Messages -->
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                    <form class="form-inline mr-auto w-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
                             </div>
-                        </form>
-                    </div>
-                </li>
+                        </div>
+                    </form>
+                </div>
+            </li>
 
-                <!-- Nav Item - Alerts -->
-                <li class="nav-item dropdown no-arrow mx-1">
-                    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-bell fa-fw"></i>
-                        <!-- Counter - Alerts -->
-                        <span class="badge badge-danger badge-counter-user"></span>
-                    </a>
-                    <!-- Dropdown - Alerts -->
-                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="list_notifikasi_user">
-                       
-                    </div>
-                </li>
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell fa-fw"></i>
+                    <!-- Counter - Alerts -->
+                    <span class="badge badge-danger badge-counter-user"></span>
+                </a>
+                <!-- Dropdown - Alerts -->
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" id="list_notifikasi_user">
+
+                </div>
+            </li>
 
 
 
-                <div class="topbar-divider d-none d-sm-block"></div>
+            <div class="topbar-divider d-none d-sm-block"></div>
 
-                <!-- Nav Item - User Information -->
-                <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->nama; ?></span>
-                        <img class="img-profile rounded-circle" src="<?php echo $this->session->user_foto ?>">
-                    </a>
-                    <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->nama; ?></span>
+                    <img class="img-profile rounded-circle" src="<?php echo $this->session->user_foto ?>">
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <?php
+                    if ($this->session->user_level == 2) { ?>
+                        <a class="dropdown-item" href="<?= base_url('cv'); ?>">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             View Profile
                         </a>
-
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
+                    <?php } elseif ($this->session->user_level == 3) { ?>
+                        <a class="dropdown-item" href="<?= base_url('provider/company'); ?>">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            View Profile
                         </a>
-                    </div>
-                </li>
+                    <?php }; ?>
 
-            </ul>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </a>
+                </div>
+            </li>
 
-        </nav>
-        <!-- Page Wrapper -->
-        <div id="wrapper">
+        </ul>
+
+    </nav>
+    <!-- Page Wrapper -->
+    <div id="wrapper">

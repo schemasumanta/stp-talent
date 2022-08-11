@@ -1435,7 +1435,7 @@ $bulan = array(
       return false;
     } else {
       let resume_lama = $('.item_lihat_resume').attr('href');
-      if (resume_lama != '') {
+      if (resume_lama != null) {
         const myfile = firebase.storage();
         myfile.refFromURL(resume_lama).delete()
       }

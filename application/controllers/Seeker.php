@@ -366,4 +366,210 @@ class Seeker extends CI_Controller
 		);
 		echo json_encode($output);
 	}
+
+	public function edit_profile()
+	{;
+		$user_id = $this->session->user_id;
+		$data['seeker'] = $this->db->get_where('tbl_master_user', ['user_id' => $user_id])->row();
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar');
+		$this->load->view('seeker/edit_profile', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function update_user()
+	{
+		$methode = "update";
+		$this->_validate($methode);
+
+		$no_hp = $this->input->post('user_telepon');
+		// Ubah no HP dari 08 ke +62
+		// kadang ada penulisan no hp 0811 239 345
+		$no_hp = str_replace(" ", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace("(", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace(")", "", $no_hp);
+		// kadang ada penulisan no hp 0811.239.345
+		$no_hp = str_replace(".", "", $no_hp);
+
+		// cek apakah no hp mengandung karakter + dan 0-9
+		if (!preg_match('/[^+0-9]/', trim($no_hp))) {
+			// cek apakah no hp karakter 1-3 adalah +62
+			if (substr(trim($no_hp), 0, 3) == '+62') {
+				$hp = trim($no_hp);
+			}
+			// cek apakah no hp karakter 1 adalah 0
+			elseif (substr(trim($no_hp), 0, 1) == '0') {
+				$hp = '+62' . substr(trim($no_hp), 1);
+			}
+		}
+
+
+		$data = array(
+			'user_email' => $this->input->post('user_email'),
+			'user_nama' => $this->input->post('user_nama'),
+			'user_updated_date'	=> date('Y-m-d H:i:s'),
+			'user_telepon' => $hp,
+		);
+
+
+		if (!empty($_FILES['user_photo']['name'])) {
+			$data['user_foto'] = $this->input->post('file_firebase');
+		}
+
+		$this->db->where('user_id', $this->input->post('id_user'));
+		$this->db->update('tbl_master_user', $data);
+
+		if ($this->session->user_email != $this->input->post('user_email')) {
+			# code...
+			$user_id = $this->input->post('id_user');
+			$token = $this->generateRandomString();
+			$tanggal = date('Y-m-d H:i:s');
+			$data_token  = array(
+				'token_isi' => $token,
+				'token_expired_date' => date('Y-m-d H:i:s', strtotime($tanggal . ' +1 day')),
+				'token_keterangan' => 'Aktivasi Akun Ganti Email',
+				'user_id' => $user_id,
+			);
+			$this->db->insert('tbl_token', $data_token);
+
+			$this->load->library('Mailer');
+			$email_penerima = $this->input->post('user_email');
+			if ($email_penerima != '') {
+				$subjek = "Aktivasi Akun Talent Hub - " . $this->input->post('user_nama');
+				$password = "Password dirahasiakan";
+				$pesan = $this->kirim_email($token, $email_penerima, $password);
+				$content = $this->load->view('content', array('pesan' => $pesan), true);
+				$sendmail = array(
+					'email_penerima' => $email_penerima,
+					'subjek' => $subjek,
+					'content' => $content,
+				);
+				$send = $this->mailer->send($sendmail);
+			}
+		}
+
+		unset($_SESSION['user_nama']);
+		unset($_SESSION['user_foto']);
+		unset($_SESSION['user_email']);
+		unset($_SESSION['user_telepon']);
+		$newdata = array(
+			'user_nama'  => $this->input->post('user_nama'),
+			'user_foto'  => $this->input->post('file_firebase'),
+			'user_email'  => $this->input->post('user_email'),
+			'user_telepon'  => $this->input->post('user_telepon')
+		);
+
+		$this->session->set_userdata($newdata);
+
+		echo json_encode(array("status" => TRUE));
+	}
+
+	private function _validate($methode)
+	{
+		$data = array();
+		$data['error_string'] = array();
+		$data['inputerror'] = array();
+		$data['status'] = TRUE;
+
+		$no_hp = $this->input->post('user_telepon');
+		// Ubah no HP dari 08 ke +62
+		// kadang ada penulisan no hp 0811 239 345
+		$no_hp = str_replace(" ", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace("(", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace(")", "", $no_hp);
+		// kadang ada penulisan no hp 0811.239.345
+		$no_hp = str_replace(".", "", $no_hp);
+
+		// cek apakah no hp mengandung karakter + dan 0-9
+		if (!preg_match('/[^+0-9]/', trim($no_hp))) {
+			// cek apakah no hp karakter 1-3 adalah +62
+			if (substr(trim($no_hp), 0, 3) == '+62') {
+				$hp = trim($no_hp);
+			}
+			// cek apakah no hp karakter 1 adalah 0
+			elseif (substr(trim($no_hp), 0, 1) == '0') {
+				$hp = '+62' . substr(trim($no_hp), 1);
+			}
+		}
+
+		if ($methode == "add") {
+
+			if ($this->input->post('user_nama') == '') {
+				$data['inputerror'][] = 'user_nama';
+				$data['error_string'][] = 'Nama wajib diisi';
+				$data['status'] = FALSE;
+			}
+
+			$email = $this->input->post('user_email');
+
+			$cek_email = $this->db->get_where('tbl_master_user', ['user_email' => $email])->row();
+			if ($this->input->post('user_email') == '') {
+				$data['inputerror'][] = 'user_email';
+				$data['error_string'][] = 'Email wajib diisi';
+				$data['status'] = FALSE;
+			} elseif ($cek_email) {
+				$data['inputerror'][] = 'user_email';
+				$data['error_string'][] = 'Email sudah terdaftar';
+				$data['status'] = FALSE;
+			}
+
+			$cek_telepon = $this->db->get_where('tbl_master_user', ['user_telepon' => $hp])->row();
+			if ($this->input->post('user_telepon') == '') {
+				$data['inputerror'][] = 'user_telepon';
+				$data['error_string'][] = 'No telepon wajib diisi';
+				$data['status'] = FALSE;
+			} elseif ($cek_telepon) {
+				$data['inputerror'][] = 'user_telepon';
+				$data['error_string'][] = 'No telepon sudah terdaftar';
+				$data['status'] = FALSE;
+			}
+
+			if ($this->input->post('user_password') == '') {
+				$data['inputerror'][] = 'user_password';
+				$data['error_string'][] = 'Password wajib diisi';
+				$data['status'] = FALSE;
+			}
+		} else {
+			if ($this->input->post('user_nama') == '') {
+				$data['inputerror'][] = 'user_nama';
+				$data['error_string'][] = 'Nama wajib diisi';
+				$data['status'] = FALSE;
+			}
+
+			$email = $this->input->post('user_email');
+			$cek_email = $this->db->get_where('tbl_master_user', ['user_email' => $email])->row();
+			if ($this->input->post('user_email') == '') {
+				$data['inputerror'][] = 'user_email';
+				$data['error_string'][] = 'Email wajib diisi';
+				$data['status'] = FALSE;
+			} elseif ($email != $this->session->user_email) {
+				if ($cek_email) {
+					$data['inputerror'][] = 'user_email';
+					$data['error_string'][] = 'Email sudah terdaftar';
+					$data['status'] = FALSE;
+				}
+			}
+			$cek_telepon = $this->db->get_where('tbl_master_user', ['user_telepon' => $hp])->row();
+			if ($this->input->post('user_telepon') == '') {
+				$data['inputerror'][] = 'user_telepon';
+				$data['error_string'][] = 'No telepon wajib diisi';
+				$data['status'] = FALSE;
+			} elseif ($hp != $this->session->user_telepon) {
+				if ($cek_telepon) {
+					$data['inputerror'][] = 'user_telepon';
+					$data['error_string'][] = 'No Telepon sudah terdaftar';
+					$data['status'] = FALSE;
+				}
+			}
+		}
+
+		if ($data['status'] === FALSE) {
+			echo json_encode($data);
+			exit();
+		}
+	}
 }

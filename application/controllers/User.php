@@ -29,13 +29,13 @@ class User extends CI_Controller
 	{
 		$this->db->select('a.user_id');
 		$penerima = $this->input->get('penerima');
-		$this->db->where('a.user_status',1);
-		if ($penerima =="Job Seeker") {
-		$this->db->where('a.user_level',2);
+		$this->db->where('a.user_status', 1);
+		if ($penerima == "Job Seeker") {
+			$this->db->where('a.user_level', 2);
 		}
 
-		if ($penerima =="Job Provider") {
-		$this->db->where('a.user_level',3);
+		if ($penerima == "Job Provider") {
+			$this->db->where('a.user_level', 3);
 		}
 		$data = $this->db->get('tbl_master_user a')->result();
 		echo json_encode($data);
@@ -500,7 +500,29 @@ class User extends CI_Controller
 	{
 		$methode = "add";
 		$this->_validate($methode);
-		$x = $this->input->post('file_firebase');
+		$no_hp = $this->input->post('user_telepon');
+		// Ubah no HP dari 08 ke +62
+		// kadang ada penulisan no hp 0811 239 345
+		$no_hp = str_replace(" ", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace("(", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace(")", "", $no_hp);
+		// kadang ada penulisan no hp 0811.239.345
+		$no_hp = str_replace(".", "", $no_hp);
+
+		// cek apakah no hp mengandung karakter + dan 0-9
+		if (!preg_match('/[^+0-9]/', trim($no_hp))) {
+			// cek apakah no hp karakter 1-3 adalah +62
+			if (substr(trim($no_hp), 0, 3) == '+62') {
+				$hp = trim($no_hp);
+			}
+			// cek apakah no hp karakter 1 adalah 0
+			elseif (substr(trim($no_hp), 0, 1) == '0') {
+				$hp = '+62' . substr(trim($no_hp), 1);
+			}
+		}
+
 		$data = array(
 			'user_email' => $this->input->post('user_email'),
 			'user_nama' => $this->input->post('user_nama'),
@@ -510,7 +532,7 @@ class User extends CI_Controller
 			'user_level'	=> 1,
 			'user_login_status'	=> 1,
 			'user_created_date'	=> date('Y-m-d H:i:s'),
-			'user_telepon' => $this->input->post('user_telepon'),
+			'user_telepon' => $hp,
 		);
 
 		if (!empty($_FILES['user_photo']['name'])) {
@@ -539,6 +561,28 @@ class User extends CI_Controller
 		$data['inputerror'] = array();
 		$data['status'] = TRUE;
 
+		$no_hp = $this->input->post('user_telepon');
+		// Ubah no HP dari 08 ke +62
+		// kadang ada penulisan no hp 0811 239 345
+		$no_hp = str_replace(" ", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace("(", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace(")", "", $no_hp);
+		// kadang ada penulisan no hp 0811.239.345
+		$no_hp = str_replace(".", "", $no_hp);
+
+		// cek apakah no hp mengandung karakter + dan 0-9
+		if (!preg_match('/[^+0-9]/', trim($no_hp))) {
+			// cek apakah no hp karakter 1-3 adalah +62
+			if (substr(trim($no_hp), 0, 3) == '+62') {
+				$hp = trim($no_hp);
+			}
+			// cek apakah no hp karakter 1 adalah 0
+			elseif (substr(trim($no_hp), 0, 1) == '0') {
+				$hp = '+62' . substr(trim($no_hp), 1);
+			}
+		}
 
 		if ($methode == "add") {
 
@@ -549,17 +593,28 @@ class User extends CI_Controller
 			}
 
 			$email = $this->input->post('user_email');
-			$cek_data = $this->db->get_where('tbl_master_user', ['user_email' => $email])->row();
+
+			$cek_email = $this->db->get_where('tbl_master_user', ['user_email' => $email])->row();
 			if ($this->input->post('user_email') == '') {
 				$data['inputerror'][] = 'user_email';
 				$data['error_string'][] = 'Email wajib diisi';
 				$data['status'] = FALSE;
-			} elseif ($cek_data) {
+			} elseif ($cek_email) {
 				$data['inputerror'][] = 'user_email';
 				$data['error_string'][] = 'Email sudah terdaftar';
 				$data['status'] = FALSE;
 			}
 
+			$cek_telepon = $this->db->get_where('tbl_master_user', ['user_telepon' => $hp])->row();
+			if ($this->input->post('user_telepon') == '') {
+				$data['inputerror'][] = 'user_telepon';
+				$data['error_string'][] = 'No telepon wajib diisi';
+				$data['status'] = FALSE;
+			} elseif ($cek_telepon) {
+				$data['inputerror'][] = 'user_telepon';
+				$data['error_string'][] = 'No telepon sudah terdaftar';
+				$data['status'] = FALSE;
+			}
 
 			if ($this->input->post('user_password') == '') {
 				$data['inputerror'][] = 'user_password';
@@ -574,15 +629,27 @@ class User extends CI_Controller
 			}
 
 			$email = $this->input->post('user_email');
-			$cek_data = $this->db->get_where('tbl_master_user', ['user_email' => $email])->row();
+			$cek_email = $this->db->get_where('tbl_master_user', ['user_email' => $email])->row();
 			if ($this->input->post('user_email') == '') {
 				$data['inputerror'][] = 'user_email';
 				$data['error_string'][] = 'Email wajib diisi';
 				$data['status'] = FALSE;
-			} elseif ($cek_data) {
-				if ($cek_data->user_email != $email) {
+			} elseif ($cek_email) {
+				if ($cek_email->user_email != $email) {
 					$data['inputerror'][] = 'user_email';
 					$data['error_string'][] = 'Email sudah terdaftar';
+					$data['status'] = FALSE;
+				}
+			}
+			$cek_telepon = $this->db->get_where('tbl_master_user', ['user_telepon' => $hp])->row();
+			if ($this->input->post('user_telepon') == '') {
+				$data['inputerror'][] = 'user_telepon';
+				$data['error_string'][] = 'No telepon wajib diisi';
+				$data['status'] = FALSE;
+			} elseif ($cek_telepon) {
+				if ($cek_telepon->user_telepon != $hp) {
+					$data['inputerror'][] = 'user_telepon';
+					$data['error_string'][] = 'No Telepon sudah terdaftar';
 					$data['status'] = FALSE;
 				}
 			}
@@ -644,6 +711,31 @@ class User extends CI_Controller
 	{
 		$methode = "update";
 		$this->_validate($methode);
+
+		$no_hp = $this->input->post('user_telepon');
+		// Ubah no HP dari 08 ke +62
+		// kadang ada penulisan no hp 0811 239 345
+		$no_hp = str_replace(" ", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace("(", "", $no_hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$no_hp = str_replace(")", "", $no_hp);
+		// kadang ada penulisan no hp 0811.239.345
+		$no_hp = str_replace(".", "", $no_hp);
+
+		// cek apakah no hp mengandung karakter + dan 0-9
+		if (!preg_match('/[^+0-9]/', trim($no_hp))) {
+			// cek apakah no hp karakter 1-3 adalah +62
+			if (substr(trim($no_hp), 0, 3) == '+62') {
+				$hp = trim($no_hp);
+			}
+			// cek apakah no hp karakter 1 adalah 0
+			elseif (substr(trim($no_hp), 0, 1) == '0') {
+				$hp = '+62' . substr(trim($no_hp), 1);
+			}
+		}
+
+
 		$data = array(
 			'user_email' => $this->input->post('user_email'),
 			'user_nama' => $this->input->post('user_nama'),
@@ -652,7 +744,7 @@ class User extends CI_Controller
 			'user_level'	=> 1,
 			'user_login_status'	=> 1,
 			'user_updated_date'	=> date('Y-m-d H:i:s'),
-			'user_telepon' => $this->input->post('user_telepon'),
+			'user_telepon' => $hp,
 		);
 
 		if ($this->input->post('user_password')) // if remove photo checked

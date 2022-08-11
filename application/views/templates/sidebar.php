@@ -86,7 +86,7 @@ $sub_active = $this->uri->segment(2);
     <?php if ($active == "agama" && $sub_active == "") {
             echo "bg-danger text-light";
         } ?>
-    " href="<?php echo base_url('agama') ?>">Edit Profile</a>
+    " href="<?php echo base_url('seeker/edit_profile') ?>">Edit Profile</a>
 
                     <a class="collapse-item 
     <?php if ($active == "bahasa" && $sub_active == "") {
@@ -164,7 +164,7 @@ $sub_active = $this->uri->segment(2);
     <?php if ($active == "agama" && $sub_active == "") {
             echo "bg-danger text-light";
         } ?>
-    " href="<?php echo base_url('agama') ?>">Edit Profile</a>
+    " href="<?php echo base_url('provider/edit_profile') ?>">Edit Profile</a>
 
                     <a class="collapse-item 
     <?php if ($active == "bahasa" && $sub_active == "") {
