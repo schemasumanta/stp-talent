@@ -528,7 +528,7 @@ class Provider extends CI_Controller
 			$this->load->library('Mailer');
 			$email_penerima = $this->input->post('user_email');
 			if ($email_penerima != '') {
-				$subjek = "Aktivasi Akun Talent Hub - " . $this->input->post('user_nama');
+				$subjek = "Aktivasi Perbahaui Email Akun Talent Hub - " . $this->input->post('user_nama');
 				$password = "Password dirahasiakan";
 				$pesan = $this->kirim_email($token, $email_penerima, $password);
 				$content = $this->load->view('content', array('pesan' => $pesan), true);
