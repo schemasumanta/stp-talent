@@ -175,12 +175,24 @@ class Slider extends CI_Controller {
 			}
 
 			if ($l->slider_tipe=="main") {
-				$l->slider_tipe = '<button type="button" class="btn btn-info btn-sm btn-round ">Main Slider</button>';
+				$l->slider_tipe = '<button type="button" class="btn btn-danger btn-sm rounded ">Main Slider</button>';
 			}elseif($l->slider_tipe=="cv") {
 
-				$l->slider_tipe = '<button type="button" class="btn btn-info btn-sm btn-round ">CV Panel</button>';
+				$l->slider_tipe = '<button type="button" class="btn btn-danger btn-sm rounded ">CV Panel</button>';
+			}
+			elseif($l->slider_tipe=="dashboard_seeker") {
+
+				$l->slider_tipe = '<button type="button" class="btn btn-danger btn-sm rounded ">Dashboard Seeker</button>';
+			}
+			elseif($l->slider_tipe=="dashboard_provider") {
+
+				$l->slider_tipe = '<button type="button" class="btn btn-danger btn-sm rounded ">Dashboard Provider</button>';
+			}
+
+			elseif($l->slider_tipe=="how") {
+				$l->slider_tipe = '<button type="button" class="btn btn-danger btn-sm rounded ">How Its Works</button>';
 			}else{
-				$l->slider_tipe = '<button type="button" class="btn btn-info btn-sm btn-round ">How Its Works</button>';
+				$l->slider_tipe = '<button type="button" class="btn btn-danger btn-sm rounded ">Dashboard</button>';
 			}
 
 			$opsi .='</div>';

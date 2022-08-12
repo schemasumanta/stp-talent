@@ -73,7 +73,7 @@
         <div class="modal fade" data-backdrop="static" id="modal_pendidikan" tabindex="-1" role="dialog" aria-labelledby="modal_pendidikanLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content" >
-              <div class="modal-header bg-primary text-light"> 
+              <div class="modal-header bg-danger text-light"> 
                 <h3 class="modal-title" id="label_header_pendidikan"> <i class="fas fa-user mr-2"></i> TAMBAH DATA PENDIDIKAN</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
               </div>
@@ -187,7 +187,7 @@
 <div class="modal fade" data-backdrop="static" id="ModalAktivasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header bg-primary text-light">
+      <div class="modal-header bg-danger text-light">
        <h3 class="modal-title" id="myModalLabel" style=" font: sans-serif; "><i class="fas fa-database mr-2"></i> Status Pendidikan</h3>
        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
 

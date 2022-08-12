@@ -78,7 +78,7 @@
           <div class="modal-dialog modal-lg">
             <div class="modal-content" >
                <form id="form_stp" method="post" enctype="multipart/form-data" action="<?php echo base_url('stp/simpan') ?>">
-              <div class="modal-header bg-primary text-light"> 
+              <div class="modal-header bg-danger text-light"> 
                 <h3 class="modal-title" id="label_header_stp"> <i class="fas fa-building mr-2"></i> TAMBAH DATA USER</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
               </div>

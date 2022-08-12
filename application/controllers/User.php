@@ -121,7 +121,7 @@ class User extends CI_Controller
 				$l->user_status = '<button type="button" class="btn btn-danger btn-sm btn-round ">Non Aktif</button>';
 			}
 			if ($l->user_foto != '') {
-				$l->user_foto = '<img src="' . base_url() . $l->user_foto . '" width="50px">';
+				$l->user_foto = '<img src="' .$l->user_foto . '" width="50px">';
 			}
 			$data[] = $l;
 		}
@@ -170,7 +170,7 @@ class User extends CI_Controller
 			}
 
 			if ($l->user_foto != '') {
-				$l->user_foto = '<img src="' . base_url() . $l->user_foto . '" width="50px">';
+				$l->user_foto = '<img src="' .$l->user_foto . '" width="50px">';
 			}
 
 			$data[] = $l;

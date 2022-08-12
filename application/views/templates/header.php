@@ -25,7 +25,7 @@
     <link href="<?php echo base_url() ?>assets_admin/css/sb-admin-2-user.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/owl.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>assets/css/owl.css">
     <style type="text/css">
         .select2-selection__rendered {
             line-height: 31px !important;

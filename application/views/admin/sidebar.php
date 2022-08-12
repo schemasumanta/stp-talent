@@ -37,7 +37,7 @@ $sub_active = $this->uri->segment(2);
                 <span>Settings</span>
             </a>
 
-            <div id="collapseTwo" class="collapse <?php if($active=="agama" || $active=="bahasa" || $active=="level"  || $active=="pendidikan" || $active=="jabatan" || $active=="skill" || $active=="job"){
+            <div id="collapseTwo" class="collapse <?php if($active=="agama" || $active=="bahasa" || $active=="level"  || $active=="pendidikan" || $active=="jabatan" || $active=="skill" || $active=="job" || $active=="stp" || $active=="slider" ){
                 echo "show";
             } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">

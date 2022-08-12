@@ -94,16 +94,18 @@
         <div class="owl-carousel">
             <?php
             foreach ($lowongan as $key) { ?>
-                <div class="card-radious align-items-center d-flex justify-content-center mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
-                    <a href="javascript:;" class="btn" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)">
+                    <a href="javascript:;" class="btn btn-sm" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)">
+
+                <div class="card-radious align-items-center d-flex justify-content-center flex-row mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
                         <div class="card-body">
                             <h5><?= $key->lowongan_judul; ?></h5>
                             <label>
                                 <i class="fa fa-map-marker" style="font-size:24px;color:red"></i> <?= $key->kabkota_nama; ?>
                             </label>
                         </div>
-                    </a>
                 </div>
+                    </a>
+
             <?php }
             ?>
         </div>
