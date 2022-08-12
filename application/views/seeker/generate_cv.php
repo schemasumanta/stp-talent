@@ -130,7 +130,7 @@
           position: relative;
           line-height: 1.4em;
           font-size: 1.03em;
-          padding: 50px;
+          padding: 10px;
           list-style: none;
           text-align: left;
           max-width: 60%;
@@ -139,7 +139,7 @@
         @media (max-width: 2000px) {
           .timeline {
             max-width: 98%;
-            padding: 25px;
+            padding: 15px;
           }
         }
 
@@ -159,14 +159,14 @@
 
         .timeline .event {
           border-bottom: 1px dashed #e8ebf1;
-          padding-bottom: 25px;
-          margin-bottom: 25px;
+          padding-bottom: 5px;
+          margin-bottom: 5px;
           position: relative;
         }
 
         @media (max-width: 2000px) {
           .timeline .event {
-            padding-top: 30px;
+            padding-top: 5px;
           }
         }
 
@@ -243,21 +243,30 @@
       $data = file_get_contents($key->resume_foto);
       $foto = 'data:image/' . ';base64,' . base64_encode($data);
 
-      $bulan = array(
-        '01' => 'Januari',
-        '02' => 'Februari',
-        '03' => 'Maret',
-        '04' => 'April',
-        '05' => 'Mei',
-        '06' => 'Juni',
-        '07' => 'Juli',
-        '08' => 'Agustus',
-        '09' => 'September',
-        '10' => 'Oktober',
-        '11' => 'November',
-        '12' => 'Desember'
-      );
+      function tgl_indo($tanggal)
+      {
+        $bulan = array(
+          1 =>   'Januari',
+          'Februari',
+          'Maret',
+          'April',
+          'Mei',
+          'Juni',
+          'Juli',
+          'Agustus',
+          'September',
+          'Oktober',
+          'November',
+          'Desember'
+        );
+        $pecahkan = explode('-', $tanggal);
 
+        // variabel pecahkan 0 = tanggal
+        // variabel pecahkan 1 = bulan
+        // variabel pecahkan 2 = tahun
+
+        return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
+      }
       ?>
 
     </head>
@@ -353,18 +362,15 @@
             <?php
             $i = 0;
             foreach ($pengalaman as $pl) : ?>
-              <?php $tgl = explode('-', $pl->pengalaman_tanggal_awal);
-              $tgl_akhir = explode('-', $pl->pengalaman_tanggal_akhir) ?>
-
               <li class="event item_list_pengalaman" data-list="<?php echo $i ?>" data-date="<?php
                                                                                               if ($pl->masih_bekerja > 0) {
-                                                                                                echo $tgl[2] . " " . $bulan[$tgl[1]] . " " . $tgl[0] . "- Sekarang";
+                                                                                                echo  tgl_indo($pl->pengalaman_tanggal_awal) . "- Sekarang";
                                                                                               } else {
-                                                                                                echo  $tgl[2] . " " . $bulan[$tgl[1]] . " " . $tgl[0] . " - " . $tgl_akhir[2] . " " . $bulan[$tgl_akhir[1]] . " " . $tgl_akhir[0];
+                                                                                                echo  tgl_indo($pl->pengalaman_tanggal_awal) . " - " . tgl_indo($pl->pengalaman_tanggal_akhir);
                                                                                               }
                                                                                               ?>">
-                <h1><?php echo $pl->jabatan_nama; ?></h1>
-                <h3 style="font-weight: bold;"><?php echo $pl->perusahaan_nama; ?></h3>
+                <h4 style="margin-buttom: 5px;"><?php echo $pl->jabatan_nama; ?></h4>
+                <h5 style="font-weight: bold; margin-top: 5px;"><?php echo $pl->perusahaan_nama; ?></h5>
                 <p><?php echo $pl->pengalaman_deskripsi; ?></p>
               </li>
             <?php $i++;

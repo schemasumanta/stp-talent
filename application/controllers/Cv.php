@@ -564,7 +564,12 @@ class Cv extends CI_Controller
 		$this->db->join('tbl_master_skill b', 'b.skill_id=a.skill_id');
 		$this->db->join('tbl_skill_level c', 'c.skill_level_id=a.skill_level_id');
 		$data['skill']	= $this->db->get('tbl_skill_resume a')->result();
-		$data['pengalaman']	= $this->db->query("SELECT tbl_pengalaman_resume.*,perusahaan_nama,jabatan_nama FROM tbl_pengalaman_resume JOIN tbl_perusahaan ON tbl_pengalaman_resume.perusahaan_id = tbl_perusahaan.perusahaan_id JOIN tbl_master_jabatan ON tbl_master_jabatan.jabatan_id = tbl_pengalaman_resume.jabatan_id WHERE tbl_pengalaman_resume.user_id = '$id'")->result();
+		$this->db->where('a.user_id', $this->session->user_id);
+		$this->db->join('tbl_perusahaan b', 'b.perusahaan_id=a.perusahaan_id');
+		$this->db->join('tbl_master_level_job c', 'c.joblevel_id=a.joblevel_id');
+		$this->db->join('tbl_master_jabatan d', 'd.jabatan_id=a.jabatan_id');
+		$this->db->order_by('a.pengalaman_tanggal_awal', 'asc');
+		$data['pengalaman'] = $this->db->get('tbl_pengalaman_resume a')->result();
 		$this->load->library('dompdf_gen');
 		$this->load->view('seeker/generate_cv', $data);
 		$customPaper = 'A4';
