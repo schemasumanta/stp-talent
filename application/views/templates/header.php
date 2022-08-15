@@ -25,7 +25,7 @@
     <link href="<?php echo base_url() ?>assets_admin/css/sb-admin-2-user.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/css/owl.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/owl.css">
     <style type="text/css">
         .select2-selection__rendered {
             line-height: 31px !important;
@@ -194,19 +194,6 @@
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <?php
-                    if ($this->session->user_level == 2) { ?>
-                        <a class="dropdown-item" href="<?= base_url('cv'); ?>">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            View Profile
-                        </a>
-                    <?php } elseif ($this->session->user_level == 3) { ?>
-                        <a class="dropdown-item" href="<?= base_url('provider/company'); ?>">
-                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                            View Profile
-                        </a>
-                    <?php }; ?>
-
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
