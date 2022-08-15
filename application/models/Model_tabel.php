@@ -87,7 +87,7 @@ class Model_tabel extends CI_Model
                     $this->db->where('a.user_id', $this->session->user_id);
                 }
                 break;
-                case 'report':
+            case 'report':
                 $this->db->select('
                 a.*,
                 b.user_nama as reporter_nama,
@@ -97,8 +97,8 @@ class Model_tabel extends CI_Model
                 ');
                 $this->db->join('tbl_master_user b', 'b.user_id=a.reporter');
                 $this->db->join('tbl_master_user c', 'c.user_id=a.reported');
-                $this->db->join('tbl_perusahaan d', 'd.perusahaan_id=b.perusahaan_id','left');
-                $this->db->join('tbl_perusahaan e', 'e.perusahaan_id=c.perusahaan_id','left');
+                $this->db->join('tbl_perusahaan d', 'd.perusahaan_id=b.perusahaan_id', 'left');
+                $this->db->join('tbl_perusahaan e', 'e.perusahaan_id=c.perusahaan_id', 'left');
                 $this->db->from('tbl_report a');
                 if ($_GET['order'][0]['column'] == 0) {
                     $this->db->order_by('a.report_id', $order);
@@ -240,9 +240,11 @@ class Model_tabel extends CI_Model
                 }
 
                 if ($search != null && $search != '') {
-                    $this->db->like('r.nama_lengkap', $search);
+                    $this->db->like('r.resume_nama_lengkap', $search);
                     $this->db->where('lp.lowongan_id', $id);
-                    $this->db->or_like('kk.kabkota_nama', $search);
+                    $this->db->or_like('mu.user_email', $search);
+                    $this->db->where('lp.lowongan_id', $id);
+                    $this->db->or_like('mu.user_telepon', $search);
                     $this->db->where('lp.lowongan_id', $id);
                 }
 

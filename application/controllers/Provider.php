@@ -388,7 +388,7 @@ class Provider extends CI_Controller
 			$l->isi_lowongan = '<div class="card border-left-success shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><img src="' . $l->resume_foto . '" style="width:5%;margin-right:25px;">
 			<div class="col mr-2"><div class="text-lg font-weight-bold text-danger text-uppercase mb-1">
 			' . $l->resume_nama_lengkap . '</div>
-			<div class="h6 mb-2 text-gray-800">' . $resume . '</div>
+			<div class="h6 mb-2 text-gray-800">' . $resume . '<label class="badge badge-pill badge-success">' . $l->user_telepon . '</label><label class="badge badge-pill badge-success">' . $l->user_email . '</label></div>
 			<div class="h6 mb-2 font-weight-bold text-gray-800">
 			<i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</i>
 			</div>
