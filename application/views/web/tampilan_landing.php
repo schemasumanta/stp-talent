@@ -80,8 +80,11 @@
                   <span class="mb-2"><img src="<?php echo $kj->kategori_icon ?>" style="height: 100px"></span>
                 </div>
                 <div class="services-cap">
-                  <h5><a href="job_listing.html"><?php echo ucwords($kj->kategori_nama); ?></a></h5>
-                  <span>(653)</span>
+                  <a href="<?= base_url('landing/get_kategori/') . $kj->kategori_id; ?>">
+                    <h5><?php echo ucwords($kj->kategori_nama); ?>
+                    </h5>
+                    <span>(<?= $kj->jml; ?>)</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -94,7 +97,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="browse-btn2 text-center mt-50 mb-1">
-            <a href="job_listing.html" class="border-btn2">Browse All Sectors</a>
+            <a href="<?= base_url('job/job_listing'); ?>" class="border-btn2">Browse All Sectors</a>
           </div>
         </div>
       </div>
@@ -111,7 +114,7 @@
             <p class="pera2">
               Life's Changing Experience & Make a difference!
             </p>
-            <a href="#" class="border-btn2" style="border:1px solid white;color: #ffffff">Upload your cv</a>
+            <a href="<?= base_url('landing/login'); ?>" class="border-btn2" style="border:1px solid white;color: #ffffff">Upload your cv</a>
           </div>
         </div>
       </div>
@@ -249,77 +252,8 @@
     </div>
   </div>
   <!-- How  Apply Process End-->
-  <!-- Testimonial Start -->
-  <div class="testimonial-area testimonial-padding">
-    <div class="container">
-      <!-- Testimonial contents -->
-      <div class="row d-flex justify-content-center">
-        <div class="col-xl-8 col-lg-8 col-md-10">
-          <div class="h1-testimonial-active dot-style">
-            <!-- Single Testimonial -->
-            <div class="single-testimonial text-center">
-              <!-- Testimonial Content -->
-              <div class="testimonial-caption">
-                <!-- founder -->
-                <div class="testimonial-founder">
-                  <div class="founder-img mb-30">
-                    <img src="assets/img/testmonial/testimonial-founder.png" alt="" />
-                    <span>Zaqi Akbar</span>
-                    <p>Full Stack Devs</p>
-                  </div>
-                </div>
-                <div class="testimonial-top-cap">
-                  <p>"This platform connected me to my Dreams, Salute"</p>
-                </div>
-              </div>
-            </div>
-            <!-- Single Testimonial -->
-            <div class="single-testimonial text-center">
-              <!-- Testimonial Content -->
-              <div class="testimonial-caption">
-                <!-- founder -->
-                <div class="testimonial-founder">
-                  <div class="founder-img mb-30">
-                    <img src="assets/img/testmonial/1.png" alt="" />
-                    <span>Margaret Lawson</span>
-                    <p>Personal Assistant to General Mgr. at BGC</p>
-                  </div>
-                </div>
-                <div class="testimonial-top-cap">
-                  <p>“I love "EASY-APPLY" Features”</p>
-                </div>
-              </div>
-            </div>
-            <!-- Single Testimonial -->
-            <div class="single-testimonial text-center">
-              <!-- Testimonial Content -->
-              <div class="testimonial-caption">
-                <!-- founder -->
-                <div class="testimonial-founder">
-                  <div class="founder-img mb-30">
-                    <img src="assets/img/testmonial/testimonial-founder.png" alt="" />
-                    <span>Margaret Lawson</span>
-                    <p>Creative Director</p>
-                  </div>
-                </div>
-                <div class="testimonial-top-cap">
-                  <p>
-                    “I am at an age where I just want to be fit and healthy
-                    our bodies are our responsibility! So start caring for
-                    your body and it will care for you. Eat clean it will
-                    care for you and workout hard.”
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Testimonial End -->
   <!-- Support Company Start-->
-  <div class="support-company-area support-padding fix">
+  <div class="support-company-area support-padding fix mt-4">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-xl-6 col-lg-6">
@@ -344,7 +278,7 @@
                 starting with the recruitment process through and beyond
                 onboarding.
               </p>
-              <a href="about.html" class="btn post-btn">Post a job</a>
+              <a href="<?= base_url('landing/login'); ?>" class="btn post-btn">Post a job</a>
             </div>
           </div>
         </div>

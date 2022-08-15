@@ -10,10 +10,7 @@ class Landing extends CI_Controller
 		$this->db->where('slider_tipe', 'main');
 		$this->db->where('slider_status', 1);
 		$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
-		$this->db->where('kategori_status', 1);
-		$this->db->limit(8);
-		$this->db->order_by('kategori_nama', 'asc');
-		$data['kategori_job'] = $this->db->get('tbl_master_kategori_job')->result();
+		$data['kategori_job'] = $this->db->query("SELECT kj.kategori_nama,kj.kategori_icon,kj.kategori_id, count(user_id) as jml FROM tbl_master_kategori_job as kj LEFT JOIN tbl_lowongan_pekerjaan as lp ON kj.kategori_id = lp.kategori_id GROUP BY kj.kategori_nama ORDER BY kj.kategori_nama LIMIT 8")->result();
 		$this->db->where('slider_tipe', 'cv');
 		$this->db->where('slider_status', 1);
 		$data['slider_cv'] = $this->db->get('tbl_master_slider')->result();
@@ -93,9 +90,9 @@ class Landing extends CI_Controller
 		$this->db->select('a.*,b.*,c.*,d.user_id');
 		$this->db->where('md5(a.perusahaan_id)', $perusahaan_id);
 
-		$this->db->join('tbl_master_provinsi b', 'b.prov_id=a.perusahaan_prov','left');
-		$this->db->join('tbl_master_kabkota c', 'c.kabkota_id=a.perusahaan_kabkota','left');
-		$this->db->join('tbl_master_user d', 'd.perusahaan_id=a.perusahaan_id','left');
+		$this->db->join('tbl_master_provinsi b', 'b.prov_id=a.perusahaan_prov', 'left');
+		$this->db->join('tbl_master_kabkota c', 'c.kabkota_id=a.perusahaan_kabkota', 'left');
+		$this->db->join('tbl_master_user d', 'd.perusahaan_id=a.perusahaan_id', 'left');
 
 		$data['perusahaan'] = $this->db->get('tbl_perusahaan a')->result();
 
@@ -239,13 +236,13 @@ class Landing extends CI_Controller
 	public function laporkan()
 	{
 		$data_laporan = array(
-			'reporter' 			=>$this->session->user_id,
-			'reported' 			=>$this->input->post('user_id_report'), 
-			'report_keterangan' =>$this->input->post('report_deskripsi'), 
-			'report_tanggal' 	=>date('Y-m-d H:i:s'), 
-			'report_status' 	=>0, 
+			'reporter' 			=> $this->session->user_id,
+			'reported' 			=> $this->input->post('user_id_report'),
+			'report_keterangan' => $this->input->post('report_deskripsi'),
+			'report_tanggal' 	=> date('Y-m-d H:i:s'),
+			'report_status' 	=> 0,
 		);
-		$result = $this->db->insert('tbl_report',$data_laporan);
+		$result = $this->db->insert('tbl_report', $data_laporan);
 		if ($result) {
 			$data['title'] = 'Berhasil';
 			$data['text'] = 'Report Pelanggaran Berhasil Dikirim!';
@@ -254,10 +251,9 @@ class Landing extends CI_Controller
 			$data['title'] = 'Error';
 			$data['text'] = 'Report Pelanggaran Gagal Dikirim!';
 			$data['icon'] = 'error';
-			
 		}
 		$this->session->set_flashdata($data);
-		redirect('landing/profil_perusahaan/'.md5($this->input->post('perusahaan_id_report')), 'refresh');
+		redirect('landing/profil_perusahaan/' . md5($this->input->post('perusahaan_id_report')), 'refresh');
 	}
 	public function reset_password($token)
 	{
@@ -292,5 +288,15 @@ class Landing extends CI_Controller
 			$this->session->set_flashdata($data);
 			redirect('landing/login', 'refresh');
 		}
+	}
+
+	public function get_kategori($id)
+	{
+		$newdata = array(
+			'kategori_job'  => $id,
+		);
+
+		$this->session->set_userdata($newdata);
+		redirect('job/job_listing', 'refresh');
 	}
 }
