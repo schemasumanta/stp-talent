@@ -1,3 +1,35 @@
+<style>
+  .select2-container--default .select2-selection--multiple:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    border-color: #888 transparent transparent transparent;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    height: 0;
+    right: 6px;
+    margin-left: -4px;
+    margin-top: -2px;
+    top: 50%;
+    width: 0;
+    cursor: pointer
+  }
+
+  .select2-container--open .select2-selection--multiple:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    border-color: transparent transparent #888 transparent;
+    border-width: 0 4px 5px 4px;
+    height: 0;
+    right: 6px;
+    margin-left: -4px;
+    margin-top: -2px;
+    top: 50%;
+    width: 0;
+    cursor: pointer
+  }
+</style>
 <div class="container-fluid">
 
   <h1 class="h3 mb-2 text-gray-800">User</h1>
@@ -56,33 +88,33 @@
               <label class="control-label col-md-4">Nama Lengkap</label>
               <div class="col-md-12">
                 <input name="user_nama" id="user_nama" placeholder="Nama Lengkap" class="form-control" type="text">
-                <span class="help-block"></span>
+                <span class="help-block text-danger" id="v_user_nama"></span>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-md-4">Email</label>
               <div class="col-md-12">
                 <input name="user_email" id="user_email" placeholder="contoh@gmail.com" class="form-control" type="email">
-                <span class="help-block"></span>
+                <span class="help-block text-danger" id="v_user_email"></span>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-md-4">No Tlp</label>
               <div class="col-md-12">
                 <input name="user_telepon" id="user_telepon" placeholder="08xxx" class="form-control" type="text">
-                <span class="help-block"></span>
+                <span class="help-block text-danger" id="v_user_telepon"></span>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-md-4">Pilih menu</label>
               <div class="col-md-12">
-                <select name="role_id[]" id="role_id" class="form-control" multiple="multiple" style="width: 100%">
+                <select name="role_id[]" id="role_id" class="form-control" multiple="multiple" style="width: 100%;">
                   <option value="0" disabled>Pilih Menu</option>
                   <?php foreach ($menu as $key) { ?>
                     <option value="<?= $key->role_id; ?>"> <?= $key->role_menu; ?></option>
                   <?php }; ?>
                 </select>
-                <span class="help-block"></span>
+                <span class="help-block text-danger" id="v_role_id"></span>
               </div>
             </div>
             <div class="form-group">
@@ -97,7 +129,7 @@
                 <p id="pw_edit">
                   <small class="text-danger">*Masukan Password jika ingin merubahnya</small>
                 </p>
-                <span class="help-block"></span>
+                <span class="help-block text-danger" id="v_user_password"></span>
               </div>
             </div>
             <div class="form-group" id="photo-preview">
@@ -106,15 +138,14 @@
                 <div class="card">
                   <img src="<?php echo base_url('assets_admin/img/avatar1.png'); ?>" class="card-img-top" alt="..." id="imgView_user">
                 </div>
-                <span class="help-block"></span>
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-md-4" id="label-photo">Upload Photo </label>
               <div class="col-md-12">
                 <input name="user_photo" id="user_photo" type="file" multiple accept="image/*" onchange="loadFile(event)">
-                <span class="help-block"></span>
                 <input type="hidden" name="file_firebase" id="file_firebase">
+                <span class="help-block" id="v_photo"></span>
               </div>
             </div>
           </div>
@@ -149,10 +180,8 @@
     // // Initialize Firebase
     // firebase.initializeApp(firebaseConfig);
     $('#role_id').select2({
-      placeholder: 'Pilih Menu',
-      allowClear: true,
-      dropdownParent: $('#modal_user'),
-      tags: true,
+      multiple: true,
+      placeholder: "Pilih menu",
     });
 
 
@@ -412,12 +441,15 @@
             location.reload();
           }, 1000);
         } else {
+          $('.help-block').empty();
+          $('.form-control').removeClass("is-invalid");
           for (var i = 0; i < data.inputerror.length; i++) {
-            $('[name="' + data.inputerror[i] + '"]').addClass('is-invalid'); //select parent twice to select div form-group class and add has-error class
+            $('[id="' + data.inputerror[i] + '"]').addClass('is-invalid'); //select parent twice to select div form-group class and add has-error class
+            $('#v_' + data.inputerror[i] + '').text(data.error_string[i])
             Swal.fire({
               icon: 'warning',
               title: 'Oops...',
-              text: data.error_string[i]
+              text: "Ada yg belum diisi atau tidak sesuai ketentuan"
             })
           }
         }
