@@ -39,20 +39,14 @@
             <div class="col-sm-6"> 
             </div>
             <div class="col-sm-12"> 
-
-             <!-- Button trigger modal -->
              <?php if ($profil < 1) { ?>
-
                <button id="btn_tambah" class="btn btn-success btn-sm btn-md btn  mr-2" ><i class="fa fa-plus mr-2"></i> Profil STP</button>
              <?php } ?>
              <button id="export" name="export" class="btn btn-sm refresh btn-warning btn-md"  ><i class="fas fa-sync-alt" style="margin-right: 10px"></i>Refresh Data</button>
-
            </div>
-           
          </div>
          <div class="card-body">
           <div class="table-responsive">
-
             <table  id="tabel_stp"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
               <thead>
                 <tr class="bg-danger text-light text-center">
@@ -77,106 +71,106 @@
         <div class="modal fade" data-backdrop="static" id="modal_stp" tabindex="-1" role="dialog" aria-labelledby="modal_stpLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg">
             <div class="modal-content" >
-               <form id="form_stp" method="post" enctype="multipart/form-data" action="<?php echo base_url('stp/simpan') ?>">
+             <form id="form_stp" method="post" enctype="multipart/form-data" action="<?php echo base_url('stp/simpan') ?>">
               <div class="modal-header bg-danger text-light"> 
                 <h3 class="modal-title" id="label_header_stp"> <i class="fas fa-building mr-2"></i> TAMBAH DATA USER</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
               </div>
               <div class="modal-body">
-              
-                 <div class="row "> 
-                  <div class="col-md-12 mb-3"> 
-                   <label style="color:#343a40;" for="stp_nama">Nama Aplikasi</label>
-                   <input type="hidden" name="stp_id" id="stp_id">
-                   <input type="text" class="form-control" id="stp_nama"  name="stp_nama" required>
-                 </div>  
-                 <div class="col-md-12 mb-3"> 
-                   <label style="color:#343a40;" for="stp_tagline">Tagline</label>
-                   <input type="text" class="form-control" id="stp_tagline"  name="stp_tagline">
-                 </div>   
 
-                 <div class="col-md-6 mb-3"> 
-                   <label style="color:#343a40;" for="stp_telepon">Telepon</label>
-                   <input type="text" class="form-control" id="stp_telepon"  name="stp_telepon">
-                 </div>
+               <div class="row "> 
+                <div class="col-md-12 mb-3"> 
+                 <label style="color:#343a40;" for="stp_nama">Nama Aplikasi</label>
+                 <input type="hidden" name="stp_id" id="stp_id">
+                 <input type="text" class="form-control" id="stp_nama"  name="stp_nama" required>
+               </div>  
+               <div class="col-md-12 mb-3"> 
+                 <label style="color:#343a40;" for="stp_tagline">About Us</label>
+                 <textarea type="text" class="form-control" id="stp_tagline"  name="stp_tagline" rows="5"></textarea>
+               </div>   
 
-                 <div class="col-md-6 mb-3"> 
-                   <label style="color:#343a40;" for="stp_email">Email</label>
-                   <input type="text" class="form-control" id="stp_email"  name="stp_email">
-                 </div>   
+               <div class="col-md-6 mb-3"> 
+                 <label style="color:#343a40;" for="stp_telepon">Telepon</label>
+                 <input type="text" class="form-control" id="stp_telepon"  name="stp_telepon">
+               </div>
 
-
-                 <div class="col-md-6 mb-3"> 
-                   <label style="color:#343a40;" for="stp_pemilik">Pemilik</label>
-                   <input type="text" class="form-control" id="stp_pemilik"  name="stp_pemilik">
-                 </div>   
+               <div class="col-md-6 mb-3"> 
+                 <label style="color:#343a40;" for="stp_email">Email</label>
+                 <input type="text" class="form-control" id="stp_email"  name="stp_email">
+               </div>   
 
 
-                 <div class="col-md-6 mb-3"> 
-                   <label style="color:#343a40;" for="stp_facebook">Facebook</label>
-                   <input type="text" class="form-control" id="stp_facebook"  name="stp_facebook">
-                 </div>   
-
-                 <div class="col-md-6 mb-3"> 
-                   <label style="color:#343a40;" for="stp_instagram">Instagram</label>
-                   <input type="text" class="form-control" id="stp_instagram"  name="stp_instagram">
-                 </div>   
-                 <div class="col-md-6 mb-3"> 
-                   <label style="color:#343a40;" for="stp_website">Website</label>
-                   <input type="text" class="form-control" id="stp_website"  name="stp_website">
-                 </div> 
+               <div class="col-md-6 mb-3"> 
+                 <label style="color:#343a40;" for="stp_pemilik">Pemilik</label>
+                 <input type="text" class="form-control" id="stp_pemilik"  name="stp_pemilik">
+               </div>   
 
 
-                 <div class="col-md-6 mb-3"> 
-                   <label style="color:#343a40;" for="stp_alamat">Alamat</label>
-                   <textarea class="form-control" id="stp_alamat"  name="stp_alamat" rows="6"></textarea> 
-                 </div>  
+               <div class="col-md-6 mb-3"> 
+                 <label style="color:#343a40;" for="stp_facebook">Facebook</label>
+                 <input type="text" class="form-control" id="stp_facebook"  name="stp_facebook">
+               </div>   
 
-                 <div class="col-md-3 mb-3"> 
-                  <label class="imagecheck">Logo Perusahaan
-                   <input type="hidden" name="lampiran_stp_lama" id="lampiran_stp_lama">
-                   <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_stp" id="lampiran_stp" onchange="previewFile(this.id)">
-                   <figure class="imagecheck-figure">
-                    <img src="<?php echo base_url('assets/img/img03.jpg');?>"  class="imagecheck-image" id="preview_lampiran_stp">
-                  </figure>
-                </label>
-              </div>
+               <div class="col-md-6 mb-3"> 
+                 <label style="color:#343a40;" for="stp_instagram">Instagram</label>
+                 <input type="text" class="form-control" id="stp_instagram"  name="stp_instagram">
+               </div>   
+               <div class="col-md-6 mb-3"> 
+                 <label style="color:#343a40;" for="stp_website">Website</label>
+                 <input type="text" class="form-control" id="stp_website"  name="stp_website">
+               </div> 
 
-              <div class="col-md-3 mb-3"> 
-                <label class="imagecheck">Brand Icon
-                 <input type="hidden" name="lampiran_icon_lama" id="lampiran_icon_lama">
-                 <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_icon" id="lampiran_icon" onchange="previewFile(this.id)">
+
+               <div class="col-md-6 mb-3"> 
+                 <label style="color:#343a40;" for="stp_alamat">Alamat</label>
+                 <textarea class="form-control" id="stp_alamat"  name="stp_alamat" rows="6"></textarea> 
+               </div>  
+
+               <div class="col-md-3 mb-3"> 
+                <label class="imagecheck">Logo Perusahaan
+                 <input type="hidden" name="lampiran_stp_lama" id="lampiran_stp_lama">
+                 <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_stp" id="lampiran_stp" onchange="previewFile(this.id)">
                  <figure class="imagecheck-figure">
-                  <img src="<?php echo base_url('assets/img/img03.jpg');?>"  class="imagecheck-image" id="preview_lampiran_icon">
+                  <img src="<?php echo base_url('assets/img/img03.jpg');?>"  class="imagecheck-image" id="preview_lampiran_stp">
                 </figure>
               </label>
             </div>
+
+            <div class="col-md-3 mb-3"> 
+              <label class="imagecheck">Brand Icon
+               <input type="hidden" name="lampiran_icon_lama" id="lampiran_icon_lama">
+               <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_icon" id="lampiran_icon" onchange="previewFile(this.id)">
+               <figure class="imagecheck-figure">
+                <img src="<?php echo base_url('assets/img/img03.jpg');?>"  class="imagecheck-image" id="preview_lampiran_icon">
+              </figure>
+            </label>
           </div>
         </div>
-        <div class="modal-footer">
-          <div class="form-group row"class="collapse" id="customer_collapse">
-            <div class="col-sm-6">
-              <button type="button" class="btn btn-danger" data-dismiss="modal"><b>TUTUP</b></button>
-
-            </div>
-
-            <div class="col-sm-6 float-sm-right">
-              <button type="button" class="btn btn-success" id="btn_simpan"><b>TAMBAH</b></button>
-
-            </div>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group row"class="collapse" id="customer_collapse">
+          <div class="col-sm-6">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"><b>TUTUP</b></button>
 
           </div>
 
+          <div class="col-sm-6 float-sm-right">
+            <button type="button" class="btn btn-success" id="btn_simpan"><b>TAMBAH</b></button>
 
+          </div>
 
         </div>
 
-      </form>
+
+
+      </div>
+
+    </form>
 
 
 
-    </div>
   </div>
+</div>
 </div> 
 
 
@@ -199,6 +193,19 @@
 
 
   $(document).ready(function(){
+    $('#stp_tagline').summernote({
+    placeholder: 'About Us',
+    tabsize: 2,
+    height: 150,
+    callbacks: {
+      onImageUpload: function(image) {
+        uploadImage('stp_tagline',image[0]);
+      },
+      onMediaDelete : function(target) {
+        deleteImage(target[0].src);
+      }
+    }
+  });
 
    const notif = $('.flashdatart').data('title');
    if (notif) {
@@ -310,7 +317,7 @@
         $('#label_header_stp').html('<i class="fas fa-building mr-2"></i> UBAH DATA PROFIL STP');
         $('#stp_id').val(stp_id);
         $('#stp_nama').val(data[0].stp_nama);
-        $('#stp_tagline').val(data[0].stp_tagline);
+        $('#stp_tagline').summernote('code',(data[0].stp_tagline));
         $('#stp_pemilik').val(data[0].stp_pemilik);
         $('#stp_telepon').val(data[0].stp_telepon);
         $('#stp_email').val(data[0].stp_email);
@@ -433,6 +440,8 @@
   $('#form_stp').submit();
 
 });
+
+  
 
 
 </script>

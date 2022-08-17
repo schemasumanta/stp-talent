@@ -650,7 +650,7 @@ class User extends CI_Controller
 
 			if ($this->input->post('role_id') == '') {
 				$data['inputerror'][] = 'role_id';
-				$data['error_string'][] = 'Menu wajib diisi';
+				$data['error_string'][] = 'Silahkan Pilih Role Min. 1';
 				$data['status'] = FALSE;
 			}
 		} else {
@@ -679,6 +679,7 @@ class User extends CI_Controller
 					$data['status'] = FALSE;
 				}
 			}
+
 			if ($this->input->post('user_telepon') == '') {
 				$data['inputerror'][] = 'user_telepon';
 				$data['error_string'][] = 'No telepon wajib diisi';

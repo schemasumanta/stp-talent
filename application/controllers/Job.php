@@ -697,7 +697,7 @@ class Job extends CI_Controller
 				$gaji = 'Rp ' . number_format($l->lowongan_gaji_min, 0, ',', '.');
 			}
 
-			$l->isi_lowongan = '<div class="single-job-items mb-30">
+			$l->isi_lowongan = '<div class="single-job-items mb-20">
                  <div class="job-items">
                    <div class="company-img">
                      <a href="#"><img src="' . $l->perusahaan_logo . '" alt="" /></a>
@@ -712,7 +712,10 @@ class Job extends CI_Controller
                          <i class="fas fa-map-marker-alt"></i>' . $l->kabkota_nama . ' - ' .  $l->prov_nama . '
                        </li>
                      </ul>
+                     <br>
 					 <h6>' . $gaji . '</h6>
+                     <br>
+					 
 					 <label>' . date('d-M-Y H:i:s', strtotime($l->lowongan_created_date)) . '</label>
                    </div>
                  </div>

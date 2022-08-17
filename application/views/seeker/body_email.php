@@ -27,10 +27,6 @@
                     <td style="padding-bottom:30px;font-style:normal;font-weight:normal;font-size:14px;line-height:24px;color:#7f8895;letter-spacing:0.005em">
                         
                         <div>
-                            <span style="width: 100px;display: inline-block;font-weight: bold;">Email</span> <span>: <?php echo $email; ?></span>
-                            <br>
-                            <br>
-                            <span style="width: 100px;display: inline-block;font-weight: bold;">Password</span> <span>: <?php echo $password; ?></span>
                             <br>
                             <br>
                          <a href="<?php echo base_url() ?>seeker/aktivasi/<?php echo $id_user ?>" style="background: red;color: white;border-radius: 10px;height: 50px;width: 150px;padding: 10px;text-decoration: none;" target="_blank">Aktivasi Akun</a>

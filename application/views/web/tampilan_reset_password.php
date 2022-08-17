@@ -33,9 +33,7 @@
                     <a href="javascript:;" class="item_send" style="width: 100%;display: inline-block!important;background:#DD2727;color: white;border: 1px solid #DD2727">Reset Password</a>
                   </div>
 
-                 <!--  <div class="col-lg-12 text-center">
-                    <a href="<?php echo base_url('landing/register') ?>"><span class="text-light">Belum Punya Akun ? Silahkan <b>Daftar</b></span></a>
-                  </div> -->
+                
                 </div>
               </div>
               

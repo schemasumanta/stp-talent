@@ -14,17 +14,14 @@
                 <h4>About Us</h4>
                 <div class="footer-pera">
                   <p>
-                    As an integrated group, our strategies are designed to
-                    meet the challenges of today and tomorrow. Combining
-                    values in order to build competitive solutions tailored
-                    to meet each customer needs.
+                    <?php echo $s->stp_tagline; ?>
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5">
           <div class="single-footer-caption mb-50">
             <div class="footer-tittle">
               <h4>Contact Info</h4>
@@ -32,29 +29,20 @@
                 <li>
                   <p></p>
                 </li>
-                <li><a href="#">Phone : +62 21 39717888 </a></li>
+                <li><a href="#">Phone : <?php echo $s->stp_telepon; ?> </a></li>
+                <?php if ($s->stp_email!='') { ?>
+                  
                 <li>
-                  <a href="#">Email : marketing.communication@infracom-tech.com</a>
+                  <a href="#">Email : <?php echo $s->stp_email; ?></a>
                 </li>
+                <?php } ?>
+
               </ul>
             </div>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-          <div class="single-footer-caption mb-50">
-            <div class="footer-tittle">
-              <h4>Important Link</h4>
-              <ul>
-                <li><a href="#"> View Project</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Testimonial</a></li>
-                <li><a href="#">Properties</a></li>
-                <li><a href="#">Supports</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+       
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5">
           <div class="single-footer-caption mb-50">
             <div class="footer-tittle">
               <h4>Newsletter</h4>
@@ -80,7 +68,7 @@
       </div>
       <!--  -->
       <div class="row footer-wejed justify-content-between">
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
           <!-- logo -->
           <div class="footer-logo mb-20">
             <a href="index.html"><img src="<?php echo base_url() . $s->stp_logo ?>" style="filter: brightness(0) invert(1);" alt="" /></a>
@@ -98,12 +86,7 @@
             <p>Talented Hunter</p>
           </div>
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-          <div class="footer-tittle-bottom">
-            <span>451</span>
-            <p>Talented Hunter</p>
-          </div>
-        </div>
+        
         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
           <!-- Footer Bottom Tittle -->
           <div class="footer-tittle-bottom">
@@ -134,9 +117,18 @@
           </div>
           <div class="col-xl-2 col-lg-2">
             <div class="footer-social f-right">
-              <a href="<?php echo $s->stp_facebook ?>" target="_blank"><i class="fab fa-facebook-f"></i></a>
-              <a href="<?php echo $s->stp_instagram ?>" target="_blank"><i class="fab fa-instagram"></i></a>
-              <a href="<?php echo $s->stp_website ?>" target="_blank"><i class="fas fa-globe"></i></a>
+              <?php if ($s->stp_facebook!=''): ?>
+              <a href="<?php echo $s->stp_facebook ?>" target="_blank"><i class="fab fa-facebook-f fa-3x"></i></a>
+              <?php endif ?>
+              <?php if ($s->stp_instagram!=''): ?>
+
+              <a href="<?php echo $s->stp_instagram ?>" target="_blank"><i class="fab fa-instagram fa-3x"></i></a>
+              <?php endif ?>
+              <?php if ($s->stp_website!=''): ?>
+
+              <a href="<?php echo $s->stp_website ?>" target="_blank"><i class="fas fa-globe fa-3x"></i></a>
+              <?php endif ?>
+
             </div>
           </div>
 

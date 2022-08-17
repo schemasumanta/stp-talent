@@ -85,31 +85,31 @@
           <input type="hidden" value="" name="id" id="id" />
           <div class="form-body">
             <div class="form-group">
-              <label class="control-label col-md-4">Nama Lengkap</label>
+              <label class="control-label col-md-4">Nama Lengkap <code>*</code></label>
               <div class="col-md-12">
                 <input name="user_nama" id="user_nama" placeholder="Nama Lengkap" class="form-control" type="text">
                 <span class="help-block text-danger" id="v_user_nama"></span>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Email</label>
+              <label class="control-label col-md-4">Email <code>*</code></label>
               <div class="col-md-12">
                 <input name="user_email" id="user_email" placeholder="contoh@gmail.com" class="form-control" type="email">
                 <span class="help-block text-danger" id="v_user_email"></span>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">No Tlp</label>
+              <label class="control-label col-md-4">No Telepon <code>*</code></label>
               <div class="col-md-12">
                 <input name="user_telepon" id="user_telepon" placeholder="08xxx" class="form-control" type="text">
                 <span class="help-block text-danger" id="v_user_telepon"></span>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Pilih menu</label>
+              <label class="control-label col-md-4">Pilih Role <code>*</code></label>
               <div class="col-md-12">
                 <select name="role_id[]" id="role_id" class="form-control" multiple="multiple" style="width: 100%;">
-                  <option value="0" disabled>Pilih Menu</option>
+                  <option value="0" disabled>Pilih Role</option>
                   <?php foreach ($menu as $key) { ?>
                     <option value="<?= $key->role_id; ?>"> <?= $key->role_menu; ?></option>
                   <?php }; ?>
@@ -118,7 +118,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Password</label>
+              <label class="control-label col-md-4">Password <code>*</code></label>
               <div class="col-md-12">
                 <div class="input-group mb-3">
                   <input type="password" name="user_password" id="user_password" class="form-control" placeholder="Password">
@@ -181,10 +181,8 @@
     // firebase.initializeApp(firebaseConfig);
     $('#role_id').select2({
       multiple: true,
-      placeholder: "Pilih menu",
+      placeholder: "Pilih Role",
     });
-
-
     const notif = $('.flashdatart').data('title');
     if (notif) {
       Swal.fire({

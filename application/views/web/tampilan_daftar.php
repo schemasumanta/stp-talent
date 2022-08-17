@@ -36,7 +36,7 @@
                     <input type="text" class="form-control w-100" name="seeker_email"  id="seeker_email" placeholder="Masukkan Email" autofocus>
                   </div>
                   <div class="col-lg-12 mt-4">
-                    <input type="password" class="form-control w-100" name="seeker_password"  id="seeker_password" placeholder="Masukkan Password">
+                    <input type="password" class="form-control w-100" name="seeker_password"  id="seeker_password" placeholder="Masukkan Password Min 6 Digit">
                   </div>
                   <div class="col-lg-12 mt-4 items-link btn-group">
                     <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
@@ -62,7 +62,8 @@
     </div>
   </main>
   <script type="text/javascript">
-    $(document).on('click','.item_daftar',function () {
+    $(document).on('click','.item_daftar',function (e) {
+      e.preventDefault();
       let cek = 0;
       let seeker_nama = $('#seeker_nama').val()
 
@@ -107,20 +108,18 @@
      }
 
      let seeker_password = $('#seeker_password').val();
+     var validasi_password = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+    if (validasi_password.test(seeker_password)==false){
+     $('#seeker_password').attr('placeholder','Gunakan Kombinasi Alfanumerik & Huruf Kapital');
+     $('#seeker_password').addClass('ph-merah');
+   }else{
+    $('#seeker_password').removeClass('ph-merah');
 
-     if (seeker_password=='') {
-
-      $('#seeker_password').attr('placeholder','Silahkan Masukkan Password');
-      $('#seeker_password').addClass('ph-merah');
-      cek++;
-    }else{
-      $('#seeker_password').removeClass('ph-merah');
-    }
+  }
 
     if (cek > 0) {
       return false
     }else{
-
       $.ajax({
         type : "GET",
         url  : "<?php echo base_url('seeker/cek_email')?>",

@@ -20,20 +20,20 @@ CREATE TABLE IF NOT EXISTS `tbl_admin_role` (
   `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`admin_role_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- Membuang data untuk tabel db_talent_hub.tbl_admin_role: ~10 rows (lebih kurang)
 INSERT INTO `tbl_admin_role` (`admin_role_id`, `user_id`, `role_id`) VALUES
-	(38, 1, 1),
-	(39, 1, 2),
-	(40, 1, 3),
-	(41, 1, 4),
-	(42, 1, 5),
-	(43, 1, 6),
-	(44, 1, 7),
-	(45, 1, 8),
-	(46, 1, 9),
-	(48, 38, 7);
+	(113, 1, 1),
+	(114, 1, 2),
+	(115, 1, 3),
+	(116, 1, 4),
+	(117, 1, 5),
+	(118, 1, 6),
+	(119, 1, 7),
+	(120, 1, 8),
+	(121, 1, 9),
+	(122, 38, 7);
 
 -- membuang struktur untuk table db_talent_hub.tbl_bahasa_resume
 CREATE TABLE IF NOT EXISTS `tbl_bahasa_resume` (
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `tbl_chat` (
   PRIMARY KEY (`chat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_chat: ~12 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_chat: ~11 rows (lebih kurang)
 INSERT INTO `tbl_chat` (`chat_id`, `chat_pengirim`, `chat_penerima`, `chat_isi`, `chat_tanggal`, `chat_lampiran`) VALUES
 	('baHFuIVDYXIUmfKC', 32, 34, '', '2022-08-03 19:55:51', ''),
 	('chC5cOm49Z9OBFJS', 32, 1, '', '2022-08-03 19:55:38', ''),
@@ -84,9 +84,9 @@ CREATE TABLE IF NOT EXISTS `tbl_history` (
   `id_user` int(11) DEFAULT NULL,
   `aktivitas` text NOT NULL,
   PRIMARY KEY (`kode_history`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=latin1 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=latin1 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_history: ~202 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_history: ~198 rows (lebih kurang)
 INSERT INTO `tbl_history` (`kode_history`, `tanggal`, `ip_address`, `id_user`, `aktivitas`) VALUES
 	(13, '2022-07-04 08:10:44', '::1', 1, 'Menambah Data Skill Baru Corel Draw'),
 	(14, '2022-07-04 08:11:53', '::1', 1, 'Menambah Data Skill Baru Corel Draw'),
@@ -292,7 +292,15 @@ INSERT INTO `tbl_history` (`kode_history`, `tanggal`, `ip_address`, `id_user`, `
 	(214, '2022-08-09 15:00:53', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
 	(215, '2022-08-10 17:38:21', '::1', 32, 'Mengubah Data Profil Perusahaan'),
 	(216, '2022-08-10 17:38:42', '::1', 32, 'Mengubah Data Profil Perusahaan'),
-	(217, '2022-08-10 17:44:43', '::1', 36, 'Mengubah Data Profil Perusahaan');
+	(217, '2022-08-10 17:44:43', '::1', 36, 'Mengubah Data Profil Perusahaan'),
+	(218, '2022-08-17 19:22:00', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(219, '2022-08-17 19:22:10', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(220, '2022-08-17 19:22:30', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(221, '2022-08-17 19:22:49', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(222, '2022-08-17 19:23:28', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(223, '2022-08-17 19:26:24', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(224, '2022-08-17 19:29:00', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub'),
+	(225, '2022-08-17 19:32:42', '::1', NULL, 'Mengubah Data Profil Aplikasi Baru atas nama Talent Hub');
 
 -- membuang struktur untuk table db_talent_hub.tbl_langganan_premium
 CREATE TABLE IF NOT EXISTS `tbl_langganan_premium` (
@@ -323,9 +331,9 @@ CREATE TABLE IF NOT EXISTS `tbl_lowongan_pekerjaan` (
   `lowongan_deskripsi` text DEFAULT NULL,
   `lowongan_status` int(11) DEFAULT NULL,
   PRIMARY KEY (`lowongan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_lowongan_pekerjaan: ~5 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_lowongan_pekerjaan: ~6 rows (lebih kurang)
 INSERT INTO `tbl_lowongan_pekerjaan` (`lowongan_id`, `joblevel_id`, `kategori_id`, `perusahaan_id`, `user_id`, `jabatan_id`, `lowongan_judul`, `lowongan_gaji_min`, `lowongan_gaji_max`, `lowongan_gaji_secret`, `lowongan_created_date`, `lowongan_end_date`, `lowongan_updated_date`, `lowongan_deskripsi`, `lowongan_status`) VALUES
 	(4, 22, 8, 1, 4, 5, 'Office Boy Magang', '3500000', '0', NULL, '2022-07-22 14:21:12', '2022-08-06', NULL, '<p>Kami Mencari Office Boy Yang Telaten</p><p><b style=""><font color="#000000" style="background-color: rgb(255, 255, 255);">&nbsp;Syarat :</font></b></p><p>Mempunyai Kendaraan Sendiri</p><p>Mempunyai Dua Mata</p><p>Mempunyai Sendal Swallow&nbsp;</p>', 1),
 	(5, 20, 9, 3, 32, 6, 'Junior IT Programmer', '8000000', '10000000', NULL, '2022-07-22 14:55:25', '2022-07-22', NULL, '<p>Kami Mencari Depelover Yang Dapat bekerja di bawah tekanan</p>', 1),
@@ -340,9 +348,9 @@ CREATE TABLE IF NOT EXISTS `tbl_lowongan_skill` (
   `lowongan_id` int(11) NOT NULL DEFAULT 0,
   `skill_id` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`lowongan_skill_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_lowongan_skill: ~18 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_lowongan_skill: ~19 rows (lebih kurang)
 INSERT INTO `tbl_lowongan_skill` (`lowongan_skill_id`, `lowongan_id`, `skill_id`) VALUES
 	(1, 4, 9),
 	(2, 5, 6),
@@ -373,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `tbl_lowongan_tersimpan` (
   PRIMARY KEY (`lowongan_tersimpan_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_lowongan_tersimpan: ~4 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_lowongan_tersimpan: ~3 rows (lebih kurang)
 INSERT INTO `tbl_lowongan_tersimpan` (`lowongan_tersimpan_id`, `user_id`, `lowongan_id`) VALUES
 	(11, 3, 6),
 	(12, 3, 7),
@@ -421,7 +429,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_jabatan` (
   PRIMARY KEY (`jabatan_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_jabatan: ~9 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_jabatan: ~8 rows (lebih kurang)
 INSERT INTO `tbl_master_jabatan` (`jabatan_id`, `jabatan_nama`, `jabatan_status`) VALUES
 	(1, 'IT Staff', 1),
 	(2, 'IT Support', 1),
@@ -967,7 +975,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_kategori_job` (
   PRIMARY KEY (`kategori_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_kategori_job: ~9 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_kategori_job: ~8 rows (lebih kurang)
 INSERT INTO `tbl_master_kategori_job` (`kategori_id`, `kategori_nama`, `kategori_status`, `kategori_icon`) VALUES
 	(1, 'Design & Creative', 1, 'assets/img/icon_kategori/icon1658219053Vector500.svg'),
 	(2, 'Construction', 1, 'assets/img/icon_kategori/icon1658219085Vectorconst.svg'),
@@ -1089,7 +1097,7 @@ CREATE TABLE IF NOT EXISTS `tbl_master_role` (
   `role_subactive` varchar(255) DEFAULT NULL,
   `role_icon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- Membuang data untuk tabel db_talent_hub.tbl_master_role: ~9 rows (lebih kurang)
 INSERT INTO `tbl_master_role` (`role_id`, `role_menu`, `role_active`, `role_subactive`, `role_icon`) VALUES
@@ -1109,9 +1117,9 @@ CREATE TABLE IF NOT EXISTS `tbl_master_skill` (
   `skill_nama` varchar(250) DEFAULT NULL,
   `skill_status` int(11) DEFAULT 1,
   PRIMARY KEY (`skill_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_skill: ~20 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_skill: ~21 rows (lebih kurang)
 INSERT INTO `tbl_master_skill` (`skill_id`, `skill_nama`, `skill_status`) VALUES
 	(4, 'Corel Draw', 1),
 	(5, 'Adobe Photoshop', 1),
@@ -1169,9 +1177,9 @@ CREATE TABLE IF NOT EXISTS `tbl_master_stp` (
   PRIMARY KEY (`stp_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_stp: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_stp: ~0 rows (lebih kurang)
 INSERT INTO `tbl_master_stp` (`stp_id`, `stp_nama`, `stp_pemilik`, `stp_logo`, `stp_facebook`, `stp_instagram`, `stp_website`, `stp_telepon`, `stp_email`, `stp_alamat`, `stp_tagline`, `stp_brand_icon`) VALUES
-	(2, 'Talent Hub', 'Solo Techno Park', 'assets/img/foto_stp/logo1657549008LOGO STP warna besar.png', '', '', '', '', '', '', '', 'assets/img/foto_icon/icon1658986604logo apps.png');
+	(2, 'Talent Hub', 'Solo Techno Park', 'assets/img/foto_stp/logo1657549008LOGO STP warna besar.png', '', 'https://www.instagram.com/solotechnopark_official', 'https://solotechnopark.id/', ' (0271) 666628', '', 'Jl. Ki Hajar Dewantara No.19, Jebres, Kec. Jebres, Kota Surakarta, Jawa Tengah 57126', '<p style="text-align: justify;">Pusat Inovasi dan Vokasi yang Memadukan Unsur Pengembangan Iptek, Kebutuhan Pasar, Industri dan Bisnis Untuk Penguatan Daya Saing Daerah<br></p>', 'assets/img/foto_icon/icon1658986604logo apps.png');
 
 -- membuang struktur untuk table db_talent_hub.tbl_master_user
 CREATE TABLE IF NOT EXISTS `tbl_master_user` (
@@ -1189,22 +1197,26 @@ CREATE TABLE IF NOT EXISTS `tbl_master_user` (
   `user_telepon` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_email` (`user_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_master_user: ~12 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_master_user: ~16 rows (lebih kurang)
 INSERT INTO `tbl_master_user` (`user_id`, `user_email`, `user_nama`, `user_password`, `user_status`, `perusahaan_id`, `user_level`, `user_login_status`, `user_foto`, `user_created_date`, `user_updated_date`, `user_telepon`) VALUES
-	(1, 'athoxusdah@gmail.com', 'Superadmin', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 1, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-06-28 11:14:54', '2022-08-09 11:45:29', '085921923978'),
-	(3, 'schemasumanta@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-06-28 11:14:54', NULL, '085921923978'),
+	(1, 'athoxusdah@gmail.com', 'Superadmin', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 1, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fintip-gaji-petugas-kebersihan-di-bandung-dan-jakarta-fvClCNykQ2.jfif?alt=media&token=5b4ec452-d8b4-4d1e-a694-0074d366f204', '2022-06-28 11:14:54', '2022-08-18 02:12:47', '+6285921923972'),
+	(3, 'schemasumanta@gmail.com', 'Sumanta', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 1, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fpngtree-vector-illustration-lovely-mother-png-image_1115780.jpg?alt=media&token=164809ee-bcb3-43f7-acdc-55c4d46bc65f', '2022-06-28 11:14:54', '2022-08-17 22:23:02', '+6285921923978'),
 	(4, 'athoxzoemanta@gmail.com', 'Super Door', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 6, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-06-28 11:14:54', NULL, '085921923978'),
 	(28, 'janu@gmail.com', 'Janu', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-20 08:11:11', NULL, '08787878787877'),
 	(31, 'jimy@gmail.com', 'Jimy', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-20 10:08:25', NULL, '0878787878'),
-	(32, 'metrotv212@gmail.com', 'MetrotvNews', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 3, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-22 09:50:27', NULL, '0878787878'),
+	(32, 'metrotv212@gmail.com', 'MetrotvNews', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 3, 3, 1, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-22 09:50:27', NULL, '0878787878'),
 	(33, 'suherman@gg.com', 'Suherman', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 4, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-22 10:27:03', NULL, '0879759878'),
 	(34, 'mayang@gmail.com', 'mayang', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 0, 2, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-27 15:15:48', NULL, '08787878787'),
 	(35, 'mayang2@gmail.com', 'Hamdani', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 5, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-07-27 15:17:23', NULL, '08787878'),
 	(36, 'asih_schema@gmail.com', 'Asih', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 10, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-08-02 09:25:06', NULL, '0898 0723 2633'),
 	(37, 'a@bcc.com', 'ucup2', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 11, 3, 0, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser.png?alt=media&token=a4827b22-b777-4bc4-89a9-96ee13810122', '2022-08-03 14:43:33', NULL, '0858585858588'),
-	(38, 'a@b.com', 'admin2', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 1, 1, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser-p.png?alt=media&token=01d48e7e-f959-4eff-a57b-af329fbb00aa', '2022-08-09 02:38:21', '2022-08-10 22:07:54', '087878878687');
+	(38, 'a@b.com', 'admin2', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 1, 1, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Ffoto_user%2Fuser-p.png?alt=media&token=01d48e7e-f959-4eff-a57b-af329fbb00aa', '2022-08-09 02:38:21', '2022-08-18 02:16:21', '+6287878878687'),
+	(39, 'metrotvs@gmail.com', 'Hamdani', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-08-12 19:01:22', NULL, 'sdsdsdsds'),
+	(40, 'athoxusdah@gmail.co.id', 'Hamdani', 'fbade9e36a3f36d3d676c1b808451dd7', 1, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-08-17 20:32:51', NULL, '085921923978'),
+	(41, 'athoxzoemanta@yahoo.com', 'Hamdani', 'fbade9e36a3f36d3d676c1b808451dd7', 0, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-08-17 20:35:02', NULL, '085921923978'),
+	(42, 'mayang.nuranggraeni@gmail.co.id', 'Sutrisna', '595648052eeb3ec81ce652c9002bdc5f', 0, 1, 2, 0, 'assets_admin/img/profile.svg', '2022-08-17 21:00:25', NULL, '087878787878');
 
 -- membuang struktur untuk table db_talent_hub.tbl_notifikasi
 CREATE TABLE IF NOT EXISTS `tbl_notifikasi` (
@@ -1287,7 +1299,7 @@ CREATE TABLE IF NOT EXISTS `tbl_perusahaan` (
   PRIMARY KEY (`perusahaan_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_perusahaan: ~10 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_perusahaan: ~8 rows (lebih kurang)
 INSERT INTO `tbl_perusahaan` (`perusahaan_id`, `perusahaan_nama`, `perusahaan_sambutan`, `perusahaan_prov`, `perusahaan_kabkota`, `perusahaan_alamat`, `perusahaan_telepon`, `perusahaan_email`, `perusahaan_website`, `perusahaan_jml_karyawan`, `perusahaan_logo`, `perusahaan_sampul`, `perusahaan_visitor`) VALUES
 	(1, 'Solo Techno Park', '', 'BT', 50, '', '0215212562367', 'a@b.com', '', 250, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fprovider%2Fperusahaan%2F1658427796260stempel%20clear.png?alt=media&token=373dc453-7ca3-4a6d-bbf9-fe13128a6bfd', NULL, NULL),
 	(3, 'PT. Metro News TV', 'Perusahaan yang dibidang Jasa Pemesanan Pesawat Pesiar dan Pesaing Terberat Hollywoods yang terevakuasi dengan integritas yang solid dan dominan dalam kesenjangan sosial', 'JK', 142, 'Jl. Kapten Pierre Tendean No. 57 Gambir', '0215212562367', 'metroku@b.com', 'www.metrotv.com', 5000, 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fperusahaan%2Fsbi%20logo.jpg?alt=media&token=56d472cc-f85d-4b56-862f-8f98ebfb0718', 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fperusahaan%2Fsampul.jpg?alt=media&token=1ee556ba-9b69-4f28-a597-cfb1c209d845', 2),
@@ -1319,11 +1331,11 @@ CREATE TABLE IF NOT EXISTS `tbl_report` (
   `report_tanggal` datetime NOT NULL,
   `report_status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`report_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_report: ~0 rows (lebih kurang)
 INSERT INTO `tbl_report` (`report_id`, `reporter`, `reported`, `report_keterangan`, `report_tanggal`, `report_status`) VALUES
-	(1, 3, 36, 'Penipuan', '2022-08-10 20:24:53', 1);
+	(1, 3, 36, 'Penipuan', '2022-08-10 20:24:53', 0);
 
 -- membuang struktur untuk table db_talent_hub.tbl_resume
 CREATE TABLE IF NOT EXISTS `tbl_resume` (
@@ -1348,7 +1360,7 @@ CREATE TABLE IF NOT EXISTS `tbl_resume` (
   PRIMARY KEY (`resume_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
--- Membuang data untuk tabel db_talent_hub.tbl_resume: ~1 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_resume: ~0 rows (lebih kurang)
 INSERT INTO `tbl_resume` (`resume_id`, `user_id`, `pendidikan_id`, `prov_id`, `kabkota_id`, `agama_id`, `resume_nama_pendidikan_terakhir`, `resume_pendidikan_tahun_lulus`, `resume_nama_lengkap`, `resume_foto`, `resume_about`, `resume_nik`, `resume_alamat_lengkap`, `resume_jenis_kelamin`, `resume_tempat_lahir`, `resume_tanggal_lahir`, `resume_created_date`, `resume_visitor`) VALUES
 	(4, 3, 3, 'BT', 50, 1, 'SMK Mulia Hati Insani', '2013', 'Sumanta', 'https://firebasestorage.googleapis.com/v0/b/solo-digital-tech.appspot.com/o/talent_hub%2Fcv%2FPas%20Photo%20merah%20sumanta.JPG?alt=media&token=8682bcd4-c467-4f3e-b6fe-bc3977540d70', '<p>Saya seorang pekerja keras yang memiliki otak seperti RUCIKA yang kepintarannya mengalir sampai jauh. dan juga seperti tepung bumbu yang harus SERBAGUNA</p>', '3602240704950004', 'Jl. Sunan Giri No. 18L Rangkasbitung', 'L', 'Lebak', '1995-08-08', '2022-07-26 14:02:02', NULL);
 
@@ -1371,7 +1383,7 @@ CREATE TABLE IF NOT EXISTS `tbl_skill_level` (
   `skill_level_nama` varchar(250) DEFAULT NULL,
   `skill_level_status` int(11) DEFAULT NULL,
   PRIMARY KEY (`skill_level_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='Y';
 
 -- Membuang data untuk tabel db_talent_hub.tbl_skill_level: ~4 rows (lebih kurang)
 INSERT INTO `tbl_skill_level` (`skill_level_id`, `skill_level_nama`, `skill_level_status`) VALUES
@@ -1413,9 +1425,13 @@ CREATE TABLE IF NOT EXISTS `tbl_token` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`token_id`),
   UNIQUE KEY `token_isi` (`token_isi`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COMMENT='Y ';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COMMENT='Y ';
 
--- Membuang data untuk tabel db_talent_hub.tbl_token: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel db_talent_hub.tbl_token: ~3 rows (lebih kurang)
+INSERT INTO `tbl_token` (`token_id`, `token_isi`, `token_expired_date`, `token_keterangan`, `user_id`) VALUES
+	(22, 'FkNUrTHwrP', '2022-08-13 19:01:22', 'Aktivasi Akun', 39),
+	(24, 'eXdY1ElfU5', '2022-08-18 20:35:02', 'Aktivasi Akun', 41),
+	(25, 'PUHtbUwTes', '2022-08-18 21:00:25', 'Aktivasi Akun', 42);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
