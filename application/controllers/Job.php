@@ -691,10 +691,16 @@ class Job extends CI_Controller
 		foreach ($list as $l) {
 			$no++;
 
-			if ($l->lowongan_gaji_max) {
+				if ($l->lowongan_gaji_max > 0) {
 				$gaji = 'Rp ' . number_format($l->lowongan_gaji_min, 0, ',', '.')  . ' - Rp ' . number_format($l->lowongan_gaji_max, 0, ',', '.');
 			} else {
+				if ($l->lowongan_gaji_min > 0) {
 				$gaji = 'Rp ' . number_format($l->lowongan_gaji_min, 0, ',', '.');
+				}
+				else
+				{
+					$gaji = 'Gaji Dirahasiakan';
+				}
 			}
 
 			$l->isi_lowongan = '<div class="single-job-items mb-20">

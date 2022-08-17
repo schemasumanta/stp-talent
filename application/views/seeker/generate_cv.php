@@ -52,7 +52,7 @@
         }
 
         p,
-        span {
+        span,{
           font-size: 12px;
           font-family: "Inter", "sans-serif";
         }
@@ -69,7 +69,7 @@
         }
 
         * {
-          font-family: Inter
+         font-family: "Inter", "sans-serif";
         }
 
         .kotak_kiri {
@@ -102,11 +102,12 @@
           height: 150px;
           position: relative;
           border-radius: 75px;
+          padding-top: 5px;
           top: 20px;
           margin: auto;
           overflow: hidden;
           text-align: center;
-          background: white;
+          background: red
         }
 
         .kotak_skor {
@@ -120,122 +121,6 @@
           vertical-align: middle;
         }
 
-        .timeline {
-          border-left: 3px solid #dd2727;
-          border-bottom-right-radius: 4px;
-          border-top-right-radius: 4px;
-          background: transparent;
-          margin: 0 auto;
-          letter-spacing: 0.2px;
-          position: relative;
-          line-height: 1.4em;
-          font-size: 1.03em;
-          padding: 10px;
-          list-style: none;
-          text-align: left;
-          max-width: 60%;
-        }
-
-        @media (max-width: 2000px) {
-          .timeline {
-            max-width: 98%;
-            padding: 15px;
-          }
-        }
-
-        .timeline h1 {
-          font-size: 1.4em;
-          font-weight: bold;
-        }
-
-        .timeline h2,
-        .timeline h3 {
-          font-weight: 600;
-          font-size: 1rem;
-          margin-bottom: 10px;
-        }
-
-
-
-        .timeline .event {
-          border-bottom: 1px dashed #e8ebf1;
-          padding-bottom: 5px;
-          margin-bottom: 5px;
-          position: relative;
-        }
-
-        @media (max-width: 2000px) {
-          .timeline .event {
-            padding-top: 5px;
-          }
-        }
-
-        .timeline .event:last-of-type {
-          padding-bottom: 0;
-          margin-bottom: 0;
-          border: none;
-        }
-
-        .timeline .event:before,
-        .timeline .event:after {
-          position: absolute;
-          display: block;
-          top: 0;
-        }
-
-        .timeline .event:before {
-          left: -270px;
-          content: attr(data-date);
-          text-align: right;
-          font-weight: 100;
-          font-size: 0.9em;
-          min-width: 120px;
-        }
-
-        @media (max-width: 2000px) {
-          .timeline .event:before {
-            left: 0px;
-            text-align: left;
-          }
-        }
-
-        .timeline .event:after {
-          -webkit-box-shadow: 0 0 0 3px #dd2727;
-          box-shadow: 0 0 0 3px #dd2727;
-          left: -55.8px;
-          background: #fff;
-          border-radius: 50%;
-          height: 9px;
-          width: 9px;
-          content: "";
-          top: 5px;
-        }
-
-        @media (max-width: 2000px) {
-          .timeline .event:after {
-            left: -31.8px;
-          }
-        }
-
-        .rtl .timeline {
-          border-left: 0;
-          text-align: right;
-          border-bottom-right-radius: 0;
-          border-top-right-radius: 0;
-          border-bottom-left-radius: 4px;
-          border-top-left-radius: 4px;
-          border-right: 3px solid #dd2727;
-        }
-
-        .rtl .timeline .event::before {
-          left: 0;
-          right: -170px;
-        }
-
-        .rtl .timeline .event::after {
-          left: 0;
-          right: -55.8px;
-        }
       </style>
 
       <?php
@@ -281,6 +166,8 @@
           <?php } ?>
         </div>
         <br>
+        <br>
+
         <h6 style="text-align: center;font-weight: bold;width: 100%;color: #3c3c3c;margin-bottom: 5px"><?php echo strtoupper($key->resume_nama_lengkap); ?></h6>
         <hr style="border-top: 1px solid #878787;border-bottom: 0px;width: 75%;margin: auto;margin-bottom: 5px">
         <p style="text-align: center;color:#3c3c3c;margin-top: 0px;font-size: 12px "><?php echo strtoupper($key->resume_nik); ?></p>
@@ -306,15 +193,30 @@
         <?php  } ?>
         <br>
         <br>
+        <br>
+
         <?php if ($skill != '') { ?>
-          <h6 style="text-align: center;font-weight: bold;width: 100%;color: #3c3c3c;margin-bottom: 5px"><?php echo strtoupper("Skill"); ?></h6>
-          <hr style="border-top: 1px solid #878787;border-bottom: 0px;width: 75%;margin: auto;margin-bottom: 5px">
-          <ul>
+          <h6 style="text-align: center;font-weight: bold;background:red; color: #fff;margin-bottom: 5px;border-top-right-radius: 15px;height: 40px;border-bottom-right-radius: 15px;padding-top: 15px"><?php echo strtoupper("S k i l l"); ?></h6>
+      
+          <ul style="padding: 25px">
             <?php foreach ($skill as $row) { ?>
-              <li> <?= $row->skill_nama ?> - <?= $row->skill_level_nama; ?></li>
+              <li style="width: 250px;height: 30px;vertical-align: middle;border:1px solid red;text-align: center;margin-bottom: 10px;background: red;color: white;font-weight: bold;border-radius: 15px;"><span style="padding-top: 15px;"> <?= $row->skill_nama ?> | <?= $row->skill_level_nama; ?></span></li>
             <?php }; ?>
           </ul>
         <?php  } ?>
+        <br>
+        <br>
+         <?php if ($bahasa != '') { ?>
+          <h6 style="text-align: center;font-weight: bold;background:red; color: #fff;margin-bottom: 5px;border-top-right-radius: 15px;height: 40px;border-bottom-right-radius: 15px;padding-top: 15px"><?php echo strtoupper("B A H A S A"); ?></h6>
+      
+          <ul style="padding: 25px">
+            <?php foreach ($bahasa as $bhs) { ?>
+              <li style="width: 250px;height: 30px;vertical-align: middle;border:1px solid red;text-align: center;margin-bottom: 10px;background: red;color: white;font-weight: bold;border-radius: 15px;"><span style="padding-top: 15px;"> <?= $bhs->bahasa_nama ?> | <?= $bhs->resume_bahasa_level > 0 ? "Aktif":"Pasif"; ?></span></li>
+            <?php }; ?>
+          </ul>
+        <?php  } ?>
+
+
       </div>
       <div class="kotak_kanan">
 
@@ -358,26 +260,31 @@
         <br>
         <?php if (count($pengalaman) > 0) { ?>
           <h6 style="font-weight: bold;color:red;margin-top:25px; margin-left: 50px;border-bottom: 1px solid red;width: 80%;margin-bottom: 25px">Pengalaman Kerja</h6>
-          <ul class="timeline">
+          <div class="pembungkus_pekerjaan" style="margin-left: 10%;border-left: 3px solid red;padding-left: 15px">
+            
             <?php
             $i = 0;
             foreach ($pengalaman as $pl) : ?>
-              <li class="event item_list_pengalaman" data-list="<?php echo $i ?>" data-date="<?php
-                                                                                              if ($pl->masih_bekerja > 0) {
-                                                                                                echo  tgl_indo($pl->pengalaman_tanggal_awal) . "- Sekarang";
-                                                                                              } else {
-                                                                                                echo  tgl_indo($pl->pengalaman_tanggal_awal) . " - " . tgl_indo($pl->pengalaman_tanggal_akhir);
-                                                                                              }
-                                                                                              ?>">
-                <h4 style="margin-buttom: 5px;"><?php echo $pl->jabatan_nama; ?></h4>
-                <h5 style="font-weight: bold; margin-top: 5px;"><?php echo $pl->perusahaan_nama; ?></h5>
-                <p><?php echo $pl->pengalaman_deskripsi; ?></p>
+              <div class="pembungkusdalam" style="position: relative;">
+              <div class="bulat" style="height: 10px;width: 10px;border-radius: 5px;background: white;border:2px solid red;position: absolute;top:5px;left:-23px">
+                
+              </div>
+              <ul>
+                <li><span><?php if ($pl->masih_bekerja > 0) { echo  tgl_indo($pl->pengalaman_tanggal_awal) . "- Sekarang"; } else { echo  tgl_indo($pl->pengalaman_tanggal_awal) . " - " . tgl_indo($pl->pengalaman_tanggal_akhir);}?></span></li>
+              <li class="event item_list_pengalaman" data-list="<?php echo $i ?>" >
+                <h6 style="margin-buttom: 5px; margin-top: 5px;"><?php echo $pl->jabatan_nama; ?></h6>
+                <h6 style="font-weight: bold; margin-top: 5px;"><?php echo $pl->perusahaan_nama; ?></h6>
+                <?php echo $pl->pengalaman_deskripsi; ?>
               </li>
-            <?php $i++;
+              </ul>
+              </div>
+              <br>
+              <?php $i++;
             endforeach ?>
 
-          </ul>
         <?php } ?>
+          </div>
+
         <br>
         <br>
 
@@ -385,8 +292,8 @@
       <br>
       <br>
 
-      </div>
-    </body>
+    </div>
+  </body>
 
-    </html>
+  </html>
   <?php endforeach ?>

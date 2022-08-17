@@ -560,10 +560,16 @@ class Cv extends CI_Controller
 		$this->db->join('tbl_master_provinsi d', 'd.prov_id=a.prov_id');
 		$this->db->join('tbl_master_kabkota e', 'e.kabkota_id=a.kabkota_id');
 		$data['resume']	= $this->db->get('tbl_resume a')->result();
+
 		$this->db->where('a.user_id', $id);
 		$this->db->join('tbl_master_skill b', 'b.skill_id=a.skill_id');
 		$this->db->join('tbl_skill_level c', 'c.skill_level_id=a.skill_level_id');
 		$data['skill']	= $this->db->get('tbl_skill_resume a')->result();
+
+		$this->db->where('a.user_id', $id);
+		$this->db->join('tbl_master_bahasa b', 'b.bahasa_id=a.bahasa_id');
+		$data['bahasa'] = $this->db->get('tbl_bahasa_resume a')->result();
+		
 		$this->db->where('a.user_id', $this->session->user_id);
 		$this->db->join('tbl_perusahaan b', 'b.perusahaan_id=a.perusahaan_id');
 		$this->db->join('tbl_master_level_job c', 'c.joblevel_id=a.joblevel_id');
