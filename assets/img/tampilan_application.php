@@ -87,7 +87,7 @@
 <div class="container-fluid p-5 flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
     <!-- Page Heading -->
     <div class="d-sm-flex mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Applicants</h1>
+        <h1 class="h3 mb-0 text-gray-800">Application Job</h1>
     </div>
     <!-- Set up your HTML -->
         <?php if (count($lowongan) > 0) { ?>

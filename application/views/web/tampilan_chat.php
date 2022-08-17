@@ -246,6 +246,8 @@ $bulan = array(
       </div>
     </div>
   </div>
+  </div>
+  
 
   <script type="text/javascript">
     var chat_id;
