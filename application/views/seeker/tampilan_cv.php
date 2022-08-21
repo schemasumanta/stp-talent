@@ -501,7 +501,7 @@ $bulan = array(
             </div>
 
             <div class="col-md-6 mb-3 ">
-              <label style="color:#343a40;" for="resume_kabkota">Provinsi</label>
+              <label style="color:#343a40;" for="resume_kabkota">Kota/Kab</label>
               <br>
               <select class="form-control" id="resume_kabkota" name="resume_kabkota" style="width: 100%">
                 <option value="0" disabled selected>Pilih Kabkota</option>
