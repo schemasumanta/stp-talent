@@ -62,10 +62,9 @@
     </div>
   </main>
   <script type="text/javascript">
-    $(document).on('click','.item_daftar',function (e) {
-      e.preventDefault();
+    $(document).on('click','.item_daftar',function () {
       let cek = 0;
-      let seeker_nama = $('#seeker_nama').val()
+      let seeker_nama = $('#seeker_nama').val();
 
       if (seeker_nama=='') {
         $('#seeker_nama').attr('placeholder','Silahkan Masukkan Nama');
@@ -74,9 +73,10 @@
       }else{
         $('#seeker_nama').removeClass('ph-merah');
       }
+
       let level = $('#seeker_level').val();
       if (level==3) {
-        let perusahaan_id = $('#perusahaan_id').val()
+        let perusahaan_id = $('#perusahaan_id').val();
         
         if (perusahaan_id=='') {
           $('#perusahaan_id').attr('placeholder','Silahkan Masukkan Perusahaan');
@@ -86,7 +86,7 @@
           $('#perusahaan_id').removeClass('ph-merah');
         }
       }else{
-        $('#perusahaan_id').removeClass('ph-merah');x
+        $('#perusahaan_id').removeClass('ph-merah');
 
       }
       let seeker_email = $('#seeker_email').val();
