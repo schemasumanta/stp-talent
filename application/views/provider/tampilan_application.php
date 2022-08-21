@@ -97,7 +97,7 @@
         <div class="owl-carousel">
             <?php
             foreach ($lowongan as $key) { ?>
-                    <a href="javascript:;" class="btn btn-sm" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)">
+                    <a href="javascript:;" class="btn btn-sm lowongan_<?php echo $key->lowongan_id; ?>" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)" style="outline: none">
 
                 <div class="card-radious align-items-center d-flex justify-content-center flex-row mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
                         <div class="card-body">
@@ -134,7 +134,7 @@
                 <option value="0">In Review</option>
                 <option value="1">Assesment</option>
                 <option value="2">Rejected</option>
-                <option value="4">Accepted</option>
+                <option value="3">Accepted</option>
             </select>
             <input type="hidden" name="id_lowongan" id="id_lowongan">
         </div>
@@ -226,6 +226,8 @@
                                 <select name="status_pelamar" id="status_pelamar" class="form-control">
                                     <option value="1">Assesment</option>
                                     <option value="2">Rejected</option>
+                                    <option value="3">Accepted</option>
+
                                 </select>
                                 <span class="help-block"></span>
                             </div>
@@ -268,6 +270,8 @@
 
     function cek_lowongan(id) {
         $('#for_filter').removeClass('d-none');
+        $('.card-radious').css('border','0px solid red');
+        $('#on_klik'+id).css('border','1px solid red');
         $('#id_lowongan').val(id);
         dataTable = $('#tabel_application').DataTable({
             paginationType: 'full_numbers',

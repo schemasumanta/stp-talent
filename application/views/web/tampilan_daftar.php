@@ -86,7 +86,7 @@
           $('#perusahaan_id').removeClass('ph-merah');
         }
       }else{
-        $('#perusahaan_id').removeClass('ph-merah');
+        $('#perusahaan_id').removeClass('ph-merah');x
 
       }
       let seeker_email = $('#seeker_email').val();

@@ -218,7 +218,7 @@ $bulan = array(
 
                     <?php else : ?>
                       <div class="col-md-12 col-md-12 text-center">
-                        <a href="javascript:;" class="text-danger genric-btn small btn-transparent" style="border-radius: 0px" data-toggle="modal" data-target="#ModalProfil"><i class="fas fa-plus mr-2"></i>Tambah Profil</a>
+                        <a href="javascript:;" class="text-danger genric-btn small btn-transparent" style="border-radius: 0px" data-toggle="modal" data-target="#ModalProfil"><i class="fas fa-plus mr-2"></i>Tambah Biodata</a>
                       </div>
                     <?php endif ?>
                   </div>
@@ -374,10 +374,6 @@ $bulan = array(
                       </div>
                     <?php endif ?>
                   </div>
-
-
-
-
                 </div>
 
 
@@ -398,7 +394,7 @@ $bulan = array(
       <form id="form_profil" method="post" enctype="multipart/form-data" action="<?php echo base_url('cv/simpan_resume') ?>">
 
         <div class="modal-header bg-danger">
-          <h3 class="modal-title" style="color: #ffffff!important"> <i class="fas fa-user mr-2"></i> TAMBAH PROFIL</h3>
+          <h3 class="modal-title" id="ModalProfilLabel" style="color: #ffffff!important"> <i class="fas fa-user mr-2"></i> TAMBAH PROFIL</h3>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
         </div>
         <div class="modal-body">
@@ -1479,7 +1475,7 @@ $bulan = array(
       success: function(data) {
         if (data.length > 0) {
           $('#ModalProfil').modal('show');
-          $('#ModalProfilLabel').html('UBAH BIODATA PROFIL');
+          $('#ModalProfilLabel').html('<i class="fas fa-user mr-2"></i>UBAH BIODATA');
           $('#form_profil').attr('action', '<?php echo base_url('cv/ubah_resume') ?>');
           $('#btn_simpan_biodata').html('UPDATE');
           $('#resume_id').val(data[0].resume_id);

@@ -4,6 +4,21 @@
         cursor: pointer;
         outline: none;
     }
+        #tabel_application td{
+     border-top: #e3e6f000;
+     padding: 0px;
+
+ }
+ #tabel_application{
+     border-collapse:separate; 
+     border-spacing:2em;
+ }
+
+ #tabel_application thead{
+     border-top: #e3e6f000;
+     display: none;
+ }
+
 </style>
 
 <!-- Begin Page Content -->

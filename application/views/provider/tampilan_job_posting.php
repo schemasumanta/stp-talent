@@ -420,7 +420,13 @@
       cek++;
       $('.error-tanggal_akhir_lowongan').html('Tanggal Akhir Lowongan Tidak Boleh Kosong');
     }else{
+      let tanggal_sekarang = '<?php echo date('Y-m-d') ?>';
+      if (tanggal_akhir_lowongan <= tanggal_sekarang) {
+        cek++;
+      $('.error-tanggal_akhir_lowongan').html('Tanggal Akhir Lowongan Minimal 1 Hari Kerja');
+      }else{
       $('.error-tanggal_akhir_lowongan').html('');
+      }
     }
 
     let kategori_id = $('#kategori_id').val();
