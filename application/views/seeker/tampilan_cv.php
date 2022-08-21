@@ -1219,7 +1219,7 @@ $bulan = array(
     let perusahaan_id = $('#perusahaan_id').val();
     if (perusahaan_id == null) {
       cek++;
-      $('.error-perusahaan_id').html('Silahkan Pilih Level');
+      $('.error-perusahaan_id').html('Silahkan Pilih Perusahaan');
     } else {
       $('.error-perusahaan_id').html('');
     }
