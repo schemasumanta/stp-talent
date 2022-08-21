@@ -474,27 +474,31 @@ class Seeker extends CI_Controller
 		$data['status'] = TRUE;
 
 		$no_hp = $this->input->post('user_telepon');
-		// Ubah no HP dari 08 ke +62
-		// kadang ada penulisan no hp 0811 239 345
-		$no_hp = str_replace(" ", "", $no_hp);
-		// kadang ada penulisan no hp (0274) 778787
-		$no_hp = str_replace("(", "", $no_hp);
-		// kadang ada penulisan no hp (0274) 778787
-		$no_hp = str_replace(")", "", $no_hp);
-		// kadang ada penulisan no hp 0811.239.345
-		$no_hp = str_replace(".", "", $no_hp);
+		if ($no_hp) {
+			// Ubah no HP dari 08 ke +62
+			// kadang ada penulisan no hp 0811 239 345
+			$no_hp = str_replace(" ", "", $no_hp);
+			// kadang ada penulisan no hp (0274) 778787
+			$no_hp = str_replace("(", "", $no_hp);
+			// kadang ada penulisan no hp (0274) 778787
+			$no_hp = str_replace(")", "", $no_hp);
+			// kadang ada penulisan no hp 0811.239.345
+			$no_hp = str_replace(".", "", $no_hp);
 
-		// cek apakah no hp mengandung karakter + dan 0-9
-		if (!preg_match('/[^+0-9]/', trim($no_hp))) {
-			// cek apakah no hp karakter 1-3 adalah +62
-			if (substr(trim($no_hp), 0, 3) == '+62') {
-				$hp = trim($no_hp);
-			}
-			// cek apakah no hp karakter 1 adalah 0
-			elseif (substr(trim($no_hp), 0, 1) == '0') {
-				$hp = '+62' . substr(trim($no_hp), 1);
-			}
+			// cek apakah no hp mengandung karakter + dan 0-9
+			if (!preg_match('/[^+0-9]/', trim($no_hp))) {
+				// cek apakah no hp karakter 1-3 adalah +62
+				if (substr(trim($no_hp), 0, 3) == '+62') {
+					$hp = trim($no_hp);
+				}
+				// cek apakah no hp karakter 1 adalah 0
+				elseif (substr(trim($no_hp), 0, 1) == '0') {
+					$hp = '+62' . substr(trim($no_hp), 1);
+				}
+			}	# code...
+			$cek_telepon = $this->db->get_where('tbl_master_user', ['user_telepon' => $hp])->row();
 		}
+
 
 		if ($methode == "add") {
 
@@ -517,7 +521,6 @@ class Seeker extends CI_Controller
 				$data['status'] = FALSE;
 			}
 
-			$cek_telepon = $this->db->get_where('tbl_master_user', ['user_telepon' => $hp])->row();
 			if ($this->input->post('user_telepon') == '') {
 				$data['inputerror'][] = 'user_telepon';
 				$data['error_string'][] = 'No telepon wajib diisi';
@@ -553,7 +556,6 @@ class Seeker extends CI_Controller
 					$data['status'] = FALSE;
 				}
 			}
-			$cek_telepon = $this->db->get_where('tbl_master_user', ['user_telepon' => $hp])->row();
 			if ($this->input->post('user_telepon') == '') {
 				$data['inputerror'][] = 'user_telepon';
 				$data['error_string'][] = 'No telepon wajib diisi';

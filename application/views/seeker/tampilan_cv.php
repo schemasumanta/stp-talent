@@ -226,7 +226,7 @@ $bulan = array(
                 <div class="col-md-4 col-xl-4 p-3" style="border: 1px solid #d8d8d8;border-radius: 15px;max-height: 200px">
                   <div class="row">
                     <div class="col-md-12 col-md-12 text-center">
-                      <span style="font-weight: bold;font-size: 18px;">Resume</span>
+                      <span style="font-weight: bold;font-size: 18px;">CV</span>
                       <hr>
                       <?php if (count($upload_resume) > 0) : ?>
                         <a href="javascript:;" class="text-danger genric-btn small btn-transparent" style="position: absolute;right: 5px;top:5px;border-radius: 0px" data-target="#ModalUploadResume" data-toggle="modal"><i class="fas fa-edit mr-2"></i>Edit</a>
@@ -235,14 +235,14 @@ $bulan = array(
                     <?php if (count($upload_resume) > 0) : ?>
                       <?php foreach ($upload_resume as $up) : ?>
                         <div class="col-md-12 col-md-12 mt-3 justify-content-center btn-group">
-                          <a href="<?php echo $up->resume_lampiran ?>" target="_blank" class="btn btn-danger  item_lihat_resume">Lihat Resume Terupload</a>
+                          <a href="<?php echo $up->resume_lampiran ?>" target="_blank" class="btn btn-danger  item_lihat_resume">Lihat CV Terupload</a>
                           <a href="<?php echo base_url() ?>cv/generate_cv/<?php echo $up->user_id ?>" target="_blank" class="btn btn-success">Export To PDF</a>
                         </div>
                       <?php endforeach ?>
 
                     <?php else : ?>
                       <div class="col-md-12 col-md-12 text-center justify-content-center">
-                        <a href="javascript:;" class="text-danger genric-btn small btn-transparent" style="border-radius: 0px" data-toggle="modal" data-target="#ModalUploadResume"><i class="fas fa-plus mr-2"></i>Upload Resume</a>
+                        <a href="javascript:;" class="text-danger genric-btn small btn-transparent" style="border-radius: 0px" data-toggle="modal" data-target="#ModalUploadResume"><i class="fas fa-plus mr-2"></i>Upload CV</a>
                       </div>
                     <?php endif ?>
                   </div>
@@ -497,7 +497,7 @@ $bulan = array(
             </div>
 
             <div class="col-md-6 mb-3 ">
-              <label style="color:#343a40;" for="resume_kabkota">Provinsi</label>
+              <label style="color:#343a40;" for="resume_kabkota">Kota/Kab</label>
               <br>
               <select class="form-control" id="resume_kabkota" name="resume_kabkota" style="width: 100%">
                 <option value="0" disabled selected>Pilih Kabkota</option>
@@ -564,7 +564,7 @@ $bulan = array(
           </button>
         </div>
         <div class="modal-body">
-          <label>File Resume</label>
+          <label>File CV</label>
           <input type="file" name="file-cv" id="file-cv" class="form-control">
           <input type="hidden" class="form-control" name="lampiran_cv" id="lampiran_cv" class="form-control" accept="application/pdf">
           <small class="error-file-cv text-danger"></small>
@@ -1215,7 +1215,7 @@ $bulan = array(
     let perusahaan_id = $('#perusahaan_id').val();
     if (perusahaan_id == null) {
       cek++;
-      $('.error-perusahaan_id').html('Silahkan Pilih Level');
+      $('.error-perusahaan_id').html('Silahkan Pilih Perusahaan');
     } else {
       $('.error-perusahaan_id').html('');
     }
@@ -1427,7 +1427,7 @@ $bulan = array(
 
   $(document).on('click', '.item_upload_resume', function() {
     if (files.length == 0) {
-      $('.error-file-cv').html('Silahkan Upload File Resume');
+      $('.error-file-cv').html('Silahkan Upload File CV');
       return false;
     } else {
       let resume_lama = $('.item_lihat_resume').attr('href');

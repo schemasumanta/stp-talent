@@ -24,165 +24,165 @@ $sub_active = $this->uri->segment(2);
         <a class="nav-link" href="<?php echo base_url('dashboard') ?>">
             <i class="fas fa-fw fa-home"></i>
             <span>Dashboard</span></a>
-        </li>
+    </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+    <!-- Divider -->
+    <hr class="sidebar-divider">
 
-        <?php if ($this->session->user_level == 2) { ?>
+    <?php if ($this->session->user_level == 2) { ?>
 
 
-            <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Item - Pages Collapse Menu -->
 
-            <li class="nav-item 
+        <li class="nav-item 
 
             <?php if ($active == "cv" && $sub_active == "") {
                 echo "active";
             } ?> ">
             <a class="nav-link" href="<?php echo base_url('cv') ?>">
-                <i class="fas fa-fw fa-receipt mr-2"></i><span>Resume</span>
+                <i class="fas fa-fw fa-receipt mr-2"></i><span>CV</span>
             </a>
         </li>
         <li class="nav-item 
         <?php if ($active == "seeker" && $sub_active == "application") {
             echo "active";
         } ?> ">
-        <a class="nav-link" href="<?php echo base_url('seeker/application') ?>">
-            <i class="fas fa-fw fa-calendar-check mr-2"></i><span>Applications</span>
-        </a>
+            <a class="nav-link" href="<?php echo base_url('seeker/application') ?>">
+                <i class="fas fa-fw fa-calendar-check mr-2"></i><span>Applications</span>
+            </a>
 
-    </li>
+        </li>
 
-    <li class="nav-item 
+        <li class="nav-item 
     <?php if ($active == "seeker" && $sub_active == "saved_job") {
-        echo "active";
-    } ?> ">
-    <a class="nav-link" href="<?php echo base_url('seeker/saved_job') ?>">
-        <i class="fas fa-fw fa-bookmark mr-2"></i><span>Saved Job</span>
-    </a>
+            echo "active";
+        } ?> ">
+            <a class="nav-link" href="<?php echo base_url('seeker/saved_job') ?>">
+                <i class="fas fa-fw fa-bookmark mr-2"></i><span>Saved Job</span>
+            </a>
 
-</li>
+        </li>
 
-<li class="nav-item 
+        <li class="nav-item 
 
 <?php if ($active == "chat" && $sub_active == "") {
-    echo "active";
-} ?> ">
-<a class="nav-link" href="<?php echo base_url('chat') ?>">
-    <i class="fas fa-fw fa-comment mr-2"></i><span>Inbox</span>
-</a>
+            echo "active";
+        } ?> ">
+            <a class="nav-link" href="<?php echo base_url('chat') ?>">
+                <i class="fas fa-fw fa-comment mr-2"></i><span>Inbox</span>
+            </a>
 
-</li>
+        </li>
 
-<li class="nav-item">
-    <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog mr-2"></i><span>Settings</span>
-    </a>
-    <div id="collapseTwo" class="collapse <?php if ($active == "seeker") {
-        echo "show";
-    } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item 
+        <li class="nav-item">
+            <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog mr-2"></i><span>Settings</span>
+            </a>
+            <div id="collapseTwo" class="collapse <?php if ($active == "seeker") {
+                                                        echo "show";
+                                                    } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item 
         <?php if ($active == "seeker" && $sub_active == "edit_profile") {
             echo "bg-danger text-light";
         } ?>
         " href="<?php echo base_url('seeker/edit_profile') ?>">Edit Profile</a>
 
-        <a class="collapse-item 
+                    <a class="collapse-item 
         <?php if ($active == "bahasa" && $sub_active == "") {
             echo "bg-danger text-light";
         } ?>
         " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Ubah Password</a>
 
-    </div>
-</div>
-</li>
+                </div>
+            </div>
+        </li>
 
-<?php } ?>
+    <?php } ?>
 
-<?php if ($this->session->user_level == 3) { ?>
+    <?php if ($this->session->user_level == 3) { ?>
 
 
-    <!-- Nav Item - Pages Collapse Menu -->
+        <!-- Nav Item - Pages Collapse Menu -->
 
-    <li class="nav-item 
+        <li class="nav-item 
 
     <?php if ($active == "provider" && $sub_active == "company") {
-        echo "active";
-    } ?> ">
-    <a class="nav-link" href="<?php echo base_url('provider/company') ?>">
-        <i class="fas fa-fw fa-building mr-2"></i><span>My Company</span>
-    </a>
+            echo "active";
+        } ?> ">
+            <a class="nav-link" href="<?php echo base_url('provider/company') ?>">
+                <i class="fas fa-fw fa-building mr-2"></i><span>My Company</span>
+            </a>
 
-</li>
+        </li>
 
-<li class="nav-item 
+        <li class="nav-item 
 
 <?php if ($active == "provider" && $sub_active == "job_posting") {
-    echo "active";
-} ?> ">
-<a class="nav-link" href="<?php echo base_url('provider/job_posting') ?>">
-    <i class="fas fa-fw fa-calendar-check mr-2"></i><span>My Vacancy</span>
-</a>
+            echo "active";
+        } ?> ">
+            <a class="nav-link" href="<?php echo base_url('provider/job_posting') ?>">
+                <i class="fas fa-fw fa-calendar-check mr-2"></i><span>My Vacancy</span>
+            </a>
 
-</li>
+        </li>
 
-<li class="nav-item 
+        <li class="nav-item 
 
 <?php if ($active == "provider" && $sub_active == "application") {
-    echo "active";
-} ?> ">
-<a class="nav-link" href="<?php echo base_url('provider/application'); ?>">
-    <i class="fas fa-fw fa-users mr-2"></i><span>Applicants</span>
-</a>
+            echo "active";
+        } ?> ">
+            <a class="nav-link" href="<?php echo base_url('provider/application'); ?>">
+                <i class="fas fa-fw fa-users mr-2"></i><span>Applicants</span>
+            </a>
 
-</li>
+        </li>
 
-<li class="nav-item 
+        <li class="nav-item 
 
 <?php if ($active == "chat" && $sub_active == "" || $active == "chat" && $sub_active == "index") {
-    echo "active";
-} ?> ">
-<a class="nav-link" href="<?php echo base_url('chat') ?>">
-    <i class="fas fa-fw fa-comment mr-2"></i><span>Inbox</span>
-</a>
+            echo "active";
+        } ?> ">
+            <a class="nav-link" href="<?php echo base_url('chat') ?>">
+                <i class="fas fa-fw fa-comment mr-2"></i><span>Inbox</span>
+            </a>
 
-</li>
+        </li>
 
 
-<li class="nav-item">
-    <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog mr-2"></i><span>Settings</span>
-    </a>
+        <li class="nav-item">
+            <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog mr-2"></i><span>Settings</span>
+            </a>
 
-    <div id="collapseTwo" class="collapse <?php if ($active == "provider") {
-        echo "show";
-    } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-        <a class="collapse-item 
+            <div id="collapseTwo" class="collapse <?php if ($active == "provider") {
+                                                        echo "show";
+                                                    } ?>" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item 
         <?php if ($active == "provider" && $sub_active == "edit_profile") {
             echo "bg-danger text-light";
         } ?>
         " href="<?php echo base_url('provider/edit_profile') ?>">Edit Profile</a>
 
-        <a class="collapse-item 
+                    <a class="collapse-item 
         <?php if ($active == "provider" && $sub_active == "") {
             echo "bg-danger text-light";
         } ?>
         " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Ubah Password</a>
 
+                </div>
+            </div>
+        </li>
+
+
+    <?php } ?>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-</div>
-</li>
-
-
-<?php } ?>
-<!-- Divider -->
-<hr class="sidebar-divider">
-
-<div class="text-center d-none d-md-inline">
-    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-</div>
 
 
 </ul>

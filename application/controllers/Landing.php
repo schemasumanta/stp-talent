@@ -10,7 +10,7 @@ class Landing extends CI_Controller
 		$this->db->where('slider_tipe', 'main');
 		$this->db->where('slider_status', 1);
 		$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
-		$data['kategori_job'] = $this->db->query("SELECT kj.kategori_nama,kj.kategori_icon,kj.kategori_id, count(user_id) as jml FROM tbl_master_kategori_job as kj LEFT JOIN tbl_lowongan_pekerjaan as lp ON kj.kategori_id = lp.kategori_id GROUP BY kj.kategori_nama ORDER BY kj.kategori_nama LIMIT 8")->result();
+		$data['kategori_job'] = $this->db->query("SELECT kj.kategori_nama,kj.kategori_icon,kj.kategori_id, count(user_id) as jml FROM tbl_master_kategori_job as kj LEFT JOIN tbl_lowongan_pekerjaan as lp ON kj.kategori_id = lp.kategori_id GROUP BY kj.kategori_nama ORDER BY jml DESC LIMIT 8")->result();
 		$this->db->where('slider_tipe', 'cv');
 		$this->db->where('slider_status', 1);
 		$data['slider_cv'] = $this->db->get('tbl_master_slider')->result();
