@@ -234,6 +234,9 @@ class Job extends CI_Controller
 		$this->db->where('a.lowongan_id', $id);
 		$data['applicants'] = $this->db->get('tbl_pelamar_pekerjaan a')->num_rows();
 
+		$user_id = $this->session->user_id;
+		$data['resume'] = $this->db->get_where('tbl_resume', ['user_id' => $user_id])->row();
+
 		$this->load->view('web/header', $data);
 
 		$this->load->view('job/tampilan_detail_job', $data);
@@ -691,14 +694,12 @@ class Job extends CI_Controller
 		foreach ($list as $l) {
 			$no++;
 
-				if ($l->lowongan_gaji_max > 0) {
+			if ($l->lowongan_gaji_max > 0) {
 				$gaji = 'Rp ' . number_format($l->lowongan_gaji_min, 0, ',', '.')  . ' - Rp ' . number_format($l->lowongan_gaji_max, 0, ',', '.');
 			} else {
 				if ($l->lowongan_gaji_min > 0) {
-				$gaji = 'Rp ' . number_format($l->lowongan_gaji_min, 0, ',', '.');
-				}
-				else
-				{
+					$gaji = 'Rp ' . number_format($l->lowongan_gaji_min, 0, ',', '.');
+				} else {
 					$gaji = 'Gaji Dirahasiakan';
 				}
 			}
