@@ -25,15 +25,15 @@
   }
 </style>
 <?php if ($this->session->login) { ?>
-  <?php if ($this->session->user_level!=1): ?>
+  <?php if ($this->session->user_level != 1) : ?>
     <a href="<?php echo base_url() ?>chat/index/<?php echo md5('admin') ?>"><img class="main-chat" src="<?php echo base_url() ?>assets/img/chatbubble.png" onclick="openchat()" style="cursor: pointer;height: 70px!important;width: 70px!important"></a>
-    
+
   <?php endif ?>
 
 
-<?php }else{ ?>
-    <a href="<?php echo base_url('landing/login') ?>"><img class="main-chat" src="<?php echo base_url() ?>assets/img/chatbubble.png" style="cursor: pointer;height: 70px!important;width: 70px!important"></a><
-<?php }?>
+<?php } else { ?>
+  <a href="<?php echo base_url('landing/login') ?>"><img class="main-chat" src="<?php echo base_url() ?>assets/img/chatbubble.png" style="cursor: pointer;height: 70px!important;width: 70px!important"></a>
+<?php } ?>
 
 
 <script src="<?php echo base_url() ?>assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -292,18 +292,18 @@
             },
             function complete() {
               storage
-              .getDownloadURL()
-              .then(function(url) {
-                $('#lampiran_logo_perusahaan_lama').val(url);
-                $('#btn_update_profil_perusahaan').attr('disabled', 'disabled');
-                $('#btn_update_profil_perusahaan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif" style="height:25px;width:25px;">');
-                $('#form_perusahaan').submit();
-              })
-              .catch(function(error) {
-                console.log("error encountered");
-              });
+                .getDownloadURL()
+                .then(function(url) {
+                  $('#lampiran_logo_perusahaan_lama').val(url);
+                  $('#btn_update_profil_perusahaan').attr('disabled', 'disabled');
+                  $('#btn_update_profil_perusahaan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif" style="height:25px;width:25px;">');
+                  $('#form_perusahaan').submit();
+                })
+                .catch(function(error) {
+                  console.log("error encountered");
+                });
             },
-            );
+          );
 
 
         }
