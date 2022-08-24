@@ -55,6 +55,17 @@
         .popover {
             padding: 15px !important;
         }
+
+        .btn-menu:hover,
+        .btn-menu:focus,
+        .btn-menu:active,
+        .btn-menu.active,
+        .open>.dropdown-toggle.btn-menu {
+            color: red;
+            background-color: white;
+            border-color: red;
+            /*set the color you want here*/
+        }
     </style>
 
     <script type="text/javascript">
@@ -68,24 +79,24 @@
             <div class="modal-content">
 
                 <div class="modal-header bg-danger text-light">
-                    <h5 id="modalubahpassworduserLabel">UBAH PASSWORD</h5>
+                    <h5 id="modalubahpassworduserLabel">UBAH KATA SANDI</h5>
                 </div>
                 <div class="modal-body">
                     <form method="post" id="form_ubah_password_user" action="<?php echo base_url('dashboard/ubah_password') ?>">
                         <div class="form-group row" class="collapse" id="customer_collapse">
 
                             <div class="col-md-12 mb-3">
-                                <label for="pwd1">Password Baru</label>
+                                <label for="pwd1">Kata Sandi Baru</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="password_baru_user" name="password_baru_user" placeholder="Masukkan Password" required>
+                                    <input type="password" class="form-control" id="password_baru_user" name="password_baru_user" placeholder="Masukkan Kata Sandi" required>
                                     <div class="input-group-addon password_baru_user mr-2 ml-2 pt-2" style="cursor: pointer;" onclick="show_password_user('password_baru_user')"><i class="fa fa-eye"></i></div>
                                 </div>
                                 <small class="mt-1 error-password_baru_user text-danger"></small>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label for="pwd1">Ulangi Password</label>
+                                <label for="pwd1">Ulangi Kata Sandi</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="confirm_password_baru_user" name="confirm_password_baru_user" placeholder="Ulangi Password" required>
+                                    <input type="password" class="form-control" id="confirm_password_baru_user" name="confirm_password_baru_user" placeholder="Ulangi Kata Sandi" required>
                                     <div class="input-group-addon confirm_password_baru_user mr-2 ml-2 pt-2" style="cursor: pointer;" onclick="show_password_user('confirm_password_baru_user')"><i class="fa fa-eye"></i></div>
 
                                 </div>
@@ -135,18 +146,11 @@
         <a href="<?php echo base_url() ?>">
             <img src="<?php echo base_url() . $this->session->stp_brand_icon ?>" style="max-height:  40px;margin-left: 5rem"></a>
         <!-- Topbar Navbar -->
-        <ul class="navbar-nav ml-md-5" style="width: 100%">
-            <form class="d-none d-sm-inline-block form-inline mr-auto  my-2 my-md-0 navbar-search" style="width: 85%;margin-left: 3rem">
-                <div class="input-group ">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-danger" type="button">
-                            <i class="fas fa-search fa-sm"></i>
-                        </button>
-                    </div>
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search " aria-label="Search" aria-describedby="basic-addon2">
-
-                </div>
-            </form>
+        <ul class="navbar-nav ml-md-5 d-flex justify-content-center" style="width: 100%">
+            <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?php echo base_url() ?>">Halaman Awal</a></li>
+            <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?php echo base_url('job/job_listing') ?>">Cari Pekerjaan </a></li>
+            <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?= base_url(); ?>#about">Tentang</a></li>
+            <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?= base_url(); ?>#about">Kontak</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -197,7 +201,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
+                        Keluar
                     </a>
                 </div>
             </li>

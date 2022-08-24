@@ -23,7 +23,7 @@ $sub_active = $this->uri->segment(2);
     <li class="nav-item active mt-5">
         <a class="nav-link" href="<?php echo base_url('dashboard') ?>">
             <i class="fas fa-fw fa-home"></i>
-            <span>Dashboard</span></a>
+            <span>Halaman Utama</span></a>
     </li>
 
     <!-- Divider -->
@@ -48,7 +48,7 @@ $sub_active = $this->uri->segment(2);
             echo "active";
         } ?> ">
             <a class="nav-link" href="<?php echo base_url('seeker/application') ?>">
-                <i class="fas fa-fw fa-calendar-check mr-2"></i><span>Applications</span>
+                <i class="fas fa-fw fa-calendar-check mr-2"></i><span>Lamaran Saya</span>
             </a>
 
         </li>
@@ -58,7 +58,7 @@ $sub_active = $this->uri->segment(2);
             echo "active";
         } ?> ">
             <a class="nav-link" href="<?php echo base_url('seeker/saved_job') ?>">
-                <i class="fas fa-fw fa-bookmark mr-2"></i><span>Saved Job</span>
+                <i class="fas fa-fw fa-bookmark mr-2"></i><span>Pekerjaan disimpan</span>
             </a>
 
         </li>
@@ -69,14 +69,14 @@ $sub_active = $this->uri->segment(2);
             echo "active";
         } ?> ">
             <a class="nav-link" href="<?php echo base_url('chat') ?>">
-                <i class="fas fa-fw fa-comment mr-2"></i><span>Inbox</span>
+                <i class="fas fa-fw fa-comment mr-2"></i><span>Pesan</span>
             </a>
 
         </li>
 
         <li class="nav-item">
             <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog mr-2"></i><span>Settings</span>
+                <i class="fas fa-fw fa-cog mr-2"></i><span>Pengaturan</span>
             </a>
             <div id="collapseTwo" class="collapse <?php if ($active == "seeker") {
                                                         echo "show";
@@ -86,13 +86,13 @@ $sub_active = $this->uri->segment(2);
         <?php if ($active == "seeker" && $sub_active == "edit_profile") {
             echo "bg-danger text-light";
         } ?>
-        " href="<?php echo base_url('seeker/edit_profile') ?>">Edit Profile</a>
+        " href="<?php echo base_url('seeker/edit_profile') ?>">Edit Data Diri</a>
 
                     <a class="collapse-item 
         <?php if ($active == "bahasa" && $sub_active == "") {
             echo "bg-danger text-light";
         } ?>
-        " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Ubah Password</a>
+        " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Ubah Kata Sandi</a>
 
                 </div>
             </div>
@@ -202,7 +202,7 @@ $sub_active = $this->uri->segment(2);
             <div class="modal-body">Anda yakin ingin keluar dari sistem ini?</div>
             <div class="modal-footer">
                 <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
-                <a class="btn btn-primary" href="<?php echo base_url('dashboard/logout') ?>">Logout</a>
+                <a class="btn btn-primary" href="<?php echo base_url('dashboard/logout') ?>">Keluar</a>
             </div>
         </div>
     </div>
