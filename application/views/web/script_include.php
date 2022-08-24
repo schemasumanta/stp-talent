@@ -32,7 +32,7 @@
 
 
 <?php }else{ ?>
-    <a href="<?php echo base_url('landing/login') ?>"><img class="main-chat" src="<?php echo base_url() ?>assets/img/chatbubble.png" style="cursor: pointer;height: 70px!important;width: 70px!important"></a><
+    <a href="<?php echo base_url('landing/login') ?>"><img class="main-chat" src="<?php echo base_url() ?>assets/img/chatbubble.png" style="cursor: pointer;height: 70px!important;width: 70px!important"></a>
 <?php }?>
 
 

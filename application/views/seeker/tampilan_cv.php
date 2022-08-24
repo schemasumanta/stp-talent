@@ -181,6 +181,8 @@ $bulan = array(
                     </div>
                     <?php if (count($resume) > 0) : ?>
                       <?php foreach ($resume as $pp) : ?>
+                        <?php if ($pp->resume_nik!=''): ?>
+                          
                         <div class="col-md-3 text-center mb-3">
                           <img class="" src="<?php echo $pp->resume_foto ?>" style="width: 60%;border-radius: 10px">
                         </div>
@@ -214,6 +216,8 @@ $bulan = array(
                             <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->pendidikan_nama; ?></span>
                           </div>
                         </div>
+                        <?php endif ?>
+                        
                       <?php endforeach ?>
 
                     <?php else : ?>

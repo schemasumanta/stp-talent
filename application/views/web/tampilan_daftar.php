@@ -62,7 +62,8 @@
     </div>
   </main>
   <script type="text/javascript">
-    $(document).on('click','.item_daftar',function () {
+    $(document).on('click','.item_daftar',function (e) {
+      e.preventDefault();
       let cek = 0;
       let seeker_nama = $('#seeker_nama').val();
 
@@ -81,6 +82,8 @@
         if (perusahaan_id=='') {
           $('#perusahaan_id').attr('placeholder','Silahkan Masukkan Perusahaan');
           $('#perusahaan_id').addClass('ph-merah');
+         $('#seeker_email').val('');
+
           cek++;
         }else{
           $('#perusahaan_id').removeClass('ph-merah');
@@ -93,6 +96,8 @@
       if (seeker_email=='') {
        $('#seeker_email').attr('placeholder','Silahkan Masukkan Email');
        $('#seeker_email').addClass('ph-merah');
+         $('#seeker_email').val('');
+
        cek++;
      }else{
        let testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
@@ -100,6 +105,8 @@
        {
          $('#seeker_email').attr('placeholder','Format Email Tidak Valid');
          $('#seeker_email').addClass('ph-merah');
+         $('#seeker_email').val('');
+
          cek++;
        }else{
          $('#seeker_email').removeClass('ph-merah');
@@ -112,6 +119,9 @@
     if (validasi_password.test(seeker_password)==false){
      $('#seeker_password').attr('placeholder','Gunakan Kombinasi Alfanumerik & Huruf Kapital');
      $('#seeker_password').addClass('ph-merah');
+         $('#seeker_password').val('');
+     
+     cek++;
    }else{
     $('#seeker_password').removeClass('ph-merah');
 
@@ -136,6 +146,7 @@
 
             return false;
           }else{
+            $('.item_daftar').attr('disabled','disabled');
             $('#form-daftar').submit();
           }
         },
