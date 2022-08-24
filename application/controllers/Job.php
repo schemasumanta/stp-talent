@@ -73,105 +73,114 @@ class Job extends CI_Controller
 	}
 	public function simpan_post()
 	{
-		// cek and tambah kategori
-		$this->db->where('kategori_id', $this->input->post('kategori_id'));
-		$cek_kategori = $this->db->get('tbl_master_kategori_job')->num_rows();
-
-		if ($cek_kategori > 0) {
-			$kategori_id = $this->input->post('kategori_id');
-		} else {
-			$data_kategori  = array(
-				'kategori_nama' => $this->input->post('kategori_id'),
-				'kategori_status' => 1,
-				'kategori_icon' => 'assets/img/icon_kategori/icon1658301518Vectorre.svg'
-			);
-			$this->db->insert('tbl_master_kategori_job', $data_kategori);
-			$kategori_id = $this->db->insert_id();
-		}
-
-		// cek and tambah joblevel
-		$this->db->where('joblevel_id', $this->input->post('joblevel_id'));
-		$cek_joblevel = $this->db->get('tbl_master_level_job')->num_rows();
-
-		if ($cek_joblevel > 0) {
-			$joblevel_id = $this->input->post('joblevel_id');
+		$perusahaan_id = $this->session->perusahaan_id;
+		$cek = $this->db->get_where('tbl_lowongan_pekerjaan', ['perusahaan_id' => $perusahaan_id, 'lowongan_status' => 1])->row();
+		if ($cek) {
+			$data['title'] = 'Gagal';
+			$data['text'] = 'Ada Lowongan aktif yang lain, tidak bisa menambah data silahkan Upgrade ke Akun Premium';
+			$data['icon'] = 'error';
 		} else {
 
-			$data_joblevel  = array(
-				'joblevel_nama' => $this->input->post('joblevel_id'),
-				'joblevel_status' => 1,
-			);
-			$this->db->insert('tbl_master_level_job', $data_joblevel);
-			$joblevel_id = $this->db->insert_id();
-		}
+			// cek and tambah kategori
+			$this->db->where('kategori_id', $this->input->post('kategori_id'));
+			$cek_kategori = $this->db->get('tbl_master_kategori_job')->num_rows();
 
-		// cek and tambah jabatan
-		$this->db->where('jabatan_id', $this->input->post('jabatan_id'));
-		$cek_jabatan = $this->db->get('tbl_master_jabatan')->num_rows();
-		if ($cek_jabatan > 0) {
-			$jabatan_id = $this->input->post('jabatan_id');
-		} else {
-			$data_jabatan  = array(
-				'jabatan_nama' => $this->input->post('jabatan_id'),
-				'jabatan_status' => 1,
-			);
-			$this->db->insert('tbl_master_jabatan', $data_jabatan);
-			$jabatan_id = $this->db->insert_id();
-		}
-
-
-		$data_posting = array(
-			'joblevel_id'			=> $joblevel_id,
-			'kategori_id' 			=> $kategori_id,
-			'perusahaan_id' 		=> $this->session->perusahaan_id,
-			'user_id' 				=> $this->session->user_id,
-			'jabatan_id' 			=> $jabatan_id,
-			'lowongan_judul' 		=> $this->input->post('lowongan_judul'),
-			'lowongan_gaji_min' 	=> str_replace('.', '', $this->input->post('lowongan_gaji_min')),
-			'lowongan_gaji_max' 	=> str_replace('.', '', $this->input->post('lowongan_gaji_max')),
-			'lowongan_gaji_secret' 	=> $this->input->post('rahasiakan'),
-			'lowongan_created_date' => date('Y-m-d H:i:s'),
-			'lowongan_end_date' 	=> $this->input->post('tanggal_akhir_lowongan'),
-			'lowongan_deskripsi' 	=> $this->input->post('lowongan_deskripsi'),
-			'lowongan_status' 		=> 1,
-		);
-
-		$result = $this->db->insert('tbl_lowongan_pekerjaan', $data_posting);
-		$lowongan_id =  $this->db->insert_id();
-
-		if ($result) {
-			$skill = $this->input->post('lowongan_skill');
-			if ($skill != NULL) {
-				for ($i = 0; $i < count($skill); $i++) {
-					$this->db->where('skill_id', $skill[$i]);
-					$cek_skill = $this->db->get('tbl_master_skill')->num_rows();
-					if ($cek_skill > 0) {
-						$skill_id = $skill[$i];
-					} else {
-						$data_skill = array(
-							'skill_nama' 	=> $skill[$i],
-							'skill_status' 	=> 1,
-
-						);
-						$this->db->insert('tbl_master_skill', $data_skill);
-						$skill_id = $this->db->insert_id();
-					}
-					$data_skill_posting = array(
-						'lowongan_id' => $lowongan_id,
-						'skill_id' => $skill_id,
-					);
-					$this->db->insert('tbl_lowongan_skill', $data_skill_posting);
-				}
+			if ($cek_kategori > 0) {
+				$kategori_id = $this->input->post('kategori_id');
+			} else {
+				$data_kategori  = array(
+					'kategori_nama' => $this->input->post('kategori_id'),
+					'kategori_status' => 1,
+					'kategori_icon' => 'assets/img/icon_kategori/icon1658301518Vectorre.svg'
+				);
+				$this->db->insert('tbl_master_kategori_job', $data_kategori);
+				$kategori_id = $this->db->insert_id();
 			}
 
-			$data['title'] = 'Berhasil';
-			$data['text'] = 'Lowongan Pekerjaan Berhasil Diposting!';
-			$data['icon'] = 'success';
-		} else {
+			// cek and tambah joblevel
+			$this->db->where('joblevel_id', $this->input->post('joblevel_id'));
+			$cek_joblevel = $this->db->get('tbl_master_level_job')->num_rows();
 
-			$data['title'] = 'Gagal';
-			$data['text'] = 'Lowongan Pekerjaan Gagal Diposting!';
-			$data['icon'] = 'error';
+			if ($cek_joblevel > 0) {
+				$joblevel_id = $this->input->post('joblevel_id');
+			} else {
+
+				$data_joblevel  = array(
+					'joblevel_nama' => $this->input->post('joblevel_id'),
+					'joblevel_status' => 1,
+				);
+				$this->db->insert('tbl_master_level_job', $data_joblevel);
+				$joblevel_id = $this->db->insert_id();
+			}
+
+			// cek and tambah jabatan
+			$this->db->where('jabatan_id', $this->input->post('jabatan_id'));
+			$cek_jabatan = $this->db->get('tbl_master_jabatan')->num_rows();
+			if ($cek_jabatan > 0) {
+				$jabatan_id = $this->input->post('jabatan_id');
+			} else {
+				$data_jabatan  = array(
+					'jabatan_nama' => $this->input->post('jabatan_id'),
+					'jabatan_status' => 1,
+				);
+				$this->db->insert('tbl_master_jabatan', $data_jabatan);
+				$jabatan_id = $this->db->insert_id();
+			}
+
+
+			$data_posting = array(
+				'joblevel_id'			=> $joblevel_id,
+				'kategori_id' 			=> $kategori_id,
+				'perusahaan_id' 		=> $this->session->perusahaan_id,
+				'user_id' 				=> $this->session->user_id,
+				'jabatan_id' 			=> $jabatan_id,
+				'lowongan_judul' 		=> $this->input->post('lowongan_judul'),
+				'lowongan_gaji_min' 	=> str_replace('.', '', $this->input->post('lowongan_gaji_min')),
+				'lowongan_gaji_max' 	=> str_replace('.', '', $this->input->post('lowongan_gaji_max')),
+				'lowongan_gaji_secret' 	=> $this->input->post('rahasiakan'),
+				'lowongan_created_date' => date('Y-m-d H:i:s'),
+				'lowongan_end_date' 	=> $this->input->post('tanggal_akhir_lowongan'),
+				'lowongan_deskripsi' 	=> $this->input->post('lowongan_deskripsi'),
+				'lowongan_status' 		=> 1,
+			);
+
+			$result = $this->db->insert('tbl_lowongan_pekerjaan', $data_posting);
+			$lowongan_id =  $this->db->insert_id();
+
+			if ($result) {
+				$skill = $this->input->post('lowongan_skill');
+				if ($skill != NULL) {
+					for ($i = 0; $i < count($skill); $i++) {
+						$this->db->where('skill_id', $skill[$i]);
+						$cek_skill = $this->db->get('tbl_master_skill')->num_rows();
+						if ($cek_skill > 0) {
+							$skill_id = $skill[$i];
+						} else {
+							$data_skill = array(
+								'skill_nama' 	=> $skill[$i],
+								'skill_status' 	=> 1,
+
+							);
+							$this->db->insert('tbl_master_skill', $data_skill);
+							$skill_id = $this->db->insert_id();
+						}
+						$data_skill_posting = array(
+							'lowongan_id' => $lowongan_id,
+							'skill_id' => $skill_id,
+						);
+						$this->db->insert('tbl_lowongan_skill', $data_skill_posting);
+					}
+				}
+
+				$data['title'] = 'Berhasil';
+				$data['text'] = 'Lowongan Pekerjaan Berhasil Diposting!';
+				$data['icon'] = 'success';
+			} else {
+
+				$data['title'] = 'Gagal';
+				$data['text'] = 'Lowongan Pekerjaan Gagal Diposting!';
+				$data['icon'] = 'error';
+			}
 		}
 		$this->session->set_flashdata($data);
 		redirect('provider/job_posting', 'refresh');

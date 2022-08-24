@@ -326,13 +326,23 @@ class Provider extends CI_Controller
 		$list = $this->model_tabel->get_datatables('job_posting', $sort, $order, $search);
 		foreach ($list as $l) {
 
+			if ($l->lowongan_status == 1) {
+				$status = "Aktif";
+			} elseif ($l->lowongan_status == 2) {
+				$status = "Tidak Aktif";
+			} elseif ($l->lowongan_status == 3) {
+				$status = "Sold Out";
+			}
+
 			$no++;
 			$l->isi_lowongan = '<div class="card border-left-success shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><img src="' . $l->perusahaan_logo . '" style="width:5%;margin-right:25px;">
 			<div class="col mr-2"><div class="text-lg font-weight-bold text-danger text-uppercase mb-1">
 			' . $l->lowongan_judul . '</div>
 			<div class="h6 mb-2 text-gray-800">' . $l->kategori_nama . '</div>
 			<div class="h6 mb-0 font-weight-bold text-gray-800"><i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</li></div>
-			</div><div class="col-auto"><a href="' . base_url() . 'job/detail/' . $l->lowongan_id . '" class="btn btn-sm rounded  mr-2 btn-success   item_detail_lowongan" data="' . $l->lowongan_id . '"><i class="fa fa-eye mr-2"></i>Detail</a></div>
+			</div>
+			<div class="col-auto"><a href="' . base_url() . 'job/detail/' . $l->lowongan_id . '" class="btn btn-sm rounded  mr-2 btn-success   item_detail_lowongan" data="' . $l->lowongan_id . '"><i class="fa fa-eye mr-2"></i>Detail</a></div>
+			<div class="col-auto"><button type="button" onclick="status_lowongan(' . $l->lowongan_id . ')" class="btn btn-sm rounded mr-2 btn-danger">' . $status . '</button></div>
 			</div></div></div>';
 
 			// <a href="javascript:;" class="btn btn-sm rounded btn-danger item_hapus_lowongan" data="'.$l->lowongan_id.'"><i class="fa fa-trash"></i></a>
@@ -459,7 +469,7 @@ class Provider extends CI_Controller
 	}
 
 	public function edit_profile()
-	{;
+	{
 		$user_id = $this->session->user_id;
 		$data['seeker'] = $this->db->get_where('tbl_master_user', ['user_id' => $user_id])->row();
 		$this->load->view('templates/header');
@@ -655,6 +665,46 @@ class Provider extends CI_Controller
 					$data['error_string'][] = 'No Telepon sudah terdaftar';
 					$data['status'] = FALSE;
 				}
+			}
+		}
+
+		if ($data['status'] === FALSE) {
+			echo json_encode($data);
+			exit();
+		}
+	}
+
+	public function status_lowongan($id)
+	{
+		$data = $this->db->get_where('tbl_lowongan_pekerjaan', ['lowongan_id' => $id])->row();
+		echo json_encode($data);
+	}
+
+	public function update_status_lowongan()
+	{
+		$this->_validate_status();
+		$data = array(
+			'lowongan_status' => $this->input->post('lowongan_status'),
+		);
+		$this->db->where('lowongan_id', $this->input->post('id_lowongan'));
+		$this->db->update('tbl_lowongan_pekerjaan', $data);
+		echo json_encode(array("status" => TRUE));
+	}
+
+	private function _validate_status()
+	{
+		$data = array();
+		$data['error_string'] = array();
+		$data['inputerror'] = array();
+		$data['status'] = TRUE;
+
+		if ($this->input->post('lowongan_status') == 1) {
+			$perusahaan_id = $this->session->perusahaan_id;
+			$cek = $this->db->get_where('tbl_lowongan_pekerjaan', ['perusahaan_id' => $perusahaan_id, 'lowongan_status' => 1])->row();
+			if ($cek) {
+				$data['inputerror'][] = 'lowongan_status';
+				$data['error_string'][] = 'Ada Lowongan aktif yang lain, tidak bisa merubah status silahkan Upgrade ke Akun Premium';
+				$data['status'] = FALSE;
 			}
 		}
 

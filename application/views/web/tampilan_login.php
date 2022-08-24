@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-lg-12 mt-3">
                       <input type="password" class="form-control mb-4" name="seeker_password" id="seeker_password" placeholder="Masukkan Password">
-                      <a href="javascript:;" onclick="show_password()" class="text-light">Tampilkan Password</a>
+                      <a href="javascript:;" onclick="show_password()" id="text_pw" class="text-light">Tampilkan Password</a>
                     </div>
                     <div class="col-lg-12 mt-4 items-link btn-group">
                       <?php if ($this->uri->segment(3) > 0) { ?>
@@ -122,7 +122,9 @@
         if ($('#seeker_password').attr('type') == "password") {
           $('#seeker_password').attr('type', 'text');
           $('#show_pw').html('<i class="fa fa-eye-slash"></i>');
+          $('#text_pw').text('Sembunyikan Password');
         } else {
+          $('#text_pw').text('Tampilkan Password');
           $('#seeker_password').attr('type', 'password');
           $('#show_pw').html('<i class="fa fa-eye"></i>');
         }
