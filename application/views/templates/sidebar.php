@@ -139,6 +139,16 @@ $sub_active = $this->uri->segment(2);
         </li>
 
         <li class="nav-item 
+<?php if ($active == "provider" && $sub_active == "premium") {
+            echo "active";
+        } ?> ">
+            <a class="nav-link" href="<?php echo base_url('provider/premium'); ?>">
+                <i class="fas fa-star mr-2"></i><span>Premium</span>
+            </a>
+
+        </li>
+
+        <li class="nav-item 
 
 <?php if ($active == "chat" && $sub_active == "" || $active == "chat" && $sub_active == "index") {
             echo "active";

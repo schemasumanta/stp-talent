@@ -154,8 +154,13 @@ class Provider extends CI_Controller
 					$this->db->where('user_id', $a->user_id);
 					$this->db->update('tbl_master_user', $data);
 					redirect('dashboard', 'refresh');
+				} elseif ($a->user_status == 2) {
+					$stp = 	$this->db->get('tbl_master_stp')->row();
+					$data['user_email'] = $a->user_email;
+					$data['stp_brand_icon'] = $stp->stp_brand_icon;
+					$this->session->set_userdata($data);
+					redirect('landing/lock_akun', 'refresh');
 				} else {
-
 					$data['title'] = 'Login Gagal';
 					$data['text'] = 'User Belum Diaktivasi!';
 					$data['icon'] = 'error';
@@ -186,13 +191,15 @@ class Provider extends CI_Controller
 	public function simpan_pendaftaran()
 	{
 		$data_perusahaan  = array(
-			'perusahaan_nama' => $this->input->post('perusahaan_id'),
+			'perusahaan_nama' => $this->input->post('perusahaan_nama'),
+			'perusahaan_npwp' => $this->input->post('perusahaan_npwp'),
+			'perusahaan_nib' => $this->input->post('perusahaan_nib'),
+			'perusahaan_website' => $this->input->post('perusahaan_website'),
 		);
 		$simpan = $this->db->insert('tbl_perusahaan', $data_perusahaan);
+		$perusahaan_id = $this->db->insert_id();
 		if ($simpan) {
-			$this->db->where('perusahaan_nama', $this->input->post('perusahaan_id'));
-			$this->db->limit(1);
-			$this->db->order_by('perusahaan_id', 'desc');
+			$this->db->where('perusahaan_id', $perusahaan_id);
 			$perusahaan = $this->db->get('tbl_perusahaan')->result();
 			foreach ($perusahaan as $pr) {
 				$perusahaan_id = $pr->perusahaan_id;
@@ -210,13 +217,11 @@ class Provider extends CI_Controller
 				);
 
 				$result = $this->db->insert('tbl_master_user', $data_seeker);
+				$user_id = $this->db->insert_id();
 
 				if ($result) {
 
-					$this->db->where('user_nama', $this->input->post('seeker_nama'));
-					$this->db->where('user_level', 3);
-					$this->db->order_by('user_id', 'desc');
-					$this->db->limit(1);
+					$this->db->where('user_id', $user_id);
 					$user = $this->db->get('tbl_master_user')->result();
 					foreach ($user as $key) {
 						$user_id = $key->user_id;
@@ -712,5 +717,155 @@ class Provider extends CI_Controller
 			echo json_encode($data);
 			exit();
 		}
+	}
+
+	public function premium()
+	{
+		$data['premium'] = $this->db->get_where('tbl_premium', ['premium_status' => 1])->row();
+
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar');
+		$this->load->view('provider/tampilan_premium', $data);
+		$this->load->view('templates/footer');
+	}
+
+	function payment()
+	{
+		$id_premium = $this->input->post('id');
+		$price = $this->input->post('price');
+		$user_id = $this->session->user_id;
+
+		$data = $this->db->where('premium_id', $id_premium)->get('tbl_premium')->row_array();
+		$users = $this->db->query("SELECT tbl_master_user.*,tbl_perusahaan.perusahaan_alamat FROM tbl_master_user LEFT JOIN tbl_perusahaan ON tbl_master_user.perusahaan_id = tbl_perusahaan.perusahaan_id WHERE tbl_master_user.user_id = $user_id")->row_array();
+		// echo json_encode($price); die();
+		$nama_premium = $data['premium_nama'];
+		$items = [
+			'name' =>  $nama_premium,
+			'price' => (int)$price,
+			'quantity' => (int)1,
+		];
+
+
+		$inv_number = 'INV-' . rand(1, 10000);
+		$itemsss[] = $items;
+
+		//save to table trasaction course
+		// $save_to_sql = [
+		// 	'participant_id' => $this->session->userdata('id'),
+		// 	'course_id'		=> $id_premium,
+		// 	'invoice_number' => $inv_number,
+		// 	'tot_price'	=> $price,
+		// 	'paid_status' => "1",
+		// 	'create_date' => date('Y-m-d H:s:s'),
+		// ];
+
+		// $this->db->insert('transaction_course', $save_to_sql);
+		// sctipt doku
+		$requestBody = [
+			'order' => [
+				'amount'            => (int)$price,
+				'invoice_number'    => $inv_number,
+				'currency'          => 'IDR',
+				'callback_url'      => base_url('/Participant'),
+				'line_items'        => $itemsss,
+			],
+			'payment'               => [
+				'payment_due_date'  => 60  //expired pay
+			],
+			'customer'              => [
+				'id'        => 'CUST-' . rand(1, 1000), // Change to your customer ID mapping
+				'name'      => $users['user_nama'],
+				'email'     => $users['user_email'],
+				'phone'     => $users['user_telepon'],
+				'address'   => $users['perusahaan_alamat'],
+				'country'   => 'ID',
+			]
+		];
+
+		// echo json_encode($requestBody);die();
+		$requestId = rand(1, 100000); // Change to UUID or anything that can generate unique value
+		$dateTime = gmdate("Y-m-d H:i:s");
+		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
+		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
+		$clientId = 'BRN-0258-1659388313605'; // Change with your Client ID
+		$secretKey = 'SK-Y7Zmm6dVGIJ5ti5aFZ1U'; // Change with your Secret Key
+
+		$getUrl = 'https://api-sandbox.doku.com';
+
+		$targetPath = '/checkout/v1/payment';
+		$url = $getUrl . $targetPath;
+
+		// Generate digest
+		$digestValue = base64_encode(hash('sha256', json_encode($requestBody), true));
+
+		// Prepare signature component
+		$componentSignature = "Client-Id:" . $clientId . "\n" .
+			"Request-Id:" . $requestId . "\n" .
+			"Request-Timestamp:" . $dateTimeFinal . "\n" .
+			"Request-Target:" . $targetPath . "\n" .
+			"Digest:" . $digestValue;
+
+		// Generate signature
+		$signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
+
+		// Execute request
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestBody));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/json',
+			'Client-Id:' . $clientId,
+			'Request-Id:' . $requestId,
+			'Request-Timestamp:' . $dateTimeFinal,
+			'Signature:' . "HMACSHA256=" . $signature,
+		));
+
+		// Set response json
+		$responseJson = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		curl_close($ch);
+
+		// Echo the response
+		if (is_string($responseJson) && $httpCode == 200) {
+			echo $responseJson;
+			return json_decode($responseJson, true);
+		} else {
+			echo $responseJson;
+			return null;
+		}
+	}
+
+	public function get_status_payment()
+	{
+		$dateTime = gmdate("Y-m-d H:i:s");
+		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
+		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'https://api-sandbox.doku.com/orders/v1/status/INV-5164',
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'GET',
+			CURLOPT_HTTPHEADER => array(
+				'Client-Id: BRN-0258-1659388313605',
+				'Request-Id: 69591',
+				'Request-Timestamp: ' . $dateTimeFinal . '',
+				'Signature: HMACSHA256=YsVBhVjRib1qHdrIukPD5P1Qgmo7oBZkUrU2hHSfP1E='
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		echo $response;
 	}
 }

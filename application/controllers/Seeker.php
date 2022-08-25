@@ -72,7 +72,7 @@ class Seeker extends CI_Controller
 	{
 		$data['id_user'] = $id_user;
 		$data['email'] = $email;
-		$data['password'] = $password;
+		$data['password'] = "Dirahasiakan";
 		$content = $this->load->view('seeker/body_email', $data, true);
 		return $content;
 	}
@@ -99,8 +99,14 @@ class Seeker extends CI_Controller
 					$this->session->set_flashdata($data);
 					redirect('landing/login', 'refresh');
 				} else {
-					$this->db->where('user_id', $key->user_id);
-					$result = $this->db->update('tbl_master_user', array('user_status' => 1));
+					$provider = $this->db->query("SELECT * FROM tbl_master_user JOIN tbl_perusahaan ON tbl_master_user.perusahaan_id = tbl_perusahaan.perusahaan_id WHERE tbl_master_user.user_id = $key->user_id AND tbl_master_user.user_level = 3")->row();
+					if ($provider) {
+						$this->db->where('user_id', $key->user_id);
+						$result = $this->db->update('tbl_master_user', array('user_status' => 2));
+					} else {
+						$this->db->where('user_id', $key->user_id);
+						$result = $this->db->update('tbl_master_user', array('user_status' => 1));
+					}
 					if ($result) {
 						$this->db->where('token_isi', $key->token_isi);
 						$result = $this->db->delete('tbl_token');

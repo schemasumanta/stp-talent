@@ -109,14 +109,18 @@ class User extends CI_Controller
 			if ($l->user_level != '1') {
 				if ($l->user_status == 1) {
 					$opsi .= '<a href="javascript:;" class="btn btn-danger btn-sm btn-circle  item_aktivasi_user" data="' . $l->user_id . '"><i class="fa fa-times-circle"></i></a>';
+				} elseif ($l->user_status == 2) {
+					$opsi .= '<a href="javascript:;" class="btn btn-success btn-sm" onclick="approve_provider(' . $l->user_id . ')"><i class="fa fa-check-circle"></i>Approve Perusahaan</a>';
 				} else {
 					$opsi .= '<a href="javascript:;" class="btn btn-success btn-sm btn-circle  item_aktivasi_user" data="' . $l->user_id . '"><i class="fa fa-check-circle"></i></a>';
 				}
 			}
 			$opsi .= '</div>';
 			$l->opsi = $opsi;
-			if ($l->user_status > 0) {
+			if ($l->user_status == 1) {
 				$l->user_status = '<button type="button" class="btn btn-success btn-sm btn-round ">Aktif</button>';
+			} elseif ($l->user_status == 2) {
+				$l->user_status = '<button type="button" class="btn btn-success btn-sm btn-round ">Belum di Approve</button>';
 			} else {
 				$l->user_status = '<button type="button" class="btn btn-danger btn-sm btn-round ">Non Aktif</button>';
 			}
@@ -814,5 +818,61 @@ class User extends CI_Controller
 		}
 
 		echo json_encode(array("status" => TRUE));
+	}
+
+	public function approve_provider($id)
+	{
+		$data = [
+			'user_status' => 1,
+		];
+		$this->db->where('user_id', $id);
+		$this->db->update('tbl_master_user', $data);
+
+		$akun = $this->db->get_where('tbl_master_user', ['user_id' => $id])->row();
+		$token = $this->generateRandomString();
+		$tanggal = date('Y-m-d H:i:s');
+		$data_token  = array(
+			'token_isi' => $token,
+			'token_expired_date' => date('Y-m-d H:i:s', strtotime($tanggal . ' +1 day')),
+			'token_keterangan' => 'Selamat akun anda telah bisa di gunakan',
+			'user_id' => $id,
+		);
+		$this->db->insert('tbl_token', $data_token);
+
+		$this->load->library('Mailer');
+		$email_penerima = $akun->user_email;
+		if ($email_penerima != '') {
+			$subjek = "Approve Akun Provider Talent Hub - " . $akun->user_nama;
+			$password = "Password dirahasiakan";
+			$pesan = $this->kirim_email($token, $email_penerima, $password);
+			$content = $this->load->view('content', array('pesan' => $pesan), true);
+			$sendmail = array(
+				'email_penerima' => $email_penerima,
+				'subjek' => $subjek,
+				'content' => $content,
+			);
+			$send = $this->mailer->send($sendmail);
+		}
+		echo json_encode(array("status" => TRUE));
+	}
+
+	public function generateRandomString($length = 10)
+	{
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		return $randomString;
+	}
+
+	public function kirim_email($id_user, $email, $password)
+	{
+		$data['id_user'] = $id_user;
+		$data['email'] = $email;
+		$data['password'] = "Dirahasiakan";
+		$content = $this->load->view('provider/body_email_approve', $data, true);
+		return $content;
 	}
 }

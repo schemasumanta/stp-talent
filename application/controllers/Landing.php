@@ -299,4 +299,15 @@ class Landing extends CI_Controller
 		$this->session->set_userdata($newdata);
 		redirect('job/job_listing', 'refresh');
 	}
+
+	public function lock_akun()
+	{
+		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+
+		$this->load->view('web/header', $data);
+		$this->load->view('provider/tampilan_lockakun');
+		$this->load->view('web/script_include', $data);
+
+		$this->session->sess_destroy();
+	}
 }
