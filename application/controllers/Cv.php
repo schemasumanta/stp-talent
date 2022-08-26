@@ -67,6 +67,9 @@ class Cv extends CI_Controller
 		$data['skill_level'] = $this->db->get('tbl_skill_level')->result();
 
 		$data['provinsi'] = $this->db->get('tbl_master_provinsi')->result();
+
+		$data['porto'] = $this->db->get_where('tbl_portopolio', ['porto_user_id' => $this->session->user_id])->result();
+
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
 		$this->load->view('seeker/tampilan_cv', $data);
@@ -569,13 +572,17 @@ class Cv extends CI_Controller
 		$this->db->where('a.user_id', $id);
 		$this->db->join('tbl_master_bahasa b', 'b.bahasa_id=a.bahasa_id');
 		$data['bahasa'] = $this->db->get('tbl_bahasa_resume a')->result();
-		
+
 		$this->db->where('a.user_id', $this->session->user_id);
 		$this->db->join('tbl_perusahaan b', 'b.perusahaan_id=a.perusahaan_id');
 		$this->db->join('tbl_master_level_job c', 'c.joblevel_id=a.joblevel_id');
 		$this->db->join('tbl_master_jabatan d', 'd.jabatan_id=a.jabatan_id');
 		$this->db->order_by('a.pengalaman_tanggal_awal', 'asc');
 		$data['pengalaman'] = $this->db->get('tbl_pengalaman_resume a')->result();
+
+		$data['porto'] = $this->db->get_where('tbl_portopolio', ['porto_user_id' => $this->session->user_id])->result();
+
+
 		$this->load->library('dompdf_gen');
 		$this->load->view('seeker/generate_cv', $data);
 		$customPaper = 'A4';
@@ -668,5 +675,49 @@ class Cv extends CI_Controller
 		}
 		$this->session->set_flashdata($data);
 		redirect('cv', 'refresh');
+	}
+
+	public function tambah_porto()
+	{
+		$this->_validate_porto();
+		$data = array(
+			'porto_nama' => $this->input->post('nama_porto'),
+			'porto_link' => $this->input->post('link_porto'),
+			'porto_user_id' => $this->session->user_id,
+		);
+		$this->db->insert("tbl_portopolio", $data);
+		echo json_encode(array("status" => TRUE));
+	}
+
+	private function _validate_porto()
+	{
+		$data = array();
+		$data['error_string'] = array();
+		$data['inputerror'] = array();
+		$data['status'] = TRUE;
+
+		if ($this->input->post('nama_porto') == '') {
+			$data['inputerror'][] = 'nama_porto';
+			$data['error_string'][] = 'Nama Portopolio wajib diisi!';
+			$data['status'] = FALSE;
+		}
+
+		if ($this->input->post('link_porto') == '') {
+			$data['inputerror'][] = 'link_porto';
+			$data['error_string'][] = 'Link Portopolio wajib diisi!';
+			$data['status'] = FALSE;
+		}
+
+		if ($data['status'] === FALSE) {
+			echo json_encode($data);
+			exit();
+		}
+	}
+
+	public function hapus_porto($id)
+	{
+		$this->db->where('porto_id', $id);
+		$this->db->delete('tbl_portopolio');
+		echo json_encode(array("status" => TRUE));
 	}
 }

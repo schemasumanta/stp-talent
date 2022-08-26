@@ -181,43 +181,43 @@ $bulan = array(
                     </div>
                     <?php if (count($resume) > 0) : ?>
                       <?php foreach ($resume as $pp) : ?>
-                        <?php if ($pp->resume_nik!=''): ?>
-                          
-                        <div class="col-md-3 text-center mb-3">
-                          <img class="" src="<?php echo $pp->resume_foto ?>" style="width: 60%;border-radius: 10px">
-                        </div>
-                        <div class="col-md-9 col-xl-9 mb-3">
-                          <div class="row mb-3">
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6">NIK</span>
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->resume_nik; ?></span>
-                          </div>
-                          <div class="row mb-3">
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6">Nama Lengkap</span>
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->resume_nama_lengkap; ?></span>
-                          </div>
+                        <?php if ($pp->resume_nik != '') : ?>
 
-                          <div class="row mb-3">
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6">Tempat Tanggal Lahir</span>
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php
-                                                                                                        $tgl_lahir = explode('-', $pp->resume_tanggal_lahir);
-                                                                                                        echo $pp->resume_tempat_lahir . ", " . $tgl_lahir[2] . " " . $bulan[$tgl_lahir[1]] . " " . $tgl_lahir[0]; ?></span>
+                          <div class="col-md-3 text-center mb-3">
+                            <img class="" src="<?php echo $pp->resume_foto ?>" style="width: 60%;border-radius: 10px">
                           </div>
-                          <div class="row mb-3">
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6">Jenis Kelamin</span>
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->resume_jenis_kelamin == "L" ? "Laki-Laki" : "Perempuan"; ?></span>
-                          </div>
-                          <div class="row mb-3">
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6">Agama</span>
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->agama_nama; ?></span>
-                          </div>
+                          <div class="col-md-9 col-xl-9 mb-3">
+                            <div class="row mb-3">
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6">NIK</span>
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->resume_nik; ?></span>
+                            </div>
+                            <div class="row mb-3">
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6">Nama Lengkap</span>
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->resume_nama_lengkap; ?></span>
+                            </div>
 
-                          <div class="row mb-3">
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6">Pendidikan</span>
-                            <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->pendidikan_nama; ?></span>
+                            <div class="row mb-3">
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6">Tempat Tanggal Lahir</span>
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php
+                                                                                                          $tgl_lahir = explode('-', $pp->resume_tanggal_lahir);
+                                                                                                          echo $pp->resume_tempat_lahir . ", " . $tgl_lahir[2] . " " . $bulan[$tgl_lahir[1]] . " " . $tgl_lahir[0]; ?></span>
+                            </div>
+                            <div class="row mb-3">
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6">Jenis Kelamin</span>
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->resume_jenis_kelamin == "L" ? "Laki-Laki" : "Perempuan"; ?></span>
+                            </div>
+                            <div class="row mb-3">
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6">Agama</span>
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->agama_nama; ?></span>
+                            </div>
+
+                            <div class="row mb-3">
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6">Pendidikan</span>
+                              <span class="col-md-6 col-sm-6 col-xs-6 col-6" style="font-weight: bold;">: <?php echo $pp->pendidikan_nama; ?></span>
+                            </div>
                           </div>
-                        </div>
                         <?php endif ?>
-                        
+
                       <?php endforeach ?>
 
                     <?php else : ?>
@@ -298,6 +298,25 @@ $bulan = array(
                       <a href="javascript:;" class="text-danger genric-btn small btn-transparent item_tambah_pengalaman" style="border-radius: 0px"><i class="fas fa-plus mr-2"></i>Tambah Pengalaman</a>
                     </div>
                   <?php endif ?>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col-md-12">
+                      <span style="font-weight: bold;font-size: 18px">Portopolio
+                      </span>
+                      <hr>
+                      <a href="javascript:;" class="text-danger genric-btn small btn-transparent" onclick="tambah_porto()" style="position: absolute;right: 5px;top:5px;border-radius: 0px"><i class="fas fa-plus mr-2"></i>Tambah Portopolio</a>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row p-2">
+                        <?php foreach ($porto as $key) { ?>
+                          <div class="col-md-4 p-2">
+                            <a href="<?= $key->porto_link; ?>" target="_blank" class="btn btn-outline-dark"><?= $key->porto_nama; ?></a>
+                            <a href="javascript:;" onclick="hapus_porto('<?= $key->porto_id; ?>')" class="btn btn-outline-danger"><i class="fas fa-trash"></i></a>
+                          </div>
+                        <?php }; ?>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
@@ -1790,6 +1809,107 @@ $bulan = array(
       success: function(response) {}
     });
   }
+
+  function tambah_porto() {
+    save_method = 'add';
+    $('#form_porto')[0].reset(); // reset form on modals
+    $('#modal_porto').modal('show'); // show bootstrap modal
+  }
+
+  function save_porto() {
+    $('#btnSave_porto').text('sedang menyimpan...'); //change button text
+    $('#btnSave_porto').attr('disabled', true); //set button disable 
+    var url;
+
+    if (save_method == 'add') {
+      url = "<?php echo site_url('cv/tambah_porto') ?>";
+    } else {
+      url = "<?php echo site_url('cv/edit_porto') ?>";
+    }
+
+    // ajax adding data to database
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: $('#form_porto').serialize(),
+      dataType: "JSON",
+      success: function(data) {
+
+        if (data.status) //if success close modal and reload ajax table
+        {
+          $('#modal_porto').modal('hide');
+          setTimeout(function() {
+            location.reload();
+          }, 1500);
+          Swal.fire(
+            'Berhasil!',
+            'Data berhasil disimpan',
+            'success'
+          );
+
+        } else {
+          $('#nama_porto').removeClass("is-invalid");
+          if ($('#nama_porto').val() != "") {
+            $('#nama_porto').addClass("is-valid");
+          }
+          $('#link_porto').removeClass("is-invalid");
+          if ($('#link_porto').val() != "") {
+            $('#link_porto').addClass("is-valid");
+          }
+          $('.help-block').empty(); //select span help-block class set text error string
+          for (var i = 0; i < data.inputerror.length; i++) {
+            $('[name="' + data.inputerror[i] + '"]').addClass('is-invalid'); //select parent twice to select div form-group class and add has-error class
+            $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]).addClass('text-danger'); //select span help-block class set text error string
+          }
+        }
+        $('#btnSave_porto').text('save'); //change button text
+        $('#btnSave_porto').attr('disabled', false); //set button enable 
+
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert('Error adding / update data');
+        $('#btnSave_porto').text('save'); //change button text
+        $('#btnSave').attr('disabled', false); //set button enable 
+
+      }
+    });
+  }
+
+  function hapus_porto(id) {
+    Swal.fire({
+      title: 'Apakah anda yakin?',
+      text: "Data tidak bisa dikembalikan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: "<?php echo site_url('cv/hapus_porto') ?>/" + id,
+          type: "POST",
+          dataType: "JSON",
+          success: function(data) {
+            Swal.fire(
+              'Berhasil!',
+              'Data berhasil dihapus.',
+              'success'
+            )
+            setTimeout(function() {
+              location.reload();
+            }, 1500);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error deleting data');
+          }
+        });
+
+      }
+    })
+
+  }
 </script>
 
 <div class="modal fade" data-backdrop="static" id="ModalHapusPengalaman" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -1814,3 +1934,40 @@ $bulan = array(
     </div>
   </div>
 </div>
+<!-- Bootstrap modal -->
+<div class="modal fade" id="modal_porto" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Tambah Portopolio</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body form">
+        <form action="#" id="form_porto" class="form-horizontal">
+          <input type="hidden" value="" name="id_porto" id="porto" />
+          <div class="form-body">
+            <div class="form-group">
+              <label class="control-label col-md-4">Nama Portopolio</label>
+              <div class="col-md-8">
+                <input name="nama_porto" id="nama_porto" placeholder="Masukan nama portopolio" class="form-control" type="text">
+                <span class="help-block text-danger"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-4">Link Portopolio</label>
+              <div class="col-md-8">
+                <input name="link_porto" id="link_porto" placeholder="Masukan link portopolio" class="form-control" type="text">
+                <span class="help-block text-danger"></span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnSave" onclick="save_porto()" class="btn btn-primary">Simpan</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal -->

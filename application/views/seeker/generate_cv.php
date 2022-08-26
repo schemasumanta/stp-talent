@@ -52,7 +52,8 @@
         }
 
         p,
-        span,{
+        span,
+          {
           font-size: 12px;
           font-family: "Inter", "sans-serif";
         }
@@ -69,7 +70,7 @@
         }
 
         * {
-         font-family: "Inter", "sans-serif";
+          font-family: "Inter", "sans-serif";
         }
 
         .kotak_kiri {
@@ -120,7 +121,6 @@
           border-radius: 15px;
           vertical-align: middle;
         }
-
       </style>
 
       <?php
@@ -197,7 +197,7 @@
 
         <?php if ($skill != '') { ?>
           <h6 style="text-align: center;font-weight: bold;background:red; color: #fff;margin-bottom: 5px;border-top-right-radius: 15px;height: 40px;border-bottom-right-radius: 15px;padding-top: 15px"><?php echo strtoupper("S k i l l"); ?></h6>
-      
+
           <ul style="padding: 25px">
             <?php foreach ($skill as $row) { ?>
               <li style="width: 250px;height: 30px;vertical-align: middle;border:1px solid red;text-align: center;margin-bottom: 10px;background: red;color: white;font-weight: bold;border-radius: 15px;"><span style="padding-top: 15px;"> <?= $row->skill_nama ?> | <?= $row->skill_level_nama; ?></span></li>
@@ -206,12 +206,12 @@
         <?php  } ?>
         <br>
         <br>
-         <?php if ($bahasa != '') { ?>
+        <?php if ($bahasa != '') { ?>
           <h6 style="text-align: center;font-weight: bold;background:red; color: #fff;margin-bottom: 5px;border-top-right-radius: 15px;height: 40px;border-bottom-right-radius: 15px;padding-top: 15px"><?php echo strtoupper("B A H A S A"); ?></h6>
-      
+
           <ul style="padding: 25px">
             <?php foreach ($bahasa as $bhs) { ?>
-              <li style="width: 250px;height: 30px;vertical-align: middle;border:1px solid red;text-align: center;margin-bottom: 10px;background: red;color: white;font-weight: bold;border-radius: 15px;"><span style="padding-top: 15px;"> <?= $bhs->bahasa_nama ?> | <?= $bhs->resume_bahasa_level > 0 ? "Aktif":"Pasif"; ?></span></li>
+              <li style="width: 250px;height: 30px;vertical-align: middle;border:1px solid red;text-align: center;margin-bottom: 10px;background: red;color: white;font-weight: bold;border-radius: 15px;"><span style="padding-top: 15px;"> <?= $bhs->bahasa_nama ?> | <?= $bhs->resume_bahasa_level > 0 ? "Aktif" : "Pasif"; ?></span></li>
             <?php }; ?>
           </ul>
         <?php  } ?>
@@ -261,39 +261,52 @@
         <?php if (count($pengalaman) > 0) { ?>
           <h6 style="font-weight: bold;color:red;margin-top:25px; margin-left: 50px;border-bottom: 1px solid red;width: 80%;margin-bottom: 25px">Pengalaman Kerja</h6>
           <div class="pembungkus_pekerjaan" style="margin-left: 10%;border-left: 3px solid red;padding-left: 15px">
-            
+
             <?php
             $i = 0;
             foreach ($pengalaman as $pl) : ?>
               <div class="pembungkusdalam" style="position: relative;">
-              <div class="bulat" style="height: 10px;width: 10px;border-radius: 5px;background: white;border:2px solid red;position: absolute;top:5px;left:-23px">
-                
-              </div>
-              <ul>
-                <li><span><?php if ($pl->masih_bekerja > 0) { echo  tgl_indo($pl->pengalaman_tanggal_awal) . "- Sekarang"; } else { echo  tgl_indo($pl->pengalaman_tanggal_awal) . " - " . tgl_indo($pl->pengalaman_tanggal_akhir);}?></span></li>
-              <li class="event item_list_pengalaman" data-list="<?php echo $i ?>" >
-                <h6 style="margin-buttom: 5px; margin-top: 5px;"><?php echo $pl->jabatan_nama; ?></h6>
-                <h6 style="font-weight: bold; margin-top: 5px;"><?php echo $pl->perusahaan_nama; ?></h6>
-                <?php echo $pl->pengalaman_deskripsi; ?>
-              </li>
-              </ul>
+                <div class="bulat" style="height: 10px;width: 10px;border-radius: 5px;background: white;border:2px solid red;position: absolute;top:5px;left:-23px">
+
+                </div>
+                <ul>
+                  <li><span><?php if ($pl->masih_bekerja > 0) {
+                              echo  tgl_indo($pl->pengalaman_tanggal_awal) . "- Sekarang";
+                            } else {
+                              echo  tgl_indo($pl->pengalaman_tanggal_awal) . " - " . tgl_indo($pl->pengalaman_tanggal_akhir);
+                            } ?></span></li>
+                  <li class="event item_list_pengalaman" data-list="<?php echo $i ?>">
+                    <h6 style="margin-buttom: 5px; margin-top: 5px;"><?php echo $pl->jabatan_nama; ?></h6>
+                    <h6 style="font-weight: bold; margin-top: 5px;"><?php echo $pl->perusahaan_nama; ?></h6>
+                    <?php echo $pl->pengalaman_deskripsi; ?>
+                  </li>
+                </ul>
               </div>
               <br>
-              <?php $i++;
+            <?php $i++;
             endforeach ?>
 
-        <?php } ?>
+          <?php } ?>
           </div>
 
-        <br>
-        <br>
-
+          <br>
+          <br>
+          <?php if (count($porto) > 0) { ?>
+            <h6 style="font-weight: bold;color:red;margin-top:25px; margin-left: 50px;border-bottom: 1px solid red;width: 80%;margin-bottom: 25px">Portopolio</h6>
+            <div class="pembungkus_pekerjaan" style="margin-left: 10%;border-left: 3px solid red;padding-left: 15px">
+              <ul style="padding: 25px">
+                <?php foreach ($porto as $key) { ?>
+                  <li><span style="padding-top: 15px;"> <?= ucwords($key->porto_nama); ?></span></li>
+                <?php }; ?>
+              </ul>
+            </div>
+          <?php }; ?>
       </div>
       <br>
       <br>
 
-    </div>
-  </body>
+      </div>
+    </body>
 
-  </html>
+    </html>
   <?php endforeach ?>
