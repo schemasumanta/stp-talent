@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -59,7 +59,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 // $autoload['libraries'] = array();
-$autoload['libraries'] = array('database', 'email', 'session','upload');
+$autoload['libraries'] = array('database', 'email', 'session', 'upload', 'form_validation');
 
 /*
 | -------------------------------------------------------------------
@@ -91,7 +91,7 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 // $autoload['helper'] = array();
-$autoload['helper'] = array('url', 'file','download','talent');
+$autoload['helper'] = array('url', 'file', 'download', 'talent');
 
 /*
 | -------------------------------------------------------------------
@@ -136,4 +136,4 @@ $autoload['language'] = array();
 */
 
 // load otomatis model-model di aplikasi blt
-$autoload['model'] = array('model_query','model_tabel');
+$autoload['model'] = array('model_query', 'model_tabel');

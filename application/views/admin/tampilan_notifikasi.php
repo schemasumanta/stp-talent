@@ -1,8 +1,8 @@
 <div class="main-panel">
   <div class="content">
 
-    <section class="content-header" >
-      <div class="container-fluid" >
+    <section class="content-header">
+      <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
 
@@ -27,112 +27,112 @@
             <div class="card-header">
 
 
-              <div class="col-sm-12"> 
+              <div class="col-sm-12">
 
-               <!-- Button trigger modal -->
+                <!-- Button trigger modal -->
 
-               <button id="btn_tambah" class="btn btn-success btn-sm btn-md btn  mr-2" ><i class="fa fa-plus mr-2"></i> Notifikasi</button>
-               <button id="export" name="export" class="btn btn-sm refresh btn-warning btn-md"  ><i class="fas fa-sync-alt" style="margin-right: 10px"></i>Refresh Data</button>
-             </div>
-           </div>
-           <div class="card-body">
-            <div class="table-responsive">
-
-              <table  id="tabel_notifikasi"  class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
-                <thead>
-                  <tr class="bg-danger text-light text-center">
-                    <th>No</th>
-                    <th >Judul</th>
-                    <th >Isi</th>
-                    <th >Lampiran</th>
-                    <th style="text-align: center;" width="10%" >Opsi</th>
-                  </tr>
-                </thead>
-                <tbody id="show_data">
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- modal add -->
-          <div class="modal fade" data-backdrop="static" id="modal_notifikasi" tabindex="-1" role="dialog" aria-labelledby="modal_notifikasiLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content" >
-               <form id="form_notifikasi" method="post" enctype="multipart/form-data" action="<?php echo base_url('notifikasi/simpan') ?>">
-                <div class="modal-header bg-danger text-light"> 
-                  <h3 class="modal-title" id="label_header_notifikasi"> <i class="fas fa-bell mr-2"></i> TAMBAH NOTIFIKASI</h3>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                </div>
-                <div class="modal-body">
-
-                 <div class="row "> 
-                  <div class="col-md-12 mb-3"> 
-                   <label style="color:#343a40;" for="notifikasi_judul">Judul</label>
-                   <input type="hidden" name="notifikasi_id" id="notifikasi_id">
-                   <input type="hidden" name="notifikasi_key" id="notifikasi_key">
-
-                   <input type="text" class="form-control" id="notifikasi_judul"  name="notifikasi_judul" required>
-                 </div>  
-                 <div class="col-md-12 mb-3"> 
-                   <label style="color:#343a40;" for="notifikasi_penerima">Penerima</label>
-                   <select  class="form-control" id="notifikasi_penerima"  name="notifikasi_penerima">
-                     <option value="All">Job Seeker dan Job Provider</option>
-                     <option value="Job Seeker">Job Seeker</option>
-                     <option value="Job Provider">Job Provider</option>
-                   </select>
-                 </div>   
-
-                 <div class="col-md-12 mb-3"> 
-                   <label style="color:#343a40;" for="notifikasi_link">Direct URL</label>
-                   <input type="text" class="form-control" id="notifikasi_link"  name="notifikasi_link" required>
-                 </div>
-                 <div class="col-md-12 mb-3"> 
-                   <label style="color:#343a40;" for="notifikasi_isi">Deskripsi</label>
-                   <textarea class="form-control" id="notifikasi_isi"  name="notifikasi_isi" rows="6"></textarea> 
-                 </div> 
-                 <div class="col-md-6 mb-3"> 
-                   <input type="hidden" name="lampiran_notifikasi_lama" id="lampiran_notifikasi_lama">
-                   <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_notifikasi" id="lampiran_notifikasi">
-                 </div>
-               </div>
-             </div>
-             <div class="modal-footer">
-              <div class="form-group row"class="collapse" id="customer_collapse">
-                <div class="col-sm-6">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal"><b>TUTUP</b></button>
-
-                </div>
-
-                <div class="col-sm-6 float-sm-right">
-                  <button type="button" class="btn btn-success" id="btn_simpan"><b>TAMBAH</b></button>
-
-                </div>
-
+                <button id="btn_tambah" class="btn btn-success btn-sm btn-md btn  mr-2"><i class="fa fa-plus mr-2"></i> Notifikasi</button>
+                <button id="export" name="export" class="btn btn-sm refresh btn-warning btn-md"><i class="fas fa-sync-alt" style="margin-right: 10px"></i>Refresh Data</button>
               </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+
+                <table id="tabel_notifikasi" class="table table-striped table-bordered " style="width: 100%; height: 30%; overflow-y: scroll;overflow-x: scroll; font-size: 13px; text-align: left;">
+                  <thead>
+                    <tr class="bg-danger text-light text-center">
+                      <th>No</th>
+                      <th>Judul</th>
+                      <th>Isi</th>
+                      <th>Lampiran</th>
+                      <th style="text-align: center;" width="10%">Opsi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="show_data">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- modal add -->
+            <div class="modal fade" data-backdrop="static" id="modal_notifikasi" tabindex="-1" role="dialog" aria-labelledby="modal_notifikasiLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <form id="form_notifikasi" method="post" enctype="multipart/form-data" action="<?php echo base_url('notifikasi/simpan') ?>">
+                    <div class="modal-header bg-danger text-light">
+                      <h3 class="modal-title" id="label_header_notifikasi"> <i class="fas fa-bell mr-2"></i> TAMBAH NOTIFIKASI</h3>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                    </div>
+                    <div class="modal-body">
+
+                      <div class="row ">
+                        <div class="col-md-12 mb-3">
+                          <label style="color:#343a40;" for="notifikasi_judul">Judul</label>
+                          <input type="hidden" name="notifikasi_id" id="notifikasi_id">
+                          <input type="hidden" name="notifikasi_key" id="notifikasi_key">
+
+                          <input type="text" class="form-control" id="notifikasi_judul" name="notifikasi_judul" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <label style="color:#343a40;" for="notifikasi_penerima">Penerima</label>
+                          <select class="form-control" id="notifikasi_penerima" name="notifikasi_penerima">
+                            <option value="All">Job Seeker dan Job Provider</option>
+                            <option value="Job Seeker">Job Seeker</option>
+                            <option value="Job Provider">Job Provider</option>
+                          </select>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                          <label style="color:#343a40;" for="notifikasi_link">Direct URL</label>
+                          <input type="text" class="form-control" id="notifikasi_link" name="notifikasi_link" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <label style="color:#343a40;" for="notifikasi_isi">Deskripsi</label>
+                          <textarea class="form-control" id="notifikasi_isi" name="notifikasi_isi" rows="6"></textarea>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <input type="hidden" name="lampiran_notifikasi_lama" id="lampiran_notifikasi_lama">
+                          <input type="file" accept="image/x-png,image/gif,image/jpeg" class="form-control" name="lampiran_notifikasi" id="lampiran_notifikasi">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="form-group row" class="collapse" id="customer_collapse">
+                        <div class="col-sm-6">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal"><b>TUTUP</b></button>
+
+                        </div>
+
+                        <div class="col-sm-6 float-sm-right">
+                          <button type="button" class="btn btn-success" id="btn_simpan"><b>TAMBAH</b></button>
+
+                        </div>
+
+                      </div>
 
 
 
+                    </div>
+
+                  </form>
+
+
+
+                </div>
+              </div>
             </div>
 
-          </form>
 
+            <!-- /.card-body -->
+          </div>
 
 
         </div>
+        <!-- /.col -->
       </div>
-    </div> 
-
-
-    <!-- /.card-body -->
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
   </div>
-
-
-</div>
-<!-- /.col -->
-</div>
-<!-- /.row -->
-</section>
-<!-- /.content -->
-</div>
 </div>
 
 <script type="text/javascript">
@@ -140,22 +140,22 @@
   document.getElementById("lampiran_notifikasi").addEventListener("change", function(e) {
     files = e.target.files;
   });
-  $(document).ready(function(){
-    let allRef = firebase.database().ref('Notification/MasterNotification/').orderByChild('notifikasi_order'); 
+  $(document).ready(function() {
+    let allRef = firebase.database().ref('Notification/MasterNotification/').orderByChild('notifikasi_order');
     allRef.on('value', function(snapshot) {
-      let datasrc='';
-      let no=0;
-      if(snapshot.numChildren()> 0){
+      let datasrc = '';
+      let no = 0;
+      if (snapshot.numChildren() > 0) {
         snapshot.forEach((isi) => {
           let key = isi['ref']['path']['pieces_'][1];
           let data = isi.val();
-          datasrc+='<tr><td class="text-center">'+(++no)+'</td><td>'+data.notifikasi_judul+'</td><td>'+data.notifikasi_isi+'</td>'+data.notifikasi_lampiran+'<td></td><td></td></tr>';
+          datasrc += '<tr><td class="text-center">' + (++no) + '</td><td>' + data.notifikasi_judul + '</td><td>' + data.notifikasi_isi + '</td>' + data.notifikasi_lampiran + '<td></td><td></td></tr>';
         });
 
-        
-        
-      }else{
-        datasrc =`<tr><td colspan="5">Data Tidak ditemukan</td></tr>`;
+
+
+      } else {
+        datasrc = `<tr><td colspan="5">Data Tidak ditemukan</td></tr>`;
         $('.badge-counter-user').html('');
 
       }
@@ -163,7 +163,7 @@
       $('#show_data').html(datasrc);
       $('#tabel_notifikasi').dataTable();
 
-    }); 
+    });
 
 
 
@@ -172,12 +172,12 @@
     const notif = $('.flashdatart').data('title');
     if (notif) {
       Swal.fire({
-        title:notif,
-        text:$('.flashdatart').data('text'),
-        icon:$('.flashdatart').data('icon'),
+        title: notif,
+        text: $('.flashdatart').data('text'),
+        icon: $('.flashdatart').data('icon'),
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.close(); 
+          Swal.close();
 
         }
       });
@@ -185,72 +185,72 @@
 
 
 
-//     dataTable = $('#tabel_notifikasi').DataTable( {
-//       paginationType:'full_numbers',
-//       processing: true,
-//       serverSide: true,
-//       searching: true,
-//       filter: false,
-//       autoWidth:false,
-//       aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
-//       ajax: {
-//        url: '<?php echo base_url('notifikasi/tabel_notifikasi')?>',
-//        type: 'get',
-//        data: function (data) {
-//        }
-//      },
-//      language: {
-//        sProcessing: 'Sedang memproses...',
-//        sLengthMenu: 'Tampilkan _MENU_ entri',
-//        sZeroRecords: 'Tidak ditemukan data yang sesuai',
-//        sInfo: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
-//        sInfoEmpty: 'Menampilkan 0 sampai 0 dari 0 entri',
-//        sInfoFiltered: '(disaring dari _MAX_ entri keseluruhan)',
-//        sInfoPostFix: '',
-//        sSearch: 'Cari:',
-//        sUrl: '',
-//        oPaginate: {
-//         sFirst: '<<',
-//         sPrevious: '<',
-//         sNext: '>',
-//         sLast: '>>'
-//       }
-//     },
-//   // order: [1, 'asc'],
-//   columns: [
-//   {'data':'no'},
-//   {'data':'notifikasi_judul'},
-//   {'data':'notifikasi_isi'},
-//   {'data':'notifikasi_lampiran'},
-//   {'data':'opsi',orderable:false},
+    //     dataTable = $('#tabel_notifikasi').DataTable( {
+    //       paginationType:'full_numbers',
+    //       processing: true,
+    //       serverSide: true,
+    //       searching: true,
+    //       filter: false,
+    //       autoWidth:false,
+    //       aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+    //       ajax: {
+    //        url: '<?php echo base_url('notifikasi/tabel_notifikasi') ?>',
+    //        type: 'get',
+    //        data: function (data) {
+    //        }
+    //      },
+    //      language: {
+    //        sProcessing: 'Sedang memproses...',
+    //        sLengthMenu: 'Tampilkan _MENU_ entri',
+    //        sZeroRecords: 'Tidak ditemukan data yang sesuai',
+    //        sInfo: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
+    //        sInfoEmpty: 'Menampilkan 0 sampai 0 dari 0 entri',
+    //        sInfoFiltered: '(disaring dari _MAX_ entri keseluruhan)',
+    //        sInfoPostFix: '',
+    //        sSearch: 'Cari:',
+    //        sUrl: '',
+    //        oPaginate: {
+    //         sFirst: '<<',
+    //         sPrevious: '<',
+    //         sNext: '>',
+    //         sLast: '>>'
+    //       }
+    //     },
+    //   // order: [1, 'asc'],
+    //   columns: [
+    //   {'data':'no'},
+    //   {'data':'notifikasi_judul'},
+    //   {'data':'notifikasi_isi'},
+    //   {'data':'notifikasi_lampiran'},
+    //   {'data':'opsi',orderable:false},
 
-//   ],   
-//   columnDefs: [
-//   {
-//     targets: [0,3,-1],
-//     className: 'text-center'
-//   },
-//   ]
+    //   ],   
+    //   columnDefs: [
+    //   {
+    //     targets: [0,3,-1],
+    //     className: 'text-center'
+    //   },
+    //   ]
 
-// });
-
-
-//     function table_data(){
-//      dataTable.ajax.reload(null,true);
-//    }
+    // });
 
 
-$(".refresh").click(function(){
- location.reload();
-});
+    //     function table_data(){
+    //      dataTable.ajax.reload(null,true);
+    //    }
 
-});
+
+    $(".refresh").click(function() {
+      location.reload();
+    });
+
+  });
 
   function previewFile(id) {
-    let file = $('#'+id)[0].files[0];
+    let file = $('#' + id)[0].files[0];
     let reader = new FileReader();
-    reader.addEventListener("load", function () {
-      $('#preview_'+id).attr('src',reader.result);
+    reader.addEventListener("load", function() {
+      $('#preview_' + id).attr('src', reader.result);
     }, false);
     if (file) {
       reader.readAsDataURL(file);
@@ -273,8 +273,7 @@ $(".refresh").click(function(){
       success: function(url) {
         $('#' + id).summernote("insertImage", url);
       },
-      error: function(id, data) {
-      }
+      error: function(id, data) {}
     });
   }
 
@@ -291,13 +290,13 @@ $(".refresh").click(function(){
   }
 
 
-  $('#btn_tambah').on('click',function(){
+  $('#btn_tambah').on('click', function() {
     $('#modal_notifikasi').modal('show');
-    $('#form_notifikasi').attr('action','<?php echo base_url('notifikasi/simpan') ?>');
+    $('#form_notifikasi').attr('action', '<?php echo base_url('notifikasi/simpan') ?>');
     $('#btn_simpan').html('SIMPAN');
 
     $('#form_notifikasi').trigger("reset");
-    $('#preview_lampiran_notifikasi').attr('src','<?php echo base_url()?>assets/img/img03.jpg');
+    $('#preview_lampiran_notifikasi').attr('src', '<?php echo base_url() ?>assets/img/img03.jpg');
 
     $('#label_header_notifikasi').html('<i class="fas fa-bell mr-2"></i> TAMBAH NOTIFIKASI');
 
@@ -326,16 +325,16 @@ $(".refresh").click(function(){
   }
 
 
-  $('#btn_simpan').on('click',function(e){
+  $('#btn_simpan').on('click', function(e) {
 
     e.preventDefault();
     let notifikasi_judul = $('#notifikasi_judul').val();
-    if (notifikasi_judul=="") {
+    if (notifikasi_judul == "") {
       $('#notifikasi_judul').focus();
       Swal.fire({
-        title:'Judul Kosong',
-        text:'Silahkan Masukkan Judul!',
-        icon:'error'
+        title: 'Judul Kosong',
+        text: 'Silahkan Masukkan Judul!',
+        icon: 'error'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.close();
@@ -344,15 +343,15 @@ $(".refresh").click(function(){
       return false;
     }
 
-    $('#btn_simpan').attr('disabled','disabled');
+    $('#btn_simpan').attr('disabled', 'disabled');
     $('#btn_simpan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif">');
-    let notifikasi_lampiran ='';
+    let notifikasi_lampiran = '';
 
-    let cek =0;
-    let newpost ='';
-    if (files.length  >  0) {
+    let cek = 0;
+    let newpost = '';
+    if (files.length > 0) {
       for (let i = 0; i < files.length; i++) {
-        cek+=1;
+        cek += 1;
 
         let storage = firebase.storage().ref('talent_hub/notifikasi/' + files[i].name);
         let upload = storage.put(files[i]);
@@ -365,133 +364,145 @@ $(".refresh").click(function(){
           },
           function complete() {
             storage
-            .getDownloadURL()
-            .then(function(url) {
-              notifikasi_lampiran = url;
+              .getDownloadURL()
+              .then(function(url) {
+                notifikasi_lampiran = url;
 
-              let post = {  
-                notifikasi_judul    : $('#notifikasi_judul').val(),  
-                notifikasi_isi      : $('#notifikasi_isi').val(),  
-                notifikasi_penerima : $('#notifikasi_penerima').val(),  
-                notifikasi_link     : $('#notifikasi_link').val(),  
-                notifikasi_lampiran : url,  
-                notifikasi_order    : $.now(),  
-                notifikasi_tanggal  : '<?php echo date('Y-m-d H:i:s') ?>',  
-                notifikasi_pengirim : '<?php echo $this->session->user_id ?>',
-              };
+                let post = {
+                  notifikasi_judul: $('#notifikasi_judul').val(),
+                  notifikasi_isi: $('#notifikasi_isi').val(),
+                  notifikasi_penerima: $('#notifikasi_penerima').val(),
+                  notifikasi_link: $('#notifikasi_link').val(),
+                  notifikasi_lampiran: url,
+                  notifikasi_order: $.now(),
+                  notifikasi_tanggal: '<?php echo date('Y-m-d H:i:s') ?>',
+                  notifikasi_pengirim: '<?php echo $this->session->user_id ?>',
+                };
 
-              newpost = firebase.database().ref('Notification/').child('MasterNotification').push().key;
-              $('#notifikasi_key').val(newpost);
-              let update = {};
-              update['/Notification/MasterNotification/'+newpost+'/'] = post;
-              firebase.database().ref().update(update, (error) => {
-                if (error) {
-                  console.log('Data could not be saved.' + error);
-                } 
-                else {
-                }
+                newpost = firebase.database().ref('Notification/').child('MasterNotification').push().key;
+                $('#notifikasi_key').val(newpost);
+                let update = {};
+                update['/Notification/MasterNotification/' + newpost + '/'] = post;
+                firebase.database().ref().update(update, (error) => {
+                  if (error) {
+                    console.log('Data could not be saved.' + error);
+                  } else {}
+                });
+              })
+
+              .catch(function(error) {
+                console.log("error encountered");
               });
-            })
-            
-            .catch(function(error) {
-              console.log("error encountered");
-            });
           },
-          );
+        );
       }
-    }
+    } else {
 
-    else{
-
-      let post = {  
-        notifikasi_judul    : $('#notifikasi_judul').val(),  
-        notifikasi_isi      : $('#notifikasi_isi').val(),  
-        notifikasi_penerima : $('#notifikasi_penerima').val(),  
-        notifikasi_link     : $('#notifikasi_link').val(),  
-        notifikasi_lampiran : notifikasi_lampiran,  
-        notifikasi_order    : $.now(),  
-        notifikasi_tanggal  : '<?php echo date('Y-m-d H:i:s'); ?>',  
-        notifikasi_pengirim : '<?php echo $this->session->user_id ?>',
+      let post = {
+        notifikasi_judul: $('#notifikasi_judul').val(),
+        notifikasi_isi: $('#notifikasi_isi').val(),
+        notifikasi_penerima: $('#notifikasi_penerima').val(),
+        notifikasi_link: $('#notifikasi_link').val(),
+        notifikasi_lampiran: notifikasi_lampiran,
+        notifikasi_order: $.now(),
+        notifikasi_tanggal: '<?php echo date('Y-m-d H:i:s'); ?>',
+        notifikasi_pengirim: '<?php echo $this->session->user_id ?>',
       };
 
       newpost = firebase.database().ref('/Notification/').child('MasterNotification').push().key;
       $('#notifikasi_key').val(newpost);
-      cek+=1;
+      cek += 1;
 
       let update = {};
-      update['/Notification/MasterNotification/'+newpost+'/'] = post;
+      update['/Notification/MasterNotification/' + newpost + '/'] = post;
 
       firebase.database().ref().update(update, (error) => {
-       if (error) {
-        Swal.fire({
-          title:'Error',
-          text:'Notifikasi Gagal Dikirim!',
-          icon:'error'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.close();
-            return false;
-          }
-        });
-      } else {
+        if (error) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Notifikasi Gagal Dikirim!',
+            icon: 'error'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.close();
+              return false;
+            }
+          });
+        } else {
 
-      }
-    });
+        }
+      });
 
     }
     if (cek > 0) {
       let penerima = $('#notifikasi_penerima').val();
 
       $.ajax({
-        type : "GET",
-        url  : "<?php echo base_url('user/get_user')?>",
-        dataType : "JSON",
-        data : {'penerima':penerima},
-        success: function(data){
+        type: "GET",
+        url: "<?php echo base_url('user/get_user') ?>",
+        dataType: "JSON",
+        data: {
+          'penerima': penerima
+        },
+        success: function(data) {
           if (data.length > 0) {
             let cek_send = 1;
             for (var i = 0; i < data.length; i++) {
-              let post = {  
-                notifikasi_judul          : $('#notifikasi_judul').val(),  
-                notifikasi_isi            : $('#notifikasi_isi').val(),
-                notifikasi_key            : newpost,  
-                notifikasi_penerima       : data[i].user_id,  
-                notifikasi_link           : $('#notifikasi_link').val(),  
-                notifikasi_lampiran       : notifikasi_lampiran,  
-                notifikasi_order          : $.now(),  
-                notifikasi_read_status    : 0,  
-                notifikasi_tanggal        : '<?php echo date('Y-m-d H:i:s'); ?>',  
-                notifikasi_pengirim       : '<?php echo $this->session->user_id ?>',
+              let post = {
+                notifikasi_judul: $('#notifikasi_judul').val(),
+                notifikasi_isi: $('#notifikasi_isi').val(),
+                notifikasi_key: newpost,
+                notifikasi_penerima: data[i].user_id,
+                notifikasi_link: $('#notifikasi_link').val(),
+                notifikasi_lampiran: notifikasi_lampiran,
+                notifikasi_order: $.now(),
+                notifikasi_read_status: 0,
+                notifikasi_tanggal: '<?php echo date('Y-m-d H:i:s'); ?>',
+                notifikasi_pengirim: '<?php echo $this->session->user_id ?>',
               };
 
               let newnotif = firebase.database().ref().child('/UserNotification/').push().key;
               let update = {};
-              update['/UserNotification/'+newnotif+'/'] = post;
+              update['/UserNotification/' + newnotif + '/'] = post;
               firebase.database().ref().update(update, (error) => {
-               if (error) {
-              } else {
-                cek_send+=1;
-              }
-            });
+                if (error) {} else {
+                  cek_send += 1;
+                }
+              });
             }
 
             if (cek_send > 0) {
-             Swal.fire({
-              title:'Berhasil',
-              text:'Notifikasi Berhasil Dikirim!',
-              icon:'success'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                Swal.close();
-                location.reload();
-              }
-            });
+              Swal.fire({
+                title: 'Berhasil',
+                text: 'Notifikasi Berhasil Dikirim!',
+                icon: 'success'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.close();
+                  location.reload();
+                }
+              });
 
-          }else{
+            } else {
+              Swal.fire({
+                title: 'Error',
+                text: 'Notifikasi Gagal Dikirim!',
+                icon: 'error'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.close();
+                  location.reload();
+                }
+              });
+            }
+
+
+
+          } else {
             Swal.fire({
-              title:'Error',
-              text:'Notifikasi Gagal Dikirim!',
-              icon:'error'
+              title: 'Error',
+              text: 'Notifikasi Gagal Dikirim!',
+              icon: 'error'
             }).then((result) => {
               if (result.isConfirmed) {
                 Swal.close();
@@ -499,30 +510,15 @@ $(".refresh").click(function(){
               }
             });
           }
+        }
+      });
 
-
-
-        }else{
-         Swal.fire({
-          title:'Error',
-          text:'Notifikasi Gagal Dikirim!',
-          icon:'error'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.close();
-            location.reload();
-          }
-        });
-      }
-    }
-  });
-
-    }else{
+    } else {
 
       Swal.fire({
-        title:'Error',
-        text:'Notifikasi Gagal Dikirim!',
-        icon:'error'
+        title: 'Error',
+        text: 'Notifikasi Gagal Dikirim!',
+        icon: 'error'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.close();
@@ -532,21 +528,7 @@ $(".refresh").click(function(){
     }
 
   });
-
-
 </script>
-<div class="col-sm-6 d-none"> 
-  <?php  $this->load->view('templates/header'); ?>
+<div class="col-sm-6 d-none">
+  <?php $this->load->view('templates/header'); ?>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-

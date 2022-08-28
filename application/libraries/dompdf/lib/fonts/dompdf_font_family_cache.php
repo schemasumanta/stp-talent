@@ -89,10 +89,7 @@
   'themify' => array(
     'normal' => $fontDir . '\007315f07d0ddafe02cf5d92ca9cdb5b',
   ),
-  'font awesome\\ 5 brands' => array(
-    'normal' => $fontDir . '\d88e190e0ca704656d9e325c89c8f0f9',
-  ),
-  'font awesome\\ 5 free' => array(
-    'normal' => $fontDir . '\82fa7647dd56be4eb197cabbdd57cfe3',
+  'summernote' => array(
+    'normal' => $fontDir . '\753d0c2cf5939cd20e699c2bff28492a',
   ),
 ) ?>

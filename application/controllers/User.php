@@ -16,6 +16,7 @@ class User extends CI_Controller
 			redirect('landing', 'refresh');
 		}
 		date_default_timezone_set('Asia/Jakarta');
+		$this->load->model('Model_laporan_user', 'lap_user');
 	}
 
 	public function detail_user()
@@ -319,17 +320,17 @@ class User extends CI_Controller
 	public function simpan()
 	{
 
-		try {
-			$storage = new StorageClient([
-				'projectId' => 'etraining-solo',
-				'keyFilePath' => 'assets/json/solo-digital-tech-9a8c6ffab50b.json',
-			]);
-			$bucketName = 'artisansweb-bucket';
-			$bucket = $storage->defaultBucket();
-			echo "Your Bucket $bucket .";
-		} catch (Exception $e) {
-			echo $e->getMessage();
-		}
+		// try {
+		// 	$storage = new StorageClient([
+		// 		'projectId' => 'etraining-solo',
+		// 		'keyFilePath' => 'assets/json/solo-digital-tech-9a8c6ffab50b.json',
+		// 	]);
+		// 	$bucketName = 'artisansweb-bucket';
+		// 	$bucket = $storage->defaultBucket();
+		// 	echo "Your Bucket $bucket .";
+		// } catch (Exception $e) {
+		// 	echo $e->getMessage();
+		// }
 
 
 		// if($_FILES['lampiran_user']['name'] != '')
@@ -874,5 +875,130 @@ class User extends CI_Controller
 		$data['password'] = "Dirahasiakan";
 		$content = $this->load->view('provider/body_email_approve', $data, true);
 		return $content;
+	}
+
+	public function laporan_user()
+	{
+		$this->load->view('admin/header');
+		$this->load->view('admin/sidebar');
+		$this->load->view('admin/tampilan_laporan_user');
+		$this->load->view('admin/footer');
+	}
+
+	public function tabel_laporan_user()
+	{
+		$list = $this->lap_user->get_datatables();
+		$data = array();
+		$no = $_POST['start'];
+		foreach ($list as $person) {
+			$no++;
+			if ($person->user_level == 1) {
+				$sebagai = "Admin";
+			} elseif ($person->user_level == 2) {
+				$sebagai = "Seeker";
+			} elseif ($person->user_level == 3) {
+				$sebagai = "Provider";
+			};
+
+			$row = array();
+			$row[] = $no;
+			$row[] = date("d-M-Y H:i:s", strtotime($person->user_created_date));
+			$row[] = $person->user_nama;
+			$row[] = $person->user_email;
+			$row[] = $person->user_telepon;
+			$row[] = $sebagai;
+
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->lap_user->count_all(),
+			"recordsFiltered" => $this->lap_user->count_filtered(),
+			"data" => $data,
+		);
+		//output to json format
+		echo json_encode($output);
+	}
+
+	public function laporan_user_print()
+	{
+
+		$dari_tgl = $this->input->post('dari_tgl');
+		$sampai_tgl = $this->input->post('sampai_tgl');
+		$sebagai = $this->input->post('sebagai');
+
+		$array = array(
+			'dari_tgl_user' => $dari_tgl,
+			'sampai_tgl_user' => $sampai_tgl,
+			'sebagai_user' => $sebagai,
+		);
+
+		$this->session->set_userdata($array);
+
+
+		$this->form_validation->set_rules(
+			'dari_tgl',
+			'Dari_tgl',
+			'required|callback_daritgl',
+			array('required' => 'Dari tanggal wajib di isi!')
+		);
+		$this->form_validation->set_rules(
+			'sampai_tgl',
+			'Sampai_tgl',
+			'required',
+			array('required' => 'Sampai tanggal wajib di isi!')
+		);
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->index();
+		} else {
+			$data['profile_apk']     = $this->db->get('tbl_master_stp')->row();
+			$data['dari_tgl']        = $dari_tgl;
+			$data['sampai_tgl']      = $sampai_tgl;
+
+			if ($sebagai == "all") {
+				$data['laporan'] = $this->db->query("SELECT tbl_master_user.*,tbl_perusahaan.perusahaan_nama,tbl_resume.resume_nama_lengkap FROM tbl_master_user LEFT JOIN tbl_perusahaan ON tbl_master_user.perusahaan_id = tbl_perusahaan.perusahaan_id LEFT JOIN tbl_resume ON tbl_resume.user_id = tbl_master_user.user_id WHERE user_created_date BETWEEN '$dari_tgl' AND '$sampai_tgl' AND user_status != 0 ORDER BY user_created_date ASC")->result();
+			} else {
+				$data['laporan'] = $this->db->query("SELECT tbl_master_user.*,tbl_perusahaan.perusahaan_nama,tbl_resume.resume_nama_lengkap FROM tbl_master_user LEFT JOIN tbl_perusahaan ON tbl_master_user.perusahaan_id = tbl_perusahaan.perusahaan_id LEFT JOIN tbl_resume ON tbl_resume.user_id = tbl_master_user.user_id WHERE user_created_date BETWEEN '$dari_tgl' AND '$sampai_tgl' AND user_level = '$sebagai' AND user_status != 0 ORDER BY user_created_date ASC")->result();
+			}
+			$this->load->view('admin/tampilan_laporan_user_pdf', $data);
+		}
+	}
+
+	public function daritgl()
+	{
+		$dari_tgl = $this->input->post('dari_tgl');
+		$sampai_tgl = $this->input->post('sampai_tgl');
+
+		if ($dari_tgl > $sampai_tgl) {
+			$this->form_validation->set_message('daritgl', 'Tanggal ini harus sebelum tanggal selanjutnya');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
+	public function laporan_excel_user()
+	{
+		// Skrip berikut ini adalah skrip yang bertugas untuk meng-export data tadi ke excel
+		header("Content-type: application/vnd-ms-excel");
+		header("Content-Disposition: attachment; filename=Laporan_data_user_TalentHub.xls");
+
+		$dari_tgl        = $this->session->userdata('dari_tgl_user');
+		$sampai_tgl      = $this->session->userdata('sampai_tgl_user');
+		$sebagai 		 = $this->session->userdata('sebagai_user');
+
+		$data['profile_apk']     = $this->db->get('tbl_master_stp')->row();
+		$data['dari_tgl']        = $dari_tgl;
+		$data['sampai_tgl']      = $sampai_tgl;
+
+		if ($sebagai == "all") {
+			$data['laporan'] = $this->db->query("SELECT tbl_master_user.*,tbl_perusahaan.perusahaan_nama,tbl_resume.resume_nama_lengkap FROM tbl_master_user LEFT JOIN tbl_perusahaan ON tbl_master_user.perusahaan_id = tbl_perusahaan.perusahaan_id LEFT JOIN tbl_resume ON tbl_resume.user_id = tbl_master_user.user_id WHERE user_created_date BETWEEN '$dari_tgl' AND '$sampai_tgl' AND user_status != 0 ORDER BY user_created_date ASC")->result();
+		} else {
+			$data['laporan'] = $this->db->query("SELECT tbl_master_user.*,tbl_perusahaan.perusahaan_nama,tbl_resume.resume_nama_lengkap FROM tbl_master_user LEFT JOIN tbl_perusahaan ON tbl_master_user.perusahaan_id = tbl_perusahaan.perusahaan_id LEFT JOIN tbl_resume ON tbl_resume.user_id = tbl_master_user.user_id WHERE user_created_date BETWEEN '$dari_tgl' AND '$sampai_tgl' AND user_level = '$sebagai' AND user_status != 0 ORDER BY user_created_date ASC")->result();
+		}
+
+		$this->load->view('admin/excel_data_user', $data);
 	}
 }
