@@ -66,6 +66,17 @@
             border-color: red;
             /*set the color you want here*/
         }
+
+        @media screen and (max-width: 600px) {
+            #menuatas {
+                visibility: hidden;
+                clear: both;
+                float: left;
+                margin: 10px auto 5px 20px;
+                width: 28%;
+                display: none;
+            }
+        }
     </style>
 
     <script type="text/javascript">
@@ -144,9 +155,9 @@
             <i class="fa fa-bars"></i>
         </button>
         <a href="<?php echo base_url() ?>">
-            <img src="<?php echo base_url() . $this->session->stp_brand_icon ?>" style="max-height:  40px;margin-left: 5rem"></a>
+            <img src="<?php echo base_url() . $this->session->stp_brand_icon ?>" style="max-height:30px;"></a>
         <!-- Topbar Navbar -->
-        <ul class="navbar-nav ml-md-5 d-flex justify-content-center" style="width: 100%">
+        <ul id="menuatas" class="navbar-nav ml-md-5 justify-content-center" style="width: 100%">
             <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?php echo base_url() ?>">Halaman Awal</a></li>
             <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?php echo base_url('job/job_listing') ?>">Cari Pekerjaan </a></li>
             <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?= base_url(); ?>#about">Tentang</a></li>

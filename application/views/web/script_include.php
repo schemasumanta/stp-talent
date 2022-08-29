@@ -17,8 +17,8 @@
 <style type="text/css">
   .main-chat {
     position: fixed;
-    bottom: -25px;
-    right: 60px;
+    bottom: 50px;
+    right: 10px;
     margin-bottom: 30px;
     margin-right: 30px;
     cursor: pointer;
@@ -54,7 +54,7 @@
 <script src="<?php echo base_url() ?>assets/js/jquery.magnific-popup.js"></script>
 
 <!-- Scrollup, nice-select, sticky -->
-<script src="<?php echo base_url() ?>assets/js/jquery.scrollUp.min.js"></script>
+<!-- <script src="<?php echo base_url() ?>assets/js/jquery.scrollUp.min.js"></script> -->
 <script src="<?php echo base_url() ?>assets/js/jquery.nice-select.min.js"></script>
 
 <script type="text/javascript">

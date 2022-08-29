@@ -115,12 +115,12 @@
                       </ul>
                     </nav>
                   </div>
-                  <div class="header-btn d-none f-right d-lg-block">
-                    <?php if ($this->session->login == FALSE) : ?>
+                  <div class="header-btn d-none d-lg-block">
+                    <?php if ($this->session->login == FALSE) { ?>
                       <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1">Login</a>
                       <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Register</a>
-                    <?php else : ?>
-                      <?php if ($this->session->user_level == 1) : ?>
+                    <?php } else { ?>
+                      <?php if ($this->session->user_level == 1) { ?>
                         <div class="row">
                           <div class="col-12">
                             <li class="nav-item dropdown no-arrow">
@@ -132,9 +132,9 @@
                           </div>
                         </div>
 
-                      <?php endif ?>
+                      <?php }; ?>
 
-                      <?php if ($this->session->user_level == 2) : ?>
+                      <?php if ($this->session->user_level == 2) { ?>
                         <div class="nav">
                           <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -155,8 +155,9 @@
                           </li>
 
                         </div>
-                      <?php endif ?>
-                      <?php if ($this->session->user_level == 3) : ?>
+                      <?php }; ?>
+
+                      <?php if ($this->session->user_level == 3) { ?>
                         <div class="nav">
                           <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -168,10 +169,6 @@
                                 <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
                                 My Dashboard
                               </a>
-                              <!--  <a class="dropdown-item item_ubah_perusahaan" href="#">
-                    <i class="fas fa-building fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Ubah Profile Perusahaan
-                  </a> -->
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -183,18 +180,44 @@
                         </div>
 
 
-                      <?php endif ?>
-
-                    <?php endif ?>
-
+                      <?php }; ?>
+                    <?php }; ?>
 
                   </div>
                 </div>
               </div>
               <!-- Mobile Menu -->
-              <div class="col-12">
-                <div class="mobile_menu d-block d-lg-none"></div>
-              </div>
+              <!-- Bottom Navbar -->
+              <nav class="navbar navbar-dark bg-danger navbar-expand d-md-none d-lg-none d-xl-none fixed-bottom">
+                <ul class="navbar-nav nav-justified w-100">
+                  <li class="nav-item">
+                    <a href="<?php echo base_url() ?>" class="nav-link"><i class='fas fa-home' style='font-size:24px'></i></a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?php echo base_url('job/job_listing') ?>" class="nav-link"><i class='fas fa-search' style='font-size:24px'></i></a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?= base_url(); ?>#about" class="nav-link"><i class='fas fa-info' style='font-size:24px'></i></a>
+                  </li>
+                  <?php if ($this->session->login == FALSE) { ?>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url('landing/login'); ?>" class="nav-link"><i class='fas fa-sign-in-alt' style='font-size:24px'></i></a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url('landing/register'); ?>" class="nav-link"><i class='fas fa-user-plus' style='font-size:24px'></i></a>
+                    </li>
+                  <?php } else { ?>
+                    <li class="nav-item">
+                      <a href="<?php echo base_url('dashboard') ?>" class="nav-link"><i class='fas fa-id-card' style='font-size:24px'></i></a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="#" data-toggle="modal" data-target="#logoutModal" class="nav-link"><i class='fas fa-sign-out-alt' style='font-size:24px'></i></a>
+                    </li>
+
+                  <?php }; ?>
+                </ul>
+              </nav>
+
             </div>
           </div>
         </div>

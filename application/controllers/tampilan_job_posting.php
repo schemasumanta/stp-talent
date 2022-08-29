@@ -349,7 +349,7 @@
         title: notif,
         text: $('.flashdatart').data('text'),
         icon: $('.flashdatart').data('icon'),
-        footer: '<a href="<?= base_url('provider/premium'); ?>">Upgrade ke Premium</a>'
+        footer: '<a href="#">Upgrade ke Premium</a>'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.close();
