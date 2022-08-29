@@ -21,13 +21,13 @@
 <div class="container-fluid p-5 flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
   <!-- Page Heading -->
   <div class="d-sm-flex mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Job Posting</h1>
+    <h1 class="h3 mb-0 text-gray-800">Lowongan Pekerjaan</h1>
   </div>
   <div class="row">
     <div class="col-sm-12 mb-3">
       <!-- Button trigger modal -->
-      <button id="btn_tambah" class="btn btn-success mr-2"><i class="fa fa-plus mr-2"></i> Posting Job</button>
-      <button id="export" name="export" class="btn btn-danger " onclick="location.reload()"><i class="fas fa-sync-alt mr-2"></i>Refresh Data</button>
+      <button id="btn_tambah" class="btn btn-success mr-2"><i class="fa fa-plus mr-2"></i> Tambah Lowongan</button>
+      <button id="export" name="export" class="btn btn-danger " onclick="location.reload()"><i class="fas fa-sync-alt mr-2"></i>Menyegarkan Tampilan</button>
     </div>
 
 

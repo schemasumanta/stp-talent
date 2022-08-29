@@ -857,7 +857,7 @@ class Provider extends CI_Controller
 			CURLOPT_CUSTOMREQUEST => 'GET',
 			CURLOPT_HTTPHEADER => array(
 				'Client-Id: BRN-0258-1659388313605',
-				'Request-Id: 69591',
+				'Request-Id: 33490',
 				'Request-Timestamp: ' . $dateTimeFinal . '',
 				'Signature: HMACSHA256=YsVBhVjRib1qHdrIukPD5P1Qgmo7oBZkUrU2hHSfP1E='
 			),

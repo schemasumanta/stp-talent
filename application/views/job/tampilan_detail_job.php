@@ -234,7 +234,7 @@
            <div class="modal-body">
              <div class="row ">
                <div class="col-md-12">
-                 <label style="color:#343a40;" for="lamaran_deskripsi">Tentang Anda</label>
+                 <label style="color:#343a40;" for="lamaran_deskripsi">Tentang Anda <?= $ip; ?></label>
                  <input type="hidden" name="lowongan_id" id="lowongan_id">
                  <textarea type="text" class="form-control" id="lamaran_deskripsi" name="lamaran_deskripsi" rows="5" placeholder="Berikan informasi terkait keahlian anda untuk pekerjaan ini"></textarea>
                  <small class="error-lamaran_deskripsi text-danger"></small>

@@ -60,7 +60,7 @@
 </style>
 <div class="container-fluid flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
     <div class="mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Upgrade ke Premium</h1>
+        <h1 class="h3 mb-0 text-gray-800">Tingkatkan akun ke Premium</h1>
     </div>
     <section class="pricing py-5">
         <div class="container">

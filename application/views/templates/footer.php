@@ -190,39 +190,39 @@
 		return text;
 	}
 
-	
-
-	$(document).ready(function(){
 
 
+	$(document).ready(function() {
 
-		let notifRef = firebase.database().ref('/UserNotification/').orderByChild('notifikasi_penerima').equalTo('<?php echo $this->session->user_id; ?>'); 
 
-		notifRef.on('value', function(snapshot) { 
+
+		let notifRef = firebase.database().ref('/UserNotification/').orderByChild('notifikasi_penerima').equalTo('<?php echo $this->session->user_id; ?>');
+
+		notifRef.on('value', function(snapshot) {
 
 			let judul_notif = `<h6 class="dropdown-header" style="background-color: #dd2727;border-color:#dd2727">
 			Notification
 			</h6>`;
-			let isi_notif ='';
-			let show_notif ;
-			let counter =0;
-			if(snapshot.numChildren()> 0){
-				show_notif =`<a class="dropdown-item text-center small text-gray-500" href="<?php echo base_url('notifikasi') ?>">Show All Notifications</a>`;
+			let isi_notif = '';
+			let show_notif;
+			let counter = 0;
+			if (snapshot.numChildren() > 0) {
+				show_notif = `<a class="dropdown-item text-center small text-gray-500" href="<?php echo base_url('notifikasi') ?>">Show All Notifications</a>`;
 				let level = '<?php echo $this->session->user_level ?>';
 
 				snapshot.forEach((isi) => {
 					let key = isi['ref']['path']['pieces_'][1];
-					let data = isi.val();  
-					if (data.notifikasi_read_status==0) {
+					let data = isi.val();
+					if (data.notifikasi_read_status == 0) {
 						counter++;
-						isi_notif+=`
-						<a class="dropdown-item item_notifikasi" href="javaScript:;" data-link="`+data.notifikasi_link+`" data-key="`+key+`">
+						isi_notif += `
+						<a class="dropdown-item item_notifikasi" href="javaScript:;" data-link="` + data.notifikasi_link + `" data-key="` + key + `">
 						<div clas="col-md-12 mb-1">
-						<b>`+data.notifikasi_judul+`</b>
+						<b>` + data.notifikasi_judul + `</b>
 						</div>
 						<div clas="col-md-12">
-						<div class="small text-gray-500 mb-2">`+data.notifikasi_tanggal+`</div>
-						`+data.notifikasi_isi+`
+						<div class="small text-gray-500 mb-2">` + data.notifikasi_tanggal + `</div>
+						` + data.notifikasi_isi + `
 						</div>
 						</a>`;
 					}
@@ -230,31 +230,31 @@
 				});
 
 				$('.badge-counter-user').html(counter);
-				
-			}else{
-				show_notif =`<a class="dropdown-item text-center small text-danger-500" href="#">Nothing Notifications</a>`;
+
+			} else {
+				show_notif = `<a class="dropdown-item text-center small text-danger-500" href="#">Nothing Notifications</a>`;
 				$('.badge-counter-user').html('');
 
 			}
 
-			let notifikasi =judul_notif+isi_notif+show_notif;
+			let notifikasi = judul_notif + isi_notif + show_notif;
 			$('#list_notifikasi_user').html(notifikasi);
 
 
-		}); 
+		});
 
-		
-		$(document).on('click','.item_notifikasi',function(){
+
+		$(document).on('click', '.item_notifikasi', function() {
 			let link = $(this).data('link');
-			let key =   $(this).data('key');
-			firebase.database().ref('/UserNotification/'+key+'/notifikasi_read_status/').set('1',(error)=> {
+			let key = $(this).data('key');
+			firebase.database().ref('/UserNotification/' + key + '/notifikasi_read_status/').set('1', (error) => {
 				if (error) {
 					return false;
 				} else {
-					if (link!='') {
-						window.location.href=link;
-					}else{
-						window.location.href='<?php echo  base_url(); ?>';
+					if (link != '') {
+						window.location.href = link;
+					} else {
+						window.location.href = '<?php echo  base_url(); ?>';
 
 					}
 				}
@@ -264,8 +264,6 @@
 		});
 
 	});
-
-
 </script>
 
 </body>

@@ -951,7 +951,7 @@ class User extends CI_Controller
 		);
 
 		if ($this->form_validation->run() == FALSE) {
-			$this->index();
+			$this->laporan_user();
 		} else {
 			$data['profile_apk']     = $this->db->get('tbl_master_stp')->row();
 			$data['dari_tgl']        = $dari_tgl;

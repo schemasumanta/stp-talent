@@ -6,38 +6,39 @@
     opacity: 0 !important;
     padding: 0 !important;
     width: 100% !important;
-    max-height: 350px  !important;
+    max-height: 350px !important;
   }
 
   #lampiran_logo {
     opacity: 0 !important;
     padding: 0 !important;
     width: 100% !important;
-    max-height: 350px  !important;
+    max-height: 350px !important;
   }
 
   #preview_lampiran_sampul {
     width: 100% !important;
-    max-height: 350px  !important;
+    max-height: 350px !important;
   }
+
   #preview_lampiran_logo {
     width: 100% !important;
     /*max-height: 350px  !important;*/
   }
+
   #preview_sampul_perusahaan {
     width: 100% !important;
-    max-height: 400px  !important;
+    max-height: 400px !important;
   }
 
-  .imagecheck{
+  .imagecheck {
     width: 100% !important;
   }
 
-  #foto_sampul
-  {
+  #foto_sampul {
 
     width: 100% !important;
-    max-height: 350px  !important;
+    max-height: 350px !important;
   }
 
   .timeline {
@@ -175,10 +176,10 @@ $bulan = array(
 );
 ?>
 
-<?php foreach ($perusahaan as $pr): ?>
+<?php foreach ($perusahaan as $pr) : ?>
 
   <div class="container-fluid  flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
-    <h1 class="h3 mb-4 text-gray-800">Company Profile</h1>
+    <h1 class="h3 mb-4 text-gray-800">Profile Perusahaan</h1>
     <div class="row">
       <!-- Earnings (Monthly) Card Example -->
       <div class="col-md-12 col-md-12 mb-4">
@@ -187,72 +188,75 @@ $bulan = array(
             <div class="row">
               <div class="col-md-12 col-md-12">
                 <div class="row p-3">
-                  <?php if ($pr->perusahaan_sampul!='') { ?>
+                  <?php if ($pr->perusahaan_sampul != '') { ?>
 
                     <div class="col-md-12 col-md-12 " style="position: relative;overflow:hidden;">
-                    <?php  }else{ ?>
-                     <div class="col-md-12 col-md-12" style="position: relative;overflow:hidden;background: #dddddd">
-                     <?php  } ?>
+                    <?php  } else { ?>
+                      <div class="col-md-12 col-md-12" style="position: relative;overflow:hidden;background: #dddddd">
+                      <?php  } ?>
 
-                     <?php if ($pr->perusahaan_sampul!='') { ?>
-                      <img src="<?php echo $pr->perusahaan_sampul; ?>" class="imagecheck-image" id="preview_sampul_perusahaan">
-                    <?php  }else{ ?>
-                     <center>
-                       <img src="<?php echo base_url('assets/img/noimagesampul.jpg'); ?>" class="imagecheck-image" style="width: auto!important;height: 350px;" id="preview_sampul_perusahaan">
-                     </center>
-                   <?php  } ?>
-
-
-                   <a href="javascript:void(0)" class="btn btn-sm btn-danger item_edit_sampul" style="position: absolute;bottom:11rem;right: 2rem" data-sampul="<?php echo $pr->perusahaan_sampul ?>"><i class="fas fa-edit mr-2"></i>Edit</a>
-
-                   <div class="shadow rounded" style="position: relative;left: 5rem;top:-5rem;width: 10rem;height: 10rem;background: white;text-align: center;padding: 0.5rem">
-                    <?php if ($pr->perusahaan_logo!=''): ?>
-                      <img src="<?php echo $pr->perusahaan_logo?>" style="width: 100%!important;height: auto;z-index: 999;margin-top: 2rem;">
-                      <?php else: ?>
-                        <img src="<?php echo base_url('assets/img/user.png'); ?>"  style="width: auto!important;height: auto;z-index: 999;margin-top: 2rem;">
+                      <?php if ($pr->perusahaan_sampul != '') { ?>
+                        <img src="<?php echo $pr->perusahaan_sampul; ?>" class="imagecheck-image" id="preview_sampul_perusahaan">
+                      <?php  } else { ?>
+                        <center>
+                          <img src="<?php echo base_url('assets/img/noimagesampul.jpg'); ?>" class="imagecheck-image" style="width: auto!important;height: 350px;" id="preview_sampul_perusahaan">
+                        </center>
+                      <?php  } ?>
 
 
-                      <?php endif; ?>
+                      <a href="javascript:void(0)" class="btn btn-sm btn-danger item_edit_sampul" style="position: absolute;bottom:11rem;right: 2rem" data-sampul="<?php echo $pr->perusahaan_sampul ?>"><i class="fas fa-edit mr-2"></i>Edit</a>
 
-                      <a href="javascript:void(0)" class="text-danger btn-outline-light btn item_edit_logo btn-block" style="position: absolute;bottom:0rem;left: 0rem;" data-logo="<?php echo $pr->perusahaan_logo ?>"><i class="fas fa-edit mr-2"></i>Edit</a>
+                      <div class="shadow rounded" style="position: relative;left: 5rem;top:-5rem;width: 10rem;height: 10rem;background: white;text-align: center;padding: 0.5rem">
+                        <?php if ($pr->perusahaan_logo != '') : ?>
+                          <img src="<?php echo $pr->perusahaan_logo ?>" style="width: 100%!important;height: auto;z-index: 999;margin-top: 2rem;">
+                        <?php else : ?>
+                          <img src="<?php echo base_url('assets/img/user.png'); ?>" style="width: auto!important;height: auto;z-index: 999;margin-top: 2rem;">
+
+
+                        <?php endif; ?>
+
+                        <a href="javascript:void(0)" class="text-danger btn-outline-light btn item_edit_logo btn-block" style="position: absolute;bottom:0rem;left: 0rem;" data-logo="<?php echo $pr->perusahaan_logo ?>"><i class="fas fa-edit mr-2"></i>Edit</a>
+                      </div>
+                      </div>
+                      <div class="col-md-12 col-xl-12 p-0 mt-5">
+                        <a href="javascript:;" class="text-danger btn-sm btn btn-outline-light item_edit_perusahaan" style="position: absolute;right: 5px;top:-15px;border-radius: 0px"><i class="fas fa-edit mr-2"></i>Edit</a>
+                        <hr>
+                        <div class="row">
+                          <div class="col-md-8 col-xl-8 p-5">
+                            <h4 style="font-weight: bolder;">Tentang Perusahaan</h4>
+                            <p style="text-align: justify;"><?php echo $pr->perusahaan_sambutan; ?></p>
+                          </div>
+                          <div class="col-md-4 col-xl-4 p-5">
+                            <h4 style="font-weight: bolder;"><?php echo $pr->perusahaan_nama; ?></h4>
+                            <br>
+                            <?php if ($pr->perusahaan_alamat != '') { ?>
+                              <p style="text-align: justify;"><i class="fas fa-building mr-3"></i><?php echo $pr->perusahaan_alamat; ?></p>
+                            <?php  } ?>
+
+                            <?php if ($pr->perusahaan_prov != 0) { ?>
+                              <p><i class="fas fa-map-marker-alt mr-3"></i><?php echo $pr->kabkota_nama . " - " . $pr->prov_nama; ?></p>
+                            <?php  } ?>
+
+                            <?php if ($pr->perusahaan_email != '') { ?>
+                              <p><i class="fas fa-envelope mr-3"></i><?php echo $pr->perusahaan_email; ?></p>
+                            <?php  } ?>
+                            <?php if ($pr->perusahaan_telepon != '') { ?>
+                              <p><i class="fas fa-phone mr-3"></i><?php echo $pr->perusahaan_telepon; ?></p>
+                            <?php  } ?>
+
+                            <?php if ($pr->perusahaan_website != '') { ?>
+                              <a href="<?php echo $pr->perusahaan_website; ?>" target="_blank" class="btn btn-sm">
+                                <p><i class="fas fa-globe mr-3"></i><?php echo $pr->perusahaan_website; ?></p>
+                              </a>
+                            <?php  } ?>
+                          </div>
+
+                        </div>
+                      </div>
+
                     </div>
-                  </div>
-                  <div class="col-md-12 col-xl-12 p-0 mt-5">
-                     <a href="javascript:;" class="text-danger btn-sm btn btn-outline-light item_edit_perusahaan" style="position: absolute;right: 5px;top:-15px;border-radius: 0px"><i class="fas fa-edit mr-2"></i>Edit</a>
-                     <hr>
-                    <div class="row">
-                      <div class="col-md-8 col-xl-8 p-5">
-                        <h4  style="font-weight: bolder;">About Us</h4>
-                        <p style="text-align: justify;"><?php echo $pr->perusahaan_sambutan; ?></p>
-                      </div> 
-                      <div class="col-md-4 col-xl-4 p-5">
-                        <h4  style="font-weight: bolder;"><?php echo $pr->perusahaan_nama; ?></h4>
-                        <br>
-                        <?php if ($pr->perusahaan_alamat!='') { ?>
-                          <p style="text-align: justify;"><i class="fas fa-building mr-3"></i><?php echo $pr->perusahaan_alamat; ?></p>
-                       <?php  } ?>
-
-                        <?php if ($pr->perusahaan_prov!=0) { ?>
-                          <p><i class="fas fa-map-marker-alt mr-3"></i><?php echo $pr->kabkota_nama." - ".$pr->prov_nama; ?></p>
-                       <?php  } ?>
-
-                       <?php if ($pr->perusahaan_email!='') { ?>
-                          <p><i class="fas fa-envelope mr-3"></i><?php echo $pr->perusahaan_email; ?></p>
-                       <?php  } ?>
-                        <?php if ($pr->perusahaan_telepon!='') { ?>
-                          <p><i class="fas fa-phone mr-3"></i><?php echo $pr->perusahaan_telepon; ?></p>
-                       <?php  } ?>
-
-                        <?php if ($pr->perusahaan_website!='') { ?>
-                          <a href="<?php echo $pr->perusahaan_website; ?>" target="_blank" class="btn btn-sm"><p><i class="fas fa-globe mr-3"></i><?php echo $pr->perusahaan_website; ?></p></a>
-                       <?php  } ?>
-                      </div> 
-
-                    </div>
-                  </div>
 
                 </div>
-
               </div>
             </div>
           </div>
@@ -260,7 +264,6 @@ $bulan = array(
       </div>
     </div>
   </div>
-</div>
 <?php endforeach ?>
 
 <!-- Modal -->
@@ -333,8 +336,8 @@ $bulan = array(
         </div>
         <div class="modal-footer">
           <div class="form-group row" class="collapse" id="customer_collapse">
-              <button type="button" class="btn btn-danger btn-sm mr-2 rounded" data-dismiss="modal">Batal</button>
-              <button type="button" class="btn btn-sm btn-success rounded" id="btn_update_profil_perusahaan">Update</button>
+            <button type="button" class="btn btn-danger btn-sm mr-2 rounded" data-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-sm btn-success rounded" id="btn_update_profil_perusahaan">Update</button>
           </div>
         </div>
       </form>
@@ -368,7 +371,7 @@ $bulan = array(
               <p class="fw-bold">Catatan :</p>
               <li>
                 <small>Format gambar harus .jpg, .jpeg, atau .png</small><br>
-                
+
               </li>
               <li>
                 <small>Dimensi Gambar Proporsional : 1260px x 350px</small><br>
@@ -442,30 +445,30 @@ $bulan = array(
   $(document).ready(function() {
 
     $('#perusahaan_prov_edit').on('change', function() {
-    let prov_id = $(this).val();
-    $.ajax({
-      type: "GET",
-      url: "<?php echo base_url('job/get_kabkota') ?>",
-      dataType: "JSON",
-      data: {
-        'prov_id': prov_id
-      },
-      success: function(data) {
+      let prov_id = $(this).val();
+      $.ajax({
+        type: "GET",
+        url: "<?php echo base_url('job/get_kabkota') ?>",
+        dataType: "JSON",
+        data: {
+          'prov_id': prov_id
+        },
+        success: function(data) {
 
-        let kab = '<option value ="0" selected disabled>Pilih Kabupaten / Kota</option>';
-        for (var i = 0; i < data.length; i++) {
-          kab += '<option value="' + data[i].kabkota_id + '">' + data[i].kabkota_nama + '</option>';
+          let kab = '<option value ="0" selected disabled>Pilih Kabupaten / Kota</option>';
+          for (var i = 0; i < data.length; i++) {
+            kab += '<option value="' + data[i].kabkota_id + '">' + data[i].kabkota_nama + '</option>';
+          }
+          $('#perusahaan_kabkota_edit').html(kab);
+          $('#perusahaan_kabkota_edit').select2({
+            allowClear: true,
+            placeholder: "Pilih Kabupaten / Kota",
+            dropdownParent: $('#modalprofilperusahaan'),
+          });
+
         }
-        $('#perusahaan_kabkota_edit').html(kab);
-        $('#perusahaan_kabkota_edit').select2({
-          allowClear: true,
-          placeholder: "Pilih Kabupaten / Kota",
-          dropdownParent: $('#modalprofilperusahaan'),
-        });
-
-      }
+      });
     });
-  });
 
 
     const notif = $('.flashdatart').data('title');
@@ -509,18 +512,18 @@ $bulan = array(
 
 
 
-  $('.item_edit_sampul').on('click',function(){
+  $('.item_edit_sampul').on('click', function() {
     let sampul = $(this).data('sampul');
     $('#ModalEditSampul').modal('show');
 
-    if (sampul!='') {
-      $('#preview_lampiran_sampul').attr('src',sampul);
+    if (sampul != '') {
+      $('#preview_lampiran_sampul').attr('src', sampul);
       $('#lampiran_sampul_lama').val(sampul);
     }
-    $('#form_sampul').attr('action','<?php echo base_url('provider/ubah_sampul') ?>');
+    $('#form_sampul').attr('action', '<?php echo base_url('provider/ubah_sampul') ?>');
   });
 
-    $(document).on('click', '.item_edit_perusahaan', function() {
+  $(document).on('click', '.item_edit_perusahaan', function() {
     let perusahaan_id = '<?php echo $this->session->perusahaan_id ?>';
     $.ajax({
       type: "GET",
@@ -575,14 +578,14 @@ $bulan = array(
     });
   });
 
-  $('.item_edit_logo').on('click',function(){
+  $('.item_edit_logo').on('click', function() {
     let logo = $(this).data('logo');
     $('#ModalEditLogo').modal('show');
-    if (logo!='') {
-      $('#preview_lampiran_logo').attr('src',logo);
+    if (logo != '') {
+      $('#preview_lampiran_logo').attr('src', logo);
       $('#lampiran_logo_lama').val(logo);
     }
-    $('#form_logo').attr('action','<?php echo base_url('provider/ubah_logo') ?>');
+    $('#form_logo').attr('action', '<?php echo base_url('provider/ubah_logo') ?>');
   });
 
   $('#btn_simpan_sampul').on('click', function() {
@@ -599,7 +602,7 @@ $bulan = array(
         return false;
       }
 
-      
+
       $('#form_sampul').submit();
     } else {
       let sampul = $('#lampiran_sampul_lama').val();
@@ -620,16 +623,16 @@ $bulan = array(
 
           function complete() {
             storage
-            .getDownloadURL()
-            .then(function(url) {
-              $('#lampiran_sampul_lama').val(url);
-              $('#form_sampul').submit();
-            })
-            .catch(function(error) {
-              console.log("error encountered");
-            });
+              .getDownloadURL()
+              .then(function(url) {
+                $('#lampiran_sampul_lama').val(url);
+                $('#form_sampul').submit();
+              })
+              .catch(function(error) {
+                console.log("error encountered");
+              });
           },
-          );
+        );
 
 
       }
@@ -653,7 +656,7 @@ $bulan = array(
         return false;
       }
 
-      
+
       $('#form_logo').submit();
     } else {
       let logo = $('#lampiran_logo_lama').val();
@@ -674,16 +677,16 @@ $bulan = array(
 
           function complete() {
             storage
-            .getDownloadURL()
-            .then(function(url) {
-              $('#lampiran_logo_lama').val(url);
-              $('#form_logo').submit();
-            })
-            .catch(function(error) {
-              console.log("error encountered");
-            });
+              .getDownloadURL()
+              .then(function(url) {
+                $('#lampiran_logo_lama').val(url);
+                $('#form_logo').submit();
+              })
+              .catch(function(error) {
+                console.log("error encountered");
+              });
           },
-          );
+        );
 
 
       }
@@ -693,7 +696,7 @@ $bulan = array(
 
   });
 
-   
+
 
 
 
@@ -754,10 +757,9 @@ $bulan = array(
       return false;
     } else {
 
-        $('#btn_update_profil_perusahaan').attr('disabled', 'disabled');
-        $('#btn_update_profil_perusahaan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif" style="height:25px;width:25px;">');
-        $('#form_perusahaan').submit();
+      $('#btn_update_profil_perusahaan').attr('disabled', 'disabled');
+      $('#btn_update_profil_perusahaan').html('<img src="<?php echo base_url() ?>assets/img/spinner.gif" style="height:25px;width:25px;">');
+      $('#form_perusahaan').submit();
     }
   });
-
 </script>

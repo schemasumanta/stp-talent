@@ -246,6 +246,9 @@ class Job extends CI_Controller
 		$user_id = $this->session->user_id;
 		$data['resume'] = $this->db->get_where('tbl_resume', ['user_id' => $user_id])->row();
 
+		$ip = $this->input->ip_address();
+		$data['ip'] = $ip;
+
 		$this->load->view('web/header', $data);
 
 		$this->load->view('job/tampilan_detail_job', $data);

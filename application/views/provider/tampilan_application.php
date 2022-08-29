@@ -87,44 +87,46 @@
 <div class="container-fluid p-5 flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
     <!-- Page Heading -->
     <div class="d-sm-flex mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Applicants</h1>
+        <h1 class="h3 mb-0 text-gray-800">Pelamar Pekerjaan</h1>
     </div>
     <!-- Set up your HTML -->
-        <?php if (count($lowongan) > 0) { ?>
+    <?php if (count($lowongan) > 0) { ?>
 
-    <div class="card-group">
-           
-        <div class="owl-carousel">
-            <?php
-            foreach ($lowongan as $key) { ?>
+        <div class="card-group">
+
+            <div class="owl-carousel">
+                <?php
+                foreach ($lowongan as $key) { ?>
                     <a href="javascript:;" class="btn btn-sm lowongan_<?php echo $key->lowongan_id; ?>" onclick="cek_lowongan(<?= $key->lowongan_id; ?>)" style="outline: none">
 
-                <div class="card-radious align-items-center d-flex justify-content-center flex-row mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
-                        <div class="card-body">
-                            <h5><?= $key->lowongan_judul; ?></h5>
-                            <label>
-                                <i class="fa fa-map-marker" style="font-size:24px;color:red"></i> <?= $key->kabkota_nama; ?>
-                            </label>
+                        <div class="card-radious align-items-center d-flex justify-content-center flex-row mb-2 mr-2" id="on_klik<?= $key->lowongan_id; ?>">
+                            <div class="card-body">
+                                <h5><?= $key->lowongan_judul; ?></h5>
+                                <label>
+                                    <i class="fa fa-map-marker" style="font-size:24px;color:red"></i> <?= $key->kabkota_nama; ?>
+                                </label>
+                            </div>
                         </div>
-                </div>
                     </a>
 
-            <?php }
-            ?>
+                <?php }
+                ?>
+            </div>
+
+
+
         </div>
-
-     
-
-    </div>
-      <?php  }else{ ?>
+    <?php  } else { ?>
         <div class="col-md-12">
-        <center><img src="<?php echo base_url() ?>assets/img/oops.png" style="width: 50%"></center>
-        <br>
-        <center><h2 style="font-weight: bold;">Oops. . Your Applicants is Empty !!!</h2>
-        <p>Let's create the new vacancies to connect with great people around you.</p></center>
+            <center><img src="<?php echo base_url() ?>assets/img/oops.png" style="width: 50%"></center>
+            <br>
+            <center>
+                <h2 style="font-weight: bold;">Oops. . Your Applicants is Empty !!!</h2>
+                <p>Let's create the new vacancies to connect with great people around you.</p>
+            </center>
 
         </div>
-       <?php } ?>
+    <?php } ?>
     <hr>
     <div class="d-none" id="for_filter">
         <div class="d-flex justify-content-end mr-4 mb-2">
@@ -270,8 +272,8 @@
 
     function cek_lowongan(id) {
         $('#for_filter').removeClass('d-none');
-        $('.card-radious').css('border','0px solid red');
-        $('#on_klik'+id).css('border','1px solid red');
+        $('.card-radious').css('border', '0px solid red');
+        $('#on_klik' + id).css('border', '1px solid red');
         $('#id_lowongan').val(id);
         dataTable = $('#tabel_application').DataTable({
             paginationType: 'full_numbers',

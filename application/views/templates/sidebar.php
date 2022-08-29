@@ -111,7 +111,7 @@ $sub_active = $this->uri->segment(2);
             echo "active";
         } ?> ">
             <a class="nav-link" href="<?php echo base_url('provider/company') ?>">
-                <i class="fas fa-fw fa-building mr-2"></i><span>My Company</span>
+                <i class="fas fa-fw fa-building mr-2"></i><span>Profile Perusahaan</span>
             </a>
 
         </li>
@@ -122,7 +122,7 @@ $sub_active = $this->uri->segment(2);
             echo "active";
         } ?> ">
             <a class="nav-link" href="<?php echo base_url('provider/job_posting') ?>">
-                <i class="fas fa-fw fa-calendar-check mr-2"></i><span>My Vacancy</span>
+                <i class="fas fa-fw fa-calendar-check mr-2"></i><span>Lowongan Pekerjaan</span>
             </a>
 
         </li>
@@ -133,7 +133,7 @@ $sub_active = $this->uri->segment(2);
             echo "active";
         } ?> ">
             <a class="nav-link" href="<?php echo base_url('provider/application'); ?>">
-                <i class="fas fa-fw fa-users mr-2"></i><span>Applicants</span>
+                <i class="fas fa-fw fa-users mr-2"></i><span>Pelamar Pekerjaan</span>
             </a>
 
         </li>
@@ -154,7 +154,7 @@ $sub_active = $this->uri->segment(2);
             echo "active";
         } ?> ">
             <a class="nav-link" href="<?php echo base_url('chat') ?>">
-                <i class="fas fa-fw fa-comment mr-2"></i><span>Inbox</span>
+                <i class="fas fa-fw fa-comment mr-2"></i><span>Pesan</span>
             </a>
 
         </li>
@@ -162,7 +162,7 @@ $sub_active = $this->uri->segment(2);
 
         <li class="nav-item">
             <a class="nav-link " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog mr-2"></i><span>Settings</span>
+                <i class="fas fa-fw fa-cog mr-2"></i><span>Pengaturan</span>
             </a>
 
             <div id="collapseTwo" class="collapse <?php if ($active == "provider") {
@@ -173,13 +173,13 @@ $sub_active = $this->uri->segment(2);
         <?php if ($active == "provider" && $sub_active == "edit_profile") {
             echo "bg-danger text-light";
         } ?>
-        " href="<?php echo base_url('provider/edit_profile') ?>">Edit Profile</a>
+        " href="<?php echo base_url('provider/edit_profile') ?>">Edit Data Diri</a>
 
                     <a class="collapse-item 
         <?php if ($active == "provider" && $sub_active == "") {
             echo "bg-danger text-light";
         } ?>
-        " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Ubah Password</a>
+        " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Edit Kata Sandi</a>
 
                 </div>
             </div>
