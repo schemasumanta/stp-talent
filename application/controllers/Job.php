@@ -223,6 +223,21 @@ class Job extends CI_Controller
 
 	public function detail($id)
 	{
+		date_default_timezone_set("Asia/Bangkok");
+		$ip = $this->input->ip_address();
+
+
+		$insert = [
+			'view_user_id'		=> $this->session->user_id,
+			'view_ip'			=> $ip,
+			'view_id_seeker'	=> null,
+			'view_id_lowongan'	=> $id,
+			'view_id_provider'	=> null,
+			'view_tgl'			=> date('Y-m-d H:i:s')
+		];
+		$this->db->insert('tbl_view', $insert);
+
+
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
 
 		$this->db->where('pelamar_id', $this->session->user_id);
@@ -246,7 +261,6 @@ class Job extends CI_Controller
 		$user_id = $this->session->user_id;
 		$data['resume'] = $this->db->get_where('tbl_resume', ['user_id' => $user_id])->row();
 
-		$ip = $this->input->ip_address();
 		$data['ip'] = $ip;
 
 		$this->load->view('web/header', $data);

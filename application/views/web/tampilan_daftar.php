@@ -43,6 +43,17 @@
                     </div>
                     <div class="col-lg-12 mt-4">
                       <input type="password" class="form-control w-100" name="seeker_password" id="seeker_password" placeholder="Masukkan Password Min 6 Digit">
+                      <a href="javascript:;" onclick="show_password()" id="text_pw" class="text-light">Tampilkan Password</a>
+                    </div>
+                    <div class="col-lg-12 mt-4">
+
+                      <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="check_persetujuan" value="1">
+                        <label class="form-check-label text-white" for="check_persetujuan">Menyetujui syarat dan ketentuan aplikasi.</label>
+                        <br />
+                        <a href="<?= $tnc_seeker->tnc_link; ?>" id="syarat_ket" target="_blank">Buka syarat dan ketentuan aplikasi</a>
+                      </div>
+
                     </div>
                     <div class="col-lg-12 mt-4 items-link btn-group">
                       <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
@@ -75,11 +86,28 @@
 
         if (seeker_nama == '') {
           $('#seeker_nama').attr('placeholder', 'Silahkan Masukkan Nama');
-          $('#seeker_nama').addClass('ph-merah');
+          $('#seeker_nama').addClass('is-invalid');
+          Swal.fire(
+            'Oops...',
+            'Ada yang belum diisi atau di Ceklis!',
+            'warning'
+          )
           cek++;
         } else {
-          $('#seeker_nama').removeClass('ph-merah');
+          $('#seeker_nama').removeClass('is-invalid');
         }
+
+        var seeker_check = $('#check_persetujuan:checkbox:checked').length > 0;
+        if (seeker_check == '') {
+          $('#check_persetujuan').addClass('is-invalid');
+          Swal.fire(
+            'Oops...',
+            'Ada yang belum diisi atau di Ceklis!',
+            'warning'
+          )
+          cek++;
+        }
+
 
         let level = $('#seeker_level').val();
         if (level == 3) {
@@ -88,42 +116,54 @@
 
           if (perusahaan_nama == '') {
             $('#perusahaan_nama').attr('placeholder', 'Silahkan Masukkan Perusahaan');
-            $('#perusahaan_nama').addClass('ph-merah');
+            $('#perusahaan_nama').addClass('is-invalid');
             $('#seeker_email').val('');
-
+            Swal.fire(
+              'Oops...',
+              'Ada yang belum diisi atau di Ceklis!',
+              'warning'
+            )
             cek++;
           } else {
-            $('#perusahaan_nama').removeClass('ph-merah');
+            $('#perusahaan_nama').removeClass('is-invalid');
           }
           if (perusahaan_npwp == '') {
             $('#perusahaan_npwp').attr('placeholder', 'Silahkan Masukkan NPWP');
-            $('#perusahaan_npwp').addClass('ph-merah');
-
+            $('#perusahaan_npwp').addClass('is-invalid');
+            Swal.fire(
+              'Oops...',
+              'Ada yang belum diisi atau di Ceklis!',
+              'warning'
+            )
             cek++;
           } else {
-            $('#perusahaan_nama').removeClass('ph-merah');
+            $('#perusahaan_nama').removeClass('is-invalid');
           }
         } else {
-          $('#perusahaan_nama').removeClass('ph-merah');
+          $('#perusahaan_nama').removeClass('is-invalid');
 
         }
         let seeker_email = $('#seeker_email').val();
         if (seeker_email == '') {
           $('#seeker_email').attr('placeholder', 'Silahkan Masukkan Email');
-          $('#seeker_email').addClass('ph-merah');
+          $('#seeker_email').addClass('is-invalid');
           $('#seeker_email').val('');
-
+          Swal.fire(
+            'Oops...',
+            'Ada yang belum diisi atau di Ceklis!',
+            'warning'
+          )
           cek++;
         } else {
           let testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
           if (!testEmail.test(seeker_email)) {
             $('#seeker_email').attr('placeholder', 'Format Email Tidak Valid');
-            $('#seeker_email').addClass('ph-merah');
+            $('#seeker_email').addClass('is-invalid');
             $('#seeker_email').val('');
 
             cek++;
           } else {
-            $('#seeker_email').removeClass('ph-merah');
+            $('#seeker_email').removeClass('is-invalid');
 
           }
         }
@@ -132,12 +172,16 @@
         var validasi_password = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
         if (validasi_password.test(seeker_password) == false) {
           $('#seeker_password').attr('placeholder', 'Gunakan Kombinasi Alfanumerik & Huruf Kapital');
-          $('#seeker_password').addClass('ph-merah');
+          $('#seeker_password').addClass('is-invalid');
           $('#seeker_password').val('');
-
+          Swal.fire(
+            'Oops...',
+            'Ada yang belum diisi atau di Ceklis!',
+            'warning'
+          )
           cek++;
         } else {
-          $('#seeker_password').removeClass('ph-merah');
+          $('#seeker_password').removeClass('is-invalid');
 
         }
 
@@ -155,10 +199,14 @@
               console.log(data);
               if (data > 0) {
                 $('#seeker_email').attr('placeholder', 'Email Sudah Digunakan!');
-                $('#seeker_email').addClass('ph-merah');
+                $('#seeker_email').addClass('is-invalid');
                 $('#seeker_email').val('');
                 $('#seeker_email').focus();
-
+                Swal.fire(
+                  'Oops...',
+                  'Email Sudah digunakan!',
+                  'warning'
+                )
 
                 return false;
               } else {
@@ -196,6 +244,7 @@
         $('.perusahaan').addClass('d-none');
         $('#form-daftar').attr('action', '<?php echo base_url('seeker/simpan_pendaftaran') ?>');
         $('#seeker_level').val(2);
+        $('#syarat_ket').attr("href", "<?= $tnc_seeker->tnc_link; ?>")
       });
       $(document).on('click', '.btn-provider', function() {
         $('.user_role').html('Job Provider');
@@ -206,5 +255,18 @@
         $('.perusahaan').removeClass('d-none');
         $('#form-daftar').attr('action', '<?php echo base_url('provider/simpan_pendaftaran') ?>');
         $('#seeker_level').val(3);
+        $('#syarat_ket').attr("href", "<?= $tnc_provider->tnc_link; ?>")
       });
+
+      function show_password() {
+        if ($('#seeker_password').attr('type') == "password") {
+          $('#seeker_password').attr('type', 'text');
+          $('#show_pw').html('<i class="fa fa-eye-slash"></i>');
+          $('#text_pw').text('Sembunyikan Password');
+        } else {
+          $('#text_pw').text('Tampilkan Password');
+          $('#seeker_password').attr('type', 'password');
+          $('#show_pw').html('<i class="fa fa-eye"></i>');
+        }
+      }
     </script>

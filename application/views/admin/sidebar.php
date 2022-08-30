@@ -98,11 +98,16 @@ $sub_active = $this->uri->segment(2);
                 } ?>
 
                 " href="<?php echo base_url('stp') ?>">Profil STP</a>
-                        <a class="collapse-item 
 
+                        <a class="collapse-item 
                 <?php if ($active == "slider" && $sub_active == "") {
                     echo "bg-danger text-light";
                 } ?>" href="<?php echo base_url('slider') ?>">Slider</a>
+
+                        <a class="collapse-item 
+                <?php if ($active == "tnc" && $sub_active == "") {
+                    echo "bg-danger text-light";
+                } ?>" href="<?php echo base_url('tnc') ?>">T&C Pendaftaran</a>
 
 
                     </div>

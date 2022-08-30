@@ -81,6 +81,8 @@ class Landing extends CI_Controller
 
 	public function profil_perusahaan($perusahaan_id)
 	{
+		date_default_timezone_set("Asia/Bangkok");
+
 		$this->db->select('perusahaan_visitor');
 		$this->db->where('md5(perusahaan_id)', $perusahaan_id);
 		$jumlah = $this->db->get('tbl_perusahaan')->result();
@@ -98,6 +100,18 @@ class Landing extends CI_Controller
 		$data['perusahaan'] = $this->db->get('tbl_perusahaan a')->result();
 
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		$perusahaan = $this->db->get_where('tbl_perusahaan', ['md5(perusahaan_id)' => $perusahaan_id])->row();
+		$ip = $this->input->ip_address();
+
+		$insert = [
+			'view_user_id'		=> $this->session->user_id,
+			'view_ip'			=> $ip,
+			'view_id_seeker'	=> null,
+			'view_id_lowongan'	=> null,
+			'view_id_provider'	=> $perusahaan->perusahaan_id,
+			'view_tgl'			=> date('Y-m-d H:i:s')
+		];
+		$this->db->insert('tbl_view', $insert);
 
 		$this->load->view('web/header', $data);
 
@@ -109,6 +123,8 @@ class Landing extends CI_Controller
 	public function register()
 	{
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		$data['tnc_seeker'] = $this->db->order_by("tnc_terbit_pada", "DESC")->get_where('tbl_tnc', ['tnc_tipe' => 1])->row();
+		$data['tnc_provider'] = $this->db->order_by("tnc_terbit_pada", "DESC")->get_where('tbl_tnc', ['tnc_tipe' => 2])->row();
 		if ($this->session->login == FALSE) {
 			$this->load->view('web/header', $data);
 			$this->load->view('web/tampilan_daftar', $data);
