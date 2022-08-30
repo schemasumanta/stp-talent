@@ -38,9 +38,10 @@ class Landing extends CI_Controller
 		$this->db->join('tbl_master_jabatan d', 'd.jabatan_id=a.jabatan_id');
 		$this->db->join('tbl_master_provinsi e', 'e.prov_id=b.perusahaan_prov');
 		$this->db->join('tbl_master_kabkota f', 'f.kabkota_id=b.perusahaan_kabkota');
+		$this->db->where('a.lowongan_status', 1);
 		$this->db->limit(8);
 		$this->db->order_by('lowongan_id', 'desc');
-		$data['featured_job'] = $this->db->get_where('tbl_lowongan_pekerjaan', ['lowongan_status' => 1])->result();
+		$data['featured_job'] = $this->db->get('tbl_lowongan_pekerjaan a')->result();
 
 		$data['kota'] = $this->db->get('tbl_master_kabkota')->result();
 
