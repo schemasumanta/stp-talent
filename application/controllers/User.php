@@ -239,13 +239,15 @@ class User extends CI_Controller
 		$no = $this->input->get('start');
 		$list = $this->model_tabel->get_datatables('job_posting_all', $sort, $order, $search);
 		foreach ($list as $l) {
+			$jml_view = $this->db->query("SELECT count(view_id_lowongan) as jml FROM tbl_view WHERE view_id_lowongan = $l->lowongan_id ")->row();
 
 			$no++;
 			$l->isi_lowongan = '<div class="card border-left-success shadow h-100 py-2"><div class="card-body"><div class="row no-gutters align-items-center"><img src="' . $l->perusahaan_logo . '" style="width:5%;margin-right:25px;">
 			<div class="col mr-2"><div class="text-lg font-weight-bold text-danger text-uppercase mb-1">
 			' . $l->lowongan_judul . '</div>
 			<div class="h6 mb-2 text-gray-800">' . $l->kategori_nama . '</div>
-			<div class="h6 mb-0 font-weight-bold text-gray-800"><i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</li></div>
+			<div class="h6 mb-2 font-weight-bold text-gray-800"><i class="fas fa-map-marker-alt mr-2"></i>' . $l->kabkota_nama . " - " . $l->prov_nama . '</i></div>
+			<div class="h6 mb-0 font-weight-bold text-gray-800">Dilihat ' . $jml_view->jml . 'x</div>
 			</div><div class="col-auto"><a href="' . base_url() . 'job/detail/' . $l->lowongan_id . '" class="btn btn-sm rounded  mr-2 btn-success   item_detail_lowongan" data="' . $l->lowongan_id . '"><i class="fa fa-eye mr-2"></i>Detail</a></div>
 			</div></div></div>';
 

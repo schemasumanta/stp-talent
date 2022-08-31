@@ -17,9 +17,9 @@ $sub_active = $this->uri->segment(2);
     </a>
     <hr class="sidebar-divider my-0">
     <li class="nav-item active">
-        <a class="nav-link" href="<?php echo base_url('dashboard') ?>">
+        <a class="nav-link" href="<?php echo base_url('dashboard'); ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span style="font-size: 18px;"><b>Dashboard</b></span></a>
 
     </li>
     <hr class="sidebar-divider" id="list_menu">
