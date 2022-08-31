@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
+                <div class="card-body" id="graph-container">
                     <canvas height="80" id="view_postingan"></canvas>
                 </div>
                 <div class="card-footer">
@@ -171,6 +171,7 @@
             data: $('#form_view_posting').serialize(),
             dataType: "JSON",
             success: function(data) {
+                resetCanvas()
                 Chart.defaults.global.legend.labels.usePointStyle = true;
                 if ($("#view_postingan").length) {
                     var label = [];
@@ -247,4 +248,9 @@
             }
         })
     }
+
+    function resetCanvas() {
+        $('#view_postingan').remove(); // this is my <canvas> element
+        $('#graph-container').append('<canvas id="view_postingan" height="80"><canvas>');
+    };
 </script>
