@@ -94,6 +94,12 @@ $sub_active = $this->uri->segment(2);
         } ?>
         " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Ubah Kata Sandi</a>
 
+                    <a class="collapse-item 
+        <?php if ($active == "bahasa" && $sub_active == "") {
+            echo "bg-danger text-light";
+        } ?>
+        " href="javascript:void(0)" onclick="tnc_sp()">Syarat dan Ketentuan</a>
+
                 </div>
             </div>
         </li>
@@ -180,7 +186,11 @@ $sub_active = $this->uri->segment(2);
             echo "bg-danger text-light";
         } ?>
         " href="javascript:;" data-toggle="modal" data-target="#modalubahpassworduser">Edit Kata Sandi</a>
-
+                    <a class="collapse-item 
+        <?php if ($active == "bahasa" && $sub_active == "") {
+            echo "bg-danger text-light";
+        } ?>
+        " href="javascript:void(0)" onclick="tnc_sp()">Syarat dan Ketentuan</a>
                 </div>
             </div>
         </li>
@@ -213,6 +223,25 @@ $sub_active = $this->uri->segment(2);
             <div class="modal-footer">
                 <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
                 <a class="btn btn-primary" href="<?php echo base_url('dashboard/logout') ?>">Keluar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_tnc_sp">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Syarat dan Ketentuan Aplikasi</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div id="tnc_text_sp"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" type="button" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>

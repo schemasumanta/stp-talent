@@ -147,4 +147,14 @@ EXTRACT(MONTH FROM view_tgl) = '$bulan' GROUP BY CAST(view_tgl AS DATE)")->resul
 
 		echo json_encode($data);
 	}
+
+	public function get_tnc()
+	{
+		if ($this->session->user_level == 3) {
+			$data = $this->db->query("SELECT * FROM tbl_tnc WHERE tnc_tipe = 2 ORDER BY tnc_id DESC")->row();
+		} else {
+			$data = $this->db->query("SELECT * FROM tbl_tnc WHERE tnc_tipe = 1 ORDER BY tnc_id DESC")->row();
+		}
+		echo json_encode($data);
+	}
 }

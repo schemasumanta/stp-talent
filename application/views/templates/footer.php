@@ -264,6 +264,22 @@
 		});
 
 	});
+
+	function tnc_sp() {
+		//Ajax Load data from ajax
+		$.ajax({
+			url: "<?php echo site_url('dashboard/get_tnc') ?>",
+			type: "GET",
+			dataType: "JSON",
+			success: function(data) {
+				$('#modal_tnc_sp').modal('show');
+				$('#tnc_text_sp').html(data.tnc_text);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert('Error get data from ajax');
+			}
+		});
+	}
 </script>
 
 </body>

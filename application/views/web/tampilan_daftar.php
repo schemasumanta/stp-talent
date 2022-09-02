@@ -1,8 +1,7 @@
     <style>
-      @media (min-width: 768px) {
-        .modal-xl {
-          width: 90%;
-          max-width: 1200px;
+      @media (min-width: 992px) {
+        .modal-lg {
+          width: 900px;
         }
       }
     </style>
@@ -88,7 +87,7 @@
     </main>
     <!-- Bootstrap modal -->
     <div class="modal fade" id="modal_tnc" role="dialog">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title">Syarat dan ketentuan Aplikasi</h3>

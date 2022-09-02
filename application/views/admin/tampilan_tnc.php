@@ -39,7 +39,7 @@
 </div>
 <!-- Bootstrap modal -->
 <div class="modal fade" id="modal_tnc" role="dialog">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Person Form</h3>
@@ -87,13 +87,13 @@
 <!-- End Bootstrap modal -->
 <!-- Bootstrap modal -->
 <div class="modal fade" id="modal_tnc_lihat" role="dialog">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Syarat dan ketentuan Aplikasi</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <div id="tnc_text_lihat"></div>
 
             </div>
