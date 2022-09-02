@@ -1,3 +1,11 @@
+    <style>
+      @media (min-width: 768px) {
+        .modal-xl {
+          width: 90%;
+          max-width: 1200px;
+        }
+      }
+    </style>
     <main>
       <!-- Hero Area Start-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -49,9 +57,9 @@
 
                       <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="check_persetujuan" value="1">
-                        <label class="form-check-label text-white" for="check_persetujuan">Menyetujui syarat dan ketentuan aplikasi.</label>
+                        <input type="hidden" value="1" id="sebagai">
+                        <label class="form-check-label text-white" for="check_persetujuan">Menyetujui <a href="javascript:void(0)" class="text-danger" onclick="tnc()">Syarat dan ketentuan aplikasi.</a></label>
                         <br />
-                        <a href="<?= $tnc_seeker->tnc_link; ?>" id="syarat_ket" target="_blank">Buka syarat dan ketentuan aplikasi</a>
                       </div>
 
                     </div>
@@ -78,6 +86,25 @@
         </div>
       </div>
     </main>
+    <!-- Bootstrap modal -->
+    <div class="modal fade" id="modal_tnc" role="dialog">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Syarat dan ketentuan Aplikasi</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body text-center">
+            <div id="tnc_text"></div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- End Bootstrap modal -->
     <script type="text/javascript">
       $(document).on('click', '.item_daftar', function(e) {
         e.preventDefault();
@@ -221,6 +248,7 @@
 
       });
       $(document).ready(function() {
+        var ini = "seeker";
         const notif = $('.flashdatart').data('title');
         if (notif) {
           Swal.fire({
@@ -244,7 +272,7 @@
         $('.perusahaan').addClass('d-none');
         $('#form-daftar').attr('action', '<?php echo base_url('seeker/simpan_pendaftaran') ?>');
         $('#seeker_level').val(2);
-        $('#syarat_ket').attr("href", "<?= $tnc_seeker->tnc_link; ?>")
+        $('#sebagai').val("1");
       });
       $(document).on('click', '.btn-provider', function() {
         $('.user_role').html('Job Provider');
@@ -255,7 +283,7 @@
         $('.perusahaan').removeClass('d-none');
         $('#form-daftar').attr('action', '<?php echo base_url('provider/simpan_pendaftaran') ?>');
         $('#seeker_level').val(3);
-        $('#syarat_ket').attr("href", "<?= $tnc_provider->tnc_link; ?>")
+        $('#sebagai').val("2");
       });
 
       function show_password() {
@@ -268,5 +296,25 @@
           $('#seeker_password').attr('type', 'password');
           $('#show_pw').html('<i class="fa fa-eye"></i>');
         }
+      }
+
+      function tnc() {
+        var sebagai = $('#sebagai').val();
+        //Ajax Load data from ajax
+        $.ajax({
+          url: "<?php echo site_url('landing/get_tnc') ?>",
+          type: "POST",
+          dataType: "JSON",
+          data: {
+            sebagai: sebagai
+          },
+          success: function(data) {
+            $('#modal_tnc').modal('show');
+            $('#tnc_text').html(data.tnc_text);
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            alert('Error get data from ajax');
+          }
+        });
       }
     </script>

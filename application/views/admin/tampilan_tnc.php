@@ -24,7 +24,6 @@
                                     <th>No</th>
                                     <th>Diterbitkan pada</th>
                                     <th>Tipe</th>
-                                    <th>Link</th>
                                     <th>Status</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -40,7 +39,7 @@
 </div>
 <!-- Bootstrap modal -->
 <div class="modal fade" id="modal_tnc" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Person Form</h3>
@@ -51,8 +50,8 @@
                     <input type="hidden" value="" name="id" />
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Tipe</label>
-                            <div class="col-md-9">
+                            <label class="control-label ">Tipe</label>
+                            <div class="">
                                 <select name="tnc_tipe" id="tnc_tipe" class="form-control">
                                     <option value="">--Pilih Tipe--</option>
                                     <option value="1">Seeker</option>
@@ -62,17 +61,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Tanggal Terbit</label>
-                            <div class="col-md-9">
+                            <label class="control-label ">Tanggal Terbit</label>
+                            <div class="">
                                 <input type="date" name="tnc_terbit" id="tnc_terbit" class="form-control" value="" />
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">File</label>
-                            <div class="col-md-9">
-                                <input type="file" name="tnc_file" id="tnc_file" class="form-control" value="" />
-                                <input type="hidden" name="tnc_firebase" id="tnc_firebase" class="form-control" value="" />
+                            <label class="control-label ">Masukan Syarat dan ketentuan</label>
+                            <div class="">
+                                <textarea type="text" class="form-control summernote" name="tnc_text" id="tnc_text" rows="5"></textarea>
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -80,8 +78,27 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="btnSave" class="btn btn-primary">Simpan</button>
+                <button type="button" id="btnSave" class="btn btn-primary" onclick="save()">Simpan</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal -->
+<!-- Bootstrap modal -->
+<div class="modal fade" id="modal_tnc_lihat" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Syarat dan ketentuan Aplikasi</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div id="tnc_text_lihat"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -92,7 +109,19 @@
     var table;
 
     $(document).ready(function() {
-
+        $('.summernote').summernote({
+            placeholder: 'Deskripsi',
+            tabsize: 2,
+            height: 350,
+            callbacks: {
+                onImageUpload: function(image) {
+                    uploadImage('misi', image[0]);
+                },
+                onMediaDelete: function(target) {
+                    deleteImage(target[0].src);
+                }
+            }
+        });
         //datatables
         table = $('#tabel_tnc').DataTable({
 
@@ -118,40 +147,6 @@
         });
 
     });
-
-    document.getElementById('btnSave').addEventListener('click', function() {
-        var file = document.getElementById('tnc_file').files[0];
-        console.log(file)
-        if (file != null) {
-            console.log(file.name);
-            var storage = firebase.storage().ref('talent_hub/tnc/' + file.name);
-            var upload = storage.put(file);
-
-            upload.on('state_changed', function(snapshot) {
-                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log("upload is " + progress + " done");
-            }, function(error) {
-                console.log(error.message);
-            }, function() {
-                upload.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-                    console.log(downloadURL);
-                    if (save_method == "add") {
-                        $('#tnc_firebase').val(downloadURL);
-                    } else {
-                        let file_tnc = $('#tnc_firebase').val();
-                        if (file_tnc != '') {
-                            const myfile = firebase.storage();
-                            myfile.refFromURL(file_tnc).delete()
-                        }
-                        $('#tnc_firebase').val(downloadURL);
-                    }
-                    save();
-                })
-            })
-        } else {
-            save();
-        }
-    })
 
 
     function changeStatus(id) {
@@ -211,6 +206,8 @@
         $('.help-block').empty(); // clear error string
         $('#modal_tnc').modal('show'); // show bootstrap modal
         $('.modal-title').text('Tambah tnc'); // Set Title to Bootstrap modal title
+        $('[name="tnc_text"]').summernote('code', "");
+
     }
 
     function edit_tnc(id) {
@@ -230,6 +227,7 @@
                 $('[name="id"]').val(data.tnc_id);
                 $('[name="tnc_terbit"]').val(data.tnc_terbit_pada);
                 $('[name="tnc_tipe"]').val(data.tnc_tipe);
+                $('[name="tnc_text"]').summernote('code', data.tnc_text);
                 $('#modal_tnc').modal('show'); // show bootstrap modal when complete loaded
                 $('.modal-title').text('Edit T&N'); // Set title to Bootstrap modal title
 
@@ -356,5 +354,22 @@
 
             }
         })
+    }
+
+    function lihat_tnc(id) {
+        //Ajax Load data from ajax
+        $.ajax({
+            url: "<?php echo site_url('tnc/lihat_tnc/') ?>/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('#modal_tnc_lihat').modal('show');
+                $('.modal-title').text('Syarat dan Ketentuan Aplikasi'); // Set title to Bootstrap modal title
+                $('#tnc_text_lihat').html(data.tnc_text);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
     }
 </script>

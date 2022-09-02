@@ -327,4 +327,11 @@ class Landing extends CI_Controller
 
 		$this->session->sess_destroy();
 	}
+
+	public function get_tnc()
+	{
+		$sebagai = $this->input->post('sebagai');
+		$data = $this->db->query("SELECT * FROM tbl_tnc WHERE tnc_tipe = '$sebagai' ORDER BY tnc_id DESC")->row();
+		echo json_encode($data);
+	}
 }

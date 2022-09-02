@@ -41,7 +41,6 @@ class Tnc extends CI_Controller
             $row[] = $no;
             $row[] = date('d-M-Y', strtotime($person->tnc_terbit_pada));
             $row[] = $tipe;
-            $row[] = "<a href='" . $person->tnc_link . "' class='btn btn-danger' target='_blank'>Buka File</a>";
             $row[] = '<div class="custom-control custom-switch">
 							<input type="checkbox" class="custom-control-input" onclick="changeStatus(\'' . $person->tnc_id . '\')" id="set_active' . $person->tnc_id . '" ' . isChecked($person->tnc_status) . '>
 							<label class="custom-control-label" for="set_active' . $person->tnc_id . '">' . isLabelChecked($person->tnc_status) . '</label>
@@ -49,6 +48,7 @@ class Tnc extends CI_Controller
 
             //add html for action
             $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_tnc(' . "'" . $person->tnc_id . "'" . ')"><i class="fas fa-edit"></i> Ubah</a>
+            <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Lihat" onclick="lihat_tnc(' . "'" . $person->tnc_id . "'" . ')"><i class="fas fa-eye"></i> Lihat</a>
                   ';
 
             $data[] = $row;
@@ -108,7 +108,7 @@ class Tnc extends CI_Controller
         $this->_validate($metod);
         $data = array(
             'tnc_tipe' => $this->input->post('tnc_tipe'),
-            'tnc_link' => $this->input->post('tnc_firebase'),
+            'tnc_text' => $this->input->post('tnc_text'),
             'tnc_terbit_pada' => $this->input->post('tnc_terbit'),
             'tnc_status' => 1,
         );
@@ -122,13 +122,11 @@ class Tnc extends CI_Controller
         $this->_validate($metod);
         $data = array(
             'tnc_tipe' => $this->input->post('tnc_tipe'),
+            'tnc_text' => $this->input->post('tnc_text'),
             'tnc_terbit_pada' => $this->input->post('tnc_terbit'),
             'tnc_status' => 1,
         );
-        $file_tnc = $_FILES['tnc_file']['name'];
-        if ($file_tnc) {
-            $data['tnc_link'] = $this->input->post("tnc_firebase");
-        }
+
         $this->tnc->update(array('tnc_id' => $this->input->post('id')), $data);
         echo json_encode(array("status" => TRUE));
     }
@@ -146,6 +144,12 @@ class Tnc extends CI_Controller
         } else {
             echo json_encode(array("status" => false, "notif" => "Karena tidak ada data lain lagi untuk di tampilkan"));
         }
+    }
+
+    public function lihat_tnc($id)
+    {
+        $data = $this->tnc->get_by_id($id);
+        echo json_encode($data);
     }
 
     private function _validate($metod)
@@ -167,6 +171,11 @@ class Tnc extends CI_Controller
                 $data['error_string'][] = 'Tipe wajib diisi!';
                 $data['status'] = FALSE;
             }    # code...
+            if ($this->input->post('tnc_text')  == '') {
+                $data['inputerror'][] = 'tnc_text';
+                $data['error_string'][] = 'Syarat dan ketentuan wajib diisi!';
+                $data['status'] = FALSE;
+            }
         } else {
             if ($this->input->post('tnc_terbit') == '') {
                 $data['inputerror'][] = 'tnc_terbit';
@@ -179,11 +188,10 @@ class Tnc extends CI_Controller
                 $data['error_string'][] = 'Tipe wajib diisi!';
                 $data['status'] = FALSE;
             }
-            $file_tnc = $_FILES['tnc_file']['name'];
 
-            if ($file_tnc == '') {
-                $data['inputerror'][] = 'tnc_file';
-                $data['error_string'][] = 'File Wajbi diisi!';
+            if ($this->input->post('tnc_text')  == '') {
+                $data['inputerror'][] = 'tnc_text';
+                $data['error_string'][] = 'Syarat dan ketentuan wajib diisi!';
                 $data['status'] = FALSE;
             }
         }

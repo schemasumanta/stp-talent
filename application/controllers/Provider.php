@@ -828,8 +828,19 @@ class Provider extends CI_Controller
 
 		curl_close($ch);
 
+
 		// Echo the response
 		if (is_string($responseJson) && $httpCode == 200) {
+			$newdata = array(
+				'client_id'  	 => $clientId,
+				'request_id'     => $requestId,
+				'inv_number'	 => $inv_number,
+				'digi'			 => $digestValue,
+				'ammount'		 => $price
+			);
+
+			$this->session->set_userdata($newdata);
+
 			echo $responseJson;
 			return json_decode($responseJson, true);
 		} else {
@@ -838,16 +849,40 @@ class Provider extends CI_Controller
 		}
 	}
 
-	public function get_status_payment()
+
+	public function get_status()
 	{
+		$header = array();
+
+		$requestId = $this->session->request_id;
+		$targetPath = "/orders/v1/status/" . $this->session->inv_number;
 		$dateTime = gmdate("Y-m-d H:i:s");
-		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
-		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
+		$dateTime = date(DATE_ISO8601, strtotime($dateTime));
+		$dateTimeFinal = substr($dateTime, 0, 19) . "Z";
+
+		$getUrl = 'https://api-sandbox.doku.com';
+
+		$url = $getUrl . $targetPath;
+
+		$shared_key = 'SK-Y7Zmm6dVGIJ5ti5aFZ1U';
+
+		$header['Client-Id'] = $this->session->client_id;
+		$header['Request-Id'] = $requestId;
+		$header['Request-Timestamp'] = $dateTimeFinal;
+		$header['Request-Target'] = $targetPath;
+
+		$signature = $this->generateSignatureCheckStatus($header, $shared_key);
+
+		echo $this->session->client_id . '<br/>';
+		echo $requestId . '<br/>';
+		echo $dateTimeFinal . '<br/>';
+		echo $signature . '<br/>';
+		echo $url . '<br/>';
 
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://api-sandbox.doku.com/orders/v1/status/INV-5164',
+			CURLOPT_URL => $url,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -856,10 +891,10 @@ class Provider extends CI_Controller
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => 'GET',
 			CURLOPT_HTTPHEADER => array(
-				'Client-Id: BRN-0258-1659388313605',
-				'Request-Id: 33490',
-				'Request-Timestamp: ' . $dateTimeFinal . '',
-				'Signature: HMACSHA256=YsVBhVjRib1qHdrIukPD5P1Qgmo7oBZkUrU2hHSfP1E='
+				'Client-Id: ' . $this->session->client_id,
+				'Request-Id: ' . $requestId,
+				'Request-Timestamp: ' . $dateTimeFinal,
+				'Signature: ' . $signature
 			),
 		));
 
@@ -867,5 +902,16 @@ class Provider extends CI_Controller
 
 		curl_close($curl);
 		echo $response;
+	}
+
+	public function generateSignatureCheckStatus($headers, $secret)
+	{
+		$rawSignature = "Client-Id:" . $headers['Client-Id'] . "\n"
+			. "Request-Id:" . $headers['Request-Id'] . "\n"
+			. "Request-Timestamp:" . $headers['Request-Timestamp'] . "\n"
+			. "Request-Target:" . $headers['Request-Target'];
+
+		$signature = base64_encode(hash_hmac('sha256', $rawSignature, htmlspecialchars_decode($secret), true));
+		return 'HMACSHA256=' . $signature;
 	}
 }

@@ -94,9 +94,7 @@
 <script src="https://sandbox.doku.com/jokul-checkout-js/v1/jokul-checkout-1.0.0.js"></script>
 
 <script>
-    $(document).ready(function() {
-        cek_status();
-    });
+    $(document).ready(function() {});
 
     function buy() {
         let price = $("#harga_premium").val();
@@ -121,6 +119,7 @@
                 success: (result) => {
                     console.log(result);
                     loadJokulCheckout(result.response.payment.url);
+                    cek_status();
                 },
                 error: (xhr, textStatus, error) => {
                     console.log(textStatus);
@@ -132,7 +131,7 @@
     function cek_status() {
         var url;
 
-        url = "<?php echo site_url('provider/get_status_payment') ?>";
+        url = "<?php echo site_url('provider/get_status') ?>";
 
         $.ajax({
             url: url,
@@ -142,7 +141,7 @@
                 console.log(result);
             },
             error: (xhr, textStatus, error) => {
-                console.log(textStatus);
+
             },
         });
     }
