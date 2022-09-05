@@ -263,7 +263,7 @@ class Job extends CI_Controller
 
 		$data['ip'] = $ip;
 
-		$this->load->view('web/header', $data);
+		$this->load->view('web/header_indo', $data);
 
 		$this->load->view('job/tampilan_detail_job', $data);
 
@@ -276,7 +276,7 @@ class Job extends CI_Controller
 		$data['prov'] = $this->db->order_by('prov_nama', 'asc')->get('tbl_master_provinsi')->result();
 		$data['kategori'] = $this->db->get_where('tbl_master_kategori_job', ['kategori_status' => 1])->result();
 
-		$this->load->view('web/header', $data);
+		$this->load->view('web/header_indo', $data);
 		$this->load->view('job/tampilan_job_listing', $data);
 		$this->load->view('web/script_include', $data);
 	}
@@ -733,10 +733,10 @@ class Job extends CI_Controller
 			$l->isi_lowongan = '<div class="single-job-items mb-20">
                  <div class="job-items">
                    <div class="company-img">
-                     <a href="#"><img src="' . $l->perusahaan_logo . '" alt="" /></a>
+                     <img src="' . $l->perusahaan_logo . '" alt="" />
                    </div>
                    <div class="job-tittle job-tittle2">
-                     <a href="#">
+                     <a href="' . base_url('job/detail/') . $l->lowongan_id . '">
                        <h4>' . $l->lowongan_judul . '</h4>
                      </a>
                      <ul>

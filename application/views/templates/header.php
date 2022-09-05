@@ -45,7 +45,7 @@
             background: #3f00ff !important;
             color: white !important;
             text-align: center;
-             !important;
+            /* !important; */
         }
 
         .popover-body {
@@ -155,10 +155,10 @@
             <i class="fa fa-bars"></i>
         </button>
         <a href="<?php echo base_url() ?>">
-            <img src="<?php echo base_url() . $this->session->stp_brand_icon ?>" style="max-height:30px;"></a>
+            <img src="<?php echo base_url() . $this->session->stp_brand_icon ?>" style="height:60px; margin-left: 25px;"></a>
         <!-- Topbar Navbar -->
         <ul id="menuatas" class="navbar-nav ml-md-5 justify-content-center" style="width: 100%">
-            <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?php echo base_url() ?>">Halaman Awal</a></li>
+            <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?php echo base_url() ?>">Beranda</a></li>
             <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?php echo base_url('job/job_listing') ?>">Cari Pekerjaan </a></li>
             <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?= base_url(); ?>#about">Tentang</a></li>
             <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?= base_url(); ?>#about">Kontak</a></li>

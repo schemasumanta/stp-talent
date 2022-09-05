@@ -11,11 +11,11 @@
 
                 <div class="col-lg-5 mb-5 mt-5  p-5" style="border-radius: 15px;background: rgba(22,22,26,0.7);">
                   <div class="hero-cap align-items-center mb-3 text-center">
-                    <a href="javascript:;" class="genric-btn danger medium btn-kandidat btn-pilihan" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px">Job Seeker</a>
-                    <a href="javascript:;" class="genric-btn danger medium btn-provider btn-pilihan">Job Provider</a>
+                    <a href="javascript:;" class="genric-btn danger medium btn-kandidat btn-pilihan" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px">Pencari Kerja</a>
+                    <a href="javascript:;" class="genric-btn danger medium btn-provider btn-pilihan">Penyedia Pekerjaan</a>
                   </div>
                   <div class="hero-cap text-center">
-                    <h2 class="user_role">Login</h2>
+                    <h3 class="user_role text-white">Masuk</h3>
                     <!-- <p class="text-light taglinetalent"> -->
                   </div>
                   <div class="row justify-content-center mt-4">
@@ -33,11 +33,8 @@
 
                       <?php } else { ?>
                         <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
-
                       <?php } ?>
-
-
-                      <a href="javascript:;" class="item_login" style="width: 50%;display: inline-block!important;background:#DD2727;color: white;border: 1px solid #DD2727">Login</a>
+                      <a href="javascript:;" class="item_login" style="width: 50%;display: inline-block!important;background:#DD2727;color: white;border: 1px solid #DD2727">Masuk</a>
                     </div>
 
                     <div class="col-lg-6">
@@ -52,9 +49,9 @@
                 </div>
                 <div class="col-lg-5 d-flex flex-wrap flex-fill justify-content-center mx-auto text-center">
                   <img src="<?php echo base_url() ?>assets/img/login.svg" style="width: 80%;">
-                  <h3 class="text-white fw-bold">Welcome to <strong>SoloTechnoPark</strong></h3>
-                  <p class="text-white">Join us to develop your company with expert talent, and expand your network
-                    with great people around you</p>
+                  <h3 class="text-white fw-bold">Selamat Datang di <strong>SoloTechnoPark</strong></h3>
+                  <p class="text-white">Bergabunglah dengan kami untuk mengembangkan perusahaan Anda dengan bakat ahli, dan memperluas jaringan Anda
+                    dengan orang-orang hebat di sekitarmu</p>
                 </div>
 
               </div>
@@ -86,7 +83,7 @@
       });
 
       $(document).on('click', '.btn-kandidat', function() {
-        $('.user_role').html('Job Seeker');
+        $('.user_role').html('Pencari Kerja');
         $('.taglinetalent').html('Bergabung bersama kami dan dapatkan pekerjaan dengan mudah');
         $('.btn-pilihan').addClass('danger');
         $(this).removeClass('danger');
@@ -97,7 +94,7 @@
       });
 
       $(document).on('click', '.btn-provider', function() {
-        $('.user_role').html('Job Provider');
+        $('.user_role').html('Penyedia Pekerjaan');
         $('.taglinetalent').html('Bergabung bersama kami dan temukan calon karyawan dengan mudah');
         $('.btn-pilihan').addClass('danger');
         $(this).removeClass('danger');

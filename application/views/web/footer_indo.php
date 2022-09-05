@@ -11,7 +11,7 @@
           <div class="single-footer-caption mb-50">
             <div class="single-footer-caption mb-30">
               <div class="footer-tittle">
-                <h4>About Us</h4>
+                <h4>Tentang Kami</h4>
                 <div class="footer-pera">
                   <p>
                     <?php echo $s->stp_tagline; ?>
@@ -24,7 +24,7 @@
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5">
           <div class="single-footer-caption mb-50">
             <div class="footer-tittle">
-              <h4>Contact Info</h4>
+              <h4>Kontak Kami</h4>
               <ul>
                 <li>
                   <p></p>
@@ -45,9 +45,9 @@
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-5">
           <div class="single-footer-caption mb-50">
             <div class="footer-tittle">
-              <h4>Newsletter</h4>
+              <h4>Informasi</h4>
               <div class="footer-pera footer-pera2">
-                <p>Subscribe to our newsletters and updates.</p>
+                <p>Berlangganan informasi dan pembaruan kami.</p>
               </div>
               <!-- Form -->
               <div class="footer-form">
@@ -83,7 +83,7 @@
         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
           <div class="footer-tittle-bottom">
             <span>5000+</span>
-            <p>Talented Hunter</p>
+            <p>Pencari Kerja</p>
           </div>
         </div>
 
@@ -91,7 +91,7 @@
           <!-- Footer Bottom Tittle -->
           <div class="footer-tittle-bottom">
             <span>568</span>
-            <p>Talented Hunter</p>
+            <p>Perusahaan Terdaftar</p>
           </div>
         </div>
       </div>
@@ -117,7 +117,7 @@
           </div>
           <div class="col-xl-4 col-lg-4">
             <div class="footer-social text-white f-right">
-              <a href="<?= base_url(); ?>" class="btn btn-xs btn-white">indonesian language</a>
+              <a href="<?= base_url(); ?>landing/en" class="btn btn-xs btn-white">Bahasa English</a>
               <?php if ($s->stp_facebook != '') : ?>
                 <a href="<?php echo $s->stp_facebook ?>" target="_blank"><i class="fab fa-facebook-f fa-3x"></i></a>
               <?php endif ?>

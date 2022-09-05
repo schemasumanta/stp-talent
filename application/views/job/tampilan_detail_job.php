@@ -105,7 +105,7 @@
                <div class="post-details1 mb-50">
                  <!-- Small Section Tittle -->
                  <div class="small-section-tittle">
-                   <h4>Job Description</h4>
+                   <h4>Deskripsi Pekerjaan</h4>
                  </div>
                  <p class="mb-3" style="font-family: Inter!important;line-height: 15px"> <?php echo $job->lowongan_deskripsi; ?></p>
                </div>
@@ -117,7 +117,7 @@
                  <div class="post-details1 mb-50">
                    <!-- Small Section Tittle -->
                    <div class="small-section-tittle">
-                     <h4>Skills</h4>
+                     <h4>Kemampuan</h4>
                    </div>
                    <ul>
                      <?php foreach ($skill as $sk) : ?>
@@ -139,16 +139,16 @@
              <div class="post-details3 mb-50">
                <!-- Small Section Tittle -->
                <div class="small-section-tittle">
-                 <h4>Job Overview</h4>
+                 <h4>Detail Pekerjaan</h4>
                </div>
                <ul>
-                 <li>Posted date : <span><?php $tgl_posting = explode(' ', $job->lowongan_created_date);
-                                          $tgl_tampil = explode('-', $tgl_posting[0]);
-                                          echo $tgl_tampil[2] . " " . $bulan[$tgl_tampil[1]] . " " . $tgl_tampil[0]; ?></span></li>
-                 <li>Location : <span><?php echo $job->kabkota_nama; ?></span></li>
-                 <li>Applicants : <span><?php echo number_format($applicants, 0, ",", "."); ?></span></li>
-                 <li>Application date : <span><?php $tgl_end = explode('-', $job->lowongan_end_date);
-                                              echo $tgl_end[2] . " " . $bulan[$tgl_end[1]] . " " . $tgl_end[0]; ?></span></li>
+                 <li>Diposting pada : <span><?php $tgl_posting = explode(' ', $job->lowongan_created_date);
+                                            $tgl_tampil = explode('-', $tgl_posting[0]);
+                                            echo $tgl_tampil[2] . " " . $bulan[$tgl_tampil[1]] . " " . $tgl_tampil[0]; ?></span></li>
+                 <li>Lokasi : <span><?php echo $job->kabkota_nama; ?></span></li>
+                 <li>Jumlah Pelamar : <span><?php echo number_format($applicants, 0, ",", "."); ?></span></li>
+                 <li>Berakhir pada : <span><?php $tgl_end = explode('-', $job->lowongan_end_date);
+                                            echo $tgl_end[2] . " " . $bulan[$tgl_end[1]] . " " . $tgl_end[0]; ?></span></li>
                </ul>
                <?php if ($this->session->user_id != $job->user_id) : ?>
 
@@ -193,7 +193,7 @@
              <div class="post-details4 mb-50">
                <!-- Small Section Tittle -->
                <div class="small-section-tittle">
-                 <h4>Company Information</h4>
+                 <h4>Informasi Perusahaan</h4>
                </div>
                <a class="btn-perusahaan" style="font-weight: bold;font-size: 1.4em;color: #5b5c6e" href="<?php echo base_url() ?>landing/profil_perusahaan/<?php echo md5($job->perusahaan_id) ?>"><?php echo $job->perusahaan_nama; ?></a>
                <?php if ($job->perusahaan_sambutan != '') : ?>

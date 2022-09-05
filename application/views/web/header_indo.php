@@ -74,7 +74,6 @@
         border-radius: .2rem;
       }
 
-
       html,
       body {
         height: 100%;
@@ -106,24 +105,24 @@
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-2">
                 <!-- Logo -->
-                <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() . $s->stp_brand_icon ?>" style="height: 50px; width:176px" alt="" /></a>
+                <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() . $s->stp_brand_icon ?>" style="height: 80px; width:170px" alt="" /></a>
               </div>
               <div class="col-lg-10 col-md-10">
                 <div class="menu-wrapper">
                   <div class="main-menu">
                     <nav class="d-none d-lg-block">
                       <ul id="navigation">
-                        <li><a href="<?php echo base_url() ?>">Home</a></li>
-                        <li><a href="<?php echo base_url('job/job_listing') ?>">Find a Jobs </a></li>
-                        <li><a href="<?= base_url(); ?>#about">About</a></li>
-                        <li><a href="<?= base_url(); ?>#about">Contact</a></li>
+                        <li><a href="<?php echo base_url() ?>">Beranda</a></li>
+                        <li><a href="<?php echo base_url('job/job_listing') ?>">Cari Pekerjaan </a></li>
+                        <li><a href="<?= base_url(); ?>#about">Tentang</a></li>
+                        <li><a href="<?= base_url(); ?>#about">Kontak</a></li>
                       </ul>
                     </nav>
                   </div>
                   <div class="header-btn d-none d-lg-block">
                     <?php if ($this->session->login == FALSE) { ?>
-                      <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1">Login</a>
-                      <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Register</a>
+                      <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1">Masuk</a>
+                      <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Daftar</a>
                     <?php } else { ?>
                       <?php if ($this->session->user_level == 1) { ?>
                         <div class="row">
@@ -149,12 +148,12 @@
                             <div class="dropdown-menu text-danger dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                               <a class="dropdown-item" href="<?php echo base_url('dashboard') ?>">
                                 <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
-                                My Dashboard
+                                Beranda Saya
                               </a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                                Keluar
                               </a>
                             </div>
                           </li>
@@ -172,12 +171,12 @@
                             <div class="dropdown-menu text-danger dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                               <a class="dropdown-item" href="<?php echo base_url('dashboard') ?>">
                                 <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
-                                My Dashboard
+                                Beranda Saya
                               </a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                                Keluar
                               </a>
                             </div>
                           </li>

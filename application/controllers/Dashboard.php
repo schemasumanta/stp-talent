@@ -148,6 +148,27 @@ EXTRACT(MONTH FROM view_tgl) = '$bulan' GROUP BY CAST(view_tgl AS DATE)")->resul
 		echo json_encode($data);
 	}
 
+	public function get_postingan_provider()
+	{
+		$bulan = $this->input->post('bulan');
+		$tahun = $this->input->post('tahun');
+		$id_perusahaan = $this->session->perusahaan_id;
+
+
+		if ($bulan == "" and $tahun == "") {
+			$month = date('m');
+			$year = date('Y');
+
+			$data = $this->db->query("SELECT count(view_id) as jml,CAST(view_tgl AS DATE) AS tgl FROM tbl_view JOIN tbl_lowongan_pekerjaan ON tbl_view.view_id_lowongan = tbl_lowongan_pekerjaan.lowongan_id WHERE view_id_lowongan is not null AND perusahaan_id = '$id_perusahaan' AND EXTRACT(YEAR FROM view_tgl) = '$year' AND
+EXTRACT(MONTH FROM view_tgl) = '$month' GROUP BY CAST(view_tgl AS DATE)")->result();
+		} else {
+			$data = $this->db->query("SELECT count(view_id) as jml,CAST(view_tgl AS DATE) AS tgl FROM tbl_view JOIN tbl_lowongan_pekerjaan ON tbl_view.view_id_lowongan = tbl_lowongan_pekerjaan.lowongan_id WHERE view_id_lowongan is not null AND perusahaan_id = '$id_perusahaan' AND EXTRACT(YEAR FROM view_tgl) = '$tahun' AND
+EXTRACT(MONTH FROM view_tgl) = '$bulan' GROUP BY CAST(view_tgl AS DATE)")->result();
+		}
+
+		echo json_encode($data);
+	}
+
 	public function get_tnc()
 	{
 		if ($this->session->user_level == 3) {

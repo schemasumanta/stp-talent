@@ -17,11 +17,11 @@
 
                 <div class="col-lg-5 p-5" style="border-radius: 15px;background: rgba(22,22,26,0.7);">
                   <div class="hero-cap align-items-center mb-3 text-center">
-                    <a href="javascript:;" class="genric-btn danger medium btn-kandidat btn-pilihan" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px">Job Seeker</a>
-                    <a href="javascript:;" class="genric-btn danger medium btn-provider btn-pilihan">Job Provider</a>
+                    <a href="javascript:;" class="genric-btn danger medium btn-kandidat btn-pilihan" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px">Pencari Kerja</a>
+                    <a href="javascript:;" class="genric-btn danger medium btn-provider btn-pilihan">Penyedia Pekerjaan</a>
                   </div>
                   <div class="hero-cap text-center">
-                    <h2 class="user_role">Register</h2>
+                    <h3 class="user_role text-white">Daftar</h3>
                     <!-- <p class="text-light taglinetalent"> -->
                     </p>
                   </div>
@@ -68,16 +68,16 @@
                     </div>
 
                     <div class="col-lg-12 text-center">
-                      <span class="text-light">Sudah Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('landing/login') ?>">Login</a></span>
+                      <span class="text-light">Sudah Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('landing/login') ?>">Masuk</a></span>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-5 d-flex flex-wrap flex-fill justify-content-center mx-auto text-center">
                   <img src="<?php echo base_url() ?>assets/img/login.svg" style="width: 80%;">
-                  <h3 class="text-white fw-bold">Welcome to <strong>SoloTechnoPark</strong></h3>
-                  <p class="text-white">Join us to develop your company with expert talent, and expand your network
-                    with great people around you</p>
+                  <h3 class="text-white fw-bold" style="height: 82px;">Selamat Datang di <strong>SoloTechnoPark</strong></h3>
+                  <p class="text-white" style="margin-top: -35px;">Bergabunglah dengan kami untuk mengembangkan perusahaan Anda dengan bakat ahli, dan memperluas jaringan Anda
+                    dengan orang-orang hebat di sekitarmu</p>
                 </div>
               </div>
             </form>
@@ -263,7 +263,7 @@
       });
 
       $(document).on('click', '.btn-kandidat', function() {
-        $('.user_role').html('Job Seeker');
+        $('.user_role').html('Pencari Pekerjaan');
         $('.taglinetalent').html('Bergabung bersama kami dan dapatkan pekerjaan dengan mudah');
         $('.btn-pilihan').addClass('danger');
         $(this).removeClass('danger');
@@ -274,7 +274,7 @@
         $('#sebagai').val("1");
       });
       $(document).on('click', '.btn-provider', function() {
-        $('.user_role').html('Job Provider');
+        $('.user_role').html('Penyedia Pekerjaan');
         $('.taglinetalent').html('Bergabung bersama kami dan temukan calon karyawan dengan mudah');
         $('.btn-pilihan').addClass('danger');
         $(this).removeClass('danger');

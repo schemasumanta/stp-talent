@@ -49,7 +49,7 @@
                      <path fill-rule="evenodd" fill="#DD2727" d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z" />
                    </svg>
                  </div>
-                 <h4>Filter Jobs</h4>
+                 <h4>Filter Pekerjaan</h4>
                </div>
              </div>
            </div>
@@ -59,12 +59,12 @@
                <!-- single one -->
                <div class="single-listing">
                  <div class="small-section-tittle2">
-                   <h4>Sort By</h4>
+                   <h4>Sortir</h4>
                  </div>
                  <!-- Select job items start -->
                  <div class="select-job-items2">
                    <select name="sort_by" id="sort_by" class="form-control">
-                     <option value="">None</option>
+                     <option value="">Tidak ada</option>
                      <option value="DESC">Terbaru</option>
                      <option value="ASC">Terlama</option>
                    </select>
@@ -72,12 +72,12 @@
                </div>
                <div class="single-listing mt-4">
                  <div class="small-section-tittle2">
-                   <h4>Job Category</h4>
+                   <h4>Kategori</h4>
                  </div>
                  <!-- Select job items start -->
                  <div class="select-job-items2">
                    <select name="kategori_id" id="kategori_id" class="form-control select2">
-                     <option value="">All Category</option>
+                     <option value="">Semua Kategori</option>
                      <?php foreach ($kategori as $key) { ?>
                        <option value="<?= $key->kategori_id; ?>"><?= $key->kategori_nama; ?></option>
                      <?php }; ?>
@@ -87,7 +87,7 @@
                <!-- single two -->
                <div class="single-listing mt-4">
                  <div class="small-section-tittle2">
-                   <h4>Job Location</h4>
+                   <h4>Lokasi</h4>
                  </div>
                  <!-- Select job items start -->
                  <div class="select-job-items2">
@@ -110,7 +110,7 @@
                  <!-- Range Slider Start -->
                  <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
                    <div class="small-section-tittle2">
-                     <h4>Job Salary</h4>
+                     <h4>Gaji</h4>
                    </div>
                    <div class="widgets_inner">
                      <div class="range_item">
