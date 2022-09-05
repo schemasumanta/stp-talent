@@ -106,7 +106,7 @@
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-2">
                 <!-- Logo -->
-                <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() . $s->stp_brand_icon ?>" style="height: 50px; width:176px" alt="" /></a>
+                <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() . $s->stp_brand_icon ?>" style="height: 80px; width:170px" alt="" /></a>
               </div>
               <div class="col-lg-10 col-md-10">
                 <div class="menu-wrapper">
