@@ -155,7 +155,7 @@
             <i class="fa fa-bars"></i>
         </button>
         <a href="<?php echo base_url() ?>">
-            <img src="<?php echo base_url() . $this->session->stp_brand_icon ?>" style="height:60px; margin-left: 25px;"></a>
+            <img src="<?php echo base_url() . $this->session->stp_logo; ?>" style="height:60px; margin-left: 25px;"></a>
         <!-- Topbar Navbar -->
         <ul id="menuatas" class="navbar-nav ml-md-5 justify-content-center" style="width: 100%">
             <li class="nav-item  mx-4"><a class="btn btn-menu " href="<?php echo base_url() ?>">Beranda</a></li>
