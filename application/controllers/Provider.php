@@ -805,8 +805,8 @@ class Provider extends CI_Controller
 		$dateTime = gmdate("Y-m-d H:i:s");
 		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
 		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
-		$clientId = 'BRN-0258-1659388313605'; // Change with your Client ID
-		$secretKey = 'SK-Y7Zmm6dVGIJ5ti5aFZ1U'; // Change with your Secret Key
+		$clientId = 'BRN-0223-1658821341264'; // Change with your Client ID
+		$secretKey = 'SK-oCGRoGuyCVTCxno3kf8n'; // Change with your Secret Key
 
 		$getUrl = 'https://api-sandbox.doku.com';
 
@@ -883,7 +883,7 @@ class Provider extends CI_Controller
 
 		$url = $getUrl . $targetPath;
 
-		$shared_key = 'SK-Y7Zmm6dVGIJ5ti5aFZ1U';
+		$shared_key = 'SK-oCGRoGuyCVTCxno3kf8n';
 
 		$header['Client-Id'] = $this->session->client_id;
 		$header['Request-Id'] = $requestId;

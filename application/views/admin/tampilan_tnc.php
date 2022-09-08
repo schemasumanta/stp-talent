@@ -68,6 +68,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="control-label ">Judul Syarat dan Ketentuan</label>
+                            <div class="">
+                                <input type="text" name="tnc_judul" id="tnc_judul" class="form-control" value="" />
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label ">Masukan Syarat dan ketentuan</label>
                             <div class="">
                                 <textarea type="text" class="form-control summernote" name="tnc_text" id="tnc_text" rows="5"></textarea>
@@ -113,6 +120,9 @@
             placeholder: 'Deskripsi',
             tabsize: 2,
             height: 350,
+            toolbar: [
+                ['para', ['ul', 'ol', 'paragraph']],
+            ],
             callbacks: {
                 onImageUpload: function(image) {
                     uploadImage('misi', image[0]);

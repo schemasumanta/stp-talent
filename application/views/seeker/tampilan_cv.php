@@ -301,16 +301,16 @@ $bulan = array(
                   </div>
                   <div class="row mt-4">
                     <div class="col-md-12">
-                      <span style="font-weight: bold;font-size: 18px">Portopolio
+                      <span style="font-weight: bold;font-size: 18px"><a href="javascript:;" class=" h4 btn btn-danger" onclick="tambah_porto()">Tambah Link Portofolio</a>
                       </span>
                       <hr>
-                      <a href="javascript:;" class="text-danger genric-btn small btn-transparent" onclick="tambah_porto()" style="position: absolute;right: 5px;top:5px;border-radius: 0px"><i class="fas fa-plus mr-2"></i>Tambah Portopolio</a>
+                      <!-- <a href="javascript:;" class="text-danger genric-btn small btn-transparent" onclick="tambah_porto()" style="position: absolute;right: 5px;top:5px;border-radius: 0px"><i class="fas fa-plus mr-2"></i>Tambah Portofolio</a> -->
                     </div>
                     <div class="col-md-12">
                       <div class="row p-2">
                         <?php foreach ($porto as $key) { ?>
                           <div class="col-md-4 p-2">
-                            <a href="<?= $key->porto_link; ?>" target="_blank" class="btn btn-outline-dark"><?= $key->porto_nama; ?></a>
+                            <a href="<?= $key->porto_link; ?>" target="_blank" class="btn btn-outline-dark"><?= $key->porto_link; ?></a>
                             <a href="javascript:;" onclick="hapus_porto('<?= $key->porto_id; ?>')" class="btn btn-outline-danger"><i class="fas fa-trash"></i></a>
                           </div>
                         <?php }; ?>
@@ -1939,7 +1939,7 @@ $bulan = array(
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title">Tambah Portopolio</h3>
+        <h3 class="modal-title">Tambah Portofolio</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body form">
@@ -1947,16 +1947,16 @@ $bulan = array(
           <input type="hidden" value="" name="id_porto" id="porto" />
           <div class="form-body">
             <div class="form-group">
-              <label class="control-label col-md-4">Nama Portopolio</label>
+              <label class="control-label col-md-4">Nama Portofolio</label>
               <div class="col-md-8">
-                <input name="nama_porto" id="nama_porto" placeholder="Masukan nama portopolio" class="form-control" type="text">
+                <input name="nama_porto" id="nama_porto" placeholder="Masukan nama Portofolio" class="form-control" type="text">
                 <span class="help-block text-danger"></span>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-4">Link Portopolio</label>
+              <label class="control-label col-md-4">Link Portofolio</label>
               <div class="col-md-8">
-                <input name="link_porto" id="link_porto" placeholder="Masukan link portopolio" class="form-control" type="text">
+                <input name="link_porto" id="link_porto" placeholder="Masukan link Portofolio" class="form-control" type="text">
                 <span class="help-block text-danger"></span>
               </div>
             </div>

@@ -37,10 +37,18 @@
                       <input type="text" class="form-control w-100" name="perusahaan_nama" id="perusahaan_nama" placeholder="Company name according to NPWP" autofocus>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
-                      <input type="text" class="form-control w-100" name="perusahaan_npwp" id="perusahaan_npwp" placeholder="NPWP Company/Personal (Owner)" autofocus>
+                      <div class="custom-file">
+                        <input type="file" name="perusahaan_npwp" id="perusahaan_npwp" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file NPWP</label>
+                      </div>
+                      <small class="text-white">*Format PDF Max 2MB</small>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
-                      <input type="text" class="form-control w-100" name="perusahaan_nib" id="perusahaan_nib" placeholder="Company NIB" autofocus>
+                      <div class="custom-file">
+                        <input type="file" name="perusahaan_nib" id="perusahaan_nib" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file NIB</label>
+                      </div>
+                      <small class="text-white">*Format PDF Max 2MB</small>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
                       <input type="text" class="form-control w-100" name="perusahaan_website" id="perusahaan_website" placeholder="Company Website" autofocus>

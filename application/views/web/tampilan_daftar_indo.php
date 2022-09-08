@@ -93,7 +93,7 @@
             <h3 class="modal-title">Syarat dan ketentuan Aplikasi</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
-          <div class="modal-body text-center">
+          <div class="modal-body">
             <div id="tnc_text"></div>
 
           </div>
