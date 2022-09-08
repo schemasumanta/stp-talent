@@ -178,9 +178,20 @@
                     <a href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>"><img src="<?php echo $fj->perusahaan_logo ?>" alt="" /></a>
                   </div>
                   <div class="job-tittle">
-                    <a href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>">
-                      <h4><?php echo $fj->lowongan_judul; ?></h4>
-                    </a>
+                    <?php
+                    if ($fj->premium_masa_aktif) {
+                    ?>
+                      <a href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>">
+                        <h4><?php echo $fj->lowongan_judul; ?><i class='fas fa-star' style='font-size:28px;color:red'></i></h4>
+                      </a>
+                    <?php } else { ?>
+                      <a href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>">
+                        <h4><?php echo $fj->lowongan_judul; ?></h4>
+                      </a>
+
+                    <?php
+                    }
+                    ?>
                     <ul>
                       <li><?php echo $fj->kategori_nama; ?></li>
                       <li><i class="fas fa-map-marker-alt"></i><?php echo $fj->kabkota_nama . " - " . $fj->prov_nama; ?></li>

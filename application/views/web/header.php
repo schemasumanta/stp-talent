@@ -104,19 +104,19 @@
         <div class="headder-top header-sticky">
           <div class="container">
             <div class="row align-items-center">
-              <div class="col-lg-2 col-md-2">
+              <div class="col-lg-3 col-md-3">
                 <!-- Logo -->
-                <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() . $s->stp_logo; ?>" style="height: 80px; width:170px" alt="" /></a>
+                <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() . $s->stp_logo; ?>" style="height: 60px; width:240px;" alt="" /></a>
               </div>
-              <div class="col-lg-10 col-md-10">
+              <div class="col-lg-9 col-md-9">
                 <div class="menu-wrapper">
                   <div class="main-menu">
                     <nav class="d-none d-lg-block">
                       <ul id="navigation">
-                        <li><a href="<?php echo base_url() ?>">Home</a></li>
+                        <li><a href="<?php echo base_url('landing/en') ?>">Home</a></li>
                         <li><a href="<?php echo base_url('job/job_listing') ?>">Find a Jobs </a></li>
-                        <li><a href="<?= base_url(); ?>#about">About</a></li>
-                        <li><a href="<?= base_url(); ?>#about">Contact</a></li>
+                        <li><a href="<?= base_url('landing/en'); ?>#about">About</a></li>
+                        <li><a href="<?= base_url('landing/en'); ?>#about">Contact</a></li>
                       </ul>
                     </nav>
                   </div>

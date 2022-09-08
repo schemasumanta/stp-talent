@@ -262,12 +262,15 @@ class Job extends CI_Controller
 		$data['resume'] = $this->db->get_where('tbl_resume', ['user_id' => $user_id])->row();
 
 		$data['ip'] = $ip;
-
-		$this->load->view('web/header_indo', $data);
-
-		$this->load->view('job/tampilan_detail_job', $data);
-
-		$this->load->view('web/script_include', $data);
+		if ($this->session->langguage == "in") {
+			$this->load->view('web/header_indo', $data);
+			$this->load->view('job/tampilan_detail_job_indo', $data);
+			$this->load->view('web/script_include', $data);
+		} else {
+			$this->load->view('web/header', $data);
+			$this->load->view('job/tampilan_detail_job', $data);
+			$this->load->view('web/script_include', $data);
+		}
 	}
 
 	public function job_listing()
@@ -275,10 +278,15 @@ class Job extends CI_Controller
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
 		$data['prov'] = $this->db->order_by('prov_nama', 'asc')->get('tbl_master_provinsi')->result();
 		$data['kategori'] = $this->db->get_where('tbl_master_kategori_job', ['kategori_status' => 1])->result();
-
-		$this->load->view('web/header_indo', $data);
-		$this->load->view('job/tampilan_job_listing', $data);
-		$this->load->view('web/script_include', $data);
+		if ($this->session->langguage == "in") {
+			$this->load->view('web/header_indo', $data);
+			$this->load->view('job/tampilan_job_listing', $data);
+			$this->load->view('web/script_include', $data);
+		} else {
+			$this->load->view('web/header', $data);
+			$this->load->view('job/tampilan_job_listing', $data);
+			$this->load->view('web/script_include', $data);
+		}
 	}
 
 	public function level()

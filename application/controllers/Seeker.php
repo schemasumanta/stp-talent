@@ -239,19 +239,32 @@ class Seeker extends CI_Controller
 					}
 					redirect('dashboard', 'refresh');
 				} else {
-
-					$data['title'] = 'Login Gagal';
-					$data['text'] = 'User Belum Diaktivasi!';
-					$data['icon'] = 'error';
-					$this->session->set_flashdata($data);
+					if ($this->session->langguage == "in") {
+						$data['title'] = 'Login Gagal';
+						$data['text'] = 'User Belum Diaktivasi!';
+						$data['icon'] = 'error';
+						$this->session->set_flashdata($data);
+					} else {
+						$data['title'] = 'Login Failed';
+						$data['text'] = 'User Not Activated!';
+						$data['icon'] = 'error';
+						$this->session->set_flashdata($data);
+					}
 					redirect('landing/login/' . $job, 'refresh');
 				}
 			}
 		} else {
-			$data['title'] = 'Login Gagal';
-			$data['text'] = 'Silahkan Periksa Email & Password!';
-			$data['icon'] = 'error';
-			$this->session->set_flashdata($data);
+			if ($this->session->langguage == "in") {
+				$data['title'] = 'Login Gagal';
+				$data['text'] = 'Silahkan Periksa Email & Password!';
+				$data['icon'] = 'error';
+				$this->session->set_flashdata($data);
+			} else {
+				$data['title'] = 'Login Failed';
+				$data['text'] = 'Please Check Email & Password!';
+				$data['icon'] = 'error';
+				$this->session->set_flashdata($data);
+			}
 			redirect('landing/login/' . $job, 'refresh');
 		}
 	}

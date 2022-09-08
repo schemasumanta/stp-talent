@@ -49,7 +49,7 @@
                      <path fill-rule="evenodd" fill="#DD2727" d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z" />
                    </svg>
                  </div>
-                 <h4>Job Filters</h4>
+                 <h4>Filter Pekerjaan</h4>
                </div>
              </div>
            </div>
@@ -59,25 +59,25 @@
                <!-- single one -->
                <div class="single-listing">
                  <div class="small-section-tittle2">
-                   <h4>Soft by</h4>
+                   <h4>Sortir</h4>
                  </div>
                  <!-- Select job items start -->
                  <div class="select-job-items2">
                    <select name="sort_by" id="sort_by" class="form-control">
-                     <option value="">None</option>
-                     <option value="DESC">Latest</option>
-                     <option value="ASC">Oldest</option>
+                     <option value="">Tidak ada</option>
+                     <option value="DESC">Terbaru</option>
+                     <option value="ASC">Terlama</option>
                    </select>
                  </div>
                </div>
                <div class="single-listing mt-4">
                  <div class="small-section-tittle2">
-                   <h4>Category</h4>
+                   <h4>Kategori</h4>
                  </div>
                  <!-- Select job items start -->
                  <div class="select-job-items2">
                    <select name="kategori_id" id="kategori_id" class="form-control select2">
-                     <option value="">All Category</option>
+                     <option value="">Semua Kategori</option>
                      <?php foreach ($kategori as $key) { ?>
                        <option value="<?= $key->kategori_id; ?>"><?= $key->kategori_nama; ?></option>
                      <?php }; ?>
@@ -87,20 +87,20 @@
                <!-- single two -->
                <div class="single-listing mt-4">
                  <div class="small-section-tittle2">
-                   <h4>Location</h4>
+                   <h4>Lokasi</h4>
                  </div>
                  <!-- Select job items start -->
                  <div class="select-job-items2">
-                   <label>Province</label>
+                   <label>Provinsi</label>
                    <select name="id_prov" id="id_prov" class="form-control select2">
-                     <option value="">Select Province</option>
+                     <option value="">Pilih Provinsi</option>
                      <?php foreach ($prov as $key) { ?>
                        <option value="<?= $key->prov_id; ?>"><?= $key->prov_nama; ?></option>
                      <?php }; ?>
                    </select>
                  </div>
                  <div class="select-job-items2">
-                   <label>City</label>
+                   <label>Kota</label>
                    <select name="id_kabkota" id="id_kabkota" class="form-control select2">
                    </select>
                  </div>
@@ -110,7 +110,7 @@
                  <!-- Range Slider Start -->
                  <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
                    <div class="small-section-tittle2">
-                     <h4>Salary</h4>
+                     <h4>Gaji</h4>
                    </div>
                    <div class="widgets_inner">
                      <div class="range_item">
@@ -204,7 +204,7 @@
      });
 
      $('#id_kabkota').select2({
-       placeholder: 'Select City',
+       placeholder: 'Pilih Kabupaten',
        allowClear: true,
        tags: true,
      });
@@ -225,6 +225,23 @@
          url: '<?php echo base_url('job/tabel_lowongan') ?>',
          type: 'get',
          data: function(data) {}
+       },
+       language: {
+         sProcessing: 'Sedang memproses...',
+         sLengthMenu: 'Tampilkan _MENU_',
+         sZeroRecords: 'Tidak ditemukan data yang sesuai',
+         sInfo: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
+         sInfoEmpty: 'Menampilkan 0 sampai 0 dari 0 entri',
+         sInfoFiltered: '(disaring dari _MAX_ entri keseluruhan)',
+         sInfoPostFix: '',
+         sSearch: 'Cari Lowongan',
+         sUrl: '',
+         oPaginate: {
+           sFirst: '<<',
+           sPrevious: '<',
+           sNext: '>',
+           sLast: '>>'
+         }
        },
        // order: [1, 'asc'],
        columns: [

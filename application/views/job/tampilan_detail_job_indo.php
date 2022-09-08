@@ -105,7 +105,7 @@
                <div class="post-details1 mb-50">
                  <!-- Small Section Tittle -->
                  <div class="small-section-tittle">
-                   <h4>Job description</h4>
+                   <h4>Deskripsi Pekerjaan</h4>
                  </div>
                  <p class="mb-3" style="font-family: Inter!important;line-height: 15px"> <?php echo $job->lowongan_deskripsi; ?></p>
                </div>
@@ -117,7 +117,7 @@
                  <div class="post-details1 mb-50">
                    <!-- Small Section Tittle -->
                    <div class="small-section-tittle">
-                     <h4>Skill</h4>
+                     <h4>Kemampuan</h4>
                    </div>
                    <ul>
                      <?php foreach ($skill as $sk) : ?>
@@ -139,16 +139,16 @@
              <div class="post-details3 mb-50">
                <!-- Small Section Tittle -->
                <div class="small-section-tittle">
-                 <h4>Job Details</h4>
+                 <h4>Detail Pekerjaan</h4>
                </div>
                <ul>
-                 <li>Posted on : <span><?php $tgl_posting = explode(' ', $job->lowongan_created_date);
-                                        $tgl_tampil = explode('-', $tgl_posting[0]);
-                                        echo $tgl_tampil[2] . " " . $bulan[$tgl_tampil[1]] . " " . $tgl_tampil[0]; ?></span></li>
-                 <li>Location : <span><?php echo $job->kabkota_nama; ?></span></li>
-                 <li>Applicants : <span><?php echo number_format($applicants, 0, ",", "."); ?></span></li>
-                 <li>Ends on : <span><?php $tgl_end = explode('-', $job->lowongan_end_date);
-                                      echo $tgl_end[2] . " " . $bulan[$tgl_end[1]] . " " . $tgl_end[0]; ?></span></li>
+                 <li>Diposting pada : <span><?php $tgl_posting = explode(' ', $job->lowongan_created_date);
+                                            $tgl_tampil = explode('-', $tgl_posting[0]);
+                                            echo $tgl_tampil[2] . " " . $bulan[$tgl_tampil[1]] . " " . $tgl_tampil[0]; ?></span></li>
+                 <li>Lokasi : <span><?php echo $job->kabkota_nama; ?></span></li>
+                 <li>Jumlah Pelamar : <span><?php echo number_format($applicants, 0, ",", "."); ?></span></li>
+                 <li>Berakhir pada : <span><?php $tgl_end = explode('-', $job->lowongan_end_date);
+                                            echo $tgl_end[2] . " " . $bulan[$tgl_end[1]] . " " . $tgl_end[0]; ?></span></li>
                </ul>
                <?php if ($this->session->user_id != $job->user_id) : ?>
 
@@ -193,7 +193,7 @@
              <div class="post-details4 mb-50">
                <!-- Small Section Tittle -->
                <div class="small-section-tittle">
-                 <h4>Company Information</h4>
+                 <h4>Informasi Perusahaan</h4>
                </div>
                <a class="btn-perusahaan" style="font-weight: bold;font-size: 1.4em;color: #5b5c6e" href="<?php echo base_url() ?>landing/profil_perusahaan/<?php echo md5($job->perusahaan_id) ?>"><?php echo $job->perusahaan_nama; ?></a>
                <?php if ($job->perusahaan_sambutan != '') : ?>
@@ -228,13 +228,13 @@
          <form id="form_lamaran" method="post" enctype="multipart/form-data" action="<?php echo base_url('job/simpan_lamaran') ?>">
 
            <div class="modal-header">
-             <h6 class="modal-title judul_lamaran">Apply to</h6>
+             <h6 class="modal-title judul_lamaran">Melamar Ke</h6>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
            </div>
            <div class="modal-body">
              <div class="row ">
                <div class="col-md-12">
-                 <label style="color:#343a40;" for="lamaran_deskripsi">About you <?= $ip; ?></label>
+                 <label style="color:#343a40;" for="lamaran_deskripsi">Tentang Anda <?= $ip; ?></label>
                  <input type="hidden" name="lowongan_id" id="lowongan_id">
                  <textarea type="text" class="form-control" id="lamaran_deskripsi" name="lamaran_deskripsi" rows="5" placeholder="Berikan informasi terkait keahlian anda untuk pekerjaan ini"></textarea>
                  <small class="error-lamaran_deskripsi text-danger"></small>
@@ -244,8 +244,8 @@
            <div class="modal-footer">
              <div class=" row" class="collapse" id="customer_collapse">
                <div class="col-sm-12 float-right">
-                 <button type="button" class="genric-btn rounded large danger" data-dismiss="modal" style="border-radius: 0px;">Close</button>
-                 <button type="submit" class="genric-btn rounded large primary" style="border-radius: 0px" id="btn_melamar">Apply</button>
+                 <button type="button" class="genric-btn rounded large danger" data-dismiss="modal" style="border-radius: 0px;">Tutup</button>
+                 <button type="submit" class="genric-btn rounded large primary" style="border-radius: 0px" id="btn_melamar">Lamar</button>
                </div>
              </div>
            </div>
@@ -313,7 +313,7 @@
      Swal.fire({
        icon: 'error',
        title: 'Oops...',
-       text: 'Please complete your personal data first!',
+       text: 'Silahkan untuk lengkapi data diri dulu!',
        timer: 2000,
        timerProgressBar: true,
        didOpen: () => {

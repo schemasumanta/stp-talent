@@ -17,67 +17,67 @@
 
                 <div class="col-lg-5 p-5" style="border-radius: 15px;background: rgba(22,22,26,0.7);">
                   <div class="hero-cap align-items-center mb-3 text-center">
-                    <a href="javascript:;" class="genric-btn danger medium btn-kandidat btn-pilihan" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px">Job Seeker</a>
-                    <a href="javascript:;" class="genric-btn danger medium btn-provider btn-pilihan">Job Provider</a>
+                    <a href="javascript:;" class="genric-btn danger medium btn-kandidat btn-pilihan" style="border-top-left-radius: 15px;border-bottom-left-radius: 15px;border-top-right-radius: 0px;border-bottom-right-radius: 0px">Pencari Kerja</a>
+                    <a href="javascript:;" class="genric-btn danger medium btn-provider btn-pilihan">Penyedia Pekerjaan</a>
                   </div>
                   <div class="hero-cap text-center">
-                    <h3 class="user_role text-white">Register</h3>
+                    <h3 class="user_role text-white">Daftar</h3>
                     <!-- <p class="text-light taglinetalent"> -->
                     </p>
                   </div>
                   <div class="row justify-content-center mt-4">
                     <div class="col-lg-12">
-                      <input type="text" class="form-control w-100" name="seeker_nama" id="seeker_nama" placeholder="Full name" autofocus>
+                      <input type="text" class="form-control w-100" name="seeker_nama" id="seeker_nama" placeholder="Nama Lengkap" autofocus>
                       <input type="hidden" class="form-control w-100" name="seeker_level" id="seeker_level" value="2">
                     </div>
                     <div class="col-lg-12 mt-4">
-                      <input type="text" class="form-control w-100" name="seeker_telepon" id="seeker_telepon" placeholder="Your Phone Number" autofocus>
+                      <input type="text" class="form-control w-100" name="seeker_telepon" id="seeker_telepon" placeholder="Nomor Telepon" autofocus>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
-                      <input type="text" class="form-control w-100" name="perusahaan_nama" id="perusahaan_nama" placeholder="Company name according to NPWP" autofocus>
+                      <input type="text" class="form-control w-100" name="perusahaan_nama" id="perusahaan_nama" placeholder="Nama Perusahaan sesuai NPWP" autofocus>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
-                      <input type="text" class="form-control w-100" name="perusahaan_npwp" id="perusahaan_npwp" placeholder="NPWP Company/Personal (Owner)" autofocus>
+                      <input type="text" class="form-control w-100" name="perusahaan_npwp" id="perusahaan_npwp" placeholder="NPWP Perusahaan/Pribadi (Owner)" autofocus>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
-                      <input type="text" class="form-control w-100" name="perusahaan_nib" id="perusahaan_nib" placeholder="Company NIB" autofocus>
+                      <input type="text" class="form-control w-100" name="perusahaan_nib" id="perusahaan_nib" placeholder="NIB Perusahaan" autofocus>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
-                      <input type="text" class="form-control w-100" name="perusahaan_website" id="perusahaan_website" placeholder="Company Website" autofocus>
+                      <input type="text" class="form-control w-100" name="perusahaan_website" id="perusahaan_website" placeholder="Website Perusahaan" autofocus>
                     </div>
                     <div class="col-lg-12 mt-4">
-                      <input type="text" class="form-control w-100" name="seeker_email" id="seeker_email" placeholder="Your Email" autofocus>
+                      <input type="text" class="form-control w-100" name="seeker_email" id="seeker_email" placeholder="Masukkan Email" autofocus>
                     </div>
                     <div class="col-lg-12 mt-4">
-                      <input type="password" class="form-control w-100" name="seeker_password" id="seeker_password" placeholder="Your Password Min 6 Digit">
-                      <a href="javascript:;" onclick="show_password()" id="text_pw" class="text-light">Show Password</a>
+                      <input type="password" class="form-control w-100" name="seeker_password" id="seeker_password" placeholder="Masukkan Password Min 6 Digit">
+                      <a href="javascript:;" onclick="show_password()" id="text_pw" class="text-light">Tampilkan Password</a>
                     </div>
                     <div class="col-lg-12 mt-4">
 
                       <div class="form-group form-check">
                         <input type="checkbox" class="form-check-input" id="check_persetujuan" value="1">
                         <input type="hidden" value="1" id="sebagai">
-                        <label class="form-check-label text-white" for="check_persetujuan">Agree to <a href="javascript:void(0)" class="text-danger" onclick="tnc()">the terms and conditions of the application.</a></label>
+                        <label class="form-check-label text-white" for="check_persetujuan">Menyetujui <a href="javascript:void(0)" class="text-danger" onclick="tnc()">Syarat dan ketentuan aplikasi.</a></label>
                         <br />
                       </div>
 
                     </div>
                     <div class="col-lg-12 mt-4 items-link btn-group">
-                      <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Cancel</a>
-                      <a href="javascript:;" class="item_daftar" style="width: 50%;display: inline-block!important;background:#DD2727;color: white;border: 1px solid #DD2727">Register</a>
+                      <a href="<?php echo base_url() ?>" style="width: 50%;margin-right:15px;display: inline-block!important;background: transparent;color: white;border:1px solid white">Batal</a>
+                      <a href="javascript:;" class="item_daftar" style="width: 50%;display: inline-block!important;background:#DD2727;color: white;border: 1px solid #DD2727">Daftar</a>
                     </div>
 
                     <div class="col-lg-12 text-center">
-                      <span class="text-light">Already Have an Account? Please <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('landing/login') ?>">Login</a></span>
+                      <span class="text-light">Sudah Punya Akun ? Silahkan <span class="text-light "><span style="font-weight: bold;"><a href="<?php echo base_url('landing/login') ?>">Masuk</a></span>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-2"></div>
                 <div class="col-lg-5 d-flex flex-wrap flex-fill justify-content-center mx-auto text-center">
                   <img src="<?php echo base_url() ?>assets/img/login.svg" style="width: 80%;">
-                  <h3 class="text-white fw-bold" style="height: 82px;">Welcome to <strong>SoloTechnoPark</strong></h3>
-                  <p class="text-white" style="margin-top: -35px;">Join us to grow your company with expert talent, and expand your network
-                    with great people around you</p>
+                  <h3 class="text-white fw-bold" style="height: 82px;">Selamat Datang di <strong>SoloTechnoPark</strong></h3>
+                  <p class="text-white" style="margin-top: -35px;">Bergabunglah dengan kami untuk mengembangkan perusahaan Anda dengan bakat ahli, dan memperluas jaringan Anda
+                    dengan orang-orang hebat di sekitarmu</p>
                 </div>
               </div>
             </form>
@@ -90,7 +90,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title">the terms and conditions of the application.</h3>
+            <h3 class="modal-title">Syarat dan ketentuan Aplikasi</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body text-center">
@@ -98,7 +98,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -111,11 +111,11 @@
         let seeker_nama = $('#seeker_nama').val();
 
         if (seeker_nama == '') {
-          $('#seeker_nama').attr('placeholder', 'Please Enter Name');
+          $('#seeker_nama').attr('placeholder', 'Silahkan Masukkan Nama');
           $('#seeker_nama').addClass('is-invalid');
           Swal.fire(
             'Oops...',
-            'Some have not been filled in or in the checklist!',
+            'Ada yang belum diisi atau di Ceklis!',
             'warning'
           )
           cek++;
@@ -128,7 +128,7 @@
           $('#check_persetujuan').addClass('is-invalid');
           Swal.fire(
             'Oops...',
-            'Some have not been filled in or in the checklist!',
+            'Ada yang belum diisi atau di Ceklis!',
             'warning'
           )
           cek++;
@@ -141,12 +141,12 @@
           let perusahaan_npwp = $('#perusahaan_npwp').val();
 
           if (perusahaan_nama == '') {
-            $('#perusahaan_nama').attr('placeholder', 'Please Enter Company');
+            $('#perusahaan_nama').attr('placeholder', 'Silahkan Masukkan Perusahaan');
             $('#perusahaan_nama').addClass('is-invalid');
             $('#seeker_email').val('');
             Swal.fire(
               'Oops...',
-              'Some have not been filled in or in the checklist!',
+              'Ada yang belum diisi atau di Ceklis!',
               'warning'
             )
             cek++;
@@ -154,11 +154,11 @@
             $('#perusahaan_nama').removeClass('is-invalid');
           }
           if (perusahaan_npwp == '') {
-            $('#perusahaan_npwp').attr('placeholder', 'Please enter NPWP');
+            $('#perusahaan_npwp').attr('placeholder', 'Silahkan Masukkan NPWP');
             $('#perusahaan_npwp').addClass('is-invalid');
             Swal.fire(
               'Oops...',
-              'Some have not been filled in or in the checklist!',
+              'Ada yang belum diisi atau di Ceklis!',
               'warning'
             )
             cek++;
@@ -171,19 +171,19 @@
         }
         let seeker_email = $('#seeker_email').val();
         if (seeker_email == '') {
-          $('#seeker_email').attr('placeholder', 'Please enter Email');
+          $('#seeker_email').attr('placeholder', 'Silahkan Masukkan Email');
           $('#seeker_email').addClass('is-invalid');
           $('#seeker_email').val('');
           Swal.fire(
             'Oops...',
-            'Some have not been filled in or in the checklist!',
+            'Ada yang belum diisi atau di Ceklis!',
             'warning'
           )
           cek++;
         } else {
           let testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
           if (!testEmail.test(seeker_email)) {
-            $('#seeker_email').attr('placeholder', 'Invalid Email Format');
+            $('#seeker_email').attr('placeholder', 'Format Email Tidak Valid');
             $('#seeker_email').addClass('is-invalid');
             $('#seeker_email').val('');
 
@@ -197,12 +197,12 @@
         let seeker_password = $('#seeker_password').val();
         var validasi_password = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
         if (validasi_password.test(seeker_password) == false) {
-          $('#seeker_password').attr('placeholder', 'Use a Combination of Alphanumeric and Capital Letters');
+          $('#seeker_password').attr('placeholder', 'Gunakan Kombinasi Alfanumerik & Huruf Kapital');
           $('#seeker_password').addClass('is-invalid');
           $('#seeker_password').val('');
           Swal.fire(
             'Oops...',
-            'Some have not been filled in or in the checklist!',
+            'Ada yang belum diisi atau di Ceklis!',
             'warning'
           )
           cek++;
@@ -224,13 +224,13 @@
             success: function(data) {
               console.log(data);
               if (data > 0) {
-                $('#seeker_email').attr('placeholder', 'Email Already Used!');
+                $('#seeker_email').attr('placeholder', 'Email Sudah Digunakan!');
                 $('#seeker_email').addClass('is-invalid');
                 $('#seeker_email').val('');
                 $('#seeker_email').focus();
                 Swal.fire(
                   'Oops...',
-                  'Email Already Used!',
+                  'Email Sudah digunakan!',
                   'warning'
                 )
 
@@ -263,7 +263,7 @@
       });
 
       $(document).on('click', '.btn-kandidat', function() {
-        $('.user_role').html('Job Seeker');
+        $('.user_role').html('Pencari Pekerjaan');
         $('.taglinetalent').html('Bergabung bersama kami dan dapatkan pekerjaan dengan mudah');
         $('.btn-pilihan').addClass('danger');
         $(this).removeClass('danger');
@@ -274,7 +274,7 @@
         $('#sebagai').val("1");
       });
       $(document).on('click', '.btn-provider', function() {
-        $('.user_role').html('Job Provider');
+        $('.user_role').html('Penyedia Pekerjaan');
         $('.taglinetalent').html('Bergabung bersama kami dan temukan calon karyawan dengan mudah');
         $('.btn-pilihan').addClass('danger');
         $(this).removeClass('danger');
@@ -289,9 +289,9 @@
         if ($('#seeker_password').attr('type') == "password") {
           $('#seeker_password').attr('type', 'text');
           $('#show_pw').html('<i class="fa fa-eye-slash"></i>');
-          $('#text_pw').text('Hide Password');
+          $('#text_pw').text('Sembunyikan Password');
         } else {
-          $('#text_pw').text('Show Password');
+          $('#text_pw').text('Tampilkan Password');
           $('#seeker_password').attr('type', 'password');
           $('#show_pw').html('<i class="fa fa-eye"></i>');
         }

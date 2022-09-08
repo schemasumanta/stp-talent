@@ -7,6 +7,8 @@ class Landing extends CI_Controller
 
 	public function index()
 	{
+		$this->session->set_userdata('langguage', 'in');
+
 		$this->in();
 	}
 	public function in()
@@ -35,14 +37,18 @@ class Landing extends CI_Controller
 			c.kategori_nama,
 			d.jabatan_nama,
 			e.prov_nama,
-			f.kabkota_nama'
+			f.kabkota_nama,
+			h.premium_masa_aktif'
 		);
 		$this->db->join('tbl_perusahaan b', 'b.perusahaan_id=a.perusahaan_id');
 		$this->db->join('tbl_master_kategori_job c', 'c.kategori_id=a.kategori_id');
 		$this->db->join('tbl_master_jabatan d', 'd.jabatan_id=a.jabatan_id');
 		$this->db->join('tbl_master_provinsi e', 'e.prov_id=b.perusahaan_prov');
 		$this->db->join('tbl_master_kabkota f', 'f.kabkota_id=b.perusahaan_kabkota');
+		$this->db->join('tbl_master_user g', 'b.perusahaan_id=g.perusahaan_id', 'left');
+		$this->db->join('tbl_langganan_premium h', 'h.user_id=g.user_id', 'left');
 		$this->db->where('a.lowongan_status', 1);
+		$this->db->group_by('a.lowongan_judul');
 		$this->db->limit(8);
 		$this->db->order_by('lowongan_id', 'desc');
 		$data['featured_job'] = $this->db->get('tbl_lowongan_pekerjaan a')->result();
@@ -56,6 +62,9 @@ class Landing extends CI_Controller
 	}
 	public function en()
 	{
+
+		$this->session->set_userdata('langguage', 'en');
+
 		$this->db->where('slider_tipe', 'main');
 		$this->db->where('slider_status', 1);
 		$data['slider_main'] = $this->db->get('tbl_master_slider')->result();
@@ -120,10 +129,18 @@ class Landing extends CI_Controller
 		$this->db->where('slider_status', 1);
 		$data['slider_how'] = $this->db->get('tbl_master_slider')->result();
 		if ($this->session->login == FALSE) {
-			$this->load->view('web/header_indo', $data);
-			$this->load->view('web/tampilan_login', $data);
-			// $this->load->view('web/footer_indo', $data);
-			$this->load->view('web/script_include', $data);
+			if ($this->session->langguage == "in") {
+				# code...
+				$this->load->view('web/header_indo', $data);
+				$this->load->view('web/tampilan_login_indo', $data);
+				// $this->load->view('web/footer_indo', $data);
+				$this->load->view('web/script_include', $data);
+			} else {
+				$this->load->view('web/header', $data);
+				$this->load->view('web/tampilan_login', $data);
+				// $this->load->view('web/footer_indo', $data);
+				$this->load->view('web/script_include', $data);
+			}
 		} else {
 			redirect('dashboard', 'refresh');
 		}
@@ -163,11 +180,15 @@ class Landing extends CI_Controller
 		];
 		$this->db->insert('tbl_view', $insert);
 
-		$this->load->view('web/header_indo', $data);
-
-		$this->load->view('provider/profil_perusahaan', $data);
-
-		$this->load->view('web/script_include', $data);
+		if ($this->session->langguage == "in") {
+			$this->load->view('web/header_indo', $data);
+			$this->load->view('provider/profil_perusahaan_indo', $data);
+			$this->load->view('web/script_include', $data);
+		} else {
+			$this->load->view('web/header', $data);
+			$this->load->view('provider/profil_perusahaan', $data);
+			$this->load->view('web/script_include', $data);
+		}
 	}
 
 	public function register()
@@ -176,9 +197,15 @@ class Landing extends CI_Controller
 		$data['tnc_seeker'] = $this->db->order_by("tnc_terbit_pada", "DESC")->get_where('tbl_tnc', ['tnc_tipe' => 1])->row();
 		$data['tnc_provider'] = $this->db->order_by("tnc_terbit_pada", "DESC")->get_where('tbl_tnc', ['tnc_tipe' => 2])->row();
 		if ($this->session->login == FALSE) {
-			$this->load->view('web/header_indo', $data);
-			$this->load->view('web/tampilan_daftar', $data);
-			$this->load->view('web/script_include', $data);
+			if ($this->session->langguage == "in") {
+				$this->load->view('web/header_indo', $data);
+				$this->load->view('web/tampilan_daftar_indo', $data);
+				$this->load->view('web/script_include', $data);
+			} else {
+				$this->load->view('web/header', $data);
+				$this->load->view('web/tampilan_daftar', $data);
+				$this->load->view('web/script_include', $data);
+			}
 		} else {
 			redirect('seeker/dashboard', 'refresh');
 		}
@@ -291,9 +318,15 @@ class Landing extends CI_Controller
 	{
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
 		if ($this->session->login == FALSE) {
-			$this->load->view('web/header_indo', $data);
-			$this->load->view('web/tampilan_forgot', $data);
-			$this->load->view('web/script_include', $data);
+			if ($this->session->langguage == "in") {
+				$this->load->view('web/header_indo', $data);
+				$this->load->view('web/tampilan_forgot_indo', $data);
+				$this->load->view('web/script_include', $data);
+			} else {
+				$this->load->view('web/header', $data);
+				$this->load->view('web/tampilan_forgot', $data);
+				$this->load->view('web/script_include', $data);
+			}
 		} else {
 			redirect('seeker/dashboard', 'refresh');
 		}

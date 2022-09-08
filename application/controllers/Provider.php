@@ -4,7 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Provider extends CI_Controller
 {
 
-
 	public function index()
 	{
 		$this->db->where('slider_tipe', 'main');
@@ -161,18 +160,32 @@ class Provider extends CI_Controller
 					$this->session->set_userdata($data);
 					redirect('landing/lock_akun', 'refresh');
 				} else {
-					$data['title'] = 'Login Gagal';
-					$data['text'] = 'User Belum Diaktivasi!';
-					$data['icon'] = 'error';
-					$this->session->set_flashdata($data);
+					if ($this->session->langguage == "in") {
+						$data['title'] = 'Login Gagal';
+						$data['text'] = 'User Belum Diaktivasi!';
+						$data['icon'] = 'error';
+						$this->session->set_flashdata($data);
+					} else {
+						$data['title'] = 'Login Failed';
+						$data['text'] = 'User Not Activated!';
+						$data['icon'] = 'error';
+						$this->session->set_flashdata($data);
+					}
 					redirect('landing/login', 'refresh');
 				}
 			}
 		} else {
-			$data['title'] = 'Login Gagal';
-			$data['text'] = 'Silahkan Periksa Email & Password!';
-			$data['icon'] = 'error';
-			$this->session->set_flashdata($data);
+			if ($this->session->langguage == "in") {
+				$data['title'] = 'Login Gagal';
+				$data['text'] = 'Silahkan Periksa Email & Password!';
+				$data['icon'] = 'error';
+				$this->session->set_flashdata($data);
+			} else {
+				$data['title'] = 'Login Failed';
+				$data['text'] = 'Please Check Email & Password!';
+				$data['icon'] = 'error';
+				$this->session->set_flashdata($data);
+			}
 			redirect('landing/login', 'refresh');
 		}
 	}
@@ -723,7 +736,10 @@ class Provider extends CI_Controller
 
 	public function premium()
 	{
-		$data['premium'] = $this->db->get_where('tbl_premium', ['premium_status' => 1])->row();
+		$user_id = $this->session->user_id;
+
+		$data['premium'] = $this->db->get_where('tbl_premium', ['premium_status' => 1, 'premium_tipe' => 2])->row();
+		$data['user_premium'] = $this->db->get_where('tbl_langganan_premium', ['user_id' => $user_id])->row();
 
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
@@ -734,7 +750,7 @@ class Provider extends CI_Controller
 	function payment()
 	{
 		$id_premium = $this->input->post('id');
-		$price = $this->input->post('price');
+		$price = $this->input->post('price') * 12;
 		$user_id = $this->session->user_id;
 
 		$data = $this->db->where('premium_id', $id_premium)->get('tbl_premium')->row_array();
@@ -768,7 +784,7 @@ class Provider extends CI_Controller
 				'amount'            => (int)$price,
 				'invoice_number'    => $inv_number,
 				'currency'          => 'IDR',
-				'callback_url'      => base_url('/Participant'),
+				'callback_url'      => base_url('provider/payment_sukses'),
 				'line_items'        => $itemsss,
 			],
 			'payment'               => [
@@ -838,7 +854,8 @@ class Provider extends CI_Controller
 				'request_id'     => $requestId,
 				'inv_number'	 => $inv_number,
 				'digi'			 => $digestValue,
-				'ammount'		 => $price
+				'ammount'		 => $price,
+				'id_premium_prov' => $id_premium
 			);
 
 			$this->session->set_userdata($newdata);
@@ -915,5 +932,69 @@ class Provider extends CI_Controller
 
 		$signature = base64_encode(hash_hmac('sha256', $rawSignature, htmlspecialchars_decode($secret), true));
 		return 'HMACSHA256=' . $signature;
+	}
+
+	public function payment_sukses()
+	{
+		$next_date = date('Y-m-d', strtotime("+365 days"));
+
+		$data = array(
+			'user_id' => $this->session->user_id,
+			'premium_id' => $this->session->id_premium_prov,
+			'premium_masa_aktif' => $next_date,
+		);
+
+		$this->db->insert('tbl_langganan_premium', $data);
+		$insert_id = $this->db->insert_id();
+
+		$data = array(
+			'transaksi_inv' => $this->session->inv_number,
+			'transaksi_client_id' => $this->session->client_id,
+			'transaksi_request_id' => $this->session->request_id,
+			'transaksi_ammount' => $this->session->ammount,
+			'transaksi_langganan_id' => $insert_id
+		);
+
+		$this->db->insert('tbl_transaksi_premium', $data);
+
+		$data['title'] = 'Berhasil';
+		$data['text'] = 'Pembayaran berhasil, akun anda sekarang premium';
+		$data['icon'] = 'success';
+		$this->session->set_flashdata($data);
+
+		redirect('/dashboard', 'refresh');
+	}
+
+	public function tabel_premium()
+	{
+		$this->load->model('Model_user_premium', 'premium');
+
+		$list = $this->premium->get_datatables();
+		$data = array();
+		$no = $_POST['start'];
+		foreach ($list as $person) {
+			$no++;
+
+			$row = array();
+			$row[] = $no;
+			$row[] = $person->transaksi_inv;
+			$row[] = "Rp " . number_format($person->transaksi_ammount, 0, ',', '.');
+			$row[] = date('d-M-Y', strtotime($person->premium_masa_aktif));
+			$row[] = "<label class='badge bg-danger text-white'>Aktif</label>";
+			//add html for action
+			$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_tnc(' . "'" . $person->langganan_id . "'" . ')"><i class="fas fa-money-bill"></i> Perpanjang</a>
+                  ';
+
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->premium->count_all(),
+			"recordsFiltered" => $this->premium->count_filtered(),
+			"data" => $data,
+		);
+		//output to json format
+		echo json_encode($output);
 	}
 }
