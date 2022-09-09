@@ -46,19 +46,15 @@
           <div class="single-footer-caption mb-50">
             <div class="footer-tittle">
               <h4>Informasi</h4>
-              <div class="footer-pera footer-pera2">
-                <p>Berlangganan informasi dan pembaruan kami.</p>
-              </div>
               <!-- Form -->
               <div class="footer-form">
                 <div id="mc_embed_signup">
-                  <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part">
-                    <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address" class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = ' Email Address '" />
-                    <div class="form-icon">
-                      <!-- <button type="submit" name="submit" id="newsletter-submit"
-                                             class="email_icon newsletter-submit button-contactForm"><img src="assets/img/icon/form.png" alt=""></button> -->
-                    </div>
-                    <div class="mt-10 info"></div>
+                  <div class="mt-10 info">
+                    <ul>
+                      <li><a href="<?= base_url('landing/kebijakan_privasi'); ?>" class="">Kebijakan Privasi <i class='fas fa-external-link-alt'></i></a></li>
+                      <li><a href="<?= base_url('landing/faq'); ?>" class="">FAQ <i class='fas fa-external-link-alt'></i></a></li>
+                    </ul>
+                  </div>
                   </form>
                 </div>
               </div>

@@ -417,4 +417,28 @@ class Landing extends CI_Controller
 		$data = $this->db->query("SELECT * FROM tbl_tnc WHERE tnc_tipe = '$sebagai' ORDER BY tnc_id DESC")->row();
 		echo json_encode($data);
 	}
+
+	public function kebijakan_privasi()
+	{
+		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+
+		$this->load->view('web/header_indo', $data);
+		$this->load->view('web/tampilan_kebijakan_privasi');
+		$this->load->view('web/footer_indo');
+		$this->load->view('web/script_include', $data);
+
+		$this->session->sess_destroy();
+	}
+
+	public function faq()
+	{
+		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+
+		$this->load->view('web/header_indo', $data);
+		$this->load->view('web/tampilan_faq');
+		$this->load->view('web/footer_indo');
+		$this->load->view('web/script_include', $data);
+
+		$this->session->sess_destroy();
+	}
 }

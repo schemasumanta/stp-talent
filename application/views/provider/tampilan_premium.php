@@ -110,9 +110,9 @@
                 </div>
             </div>
         </section>
-    <?php }
+    <?php };
     ?>
-
+    <button onclick="cek_payment()" class="btn btn-danger">Cek Status Pembayaran</button>
 </div>
 <script src="https://sandbox.doku.com/jokul-checkout-js/v1/jokul-checkout-1.0.0.js"></script>
 
@@ -182,6 +182,24 @@
         var url;
 
         url = "<?php echo site_url('provider/get_status') ?>";
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "JSON",
+            success: (result) => {
+                console.log(result);
+            },
+            error: (xhr, textStatus, error) => {
+
+            },
+        });
+    }
+
+    function cek_payment() {
+        var url;
+
+        url = "<?php echo site_url('provider/cek_status_pay') ?>";
 
         $.ajax({
             url: url,

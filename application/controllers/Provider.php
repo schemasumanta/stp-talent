@@ -997,4 +997,50 @@ class Provider extends CI_Controller
 		//output to json format
 		echo json_encode($output);
 	}
+
+	public function cek_status_pay()
+	{
+		$clientId = 'BRN-0223-1658821341264'; // Change with your Client ID
+		$secretKey = 'SK-oCGRoGuyCVTCxno3kf8n'; // Change with your Secret Key
+		$dateTime = gmdate("Y-m-d H:i:s");
+		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
+		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
+		$requestId = $this->session->request_id;
+		$inv = $this->session->inv_number;
+		$targetPath = "/orders/v1/status/" . $inv;
+
+		// Prepare signature component
+		$componentSignature = "Client-Id:" . $clientId . "\n" .
+			"Request-Id:" . $requestId . "\n" .
+			"Request-Timestamp:" . $dateTimeFinal . "\n" .
+			"Request-Target:" . $targetPath;
+
+		// Generate signature
+		$signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
+
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'https://api-sandbox.doku.com/orders/v1/status/' . $inv,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'GET',
+			CURLOPT_HTTPHEADER => array(
+				'Client-Id: ' . $clientId,
+				'Request-Id: ' . $requestId,
+				'Request-Timestamp: ' . $dateTimeFinal,
+				'Signature: ' . $signature
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+		echo $response;
+	}
 }
