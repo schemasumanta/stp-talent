@@ -102,6 +102,30 @@
     <header>
       <div class="header-area header-transparrent">
         <div class="headder-top header-sticky">
+          <div style="background-color: #DD2727;">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8 text-left">
+                  <?php if ($s->stp_facebook != '') : ?>
+                    <a href="<?php echo $s->stp_facebook ?>" target="_blank"><i class="fab fa-facebook-f"></i> STP </a>
+                  <?php endif ?>
+                  <?php if ($s->stp_instagram != '') : ?>
+
+                    <a href="<?php echo $s->stp_instagram ?>" target="_blank"><i class="fab fa-instagram"></i> STP</a>
+                  <?php endif ?>
+                  <?php if ($s->stp_website != '') : ?>
+                    <a href="<?php echo $s->stp_website ?>" target="_blank"><i class="fas fa-globe"></i> STP </a>
+                  <?php endif ?>
+
+                </div>
+                <div class="col-md-4 text-right">
+                  <div id="google_translate_element"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
           <div class="container">
             <div class="row align-items-center">
               <div class="col-lg-3 col-md-3">
