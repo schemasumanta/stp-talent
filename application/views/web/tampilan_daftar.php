@@ -4,6 +4,10 @@
           width: 900px;
         }
       }
+
+      .image-upload>input {
+        display: none;
+      }
     </style>
     <main>
       <!-- Hero Area Start-->
@@ -12,7 +16,7 @@
       <div class="slider-area">
         <div class="single-slider section-overly2 slider-height2 d-flex align-items-center" data-background="<?php echo base_url() ?>assets/img/hero/about.jpg">
           <div class="container flashdatart" data-title="<?php echo $this->session->flashdata('title'); ?>" data-text="<?php echo $this->session->flashdata('text'); ?>" data-icon="<?php echo $this->session->flashdata('icon'); ?>">
-            <form method="post" action="<?php echo base_url('seeker/simpan_pendaftaran') ?>" id="form-daftar">
+            <form method="post" action="<?php echo base_url('seeker/simpan_pendaftaran') ?>" id="form-daftar" enctype="multipart/form-data">
               <div class="row mt-5 mb-5 p-0 w-100 justify-content-center ">
 
                 <div class="col-lg-5 p-5" style="border-radius: 15px;background: rgba(22,22,26,0.7);">
@@ -37,17 +41,27 @@
                       <input type="text" class="form-control w-100" name="perusahaan_nama" id="perusahaan_nama" placeholder="Company name according to NPWP" autofocus>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
-                      <div class="custom-file">
-                        <input type="file" name="perusahaan_npwp" id="perusahaan_npwp" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file NPWP</label>
+                      <label class="text-white">Upload File NPWP</label>
+                      <div class="image-upload">
+                        <label for="file_npwp">
+                          <img src="<?= base_url('assets/img/icon/file-upload.png'); ?>" />
+                        </label>
+
+                        <input id="file_npwp" type="file" name="file_npwp" accept="application/pdf" />
                       </div>
+                      <label id="nama_file_npwp" class="text-white"></label><br />
                       <small class="text-white">*Format PDF Max 2MB</small>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
-                      <div class="custom-file">
-                        <input type="file" name="perusahaan_nib" id="perusahaan_nib" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file NIB</label>
+                      <label class="text-white">Upload File NIB</label>
+                      <div class="image-upload">
+                        <label for="file_nib">
+                          <img src="<?= base_url('assets/img/icon/file-upload.png'); ?>" />
+                        </label>
+
+                        <input id="file_nib" type="file" name="file_nib" accept="application/pdf" />
                       </div>
+                      <label id="nama_file_nib" class="text-white"></label><br />
                       <small class="text-white">*Format PDF Max 2MB</small>
                     </div>
                     <div class="col-lg-12 mt-4 perusahaan d-none">
@@ -59,6 +73,9 @@
                     <div class="col-lg-12 mt-4">
                       <input type="password" class="form-control w-100" name="seeker_password" id="seeker_password" placeholder="Your Password Min 6 Digit">
                       <a href="javascript:;" onclick="show_password()" id="text_pw" class="text-light">Show Password</a>
+                      <br />
+                      <small class="text-white">*Password Uses a Combination of Upper and Lowercase Letters and Numbers.</small>
+
                     </div>
                     <div class="col-lg-12 mt-4">
 
@@ -113,10 +130,31 @@
     </div><!-- /.modal -->
     <!-- End Bootstrap modal -->
     <script type="text/javascript">
+      $('[name="file_npwp"]').change(function() {
+        var filename = $(this).val().replace(/C:\\fakepath\\/i, '')
+        $('#nama_file_npwp').text(filename);
+      });
+
+      $('[name="file_nib"]').change(function() {
+        var filename = $(this).val().replace(/C:\\fakepath\\/i, '')
+        $('#nama_file_nib').text(filename);
+        console.log(filename)
+      });
+
       $(document).on('click', '.item_daftar', function(e) {
         e.preventDefault();
         let cek = 0;
         let seeker_nama = $('#seeker_nama').val();
+
+        if (document.getElementById("file_npwp").files.length == 0) {
+          console.log("no files selected");
+          Swal.fire(
+            'Oops...',
+            'File NPWP Required!',
+            'warning'
+          )
+          cek++;
+        }
 
         if (seeker_nama == '') {
           $('#seeker_nama').attr('placeholder', 'Please Enter Name');
@@ -146,7 +184,6 @@
         let level = $('#seeker_level').val();
         if (level == 3) {
           let perusahaan_nama = $('#perusahaan_nama').val();
-          let perusahaan_npwp = $('#perusahaan_npwp').val();
 
           if (perusahaan_nama == '') {
             $('#perusahaan_nama').attr('placeholder', 'Please Enter Company');
@@ -161,18 +198,7 @@
           } else {
             $('#perusahaan_nama').removeClass('is-invalid');
           }
-          if (perusahaan_npwp == '') {
-            $('#perusahaan_npwp').attr('placeholder', 'Please enter NPWP');
-            $('#perusahaan_npwp').addClass('is-invalid');
-            Swal.fire(
-              'Oops...',
-              'Some have not been filled in or in the checklist!',
-              'warning'
-            )
-            cek++;
-          } else {
-            $('#perusahaan_nama').removeClass('is-invalid');
-          }
+
         } else {
           $('#perusahaan_nama').removeClass('is-invalid');
 

@@ -145,7 +145,7 @@
 
 </div>
 
-<div class="row">
+<div class="row ml-2 mr-2">
 
     <!-- Area Chart -->
     <div class="col-xl-12 col-lg-12">

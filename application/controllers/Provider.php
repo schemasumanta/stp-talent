@@ -205,10 +205,19 @@ class Provider extends CI_Controller
 	{
 		$data_perusahaan  = array(
 			'perusahaan_nama' => $this->input->post('perusahaan_nama'),
-			'perusahaan_npwp' => $this->input->post('perusahaan_npwp'),
-			'perusahaan_nib' => $this->input->post('perusahaan_nib'),
 			'perusahaan_website' => $this->input->post('perusahaan_website'),
+			'perusahaan_email' => $this->input->post('seeker_email'),
 		);
+		if (!empty($_FILES['file_npwp']['name'])) {
+			$upload = $this->_do_upload_npwp();
+			$data_perusahaan['perusahaan_npwp'] = $upload;
+		};
+
+		if (!empty($_FILES['file_nib']['name'])) {
+			$upload = $this->_do_upload_nib();
+			$data_perusahaan['perusahaan_nib'] = $upload;
+		};
+
 		$simpan = $this->db->insert('tbl_perusahaan', $data_perusahaan);
 		$perusahaan_id = $this->db->insert_id();
 		if ($simpan) {
@@ -279,9 +288,46 @@ class Provider extends CI_Controller
 			$data['icon'] = 'error';
 		}
 
-
 		$this->session->set_flashdata($data);
 		redirect('landing/register', 'refresh');
+	}
+
+	private function _do_upload_npwp()
+	{
+		$config['upload_path']          = 'assets/dokumen/npwp/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']             = 2048; //set max size allowed in Kilobyte
+		$config['file_name']            = round(microtime(true) * 1000); //just milisecond timestamp fot unique name
+		$this->upload->initialize($config);
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('file_npwp')) //upload and validate
+		{
+			$data['title'] = 'File NPWP ada error nih';
+			$data['text'] = 'Upload error: ' . $this->upload->display_errors('', ''); //show ajax error
+			$data['icon'] = 'error';
+			$this->session->set_flashdata($data);
+		}
+		return $this->upload->data('file_name');
+	}
+
+	private function _do_upload_nib()
+	{
+		$config['upload_path']          = 'assets/dokumen/nib/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']             = 2048; //set max size allowed in Kilobyte
+		$config['file_name']            = round(microtime(true) * 1000); //just milisecond timestamp fot unique name
+		$this->upload->initialize($config);
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('file_nib')) //upload and validate
+		{
+			$data['title'] = 'File NIB ada error nih';
+			$data['text'] = 'Upload error: ' . $this->upload->display_errors('', ''); //show ajax error
+			$data['icon'] = 'error';
+			$this->session->set_flashdata($data);
+		}
+		return $this->upload->data('file_name');
 	}
 
 	public function job_posting()
@@ -1042,5 +1088,15 @@ class Provider extends CI_Controller
 
 		curl_close($curl);
 		echo $response;
+	}
+
+	public function kebijakan_privasi()
+	{
+		$data['kp_provider'] = $this->db->get_where('tbl_kebijakan_privasi', ['kp_tipe' => 2])->row();
+
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar');
+		$this->load->view('provider/kebijakan_privasi', $data);
+		$this->load->view('templates/footer');
 	}
 }

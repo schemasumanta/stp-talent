@@ -42,41 +42,53 @@
     }
 </style>
 <div class="container mb-4">
+    <hr>
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">FAQ</h1>
+        <h1 class="display-4">FAQ Seeker</h1>
         <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
     </div>
-    <button class="accordion">Section 1</button>
-    <div class="panel">
-        <p>Lorem ipsum...</p>
+    <?php foreach ($faq_seeker as $key) { ?>
+        <button class="accordion seeker"><?= $key->faq_question; ?></button>
+        <div class="panel">
+            <p><?= $key->faq_answer; ?></p>
+        </div>
+    <?php }; ?>
+    <hr>
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">FAQ Provider</h1>
+        <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
     </div>
+    <?php foreach ($faq_provider as $key) { ?>
+        <button class="accordion provider"><?= $key->faq_question; ?></button>
+        <div class="panel">
+            <p><?= $key->faq_answer; ?></p>
+        </div>
+    <?php }; ?>
 
-    <button class="accordion">Section 2</button>
-    <div class="panel">
-        <p>Lorem ipsum...</p>
-    </div>
-
-    <button class="accordion">Section 3</button>
-    <div class="panel">
-        <p>Lorem ipsum...</p>
-    </div>
-
-    <button class="accordion">Section 4</button>
-    <div class="panel">
-        <p>Lorem ipsum...</p>
-    </div>
-
-    <button class="accordion">Section 5</button>
-    <div class="panel">
-        <p>Lorem ipsum...</p>
-    </div>
 </div>
+<script src="<?php echo base_url() ?>assets/js/vendor/jquery-1.12.4.min.js"></script>
+
 <script>
-    var acc = document.getElementsByClassName("accordion");
+    var seeker = $(".seeker");
+    var x;
+
+    for (x = 0; x < seeker.length; x++) {
+        seeker[x].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+
+    var provider = $(".provider");
     var i;
 
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
+    for (i = 0; i < provider.length; i++) {
+        provider[i].addEventListener("click", function() {
             this.classList.toggle("active");
             var panel = this.nextElementSibling;
             if (panel.style.maxHeight) {

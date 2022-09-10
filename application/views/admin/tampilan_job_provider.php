@@ -522,38 +522,114 @@
   });
 
   function approve_provider(id) {
-    Swal.fire({
-      title: 'Apakah anda yakin?',
-      text: "Yakin akan mensetujui perusahaan ini!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Ya!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        //Ajax Load data from ajax
-        $.ajax({
-          url: "<?php echo site_url('user/approve_provider') ?>/" + id,
-          type: "GET",
-          dataType: "JSON",
-          success: function(data) {
-            Swal.fire(
-              'Berhasil!',
-              'Perusahaan berhasil di setujui.',
-              'success'
-            )
-            window.setTimeout(function() {
-              location.reload();
-            }, 1500);
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            alert('Error get data from ajax');
-          }
-        });
-      }
-    })
+    save_method = 'update';
+    $('#form_approve')[0].reset(); // reset form on modals
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
 
+
+    //Ajax Load data from ajax
+    $.ajax({
+      url: "<?php echo site_url('user/cek_perusahaan') ?>/" + id,
+      type: "GET",
+      dataType: "JSON",
+      success: function(data) {
+
+        $('[name="id"]').val(data.user_id);
+        $('[name="perusahaan_nama"]').val(data.perusahaan_nama);
+        $('[name="perusahaan_email"]').val(data.perusahaan_email);
+        if (data.perusahaan_website) {
+          $('[name="perusahaan_website"]').val(data.perusahaan_website);
+        }
+        $('#modal_approve').modal('show'); // show bootstrap modal when complete loaded
+        $('.modal-title').text('Detail Approve'); // Set title to Bootstrap modal title
+
+        $('#npwp-preview').show(); // show photo preview modal
+        var base_url = "<?= base_url(); ?>"
+        if (data.perusahaan_npwp) {
+          $('#npwp-preview div').html(`<iframe
+              src = "` + base_url + `assets/dokumen/npwp/` + data.perusahaan_npwp + `"
+              frameBorder = "0"
+              scrolling = "auto"
+              height = "100%"
+              width = "100%" >
+              <
+              /iframe>`);
+        } else {
+          $('#npwp-preview div').text('(NPWP Tidak ada)');
+        }
+
+        if (data.perusahaan_nib) {
+          $('#nib-preview div').html(`<iframe
+              src = "` + base_url + `assets/dokumen/nib/` + data.perusahaan_nib + `"
+              frameBorder = "0"
+              scrolling = "auto"
+              height = "100%"
+              width = "100%" >
+              <
+              /iframe>`);
+        } else {
+          $('#nib-preview div').text('(NPWP Tidak ada)');
+        }
+
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert('Error get data from ajax');
+      }
+    });
+  }
+
+  function save_perusahaan() {
+    $('#btnSave').text('menyimpan...'); //change button text
+    $('#btnSave').attr('disabled', true); //set button disable 
+    var url;
+
+    url = "<?php echo site_url('user/approve_provider') ?>";
+
+    // ajax adding data to database
+
+    var formData = new FormData($('#form_approve')[0]);
+    $.ajax({
+      url: url,
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      dataType: "JSON",
+      success: function(data) {
+
+        if (data.status) //if success close modal and reload ajax table
+        {
+          $('#modal_approve').modal('hide');
+          Swal.fire({
+            title: 'Berhasil',
+            text: 'Data berhasil disimpan',
+            icon: 'success'
+          });
+          reload_table();
+        } else {
+          for (var i = 0; i < data.inputerror.length; i++) {
+            $('[name="' + data.inputerror[i] + '"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+            $('[name="' + data.inputerror[i] + '"]').next().text(data.error_string[i]); //select span help-block class set text error string
+          }
+        }
+        $('#btnSave').text('Simpan'); //change button text
+        $('#btnSave').attr('disabled', false); //set button enable 
+
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert('Error adding / update data');
+        $('#btnSave').text('Simpan'); //change button text
+        $('#btnSave').attr('disabled', false); //set button enable 
+
+      }
+    });
+  }
+
+  function reload_table() {
+    dataTable.ajax.reload(null, false); //reload datatable ajax 
   }
 </script>
 <div class="modal fade" data-backdrop="static" id="ModalAktivasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -581,3 +657,80 @@
     </div>
   </div>
 </div>
+
+<!-- Bootstrap modal -->
+<div class="modal fade" id="modal_approve" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Person Form</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body form">
+        <form action="#" id="form_approve" class="form-horizontal">
+          <input type="hidden" value="" name="id" />
+          <div class="form-body">
+            <div class="form-group">
+              <label class="control-label">Nama Perusahaan</label>
+              <div class="">
+                <input name="perusahaan_nama" id="perusahaan_nama" class="form-control" type="text" readonly>
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label ">Email Perusahaan</label>
+              <div class="">
+                <input name="perusahaan_email" id="perusahaan_email" class="form-control" type="text" readonly>
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Website Perusahaan</label>
+              <div class="">
+                <a href="#" id="perusahaan_website" class="btn btn-danger btn-sm">Tidak ada</a>
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <div id="npwp-preview" style="height: 500px;">
+              <h4 class="control-label text-center">NPWP Perusahaan</h4>
+              <div style="height: 500px;">
+                (No photo)
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <br />
+            <hr>
+            <br />
+            <div id="nib-preview" style="height: 500px;">
+              <h4 class="control-label  text-center">NIB Perusahaan</h4>
+              <div style="height: 500px;">
+                (No photo)
+                <span class="help-block"></span>
+              </div>
+            </div>
+            <br />
+            <hr>
+            <br />
+            <div class="form-group">
+              <label class="control-label">Status</label>
+              <div class="">
+                <select name="perusahaan_status" class="form-control">
+                  <!-- <option value="">--Pilih Status--</option> -->
+                  <option value="1">Terima</option>
+                  <option value="3">Tolak</option>
+                </select>
+                <span class="help-block"></span>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnSave" onclick="save_perusahaan()" class="btn btn-primary">Simpan</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End Bootstrap modal -->

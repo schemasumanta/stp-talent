@@ -387,7 +387,7 @@ class Seeker extends CI_Controller
 	}
 
 	public function edit_profile()
-	{;
+	{
 		$user_id = $this->session->user_id;
 		$data['seeker'] = $this->db->get_where('tbl_master_user', ['user_id' => $user_id])->row();
 		$this->load->view('templates/header');
@@ -592,5 +592,15 @@ class Seeker extends CI_Controller
 			echo json_encode($data);
 			exit();
 		}
+	}
+
+	public function kebijakan_privasi()
+	{
+		$data['kp_seeker'] = $this->db->get_where('tbl_kebijakan_privasi', ['kp_tipe' => 1])->row();
+
+		$this->load->view('templates/header');
+		$this->load->view('templates/sidebar');
+		$this->load->view('seeker/kebijakan_privasi', $data);
+		$this->load->view('templates/footer');
 	}
 }

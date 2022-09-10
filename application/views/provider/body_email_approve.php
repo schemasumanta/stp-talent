@@ -30,7 +30,7 @@
                         <tr>
                             <td align="left" valign="top" style="padding-bottom:30px">
                                 <h2 style="font-size:20px;margin:0;color:#0057b2">
-                                    Selamat akun anda telah berhasil diapprove dan akun anda siap untuk digunakan
+                                    <?= $isi; ?>
                                 </h2>
                             </td>
                         </tr>
@@ -39,9 +39,6 @@
 
                                 <div>
                                     <span style="width: 100px;display: inline-block;font-weight: bold;">Email</span> <span>: <?php echo $email; ?></span>
-                                    <br>
-                                    <br>
-                                    <span style="width: 100px;display: inline-block;font-weight: bold;">Password</span> <span>: <?php echo $password; ?></span>
                                     <br>
                                     <br>
                                     <a href="<?php echo base_url('landing/login'); ?>" style="background: red;color: white;border-radius: 10px;height: 50px;width: 150px;padding: 10px;text-decoration: none;" target="_blank">Login Akun</a>

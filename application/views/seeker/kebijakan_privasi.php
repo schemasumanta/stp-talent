@@ -4,5 +4,5 @@
         <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
     </div>
     <hr>
-    <?= $kp_all->kp_isi; ?>
+    <?= $kp_seeker->kp_isi; ?>
 </div>

@@ -421,6 +421,7 @@ class Landing extends CI_Controller
 	public function kebijakan_privasi()
 	{
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		$data['kp_all'] = $this->db->get_where('tbl_kebijakan_privasi', ['kp_tipe' => 0])->row();
 
 		$this->load->view('web/header_indo', $data);
 		$this->load->view('web/tampilan_kebijakan_privasi');
@@ -433,6 +434,8 @@ class Landing extends CI_Controller
 	public function faq()
 	{
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		$data['faq_seeker'] = $this->db->get_where('tbl_faq_talent', ['faq_tipe' => 1])->result();
+		$data['faq_provider'] = $this->db->get_where('tbl_faq_talent', ['faq_tipe' => 2])->result();
 
 		$this->load->view('web/header_indo', $data);
 		$this->load->view('web/tampilan_faq');

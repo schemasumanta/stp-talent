@@ -100,6 +100,12 @@ $sub_active = $this->uri->segment(2);
         } ?>
         " href="javascript:void(0)" onclick="tnc_sp()">Syarat dan Ketentuan</a>
 
+                    <a class="collapse-item 
+        <?php if ($active == "kebijakan_privasi" && $sub_active == "") {
+            echo "bg-danger text-light";
+        } ?>
+        " href="<?= base_url('seeker/kebijakan_privasi'); ?>">Kebijakan Privasi</a>
+
                 </div>
             </div>
         </li>
@@ -191,6 +197,12 @@ $sub_active = $this->uri->segment(2);
             echo "bg-danger text-light";
         } ?>
         " href="javascript:void(0)" onclick="tnc_sp()">Syarat dan Ketentuan</a>
+
+                    <a class="collapse-item 
+        <?php if ($active == "kebijakan_privasi" && $sub_active == "") {
+            echo "bg-danger text-light";
+        } ?>
+        " href="<?= base_url('provider/kebijakan_privasi'); ?>">Kebijakan Privasi</a>
                 </div>
             </div>
         </li>

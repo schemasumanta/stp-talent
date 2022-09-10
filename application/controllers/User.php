@@ -119,11 +119,11 @@ class User extends CI_Controller
 			$opsi .= '</div>';
 			$l->opsi = $opsi;
 			if ($l->user_status == 1) {
-				$l->user_status = '<button type="button" class="btn btn-success btn-sm btn-round ">Aktif</button>';
+				$l->user_status = '<label class="text-white badge bg-success">Aktif</label>';
 			} elseif ($l->user_status == 2) {
-				$l->user_status = '<button type="button" class="btn btn-success btn-sm btn-round ">Belum di Approve</button>';
+				$l->user_status = '<label class="text-white badge bg-secondary">Belum di Approve</label>';
 			} else {
-				$l->user_status = '<button type="button" class="btn btn-danger btn-sm btn-round ">Non Aktif</button>';
+				$l->user_status = '<label class="text-white badge bg-danger">Non Aktif</label>';
 			}
 			if ($l->user_foto != '') {
 				$l->user_foto = '<img src="' . $l->user_foto . '" width="50px">';
@@ -823,39 +823,72 @@ class User extends CI_Controller
 		echo json_encode(array("status" => TRUE));
 	}
 
-	public function approve_provider($id)
+	public function approve_provider()
 	{
+		$id = $this->input->post('id');
+		$status = $this->input->post('perusahaan_status');
 		$data = [
-			'user_status' => 1,
+			'user_status' => $status,
 		];
 		$this->db->where('user_id', $id);
 		$this->db->update('tbl_master_user', $data);
 
-		$akun = $this->db->get_where('tbl_master_user', ['user_id' => $id])->row();
-		$token = $this->generateRandomString();
-		$tanggal = date('Y-m-d H:i:s');
-		$data_token  = array(
-			'token_isi' => $token,
-			'token_expired_date' => date('Y-m-d H:i:s', strtotime($tanggal . ' +1 day')),
-			'token_keterangan' => 'Selamat akun anda telah bisa di gunakan',
-			'user_id' => $id,
-		);
-		$this->db->insert('tbl_token', $data_token);
-
-		$this->load->library('Mailer');
-		$email_penerima = $akun->user_email;
-		if ($email_penerima != '') {
-			$subjek = "Approve Akun Provider Talent Hub - " . $akun->user_nama;
-			$password = "Password dirahasiakan";
-			$pesan = $this->kirim_email($token, $email_penerima, $password);
-			$content = $this->load->view('content', array('pesan' => $pesan), true);
-			$sendmail = array(
-				'email_penerima' => $email_penerima,
-				'subjek' => $subjek,
-				'content' => $content,
+		if ($status == 1) {
+			$akun = $this->db->get_where('tbl_master_user', ['user_id' => $id])->row();
+			$token = $this->generateRandomString();
+			$tanggal = date('Y-m-d H:i:s');
+			$data_token  = array(
+				'token_isi' => $token,
+				'token_expired_date' => date('Y-m-d H:i:s', strtotime($tanggal . ' +1 day')),
+				'token_keterangan' => 'Selamat akun anda telah bisa di gunakan',
+				'user_id' => $id,
 			);
-			$send = $this->mailer->send($sendmail);
+			$this->db->insert('tbl_token', $data_token);
+
+			$this->load->library('Mailer');
+			$email_penerima = $akun->user_email;
+			if ($email_penerima != '') {
+				$subjek = "Approve Akun Provider Talent Hub - " . $akun->user_nama;
+				$password = "Password dirahasiakan";
+				$isi = "Selamat akun anda telah bisa di gunakan";
+				$pesan = $this->kirim_email($token, $email_penerima, $isi);
+				$content = $this->load->view('content', array('pesan' => $pesan), true);
+				$sendmail = array(
+					'email_penerima' => $email_penerima,
+					'subjek' => $subjek,
+					'content' => $content,
+				);
+				$this->mailer->send($sendmail);
+			}	# code...
+		} else {
+			$akun = $this->db->get_where('tbl_master_user', ['user_id' => $id])->row();
+			$token = $this->generateRandomString();
+			$tanggal = date('Y-m-d H:i:s');
+			$data_token  = array(
+				'token_isi' => $token,
+				'token_expired_date' => date('Y-m-d H:i:s', strtotime($tanggal . ' +1 day')),
+				'token_keterangan' => 'Mohon Maaf Akun anda ditolak silahkan Masukan NPWP dan data lain dengan Benar',
+				'user_id' => $id,
+			);
+			$this->db->insert('tbl_token', $data_token);
+
+			$this->load->library('Mailer');
+			$email_penerima = $akun->user_email;
+			if ($email_penerima != '') {
+				$subjek = "Approve Akun Provider Talent Hub - " . $akun->user_nama;
+				$password = "Password dirahasiakan";
+				$isi = 'Mohon Maaf Akun anda ditolak silahkan Masukan NPWP dan data lain dengan Benar';
+				$pesan = $this->kirim_email($token, $email_penerima, $isi);
+				$content = $this->load->view('content', array('pesan' => $pesan), true);
+				$sendmail = array(
+					'email_penerima' => $email_penerima,
+					'subjek' => $subjek,
+					'content' => $content,
+				);
+				$this->mailer->send($sendmail);
+			}
 		}
+
 		echo json_encode(array("status" => TRUE));
 	}
 
@@ -870,13 +903,20 @@ class User extends CI_Controller
 		return $randomString;
 	}
 
-	public function kirim_email($id_user, $email, $password)
+	public function kirim_email($id_user, $email, $isi)
 	{
 		$data['id_user'] = $id_user;
 		$data['email'] = $email;
 		$data['password'] = "Dirahasiakan";
+		$data['isi']	= $isi;
 		$content = $this->load->view('provider/body_email_approve', $data, true);
 		return $content;
+	}
+
+	public function cek_perusahaan($id)
+	{
+		$cek = $this->db->query("SELECT * FROM tbl_master_user JOIN tbl_perusahaan ON tbl_master_user.perusahaan_id = tbl_perusahaan.perusahaan_id WHERE user_id = '$id'")->row();
+		echo json_encode($cek);
 	}
 
 	public function laporan_user()

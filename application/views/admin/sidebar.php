@@ -109,6 +109,16 @@ $sub_active = $this->uri->segment(2);
                     echo "bg-danger text-light";
                 } ?>" href="<?php echo base_url('tnc') ?>">T&C Pendaftaran</a>
 
+                        <a class="collapse-item 
+                <?php if ($active == "kebijakan_privasi" && $sub_active == "") {
+                    echo "bg-danger text-light";
+                } ?>" href="<?php echo base_url('kebijakan_privasi') ?>">Kebijakan Privasi</a>
+
+                        <a class="collapse-item 
+                <?php if ($active == "faq" && $sub_active == "") {
+                    echo "bg-danger text-light";
+                } ?>" href="<?php echo base_url('faq') ?>">FAQ</a>
+
 
                     </div>
                 </div>
