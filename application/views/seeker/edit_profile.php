@@ -3,7 +3,7 @@
         <div class="col-sm-10">
             <h1>Edit Profile</h1>
         </div>
-        <div class="col-sm-2"><img title="profi-le image" class="img-circle img-responsive" src="<?php echo base_url() . $this->session->stp_brand_icon ?>"></div>
+        <div class="col-sm-2"><img title="profi-le image" style="height: 100px;" src="<?php echo base_url() . $this->session->stp_brand_icon ?>"></div>
     </div>
     <form class="form" action="javascript:;" id="form_user">
         <div class="row">

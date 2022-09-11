@@ -477,7 +477,7 @@ class Seeker extends CI_Controller
 			'user_nama'  => $this->input->post('user_nama'),
 			'user_foto'  => $this->input->post('file_firebase'),
 			'user_email'  => $this->input->post('user_email'),
-			'user_telepon'  => $this->input->post('user_telepon')
+			'user_telepon'  => $hp
 		);
 
 		$this->session->set_userdata($newdata);

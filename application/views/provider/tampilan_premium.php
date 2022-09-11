@@ -89,7 +89,7 @@
                     <div class="col-lg-6 ">
                         <div class="card mb-5 mb-lg-0">
                             <div class="card-body">
-                                <h5 class="card-title text-muted text-uppercase text-center">Premium User</h5>
+                                <h5 class="card-title text-muted text-uppercase text-center">Paket 12 Bulan Premium User</h5>
                                 <h6 class="card-price text-center"><?= "Rp " . number_format($premium->premium_harga, 0, ',', '.'); ?><span class="period">/month</span></h6>
                                 <input type="hidden" id="harga_premium" value="<?= $premium->premium_harga; ?>">
                                 <input type="hidden" id="id_premium" value="<?= $premium->premium_id; ?>">
