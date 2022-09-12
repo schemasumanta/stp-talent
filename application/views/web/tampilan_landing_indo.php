@@ -182,7 +182,7 @@
                     if ($fj->premium_masa_aktif) {
                     ?>
                       <a href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>">
-                        <h4><?php echo $fj->lowongan_judul; ?><i class='fas fa-star' style='font-size:28px;color:red'></i></h4>
+                        <h4><?php echo $fj->lowongan_judul; ?><img src="<?= base_url('assets_admin/img/badge_premium.svg'); ?>" alt="premium_user"></h4>
                       </a>
                     <?php } else { ?>
                       <a href="<?php echo base_url() ?>job/detail/<?php echo $fj->lowongan_id ?>">

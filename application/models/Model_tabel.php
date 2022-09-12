@@ -167,12 +167,15 @@ class Model_tabel extends CI_Model
                 p.perusahaan_logo,
                 pr.prov_nama,
                 kk.kabkota_nama,
-                kj.kategori_nama
+                kj.kategori_nama,
+                pre.premium_masa_aktif
                 ');
                 $this->db->join('tbl_perusahaan p', 'p.perusahaan_id=lp.perusahaan_id');
                 $this->db->join('tbl_master_provinsi pr', 'pr.prov_id=p.perusahaan_prov');
                 $this->db->join('tbl_master_kabkota kk', 'kk.kabkota_id=p.perusahaan_kabkota');
                 $this->db->join('tbl_master_kategori_job kj', 'kj.kategori_id=lp.kategori_id');
+                $this->db->join('tbl_master_user mu', 'p.perusahaan_id=mu.perusahaan_id', 'left');
+                $this->db->join('tbl_langganan_premium pre', 'mu.user_id=pre.user_id', 'left');
                 $this->db->from('tbl_lowongan_pekerjaan lp');
                 $this->db->where('lp.lowongan_status', 1);
                 $kategori = $this->session->kategori_job;
@@ -206,6 +209,7 @@ class Model_tabel extends CI_Model
                 if ($sort_by) {
                     $this->db->order_by('lp.lowongan_created_date', $sort_by);
                 }
+                $this->db->order_by('pre.premium_masa_aktif', "DESC");
                 if ($_GET['order'][0]['column'] == 0) {
                     $this->db->order_by('lp.lowongan_created_date', $order);
                 } else {
