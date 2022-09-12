@@ -767,12 +767,15 @@ class Provider extends CI_Controller
 		$data['status'] = TRUE;
 
 		if ($this->input->post('lowongan_status') == 1) {
-			$perusahaan_id = $this->session->perusahaan_id;
-			$cek = $this->db->get_where('tbl_lowongan_pekerjaan', ['perusahaan_id' => $perusahaan_id, 'lowongan_status' => 1])->row();
-			if ($cek) {
-				$data['inputerror'][] = 'lowongan_status';
-				$data['error_string'][] = 'Ada Lowongan aktif yang lain, tidak bisa merubah status silahkan Upgrade ke Akun Premium';
-				$data['status'] = FALSE;
+			$premium_user = $this->db->get_where('tbl_langganan_premium', ['user_id' => $this->session->user_id])->row();
+			if ($premium_user == false) {
+				$perusahaan_id = $this->session->perusahaan_id;
+				$cek = $this->db->get_where('tbl_lowongan_pekerjaan', ['perusahaan_id' => $perusahaan_id, 'lowongan_status' => 1])->row();
+				if ($cek) {
+					$data['inputerror'][] = 'lowongan_status';
+					$data['error_string'][] = 'Ada Lowongan aktif yang lain, tidak bisa merubah status silahkan Upgrade ke Akun Premium';
+					$data['status'] = FALSE;
+				}	# code...
 			}
 		}
 
