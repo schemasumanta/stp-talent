@@ -354,6 +354,8 @@ class Provider extends CI_Controller
 		$this->db->order_by('jabatan_nama', 'asc');
 		$data['jabatan'] = $this->db->get('tbl_master_jabatan')->result();
 
+		$data['premium_user'] = $this->db->get_where('tbl_langganan_premium', ['user_id' => $this->session->user_id])->row();
+
 		$this->load->view('templates/header');
 		$this->load->view('templates/sidebar');
 		$this->load->view('provider/tampilan_job_posting', $data);

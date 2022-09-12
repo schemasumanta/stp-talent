@@ -129,9 +129,13 @@
               </div>
               <input type="checkbox" id="rentang_gaji" name="rentang_gaji" class=" mt-3" value="1">
               <label for="rentang_gaji" class="mr-5">Range</label>
-              <input type="checkbox" id="rahasiakan" name="rahasiakan" class=" mt-3" value="1">
-              <label for="rahasiakan">Dirahasiakan</label>
-              <br>
+              <?php
+              if ($premium_user) { ?>
+                <input type="checkbox" id="rahasiakan" name="rahasiakan" class=" mt-3" value="1">
+                <label for="rahasiakan">Dirahasiakan</label>
+                <br>
+              <?php }
+              ?>
               <small class="mt-1 error-lowongan_gaji_min text-danger"></small>
             </div>
 

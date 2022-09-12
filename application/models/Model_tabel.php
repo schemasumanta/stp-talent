@@ -201,6 +201,7 @@ class Model_tabel extends CI_Model
                 if ($ke_gaji) {
                     $this->db->where('lp.lowongan_gaji_max <=', $ke_gaji);
                 }
+                $this->db->group_by('lp.lowongan_judul');
                 $nm_lowongan = $this->session->nama_lowongan;
                 if ($nm_lowongan) {
                     $this->db->like('lp.lowongan_judul', $nm_lowongan);
