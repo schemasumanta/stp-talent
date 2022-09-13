@@ -168,14 +168,15 @@
 
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?php echo site_url('kebijakan_privasi/edit_kp/') ?>/" + id,
+            url: "<?php echo site_url('faq/edit_faq') ?>/" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
 
-                $('[name="id"]').val(data.kp_id);
+                $('[name="id"]').val(data.faq_id);
                 $('[name="faq_tipe"]').val(data.faq_tipe);
-                $('[name="faq_question"]').summernote('code', data.kp_isi);
+                $('[name="faq_answer"]').summernote('code', data.faq_answer);
+                $('[name="faq_question"]').val(data.faq_question);
                 $('#modal_faq').modal('show'); // show bootstrap modal when complete loaded
                 $('.modal-title').text('Edit Kebijakan Privasi'); // Set title to Bootstrap modal title
 
@@ -263,7 +264,7 @@
     function lihat_kp(id) {
         //Ajax Load data from ajax
         $.ajax({
-            url: "<?php echo site_url('kebijakan_privasi/lihat_kp/') ?>" + id,
+            url: "<?php echo site_url('faq/lihat_faq/') ?>" + id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {

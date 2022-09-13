@@ -46,7 +46,6 @@ class Faq extends CI_Controller
             $row[] = substr($person->faq_answer, 0, 150) . ".....";
             //add html for action
             $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_kp(' . "'" . $person->faq_id . "'" . ')"><i class="fas fa-edit"></i> Ubah</a>
-            <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Lihat" onclick="lihat_kp(' . "'" . $person->faq_id . "'" . ')"><i class="fas fa-eye"></i> Lihat</a>
                   ';
 
             $data[] = $row;
@@ -63,7 +62,7 @@ class Faq extends CI_Controller
     }
 
 
-    public function edit_kp($id)
+    public function edit_faq($id)
     {
         $data = $this->faq->get_by_id($id);
         echo json_encode($data);
@@ -82,7 +81,7 @@ class Faq extends CI_Controller
         echo json_encode(array("status" => TRUE));
     }
 
-    public function kp_update()
+    public function faq_update()
     {
         $metod = "update";
         $this->_validate($metod);
@@ -97,7 +96,7 @@ class Faq extends CI_Controller
     }
 
 
-    public function lihat_kp($id)
+    public function lihat_faq($id)
     {
         $data = $this->faq->get_by_id($id);
         echo json_encode($data);

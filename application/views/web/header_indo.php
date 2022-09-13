@@ -78,6 +78,15 @@
       body {
         height: 100%;
       }
+
+
+      .goog-te-banner-frame.skiptranslate {
+        display: none !important;
+      }
+
+      body {
+        top: 0px !important;
+      }
     </style>
 
   </head>
@@ -145,8 +154,8 @@
                   </div>
                   <div class="header-btn d-none d-lg-block">
                     <?php if ($this->session->login == FALSE) { ?>
-                      <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1">Masuk</a>
-                      <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Daftar</a>
+                      <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1">Login</a>
+                      <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Registrasi</a>
                     <?php } else { ?>
                       <?php if ($this->session->user_level == 1) { ?>
                         <div class="row">
