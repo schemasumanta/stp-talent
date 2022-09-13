@@ -45,7 +45,7 @@
                       <th>Judul</th>
                       <th>Isi</th>
                       <th>Lampiran</th>
-                      <th style="text-align: center;" width="10%">Opsi</th>
+                      <!-- <th style="text-align: center;" width="10%">Opsi</th> -->
                     </tr>
                   </thead>
                   <tbody id="show_data">
@@ -149,7 +149,7 @@
         snapshot.forEach((isi) => {
           let key = isi['ref']['path']['pieces_'][1];
           let data = isi.val();
-          datasrc += '<tr><td class="text-center">' + (++no) + '</td><td>' + data.notifikasi_judul + '</td><td>' + data.notifikasi_isi + '</td>' + data.notifikasi_lampiran + '<td></td><td></td></tr>';
+          datasrc += '<tr><td class="text-center">' + (++no) + '</td><td>' + data.notifikasi_judul + '</td><td>' + data.notifikasi_isi + '</td>' + data.notifikasi_lampiran + '<td></td></tr>';
         });
 
 
