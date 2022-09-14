@@ -25,6 +25,7 @@
                                     <th>Nama</th>
                                     <th>Tipe</th>
                                     <th>Harga</th>
+                                    <th>Bulan</th>
                                     <th>Status</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -51,15 +52,15 @@
                     <input type="hidden" value="" name="id" />
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="control-label col-md-3">Nama</label>
-                            <div class="col-md-9">
+                            <label class="control-label ">Nama</label>
+                            <div class="">
                                 <input name="premium_nama" id="premium_nama" placeholder="Masukan nama premium" class="form-control" type="text">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Tipe</label>
-                            <div class="col-md-9">
+                            <label class="control-label ">Tipe</label>
+                            <div class="">
                                 <select name="premium_tipe" id="premium_tipe" class="form-control">
                                     <option value="">--Pilih Tipe--</option>
                                     <option value="1">Seeker</option>
@@ -69,9 +70,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Harga</label>
-                            <div class="col-md-9">
+                            <label class="control-label ">Harga perbulan</label>
+                            <div class="">
                                 <input type="text" name="premium_harga" id="premium_harga" placeholder="100000" class="form-control" value="" />
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label ">Berlaku selama berapa bulan</label>
+                            <div class="">
+                                <input type="number" name="premium_bulan" id="premium_bulan" min="1" placeholder="1" class="form-control" value="" />
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -219,6 +227,7 @@
                 $('[name="premium_nama"]').val(data.premium_nama);
                 $('[name="premium_tipe"]').val(data.premium_tipe);
                 $('[name="premium_harga"]').val(data.premium_harga);
+                $('[name="premium_bulan"]').val(data.premium_bulan);
                 $('#modal_premium').modal('show'); // show bootstrap modal when complete loaded
                 $('.modal-title').text('Edit Premium'); // Set title to Bootstrap modal title
 

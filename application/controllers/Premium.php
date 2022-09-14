@@ -42,6 +42,7 @@ class Premium extends CI_Controller
 			$row[] = $person->premium_nama;
 			$row[] = $tipe;
 			$row[] = "Rp " . number_format($person->premium_harga, 0, ',', '.');
+			$row[] = $person->premium_bulan . " Bulan";
 			$row[] = '<div class="custom-control custom-switch">
 							<input type="checkbox" class="custom-control-input" onclick="changeStatus(\'' . $person->premium_id . '\')" id="set_active' . $person->premium_id . '" ' . isChecked($person->premium_status) . '>
 							<label class="custom-control-label" for="set_active' . $person->premium_id . '">' . isLabelChecked($person->premium_status) . '</label>
@@ -111,6 +112,7 @@ class Premium extends CI_Controller
 			'premium_nama' => $this->input->post('premium_nama'),
 			'premium_tipe' => $this->input->post('premium_tipe'),
 			'premium_harga' => (int) $xx,
+			'premium_bulan' => $this->input->post('premium_bulan'),
 			'premium_status' => 1,
 		);
 		$this->premium->save($data);
@@ -126,6 +128,7 @@ class Premium extends CI_Controller
 			'premium_nama' => $this->input->post('premium_nama'),
 			'premium_tipe' => $this->input->post('premium_tipe'),
 			'premium_harga' => (int) $xx,
+			'premium_bulan' => $this->input->post('premium_bulan'),
 			'premium_status' => 1,
 		);
 		$this->premium->update(array('premium_id' => $this->input->post('id')), $data);
@@ -160,7 +163,13 @@ class Premium extends CI_Controller
 
 		if ($this->input->post('premium_harga') == '') {
 			$data['inputerror'][] = 'premium_harga';
-			$data['error_string'][] = 'Harga wajbi diisi!';
+			$data['error_string'][] = 'Harga wajib diisi!';
+			$data['status'] = FALSE;
+		}
+
+		if ($this->input->post('premium_bulan') == '') {
+			$data['inputerror'][] = 'premium_bulan';
+			$data['error_string'][] = 'Berlaku selama berapa bulan wajib diisi!';
 			$data['status'] = FALSE;
 		}
 

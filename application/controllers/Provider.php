@@ -800,8 +800,10 @@ class Provider extends CI_Controller
 
 	function payment()
 	{
+		$data_premium = $this->db->get_where('tbl_premium', ['premium_status' => 1, 'premium_tipe' => 2])->row();
+
 		$id_premium = $this->input->post('id');
-		$price = $this->input->post('price') * 12;
+		$price = $this->input->post('price') * $data_premium->premium_bulan;
 		$user_id = $this->session->user_id;
 
 		$data = $this->db->where('premium_id', $id_premium)->get('tbl_premium')->row_array();
@@ -835,7 +837,7 @@ class Provider extends CI_Controller
 				'amount'            => (int)$price,
 				'invoice_number'    => $inv_number,
 				'currency'          => 'IDR',
-				'callback_url'      => base_url('provider/payment_sukses'),
+				'callback_url'      => base_url('provider/cek_status_pay'),
 				'line_items'        => $itemsss,
 			],
 			'payment'               => [
@@ -922,56 +924,53 @@ class Provider extends CI_Controller
 
 	public function get_status()
 	{
-		$header = array();
+		if ($this->session->inv_number) {
+			$clientId = 'BRN-0223-1658821341264'; // Change with your Client ID
+			$secretKey = 'SK-oCGRoGuyCVTCxno3kf8n'; // Change with your Secret Key
+			$dateTime = gmdate("Y-m-d H:i:s");
+			$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
+			$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
+			$requestId = $this->session->request_id;
+			$inv = $this->session->inv_number;
+			$targetPath = "/orders/v1/status/" . $inv;
 
-		$requestId = $this->session->request_id;
-		$targetPath = "/orders/v1/status/" . $this->session->inv_number;
-		$dateTime = gmdate("Y-m-d H:i:s");
-		$dateTime = date(DATE_ISO8601, strtotime($dateTime));
-		$dateTimeFinal = substr($dateTime, 0, 19) . "Z";
+			// Prepare signature component
+			$componentSignature = "Client-Id:" . $clientId . "\n" .
+				"Request-Id:" . $requestId . "\n" .
+				"Request-Timestamp:" . $dateTimeFinal . "\n" .
+				"Request-Target:" . $targetPath;
 
-		$getUrl = 'https://api-sandbox.doku.com';
+			// Generate signature
+			$signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
 
-		$url = $getUrl . $targetPath;
 
-		$shared_key = 'SK-oCGRoGuyCVTCxno3kf8n';
+			$curl = curl_init();
 
-		$header['Client-Id'] = $this->session->client_id;
-		$header['Request-Id'] = $requestId;
-		$header['Request-Timestamp'] = $dateTimeFinal;
-		$header['Request-Target'] = $targetPath;
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'https://api-sandbox.doku.com/orders/v1/status/' . $inv,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'GET',
+				CURLOPT_HTTPHEADER => array(
+					'Client-Id: ' . $clientId,
+					'Request-Id: ' . $requestId,
+					'Request-Timestamp: ' . $dateTimeFinal,
+					'Signature: HMACSHA256=' . $signature
+				),
+			));
 
-		$signature = $this->generateSignatureCheckStatus($header, $shared_key);
+			$response = curl_exec($curl);
 
-		echo $this->session->client_id . '<br/>';
-		echo $requestId . '<br/>';
-		echo $dateTimeFinal . '<br/>';
-		echo $signature . '<br/>';
-		echo $url . '<br/>';
+			curl_close($curl);
 
-		$curl = curl_init();
-
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => $url,
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'GET',
-			CURLOPT_HTTPHEADER => array(
-				'Client-Id: ' . $this->session->client_id,
-				'Request-Id: ' . $requestId,
-				'Request-Timestamp: ' . $dateTimeFinal,
-				'Signature: ' . $signature
-			),
-		));
-
-		$response = curl_exec($curl);
-
-		curl_close($curl);
-		echo $response;
+			echo $response;
+		} else {
+			echo "Tidak ada pengecekan";
+		}
 	}
 
 	public function generateSignatureCheckStatus($headers, $secret)
@@ -987,32 +986,39 @@ class Provider extends CI_Controller
 
 	public function payment_sukses()
 	{
-		$next_date = date('Y-m-d', strtotime("+365 days"));
+		$data_premium = $this->db->get_where('tbl_premium', ['premium_status' => 1, 'premium_tipe' => 2])->row();
+		$day = $data_premium->premium_bulan * 30;
+		$next_date = date('Y-m-d', strtotime("+" . $day . " days"));
+		$cek_langganan = $this->db->get_where('tbl_langganan_premium', ['user_id' => $this->session->user_id])->row();
+		if ($cek_langganan == false) {
+			$data = array(
+				'user_id' => $this->session->user_id,
+				'premium_id' => $this->session->id_premium_prov,
+				'premium_masa_aktif' => $next_date,
+			);
 
-		$data = array(
-			'user_id' => $this->session->user_id,
-			'premium_id' => $this->session->id_premium_prov,
-			'premium_masa_aktif' => $next_date,
-		);
+			$this->db->insert('tbl_langganan_premium', $data);
+			$insert_id = $this->db->insert_id();
 
-		$this->db->insert('tbl_langganan_premium', $data);
-		$insert_id = $this->db->insert_id();
+			$data = array(
+				'transaksi_inv' => $this->session->inv_number,
+				'transaksi_client_id' => $this->session->client_id,
+				'transaksi_request_id' => $this->session->request_id,
+				'transaksi_ammount' => $this->session->ammount,
+				'transaksi_langganan_id' => $insert_id
+			);
 
-		$data = array(
-			'transaksi_inv' => $this->session->inv_number,
-			'transaksi_client_id' => $this->session->client_id,
-			'transaksi_request_id' => $this->session->request_id,
-			'transaksi_ammount' => $this->session->ammount,
-			'transaksi_langganan_id' => $insert_id
-		);
-
-		$this->db->insert('tbl_transaksi_premium', $data);
+			$this->db->insert('tbl_transaksi_premium', $data);
+		}
 
 		$data['title'] = 'Berhasil';
 		$data['text'] = 'Pembayaran berhasil, akun anda sekarang premium';
 		$data['icon'] = 'success';
 		$this->session->set_flashdata($data);
 
+		$array_items = array('client_id', 'request_id', 'inv_number', 'ammount');
+
+		$this->session->unset_userdata($array_items);
 		redirect('/dashboard', 'refresh');
 	}
 
@@ -1085,14 +1091,25 @@ class Provider extends CI_Controller
 				'Client-Id: ' . $clientId,
 				'Request-Id: ' . $requestId,
 				'Request-Timestamp: ' . $dateTimeFinal,
-				'Signature: ' . $signature
+				'Signature: HMACSHA256=' . $signature
 			),
 		));
 
 		$response = curl_exec($curl);
 
 		curl_close($curl);
-		echo $response;
+
+		$jsonObject = json_decode($response);
+
+		if ($jsonObject->transaction->status ==  "SUCCESS") {
+			$this->payment_sukses();
+		} else {
+			$data['title'] = 'Opp...!';
+			$data['text'] = 'Silahkan Lakukan Pembayaran terlebih dahulu!';
+			$data['icon'] = 'warning';
+			$this->session->set_flashdata($data);
+			redirect('/dashboard', 'refresh');
+		}
 	}
 
 	public function kebijakan_privasi()
@@ -1103,5 +1120,9 @@ class Provider extends CI_Controller
 		$this->load->view('templates/sidebar');
 		$this->load->view('provider/kebijakan_privasi', $data);
 		$this->load->view('templates/footer');
+	}
+
+	public function duku_notif()
+	{
 	}
 }

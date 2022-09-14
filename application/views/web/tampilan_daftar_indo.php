@@ -72,6 +72,9 @@
                     </div>
                     <div class="col-lg-12 mt-4">
                       <input type="password" class="form-control w-100" name="seeker_password" id="seeker_password" placeholder="Masukkan Password Min 6 Digit">
+                    </div>
+                    <div class="col-lg-12 mt-4">
+                      <input type="password" class="form-control w-100" name="seeker_password_ulang" id="seeker_password_ulang" placeholder="Masukkan Kembali Password">
                       <a href="javascript:;" onclick="show_password()" id="text_pw" class="text-light">Tampilkan Password</a>
                       <br />
                       <small class="text-white">*Password Menggunakan Kombinasi Huruf Besar dan Kecil dan Angka.</small>
@@ -155,6 +158,16 @@
           cek++;
         }
 
+        var password = $('#seeker_password').val();
+        var password_ulang = $('#seeker_password_ulang').val();
+
+        if (password != password_ulang) {
+          Swal.fire(
+            'Oops...',
+            'Password pertama dan kedua tidak sama',
+            'warning'
+          )
+        }
 
         if (seeker_nama == '') {
           $('#seeker_nama').attr('placeholder', 'Silahkan Masukkan Nama');
@@ -334,11 +347,13 @@
       function show_password() {
         if ($('#seeker_password').attr('type') == "password") {
           $('#seeker_password').attr('type', 'text');
+          $('#seeker_password_ulang').attr('type', 'text');
           $('#show_pw').html('<i class="fa fa-eye-slash"></i>');
           $('#text_pw').text('Sembunyikan Password');
         } else {
           $('#text_pw').text('Tampilkan Password');
           $('#seeker_password').attr('type', 'password');
+          $('#seeker_password_ulang').attr('type', 'password');
           $('#show_pw').html('<i class="fa fa-eye"></i>');
         }
       }
