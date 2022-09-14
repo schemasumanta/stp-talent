@@ -126,8 +126,11 @@
                   <?php endif ?>
 
                 </div>
-                <div class="col-md-4 text-right">
-                  <div id="google_translate_element"></div>
+                <div class="col-md-4 text-right ">
+                  <label class="text-white">Pilih Bahasa :</label>
+                  <a href="#googtrans(id|id)" class="lang-select badge bg-white text-danger" data-lang="id">ID</a>
+                  <label class="text-white"> | </label>
+                  <a href="#googtrans(id|en)" class="lang-select badge bg-white text-danger" data-lang="en">EN</a>
                 </div>
               </div>
             </div>

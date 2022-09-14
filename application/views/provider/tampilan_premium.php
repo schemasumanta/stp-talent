@@ -82,7 +82,7 @@
         <div class="mb-4">
             <h1 class="h3 mb-0 text-gray-800">Tingkatkan akun ke Premium</h1>
         </div>
-        <section class="pricing py-5">
+        <section class="pricing py-5" id="upgrade_premium">
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <!-- Plus Tier -->
@@ -110,41 +110,28 @@
                 </div>
             </div>
         </section>
-        <button onclick="cek_payment()" class="btn btn-danger">Cek Status Pembayaran</button>
+
+        <div class="card text-center d-none" id="get_status_pay">
+            <div class="card-header" id="bank_va">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" id="no_va">Special title treatment</h5>
+                <p class="card-text">Jumlah Pembayaran</p>
+                <p class="card-text" id="jml_pembayaran">Rp.</p>
+                <p class="card-text" id="status_pembayaran">?</p>
+                <a href="javascript:;" onclick="buy()" class="btn btn-primary text-uppercase">Ganti Pembayaran</a>
+            </div>
+            <div class="card-footer text-muted">
+                Silahkan Melakukan pembayaran pada no VA tersebut, Jika ingin melalukan pergantian pembayaran silahkan klik ganti pembayaran
+            </div>
+        </div>
+
     <?php };
     ?>
 
 </div>
 
-<!-- Bootstrap modal -->
-<div class="modal fade" id="modal_cekpayment" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Status Pembayaran</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body text-center">
-                <h2 id="bank_va">Bank</h2>
-                <hr>
-                <h4>No VA :</h4>
-                <h2 id="no_va"></h2>
-                <hr>
-                <h4>Jumlah Pembayaran :</h4>
-                <h2 id="jml_pembayaran"></h2>
-                <hr>
-                <h2 id="status_pembayaran"></h2>
-                <hr>
-                <p>Silahkan Melakukan pembayaran pada no VA tersebut</p>
-                <label>Jika ingin melalukan pergantian pembayaran silahkan klik Upgrade kembali</label>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- End Bootstrap modal -->
 
 <script src="https://sandbox.doku.com/jokul-checkout-js/v1/jokul-checkout-1.0.0.js"></script>
 
@@ -177,7 +164,7 @@
 
         });
 
-        setInterval('cek_status()', 10000);
+        setInterval('cek_status()', 15000);
 
     });
 
@@ -213,42 +200,6 @@
         }
     }
 
-    function cek_payment() {
-        var url;
-
-        url = "<?php echo site_url('provider/get_status') ?>";
-
-        $.ajax({
-            url: url,
-            type: "GET",
-            dataType: "JSON",
-            success: (result) => {
-                if (result.transaction.status == "PENDING") {
-                    console.log(result);
-                    $('#modal_cekpayment').modal('show');
-                    $('#no_va').text(result.virtual_account_info.virtual_account_number);
-                    $('#bank_va').text(result.acquirer.id);
-                    $('#jml_pembayaran').text(result.order.amount);
-                    $('#status_pembayaran').text(result.transaction.status);
-                } else {
-                    upgrade_premium();
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1500);
-                    Swal.fire(
-                        'Berhasil',
-                        'Pembayaran berhasil, akun anda sekarang premium',
-                        'success'
-                    )
-                }
-
-            },
-            error: (xhr, textStatus, error) => {
-
-            },
-        });
-    }
-
     function cek_status() {
         var url;
 
@@ -269,6 +220,14 @@
                         'Pembayaran berhasil, akun anda sekarang premium',
                         'success'
                     )
+                } else {
+                    $('#get_status_pay').removeClass('d-none');
+                    $('#upgrade_premium').addClass('d-none');
+                    $('#no_va').text(result.virtual_account_info.virtual_account_number);
+                    $('#bank_va').text(result.acquirer.id);
+                    $('#jml_pembayaran').text(result.order.amount);
+                    $('#status_pembayaran').text(result.transaction.status);
+
                 }
 
             },

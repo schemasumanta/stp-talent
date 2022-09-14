@@ -466,12 +466,30 @@
 <script type="text/javascript">
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
-      pageLanguage: 'id',
-      includedLanguages: 'en,id,jw',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-      autoDisplay: false
+      pageLanguage: 'id'
     }, 'google_translate_element');
   }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+  $(document).ready(function() {
+    $(".lang-select").click(function() {
+      var theLang = $(this).attr('data-lang');
+      $(".goog-te-combo").val(theLang);
+      window.location = $(this).attr('href');
+      window.location.reload();
+    });
+  });
 </script>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
