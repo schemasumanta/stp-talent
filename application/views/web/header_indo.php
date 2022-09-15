@@ -141,7 +141,7 @@
             <div class="row align-items-center">
               <div class="col-lg-3 col-md-3">
                 <!-- Logo -->
-                <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() . $s->stp_logo; ?>" style="height: 60px; width:240px;" alt="" /></a>
+                <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() . $s->stp_logo; ?>" style="height: 90px; width:240px;" alt="" /></a>
               </div>
               <div class="col-lg-9 col-md-9">
                 <div class="menu-wrapper">
@@ -157,8 +157,8 @@
                   </div>
                   <div class="header-btn d-none d-lg-block">
                     <?php if ($this->session->login == FALSE) { ?>
-                      <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1">Login</a>
-                      <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2">Registrasi</a>
+                      <a href="<?php echo base_url('landing/login') ?>" class="btn head-btn1 rounded">Login</a>
+                      <a href="<?php echo base_url('landing/register') ?>" class="btn head-btn2 rounded">Registrasi</a>
                     <?php } else { ?>
                       <?php if ($this->session->user_level == 1) { ?>
                         <div class="row">

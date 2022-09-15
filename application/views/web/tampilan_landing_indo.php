@@ -70,7 +70,7 @@
                   </div>
                 </div>
                 <div class="search-form">
-                  <button type="button" id="btnSave" onclick="cari()" class="btn btn-danger btn-lg">Cari</button>
+                  <button type="button" id="btnSave" onclick="cari()" class="btn btn-danger btn-lg rounded">Cari</button>
                 </div>
               </form>
             </div>
