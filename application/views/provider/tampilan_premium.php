@@ -164,8 +164,10 @@
 
         });
 
-        setInterval('cek_status()', 15000);
-
+        <?php
+        if ($user_premium == false) { ?>
+            setInterval('cek_status()', 15000);
+        <?php }; ?>
     });
 
     function buy() {

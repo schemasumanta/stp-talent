@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="hero__img d-none d-lg-block f-right" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
-                                    <img src="<?php echo base_url('assets/img/lockakun1.png'); ?>" alt="" style="width: 100%;">
+                                    <img src="<?php echo base_url('assets/img/lockakun1.png'); ?>" alt="" style="width: 75%;">
                                 </div>
                             </div>
                         </div>

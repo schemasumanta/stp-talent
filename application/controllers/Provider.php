@@ -817,7 +817,7 @@ class Provider extends CI_Controller
 		];
 
 
-		$inv_number = 'INV-' . rand(1, 10000);
+		$inv_number = 'TH-' . rand(1, 10000);
 		$itemsss[] = $items;
 
 		//save to table trasaction course
@@ -1108,7 +1108,7 @@ class Provider extends CI_Controller
 			$data['text'] = 'Silahkan Lakukan Pembayaran terlebih dahulu!';
 			$data['icon'] = 'warning';
 			$this->session->set_flashdata($data);
-			redirect('/dashboard', 'refresh');
+			// redirect('/dashboard', 'refresh');
 		}
 	}
 
