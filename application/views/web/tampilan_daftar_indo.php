@@ -82,9 +82,8 @@
                     <div class="col-lg-12 mt-4">
 
                       <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="check_persetujuan" value="1">
                         <input type="hidden" value="1" id="sebagai">
-                        <label class="form-check-label text-white" for="check_persetujuan">Menyetujui <a href="javascript:void(0)" class="text-danger" onclick="tnc()">Syarat dan ketentuan aplikasi.</a></label>
+                        <label class="form-check-label text-white" for="check_persetujuan">Cek<a href="javascript:void(0)" class="text-danger" onclick="tnc()"> Syarat dan ketentuan aplikasi.</a></label>
                         <br />
                       </div>
 
@@ -122,7 +121,16 @@
           </div>
           <div class="modal-body">
             <div id="tnc_text"></div>
+            <hr>
+            <div class="ml-4 mt-4 text-danger">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="1" id="check_persetujuan">
+                <label class="form-check-label" for="defaultCheck1">
+                  Saya setuju dengan syarat dan ketentuan aplikasi
+                </label>
+              </div>
 
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
@@ -148,15 +156,6 @@
         let cek = 0;
         let seeker_nama = $('#seeker_nama').val();
 
-        if (document.getElementById("file_npwp").files.length == 0) {
-          console.log("no files selected");
-          Swal.fire(
-            'Oops...',
-            'File NPWP Required!',
-            'warning'
-          )
-          cek++;
-        }
 
         var password = $('#seeker_password').val();
         var password_ulang = $('#seeker_password_ulang').val();
@@ -198,6 +197,17 @@
         if (level == 3) {
           let perusahaan_nama = $('#perusahaan_nama').val();
           let perusahaan_npwp = $('#perusahaan_npwp').val();
+
+          if (document.getElementById("file_npwp").files.length == 0) {
+            console.log("no files selected");
+            Swal.fire(
+              'Oops...',
+              'File NPWP Required!',
+              'warning'
+            )
+            cek++;
+          }
+
 
           if (perusahaan_nama == '') {
             $('#perusahaan_nama').attr('placeholder', 'Silahkan Masukkan Perusahaan');
