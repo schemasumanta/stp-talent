@@ -20,6 +20,7 @@ class Model_user_premium extends CI_Model
 
         $this->db->from('tbl_langganan_premium as lp');
         $this->db->join('tbl_transaksi_premium as tp', 'lp.langganan_id = tp.transaksi_langganan_id');
+        $this->db->where('lp.user_id', $this->session->user_id);
 
         $i = 0;
 
@@ -71,6 +72,7 @@ class Model_user_premium extends CI_Model
     {
         $this->db->from('tbl_langganan_premium as lp');
         $this->db->join('tbl_transaksi_premium as tp', 'lp.langganan_id = tp.transaksi_langganan_id');
+        $this->db->where('lp.user_id', $this->session->user_id);
         return $this->db->count_all_results();
     }
 

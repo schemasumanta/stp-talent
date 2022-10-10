@@ -817,7 +817,7 @@ class Provider extends CI_Controller
 		];
 
 
-		$inv_number = 'TH-' . rand(1, 10000);
+		$inv_number = 'TH-' . date('dmy') . "-" . rand(1, 10000);
 		$itemsss[] = $items;
 
 		//save to table trasaction course
@@ -858,10 +858,10 @@ class Provider extends CI_Controller
 		$dateTime = gmdate("Y-m-d H:i:s");
 		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
 		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
-		$clientId = 'BRN-0223-1658821341264'; // Change with your Client ID
-		$secretKey = 'SK-oCGRoGuyCVTCxno3kf8n'; // Change with your Secret Key
+		$clientId = 'BRN-0230-1658374379977'; // Change with your Client ID
+		$secretKey = 'SK-7ZWrLQIZBr3tcwJt4JEu'; // Change with your Secret Key
 
-		$getUrl = 'https://api-sandbox.doku.com';
+		$getUrl = 'https://api.doku.com';
 
 		$targetPath = '/checkout/v1/payment';
 		$url = $getUrl . $targetPath;
@@ -925,8 +925,8 @@ class Provider extends CI_Controller
 	public function get_status()
 	{
 		if ($this->session->inv_number) {
-			$clientId = 'BRN-0223-1658821341264'; // Change with your Client ID
-			$secretKey = 'SK-oCGRoGuyCVTCxno3kf8n'; // Change with your Secret Key
+			$clientId = 'BRN-0230-1658374379977'; // Change with your Client ID
+			$secretKey = 'SK-7ZWrLQIZBr3tcwJt4JEu'; // Change with your Secret Key
 			$dateTime = gmdate("Y-m-d H:i:s");
 			$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
 			$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
@@ -947,7 +947,7 @@ class Provider extends CI_Controller
 			$curl = curl_init();
 
 			curl_setopt_array($curl, array(
-				CURLOPT_URL => 'https://api-sandbox.doku.com/orders/v1/status/' . $inv,
+				CURLOPT_URL => 'https://api.doku.com/orders/v1/status/' . $inv,
 				CURLOPT_RETURNTRANSFER => true,
 				CURLOPT_ENCODING => '',
 				CURLOPT_MAXREDIRS => 10,
@@ -1028,10 +1028,10 @@ class Provider extends CI_Controller
 
 		$list = $this->premium->get_datatables();
 		$data = array();
-		$no = $_POST['start'];
+		$no = 0;
+		$numItems = count($list);
 		foreach ($list as $person) {
 			$no++;
-
 			$row = array();
 			$row[] = $no;
 			$row[] = $person->transaksi_inv;
@@ -1039,8 +1039,12 @@ class Provider extends CI_Controller
 			$row[] = date('d-M-Y', strtotime($person->premium_masa_aktif));
 			$row[] = "<label class='badge bg-danger text-white'>Aktif</label>";
 			//add html for action
-			$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_tnc(' . "'" . $person->langganan_id . "'" . ')"><i class="fas fa-money-bill"></i> Perpanjang</a>
+			if ($no == 1) {
+				$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="perpanjang()"><i class="fas fa-money-bill"></i> Perpanjang</a>
                   ';
+			} else {
+				$row[] = 'Telah diperpanjang';
+			}
 
 			$data[] = $row;
 		}
@@ -1057,8 +1061,8 @@ class Provider extends CI_Controller
 
 	public function cek_status_pay()
 	{
-		$clientId = 'BRN-0223-1658821341264'; // Change with your Client ID
-		$secretKey = 'SK-oCGRoGuyCVTCxno3kf8n'; // Change with your Secret Key
+		$clientId = 'BRN-0230-1658374379977'; // Change with your Client ID
+		$secretKey = 'SK-7ZWrLQIZBr3tcwJt4JEu'; // Change with your Secret Key
 		$dateTime = gmdate("Y-m-d H:i:s");
 		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
 		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
@@ -1079,7 +1083,7 @@ class Provider extends CI_Controller
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
-			CURLOPT_URL => 'https://api-sandbox.doku.com/orders/v1/status/' . $inv,
+			CURLOPT_URL => 'https://api.doku.com/orders/v1/status/' . $inv,
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => '',
 			CURLOPT_MAXREDIRS => 10,
@@ -1124,5 +1128,311 @@ class Provider extends CI_Controller
 
 	public function duku_notif()
 	{
+	}
+
+	function perpanjang()
+	{
+		$data_premium = $this->db->get_where('tbl_premium', ['premium_status' => 1, 'premium_tipe' => 2])->row();
+
+		$id_premium = $this->input->post('id');
+		// $price = $this->input->post('price') * $data_premium->premium_bulan;
+		$price = 10000;
+		$user_id = $this->session->user_id;
+
+		$data = $this->db->where('premium_id', $id_premium)->get('tbl_premium')->row_array();
+		$users = $this->db->query("SELECT tbl_master_user.*,tbl_perusahaan.perusahaan_alamat FROM tbl_master_user LEFT JOIN tbl_perusahaan ON tbl_master_user.perusahaan_id = tbl_perusahaan.perusahaan_id WHERE tbl_master_user.user_id = $user_id")->row_array();
+		// echo json_encode($price); die();
+		$nama_premium = $data['premium_nama'];
+		$items = [
+			'name' =>  $nama_premium,
+			'price' => (int)$price,
+			'quantity' => (int)1,
+		];
+
+
+		$inv_number = 'TH-' . date('dmy') . "-" . rand(1, 10000);
+		$itemsss[] = $items;
+
+		$requestBody = [
+			'order' => [
+				'amount'            => (int)$price,
+				'invoice_number'    => $inv_number,
+				'currency'          => 'IDR',
+				'callback_url'      => base_url('provider/cek_status_perpanjang'),
+				'line_items'        => $itemsss,
+			],
+			'payment'               => [
+				'payment_due_date'  => 60  //expired pay
+			],
+			'customer'              => [
+				'id'        => 'CUST-' . rand(1, 1000), // Change to your customer ID mapping
+				'name'      => $users['user_nama'],
+				'email'     => $users['user_email'],
+				'phone'     => $users['user_telepon'],
+				'address'   => $users['perusahaan_alamat'],
+				'country'   => 'ID',
+			]
+		];
+
+		// echo json_encode($requestBody);die();
+		$requestId = rand(1, 100000); // Change to UUID or anything that can generate unique value
+		$dateTime = gmdate("Y-m-d H:i:s");
+		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
+		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
+		$clientId = 'BRN-0230-1658374379977'; // Change with your Client ID
+		$secretKey = 'SK-7ZWrLQIZBr3tcwJt4JEu'; // Change with your Secret Key
+
+		$getUrl = 'https://api.doku.com';
+
+		$targetPath = '/checkout/v1/payment';
+		$url = $getUrl . $targetPath;
+
+		// Generate digest
+		$digestValue = base64_encode(hash('sha256', json_encode($requestBody), true));
+
+		// Prepare signature component
+		$componentSignature = "Client-Id:" . $clientId . "\n" .
+			"Request-Id:" . $requestId . "\n" .
+			"Request-Timestamp:" . $dateTimeFinal . "\n" .
+			"Request-Target:" . $targetPath . "\n" .
+			"Digest:" . $digestValue;
+
+		// Generate signature
+		$signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
+
+		// Execute request
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestBody));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/json',
+			'Client-Id:' . $clientId,
+			'Request-Id:' . $requestId,
+			'Request-Timestamp:' . $dateTimeFinal,
+			'Signature:' . "HMACSHA256=" . $signature,
+		));
+
+		// Set response json
+		$responseJson = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		curl_close($ch);
+
+
+		// Echo the response
+		if (is_string($responseJson) && $httpCode == 200) {
+			$newdata = array(
+				'client_id'  	 => $clientId,
+				'request_id'     => $requestId,
+				'inv_number'	 => $inv_number,
+				'digi'			 => $digestValue,
+				'ammount'		 => $price,
+				'id_premium_prov' => $id_premium
+			);
+
+			$this->session->set_userdata($newdata);
+
+			echo $responseJson;
+			return json_decode($responseJson, true);
+		} else {
+			echo $responseJson;
+			return null;
+		}
+	}
+
+	public function cek_status_perpanjang()
+	{
+		$clientId = 'BRN-0230-1658374379977'; // Change with your Client ID
+		$secretKey = 'SK-7ZWrLQIZBr3tcwJt4JEu'; // Change with your Secret Key
+		$dateTime = gmdate("Y-m-d H:i:s");
+		$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
+		$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
+		$requestId = $this->session->request_id;
+		$inv = $this->session->inv_number;
+		$targetPath = "/orders/v1/status/" . $inv;
+
+		// Prepare signature component
+		$componentSignature = "Client-Id:" . $clientId . "\n" .
+			"Request-Id:" . $requestId . "\n" .
+			"Request-Timestamp:" . $dateTimeFinal . "\n" .
+			"Request-Target:" . $targetPath;
+
+		// Generate signature
+		$signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
+
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => 'https://api.doku.com/orders/v1/status/' . $inv,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => '',
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FOLLOWLOCATION => true,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => 'GET',
+			CURLOPT_HTTPHEADER => array(
+				'Client-Id: ' . $clientId,
+				'Request-Id: ' . $requestId,
+				'Request-Timestamp: ' . $dateTimeFinal,
+				'Signature: HMACSHA256=' . $signature
+			),
+		));
+
+		$response = curl_exec($curl);
+
+		curl_close($curl);
+
+		$jsonObject = json_decode($response);
+
+		if ($jsonObject->transaction->status ==  "SUCCESS") {
+			$this->perpanjang_sukses();
+		} else {
+			$data['title'] = 'Opp...!';
+			$data['text'] = 'Silahkan Lakukan Pembayaran terlebih dahulu!';
+			$data['icon'] = 'warning';
+			$this->session->set_flashdata($data);
+			// redirect('/dashboard', 'refresh');
+		}
+	}
+
+	public function perpanjang_sukses()
+	{
+		$user_id = $this->session->user_id;
+		$key = $this->input->post("key");
+
+		$hasil = $this->simpan_notif($key);
+
+		if ($hasil == "Success") {
+			$cek_langganan = $this->db->query("SELECT * FROM tbl_langganan_premium WHERE user_id = '$user_id' ORDER BY premium_masa_aktif DESC ")->row();
+			if ($cek_langganan) {
+				$data_premium = $this->db->get_where('tbl_premium', ['premium_status' => 1, 'premium_tipe' => 2])->row();
+				$day = $data_premium->premium_bulan * 30;
+				$next_date = date('Y-m-d', strtotime("+" . $day . " days", strtotime($cek_langganan->premium_masa_aktif)));
+
+				$data = array(
+					'user_id' => $this->session->user_id,
+					'premium_id' => $this->session->id_premium_prov,
+					'premium_masa_aktif' => $next_date,
+				);
+				$this->db->insert('tbl_langganan_premium', $data);
+				$insert_id = $this->db->insert_id();
+
+				$data = array(
+					'transaksi_inv' => $this->session->inv_number,
+					'transaksi_client_id' => $this->session->client_id,
+					'transaksi_request_id' => $this->session->request_id,
+					'transaksi_ammount' => $this->session->ammount,
+					'transaksi_langganan_id' => $insert_id
+				);
+
+				$this->db->insert('tbl_transaksi_premium', $data);
+			}
+
+			$data['title'] = 'Berhasil';
+			$data['text'] = 'Pembayaran berhasil, akun anda sekarang premium';
+			$data['icon'] = 'success';
+			$this->session->set_flashdata($data);
+
+			$array_items = array('client_id', 'request_id', 'inv_number', 'ammount');
+
+			$this->session->unset_userdata($array_items);
+			// redirect('/dashboard', 'refresh');
+
+			echo json_encode(array("status" => TRUE));
+		} else {
+			echo json_encode(array("status" => FALSE));
+		}
+	}
+
+	public function get_status_perpanjang()
+	{
+		if ($this->session->inv_number) {
+			$clientId = 'BRN-0230-1658374379977'; // Change with your Client ID
+			$secretKey = 'SK-7ZWrLQIZBr3tcwJt4JEu'; // Change with your Secret Key
+			$dateTime = gmdate("Y-m-d H:i:s");
+			$isoDateTime = date(DATE_ISO8601, strtotime($dateTime));
+			$dateTimeFinal = substr($isoDateTime, 0, 19) . "Z";
+			$requestId = $this->session->request_id;
+			$inv = $this->session->inv_number;
+			$targetPath = "/orders/v1/status/" . $inv;
+
+			// Prepare signature component
+			$componentSignature = "Client-Id:" . $clientId . "\n" .
+				"Request-Id:" . $requestId . "\n" .
+				"Request-Timestamp:" . $dateTimeFinal . "\n" .
+				"Request-Target:" . $targetPath;
+
+			// Generate signature
+			$signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
+
+
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+				CURLOPT_URL => 'https://api.doku.com/orders/v1/status/' . $inv,
+				CURLOPT_RETURNTRANSFER => true,
+				CURLOPT_ENCODING => '',
+				CURLOPT_MAXREDIRS => 10,
+				CURLOPT_TIMEOUT => 0,
+				CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				CURLOPT_CUSTOMREQUEST => 'GET',
+				CURLOPT_HTTPHEADER => array(
+					'Client-Id: ' . $clientId,
+					'Request-Id: ' . $requestId,
+					'Request-Timestamp: ' . $dateTimeFinal,
+					'Signature: HMACSHA256=' . $signature
+				),
+			));
+
+			$response = curl_exec($curl);
+
+			curl_close($curl);
+
+			echo $response;
+		} else {
+			echo "Tidak ada pengecekan";
+		}
+	}
+
+	public function simpan_notif($key)
+	{
+		$data_notifikasi = array(
+			'notifikasi_pengirim' 	=> 1,
+			'notifikasi_key' 		=> $key,
+			'notifikasi_isi' 		=> "Perpangjangan Akun Premium Anda Berhasil, Pembayaran telah diterima.",
+			'notifikasi_judul' 		=> "Perpanjangan Premium",
+			'notifikasi_tanggal' 	=> date('Y-m-d H:i:s'),
+			'notifikasi_lampiran' 	=> 1,
+			'notifikasi_link' 		=> base_url('provider/premium'),
+		);
+		$result = $this->db->insert('tbl_notifikasi', $data_notifikasi);
+		if ($result) {
+
+			$data_penerima = array(
+				'user_id' 			=> $this->session->user_id,
+				'notifikasi_key' 	=> $key,
+				'read_status' 		=> 0,
+			);
+			$this->db->insert('tbl_penerima_notifikasi', $data_penerima);
+
+			$data_history = array(
+				'id_user' => $this->session->user_id,
+				'ip_address' => get_ip(),
+				'aktivitas' => "Blast Notifikasi Baru",
+			);
+
+			$this->db->insert('tbl_history', $data_history);
+
+			$hasil = "Success";
+			return $hasil;
+		} else {
+			$hasil = "Gagal";
+			return $hasil;
+		}
 	}
 }

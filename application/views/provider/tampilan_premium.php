@@ -111,25 +111,25 @@
             </div>
         </section>
 
-        <div class="card text-center d-none" id="get_status_pay">
-            <div class="card-header" id="bank_va">
-                Featured
-            </div>
-            <div class="card-body">
-                <h5 class="card-title" id="no_va">Special title treatment</h5>
-                <p class="card-text">Jumlah Pembayaran</p>
-                <p class="card-text" id="jml_pembayaran">Rp.</p>
-                <p class="card-text" id="status_pembayaran">?</p>
-                <a href="javascript:;" onclick="buy()" class="btn btn-primary text-uppercase">Ganti Pembayaran</a>
-            </div>
-            <div class="card-footer text-muted">
-                Silahkan Melakukan pembayaran pada no VA tersebut, Jika ingin melalukan pergantian pembayaran silahkan klik ganti pembayaran
-            </div>
-        </div>
+
 
     <?php };
     ?>
-
+    <div class="card text-center d-none" id="get_status_pay">
+        <div class="card-header" id="bank_va">
+            Featured
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" id="no_va">Special title treatment</h5>
+            <p class="card-text">Jumlah Pembayaran</p>
+            <p class="card-text" id="jml_pembayaran">Rp.</p>
+            <p class="card-text" id="status_pembayaran">?</p>
+            <a href="javascript:;" onclick="buy()" class="btn btn-primary text-uppercase">Ganti Pembayaran</a>
+        </div>
+        <div class="card-footer text-muted">
+            Silahkan Melakukan pembayaran pada no VA tersebut, Jika ingin melalukan pergantian pembayaran silahkan klik ganti pembayaran
+        </div>
+    </div>
 </div>
 
 
@@ -167,6 +167,8 @@
         <?php
         if ($user_premium == false) { ?>
             setInterval('cek_status()', 15000);
+        <?php } else { ?>
+            setInterval('cek_status_perpanjangan()', 15000);
         <?php }; ?>
     });
 
@@ -202,6 +204,8 @@
         }
     }
 
+
+
     function cek_status() {
         var url;
 
@@ -213,15 +217,74 @@
             dataType: "JSON",
             success: (result) => {
                 if (result.transaction.status == "SUCCESS") {
-                    upgrade_premium();
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1500);
-                    Swal.fire(
-                        'Berhasil',
-                        'Pembayaran berhasil, akun anda sekarang premium',
-                        'success'
-                    )
+
+                    notifikasi_lampiran = "<?= base_url('provider/premium') ?>";
+
+                    let post = {
+                        notifikasi_judul: "Upgrade Premium",
+                        notifikasi_isi: "Upgrade Akun Premium Anda Berhasil, Pembayaran telah diterima.",
+                        notifikasi_penerima: 'Job Provider',
+                        notifikasi_link: '<?= base_url('provider/premium') ?>',
+                        notifikasi_lampiran: "kosong",
+                        notifikasi_order: $.now(),
+                        notifikasi_tanggal: '<?php echo date('Y-m-d H:i:s') ?>',
+                        notifikasi_pengirim: '1',
+                    };
+
+                    newpost = firebase.database().ref('/Notification/').child('MasterNotification').push().key;
+                    $('#notifikasi_key').val(newpost);
+
+                    let update = {};
+                    update['/Notification/MasterNotification/' + newpost + '/'] = post;
+
+                    firebase.database().ref().update(update, (error) => {
+                        if (error) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Notifikasi Gagal Dikirim!',
+                                icon: 'error'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.close();
+                                    return false;
+                                }
+                            });
+                        } else {
+                            let post = {
+                                notifikasi_judul: "Upgrade Premium",
+                                notifikasi_isi: "Upgrade Akun Premium Anda Berhasil, Pembayaran telah diterima.",
+                                notifikasi_key: newpost,
+                                notifikasi_penerima: "<?= $this->session->user_id; ?>",
+                                notifikasi_link: '<?= base_url('provider/premium') ?>',
+                                notifikasi_lampiran: "-",
+                                notifikasi_order: $.now(),
+                                notifikasi_read_status: 0,
+                                notifikasi_tanggal: '<?php echo date('Y-m-d H:i:s'); ?>',
+                                notifikasi_pengirim: '<?php echo 0; ?>',
+                            };
+
+                            let newnotif = firebase.database().ref().child('/UserNotification/').push().key;
+                            let update = {};
+                            update['/UserNotification/' + newnotif + '/'] = post;
+                            firebase.database().ref().update(update, (error) => {
+                                if (error) {
+                                    console.log("Error di kirim notif");
+                                } else {
+                                    upgrade_premium();
+                                    Swal.fire(
+                                        'Berhasil',
+                                        'Pembayaran berhasil, akun anda sekarang premium',
+                                        'success'
+                                    )
+                                    setTimeout(function() {
+                                        location.reload();
+                                    }, 1500);
+
+                                }
+                            });
+                        }
+                    });
+
                 } else {
                     $('#get_status_pay').removeClass('d-none');
                     $('#upgrade_premium').addClass('d-none');
@@ -252,6 +315,162 @@
                 setTimeout(function() {
                     location.reload();
                 }, 1500);
+
+            },
+            error: (xhr, textStatus, error) => {
+
+            },
+        });
+    }
+
+    function perpanjang() {
+        let price = '<?= $premium->premium_harga; ?>'
+        let id = '<?= $premium->premium_id; ?>';
+        if (price == undefined) {
+            alert("kosong");
+            return false;
+        } else {
+            var url;
+
+            url = "<?php echo site_url('provider/perpanjang') ?>";
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    price: price,
+                    id: id,
+                },
+
+                success: (result) => {
+                    console.log(result);
+                    loadJokulCheckout(result.response.payment.url);
+                    cek_status();
+                },
+                error: (xhr, textStatus, error) => {
+                    console.log(textStatus);
+                },
+            });
+        }
+    }
+
+    function cek_status_perpanjangan() {
+        var url;
+
+        url = "<?php echo site_url('provider/get_status/perpanjangan') ?>";
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "JSON",
+            success: (result) => {
+                if (result.transaction.status == "SUCCESS") {
+
+                    notifikasi_lampiran = "<?= base_url('provider/premium') ?>";
+
+                    let post = {
+                        notifikasi_judul: "Perpanjangan Premium",
+                        notifikasi_isi: "Perpangjangan Akun Premium Anda Berhasil, Pembayaran telah diterima.",
+                        notifikasi_penerima: 'Job Provider',
+                        notifikasi_link: '<?= base_url('provider/premium') ?>',
+                        notifikasi_lampiran: "kosong",
+                        notifikasi_order: $.now(),
+                        notifikasi_tanggal: '<?php echo date('Y-m-d H:i:s') ?>',
+                        notifikasi_pengirim: '1',
+                    };
+
+                    newpost = firebase.database().ref('/Notification/').child('MasterNotification').push().key;
+                    $('#notifikasi_key').val(newpost);
+
+                    let update = {};
+                    update['/Notification/MasterNotification/' + newpost + '/'] = post;
+
+                    firebase.database().ref().update(update, (error) => {
+                        if (error) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Notifikasi Gagal Dikirim!',
+                                icon: 'error'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.close();
+                                    return false;
+                                }
+                            });
+                        } else {
+                            let post = {
+                                notifikasi_judul: "Perpanjangan Premium",
+                                notifikasi_isi: "Perpangjangan Akun Premium Anda Berhasil, Pembayaran telah diterima.",
+                                notifikasi_key: newpost,
+                                notifikasi_penerima: "<?= $this->session->user_id; ?>",
+                                notifikasi_link: '<?= base_url('provider/premium') ?>',
+                                notifikasi_lampiran: "-",
+                                notifikasi_order: $.now(),
+                                notifikasi_read_status: 0,
+                                notifikasi_tanggal: '<?php echo date('Y-m-d H:i:s'); ?>',
+                                notifikasi_pengirim: '<?php echo 0; ?>',
+                            };
+
+                            let newnotif = firebase.database().ref().child('/UserNotification/').push().key;
+                            let update = {};
+                            update['/UserNotification/' + newnotif + '/'] = post;
+                            firebase.database().ref().update(update, (error) => {
+                                if (error) {
+                                    console.log("Error di kirim notif");
+                                } else {
+                                    perpanjang_premium(newpost);
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    $('#get_status_pay').removeClass('d-none');
+                    $('#upgrade_premium').addClass('d-none');
+                    $('#no_va').text(result.virtual_account_info.virtual_account_number);
+                    $('#bank_va').text(result.acquirer.id);
+                    $('#jml_pembayaran').text(result.order.amount);
+                    $('#status_pembayaran').text(result.transaction.status);
+
+                }
+
+            },
+            error: (xhr, textStatus, error) => {
+
+            },
+        });
+    }
+
+    function perpanjang_premium(newpost) {
+        var url;
+
+        url = "<?php echo site_url('provider/perpanjang_sukses') ?>";
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                key: newpost,
+            },
+            success: (result) => {
+                if (result.status == true) {
+                    Swal.fire(
+                        'Berhasil',
+                        'Pembayaran berhasil, akun anda sekarang premium',
+                        'success'
+                    )
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+
+                } else {
+                    Swal.fire(
+                        'Gagal',
+                        'Mohon Maaf ada kendala',
+                        'warning'
+                    )
+                }
 
             },
             error: (xhr, textStatus, error) => {

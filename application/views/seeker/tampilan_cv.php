@@ -588,8 +588,8 @@ $bulan = array(
         </div>
         <div class="modal-body">
           <label>File CV</label>
-          <input type="file" name="file-cv" id="file-cv" class="form-control">
-          <input type="hidden" class="form-control" name="lampiran_cv" id="lampiran_cv" class="form-control" accept="application/pdf">
+          <input type="file" name="file-cv" id="file-cv" class="form-control" accept="application/pdf">
+          <input type="hidden" class="form-control" name="lampiran_cv" id="lampiran_cv" class="form-control">
           <small class="error-file-cv text-danger"></small>
 
         </div>
@@ -1460,31 +1460,39 @@ $bulan = array(
       }
 
       for (let i = 0; i < files.length; i++) {
-        var storage = firebase.storage().ref('talent_hub/cv/' + files[i].name);
-        var upload = storage.put(files[i]);
-        upload.on(
+        console.log(files[i].size);
+        if (files[i].size < 2048000) {
+          var storage = firebase.storage().ref('talent_hub/cv/' + files[i].name);
+          var upload = storage.put(files[i]);
+          upload.on(
 
-          "state_changed",
-          function progress(snapshot) {},
+            "state_changed",
+            function progress(snapshot) {},
 
-          function error() {
-            $('.error-file-cv').html("Upload File Error");
-          },
+            function error() {
+              $('.error-file-cv').html("Upload File Error");
+            },
 
-          function complete() {
-            storage
-              .getDownloadURL()
-              .then(function(url) {
-                $('#lampiran_cv').val(url);
+            function complete() {
+              storage
+                .getDownloadURL()
+                .then(function(url) {
+                  $('#lampiran_cv').val(url);
 
-                $('#form_upload').submit();
-              })
-              .catch(function(error) {
-                console.log("error encountered");
-              });
-          },
-        );
-
+                  $('#form_upload').submit();
+                })
+                .catch(function(error) {
+                  console.log("error encountered");
+                });
+            },
+          );
+        } else {
+          Swal.fire(
+            'Gagal di upload',
+            "Ukuran CV tidak boleh lebih dari 2MB",
+            'warning'
+          )
+        }
 
       }
     }

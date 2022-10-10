@@ -113,7 +113,7 @@
           </div>
           <div class="col-xl-4 col-lg-4">
             <div class="footer-social text-white f-right">
-              <a href="<?= base_url(); ?>landing/en" class="btn btn-xs btn-white">Bahasa English</a>
+              <!-- <a href="<?= base_url(); ?>landing/en" class="btn btn-xs btn-white">Bahasa English</a> -->
               <?php if ($s->stp_facebook != '') : ?>
                 <a href="<?php echo $s->stp_facebook ?>" target="_blank"><i class="fab fa-facebook-f fa-3x"></i></a>
               <?php endif ?>

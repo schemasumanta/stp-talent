@@ -150,8 +150,8 @@
                       <ul id="navigation">
                         <li><a href="<?php echo base_url() ?>">Beranda</a></li>
                         <li><a href="<?php echo base_url('job/job_listing') ?>">Cari Pekerjaan </a></li>
-                        <li><a href="<?= base_url(); ?>#about">Tentang</a></li>
-                        <li><a href="<?= base_url(); ?>#about">Kontak</a></li>
+                        <li><a href="<?= base_url('landing/tentang'); ?>">Tentang</a></li>
+                        <li><a href="<?= base_url('landing/kontak'); ?>">Kontak</a></li>
                       </ul>
                     </nav>
                   </div>

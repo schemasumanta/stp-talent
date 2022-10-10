@@ -129,18 +129,10 @@ class Landing extends CI_Controller
 		$this->db->where('slider_status', 1);
 		$data['slider_how'] = $this->db->get('tbl_master_slider')->result();
 		if ($this->session->login == FALSE) {
-			if ($this->session->langguage == "in") {
-				# code...
-				$this->load->view('web/header_indo', $data);
-				$this->load->view('web/tampilan_login_indo', $data);
-				// $this->load->view('web/footer_indo', $data);
-				$this->load->view('web/script_include', $data);
-			} else {
-				$this->load->view('web/header', $data);
-				$this->load->view('web/tampilan_login', $data);
-				// $this->load->view('web/footer_indo', $data);
-				$this->load->view('web/script_include', $data);
-			}
+			$this->load->view('web/header_indo', $data);
+			$this->load->view('web/tampilan_login_indo', $data);
+			$this->load->view('web/footer_indo', $data);
+			$this->load->view('web/script_include', $data);
 		} else {
 			redirect('dashboard', 'refresh');
 		}
@@ -180,15 +172,10 @@ class Landing extends CI_Controller
 		];
 		$this->db->insert('tbl_view', $insert);
 
-		if ($this->session->langguage == "in") {
-			$this->load->view('web/header_indo', $data);
-			$this->load->view('provider/profil_perusahaan_indo', $data);
-			$this->load->view('web/script_include', $data);
-		} else {
-			$this->load->view('web/header', $data);
-			$this->load->view('provider/profil_perusahaan', $data);
-			$this->load->view('web/script_include', $data);
-		}
+		$this->load->view('web/header_indo', $data);
+		$this->load->view('provider/profil_perusahaan_indo', $data);
+		$this->load->view('web/footer_indo', $data);
+		$this->load->view('web/script_include', $data);
 	}
 
 	public function register()
@@ -197,15 +184,10 @@ class Landing extends CI_Controller
 		$data['tnc_seeker'] = $this->db->order_by("tnc_terbit_pada", "DESC")->get_where('tbl_tnc', ['tnc_tipe' => 1])->row();
 		$data['tnc_provider'] = $this->db->order_by("tnc_terbit_pada", "DESC")->get_where('tbl_tnc', ['tnc_tipe' => 2])->row();
 		if ($this->session->login == FALSE) {
-			if ($this->session->langguage == "in") {
-				$this->load->view('web/header_indo', $data);
-				$this->load->view('web/tampilan_daftar_indo', $data);
-				$this->load->view('web/script_include', $data);
-			} else {
-				$this->load->view('web/header', $data);
-				$this->load->view('web/tampilan_daftar', $data);
-				$this->load->view('web/script_include', $data);
-			}
+			$this->load->view('web/header_indo', $data);
+			$this->load->view('web/tampilan_daftar_indo', $data);
+			$this->load->view('web/footer_indo', $data);
+			$this->load->view('web/script_include', $data);
 		} else {
 			redirect('seeker/dashboard', 'refresh');
 		}
@@ -318,15 +300,9 @@ class Landing extends CI_Controller
 	{
 		$data['stp'] = $this->db->get('tbl_master_stp')->result();
 		if ($this->session->login == FALSE) {
-			if ($this->session->langguage == "in") {
-				$this->load->view('web/header_indo', $data);
-				$this->load->view('web/tampilan_forgot_indo', $data);
-				$this->load->view('web/script_include', $data);
-			} else {
-				$this->load->view('web/header', $data);
-				$this->load->view('web/tampilan_forgot', $data);
-				$this->load->view('web/script_include', $data);
-			}
+			$this->load->view('web/header_indo', $data);
+			$this->load->view('web/tampilan_forgot_indo', $data);
+			$this->load->view('web/script_include', $data);
 		} else {
 			redirect('seeker/dashboard', 'refresh');
 		}
@@ -439,6 +415,32 @@ class Landing extends CI_Controller
 
 		$this->load->view('web/header_indo', $data);
 		$this->load->view('web/tampilan_faq');
+		$this->load->view('web/footer_indo');
+		$this->load->view('web/script_include', $data);
+
+		$this->session->sess_destroy();
+	}
+
+	public function kontak()
+	{
+		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		$data['profile'] = $this->db->get('tbl_master_stp')->row();
+
+		$this->load->view('web/header_indo', $data);
+		$this->load->view('web/tampilan_kontak');
+		$this->load->view('web/footer_indo');
+		$this->load->view('web/script_include', $data);
+
+		$this->session->sess_destroy();
+	}
+
+	public function tentang()
+	{
+		$data['stp'] = $this->db->get('tbl_master_stp')->result();
+		$data['profile'] = $this->db->get('tbl_master_stp')->row();
+
+		$this->load->view('web/header_indo', $data);
+		$this->load->view('web/tampilan_tentang');
 		$this->load->view('web/footer_indo');
 		$this->load->view('web/script_include', $data);
 
