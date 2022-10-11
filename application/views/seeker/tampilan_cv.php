@@ -398,9 +398,9 @@ $bulan = array(
                     <?php endif ?>
                   </div>
                 </div>
-
-
-
+                <?php if (count($resume) > 0) { ?>
+                  <a class="btn btn-menu " href="<?php echo base_url('job/job_listing') ?>">Mulai Cari Pekerjaan</a>
+                <?php } ?>
               </div>
             </div>
           </div>
@@ -558,13 +558,8 @@ $bulan = array(
               <button type="button" class="btn btn-danger" data-dismiss="modal" style="border-radius: 0px;">Tutup</button>
 
               <button type="button" class="btn btn-success" style="border-radius: 0px" id="btn_simpan_biodata">Simpan</button>
-
             </div>
-
           </div>
-
-
-
         </div>
 
       </form>

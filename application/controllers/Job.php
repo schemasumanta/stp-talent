@@ -387,7 +387,7 @@ class Job extends CI_Controller
 		$data['kategori'] = $this->db->get_where('tbl_master_kategori_job', ['kategori_status' => 1])->result();
 
 		$this->load->view('web/header_indo', $data);
-		$this->load->view('job/tampilan_job_listing', $data);
+		$this->load->view('job/tampilan_job_listing_indo', $data);
 		$this->load->view('web/script_include', $data);
 	}
 

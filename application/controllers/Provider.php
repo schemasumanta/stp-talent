@@ -841,7 +841,7 @@ class Provider extends CI_Controller
 				'line_items'        => $itemsss,
 			],
 			'payment'               => [
-				'payment_due_date'  => 60  //expired pay
+				'payment_due_date'  => 1440  //expired pay
 			],
 			'customer'              => [
 				'id'        => 'CUST-' . rand(1, 1000), // Change to your customer ID mapping
@@ -1162,7 +1162,7 @@ class Provider extends CI_Controller
 				'line_items'        => $itemsss,
 			],
 			'payment'               => [
-				'payment_due_date'  => 60  //expired pay
+				'payment_due_date'  => 1440  //expired pay
 			],
 			'customer'              => [
 				'id'        => 'CUST-' . rand(1, 1000), // Change to your customer ID mapping

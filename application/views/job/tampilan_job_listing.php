@@ -59,7 +59,7 @@
                <!-- single one -->
                <div class="single-listing">
                  <div class="small-section-tittle2">
-                   <h4>Soft by</h4>
+                   <h4>Sort by</h4>
                  </div>
                  <!-- Select job items start -->
                  <div class="select-job-items2">
